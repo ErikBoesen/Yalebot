@@ -15,7 +15,7 @@ def webhook():
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
 
-    if "Can I get an f in the chat" in message["text"].lower() and not sender_is_bot(message):
+    if "Can I get an f in the chat" in message["text"] and message["sender_type"] != "bot":
         reply("f")
 
     return "ok", 200
@@ -31,7 +31,3 @@ def reply(text):
     }
     request = Request(url, urlencode(data).encode())
     json = urlopen(request).read().decode()
-
-# Checks whether the message sender is a bot
-def sender_is_bot(message):
-    return message["sender_type"] == "bot"
