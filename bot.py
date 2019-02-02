@@ -7,7 +7,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 bot_id = "1520c98b3da635c8c6383951a6"
-F_PATTERN = re.compile('can i get an? (.+) in the chat/i')
+F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE)
 SUFFIX = '❤️'
 
 @app.route("/", methods=["POST"])
@@ -19,10 +19,9 @@ def webhook():
     message = request.get_json()
     print("Message received: %s" % message)
     if message["sender_type"] != "bot":
-        groups = pattern.match(message["text"].lower()):
-        if :
-
-            reply("f")
+        groups = F_PATTERN.match(message["text"]).groups()
+        if len(groups):
+            reply(groups[0] + ' ' + SUFFIX)
 
     return "ok", 200
 
