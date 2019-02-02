@@ -19,9 +19,9 @@ def webhook():
     message = request.get_json()
     print("Message received: %s" % message)
     if message["sender_type"] != "bot":
-        groups = F_PATTERN.match(message["text"]).groups()
-        if len(groups):
-            reply(groups[0] + ' ' + SUFFIX)
+        match = F_PATTERN.search(message["text"]))
+        if match is not None:
+            reply(match + ' ' + SUFFIX)
 
     return "ok", 200
 
