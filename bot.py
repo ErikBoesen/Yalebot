@@ -5,7 +5,8 @@ from urllib.request import Request, urlopen
 from flask import Flask, request
 
 app = Flask(__name__)
-bot_id = "REPLACE THIS WITH YOUR BOT ID ONCE BOT IS ADDED TO THE CHAT"
+with open("config.json", "r") as f:
+    config = json.load(f)
 
 @app.route("/", methods=["POST"])
 def webhook():
@@ -24,7 +25,7 @@ def reply(text):
     """
     url = "https://api.groupme.com/v3/bots/post"
     data = {
-        "bot_id": bot_id,
+        "bot_id": config["id"],
         "text": text,
     }
     request = Request(url, urlencode(data).encode())
