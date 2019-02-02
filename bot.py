@@ -7,39 +7,31 @@ from flask import Flask, request
 app = Flask(__name__)
 bot_id = "REPLACE THIS WITH YOUR BOT ID ONCE BOT IS ADDED TO THE CHAT"
 
-# Called whenever the app's callback URL receives a POST request
-# That'll happen every time a message is sent in the group
-@app.route('/', methods=['POST'])
+@app.route("/", methods=["POST"])
 def webhook():
-    # 'message' is an object that represents a single GroupMe message.
+    """
+    Receive callback to URL when message is sent in the group.
+    """
+    # Retrieve data on that single GroupMe message.
     message = request.get_json()
 
-    if 'groot' in message['text'].lower() and not sender_is_bot(message): # if message contains 'groot', ignoring case, and sender is not a bot...
-        reply('I am Groot.')
+    if "Can I get an f in the chat" in message["text"].lower() and not sender_is_bot(message):
+        reply("f")
 
     return "ok", 200
 
 def reply(msg):
-
-    url = 'https://api.groupme.com/v3/bots/post'
+    """
+    Reply in chat.
+    """
+    url = "https://api.groupme.com/v3/bots/post"
     data = {
-        'bot_id'        : bot_id,
-        'text'            : msg
-    }
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
-
-# Send a message with an image attached in the groupchat
-def reply_with_image(msg, imgURL):
-    url = 'https://api.groupme.com/v3/bots/post'
-    data = {
-        'bot_id'        : bot_id,
-        'text'            : msg,
-        'attachments'    : [{"type": "image", "url":imgURL}]
+        "bot_id": bot_id,
+        "text": msg
     }
     request = Request(url, urlencode(data).encode())
     json = urlopen(request).read().decode()
 
 # Checks whether the message sender is a bot
 def sender_is_bot(message):
-    return message['sender_type'] == "bot"
+    return message["sender_type"] == "bot"
