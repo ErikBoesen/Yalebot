@@ -7,7 +7,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 bot_id = "1520c98b3da635c8c6383951a6"
-F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE)
+F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 SUFFIX = '❤️'
 
 @app.route("/", methods=["POST"])
