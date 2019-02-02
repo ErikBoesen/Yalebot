@@ -20,14 +20,14 @@ def webhook():
 
     return "ok", 200
 
-def reply(msg):
+def reply(text):
     """
     Reply in chat.
     """
     url = "https://api.groupme.com/v3/bots/post"
     data = {
         "bot_id": bot_id,
-        "text": msg
+        "text": text,
     }
     request = Request(url, urlencode(data).encode())
     json = urlopen(request).read().decode()
