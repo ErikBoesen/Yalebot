@@ -1,11 +1,14 @@
 import os
 import json
+import re
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
 
 app = Flask(__name__)
 bot_id = "1520c98b3da635c8c6383951a6"
+F_PATTERN = re.compile('can i get an? (.+) in the chat/i')
+SUFFIX = '❤️'
 
 @app.route("/", methods=["POST"])
 def webhook():
@@ -15,8 +18,12 @@ def webhook():
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
     print("Message received: %s" % message)
-    if "Can I get an in the chat" in message["text"] and message["sender_type"] != "bot":
-        reply("f")
+    if message["sender_type"] != "bot":
+        groups = pattern.match(message["text"].lower()):
+        if :
+
+            reply("f")
+
     return "ok", 200
 
 def reply(text):
