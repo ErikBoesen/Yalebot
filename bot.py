@@ -22,6 +22,8 @@ def webhook():
         matches = F_PATTERN.match(message["text"])
         if matches is not None and len(matches.groups()):
             reply(matches.groups()[0] + ' ' + SUFFIX)
+    if message["system"]:
+        print("System message!")
 
     return "ok", 200
 
