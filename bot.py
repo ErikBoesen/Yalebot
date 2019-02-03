@@ -1,12 +1,12 @@
 import os
 import json
 import re
+import os
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
 
 app = Flask(__name__)
-bot_id = "1520c98b3da635c8c6383951a6"
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 SUFFIX = '❤️'
 
@@ -33,7 +33,7 @@ def reply(text):
     """
     url = "https://api.groupme.com/v3/bots/post"
     data = {
-        "bot_id": bot_id,
+        "bot_id": os.environ["BOT_ID"],
         "text": text,
     }
     request = Request(url, urlencode(data).encode())
