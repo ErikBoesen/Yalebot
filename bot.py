@@ -53,6 +53,7 @@ def bulldog_countdown():
     string += '%d hours, ' % hours
     string += '%d minutes, ' % minutes
     string += 'and %d seconds left until Bulldog Days.' % seconds
+    return string
 
 def reply(text):
     """
