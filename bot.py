@@ -45,7 +45,7 @@ def webhook():
             reply(zalgoify.process(message["text"][6:]))
         if "bulldog days" in message["text"].lower():
             reply(bulldog_countdown())
-        if "thanks yalebot" in message["text"].lower():
+        if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
             reply("You're welcome! :)")
         if "polls" in message["text"].lower():
             reply("There have been way too goddamn many polls in this chat.")
