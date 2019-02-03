@@ -52,7 +52,7 @@ def webhook():
         if "favorite song" in message["text"].lower():
             reply(BOOLA_BOOLA)
         if "dad" in message["text"].lower():
-            new_text = message["text"].replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
+            new_text = message["text"].strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + message["name"] + ", did you mean \"" + new_text + "\"?")
     if message["system"]:
         print("System message!")
