@@ -7,11 +7,14 @@ from urllib.request import Request, urlopen
 from flask import Flask, request
 import facebook
 import zalgoify
+import datetime
+
 
 app = Flask(__name__)
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 SUFFIX = '❤️'
 GROUP_ID = 1140136552771525
+BDD_TIME = datetime.datetime(year=2019, month=4, day=15)
 
 @app.route("/", methods=["POST"])
 def webhook():
@@ -27,10 +30,29 @@ def webhook():
             reply(matches.groups()[0] + ' ' + SUFFIX)
         if message["text"].lower().startswith("zalgo"):
             reply(zalgoify.process(message["text"][6:]))
+        if "bulldog days" in message["text"].lower():
+            reply(bulldog_countdown())
     if message["system"]:
         print("System message!")
 
     return "ok", 200
+
+def bulldog_countdown():
+    """
+    Get time until Bulldog Days.
+    """
+    delta = BDD_TIME - datetime.datetime.now()
+    seconds = delta.total_seconds()
+    weeks, seconds = divmod(seconds, 60*60*24*7)
+    days, seconds = divmod(seconds, 60*60*24)
+    hours, seconds = divmod(seconds, 60*60)
+    minutes, seconds = divmod(seconds, 60)
+    string = 'There are '
+    string += '%d weeks, ' % weeks
+    string += '%d days, ' % days
+    string += '%d hours, ' % hours
+    string += '%d minutes, ' % minutes
+    string += 'and %d seconds left until Bulldog Days.' % seconds
 
 def reply(text):
     """
