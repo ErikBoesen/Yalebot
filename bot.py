@@ -15,6 +15,19 @@ F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | r
 SUFFIX = '❤️'
 GROUP_ID = 1140136552771525
 BDD_TIME = datetime.datetime(year=2019, month=4, day=15)
+BOOLA_BOOLA = """Bulldog!  Bulldog!
+Bow, wow, wow
+Eli Yale
+Bulldog!  Bulldog!
+Bow, wow, wow
+Our team can never fail
+
+When the sons of Eli
+Break through the line
+That is the sign we hail
+Bulldog!  Bulldog!
+Bow, wow, wow
+Eli Yale!"""
 
 @app.route("/", methods=["POST"])
 def webhook():
@@ -36,6 +49,8 @@ def webhook():
             reply("You're welcome! :)")
         if "polls" in message["text"].lower():
             reply("There have been way too goddamn many polls in this chat.")
+        if "favorite song" in message["text"].lower():
+            reply(BOOLA_BOOLA)
     if message["system"]:
         print("System message!")
 
