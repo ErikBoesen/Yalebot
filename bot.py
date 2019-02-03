@@ -5,10 +5,12 @@ import os
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
+import facebook
 
 app = Flask(__name__)
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 SUFFIX = '❤️'
+GROUP_ID = 1140136552771525
 
 @app.route("/", methods=["POST"])
 def webhook():
@@ -44,3 +46,10 @@ def reply(text, image=None):
     request = Request(url, urlencode(data).encode())
     response = urlopen(request).read().decode()
     print("Response after message send: %s" % response)
+
+def vet_user(name: str):
+    """
+    Check Facebook to determine if user is part of the Yale '23 group.
+    """
+    os.environ['FACEBOOK_TOKEN']
+
