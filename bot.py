@@ -8,6 +8,7 @@ from flask import Flask, request
 import facebook
 import zalgoify
 import datetime
+import upsidedown
 
 
 app = Flask(__name__)
@@ -43,6 +44,8 @@ def webhook():
     if message["sender_type"] != "bot":
         if message["text"].lower().startswith("zalgo"):
             reply(zalgoify.process(message["text"][6:]))
+        if message["text"].lower().startswith("flip"):
+            reply(upsidedown.transform(message["text"][5:]))
         if "bulldog days" in message["text"].lower():
             reply(bulldog_countdown())
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
