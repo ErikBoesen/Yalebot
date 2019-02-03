@@ -1,3 +1,4 @@
 Flask==0.12
 gunicorn==19.6.0
 facebook-sdk>=3.1.0
+zalgoify>=1.0

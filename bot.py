@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
 import facebook
+import zalgoify
 
 app = Flask(__name__)
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
@@ -24,6 +25,8 @@ def webhook():
         matches = F_PATTERN.match(message["text"])
         if matches is not None and len(matches.groups()):
             reply(matches.groups()[0] + ' ' + SUFFIX)
+        if message["text"].lower().startswith("zalgo"):
+            reply(zalgoify.process(message["text"][6:]))
     if message["system"]:
         print("System message!")
 
