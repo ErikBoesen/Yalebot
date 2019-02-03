@@ -37,10 +37,10 @@ def webhook():
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
     print("Message received: %s" % message)
+    matches = F_PATTERN.match(message["text"])
+    if matches is not None and len(matches.groups()):
+        reply(matches.groups()[0] + ' ' + SUFFIX)
     if message["sender_type"] != "bot":
-        matches = F_PATTERN.match(message["text"])
-        if matches is not None and len(matches.groups()):
-            reply(matches.groups()[0] + ' ' + SUFFIX)
         if message["text"].lower().startswith("zalgo"):
             reply(zalgoify.process(message["text"][6:]))
         if "bulldog days" in message["text"].lower():
