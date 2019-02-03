@@ -51,8 +51,8 @@ def webhook():
             reply("There have been way too goddamn many polls in this chat.")
         if "favorite song" in message["text"].lower():
             reply(BOOLA_BOOLA)
-        if "a" in message["text"].lower() and False:
-            new_text = message["text"].replace("a", "y").replace("A", "Y")
+        if "dad" in message["text"].lower():
+            new_text = message["text"].replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + message["name"] + ", did you mean \"" + new_text + "?")
     if message["system"]:
         print("System message!")
