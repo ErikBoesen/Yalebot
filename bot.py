@@ -12,6 +12,9 @@ GROUPS = {
     46649296: {"name": "Main Yale chat", "bot_id": "1520c98b3da635c8c6383951a6"},
     47743475: {"name": "The loud minority", "bot_id": "004330a9e1f501c837041763fc"},
 }
+simple_responses = {
+    "ping": "pong"
+}
 commands = {
     "zalgo": modules.Zalgo(),
     "flip": modules.Flip(),
@@ -40,7 +43,13 @@ def webhook():
             instructions = text[1:].split(" ", 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else None
-            response = commands[command].response(query)
+            # Check if there's an automatic response for this command
+            if command in simple_responses:
+                response = simple_responses[command]
+            else if command in commands:
+                # If not, query appropriate module for a response
+                response = commands[command].response(query)
+
             if response is not None:
                 reply(response, group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
