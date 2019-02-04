@@ -30,8 +30,9 @@ def webhook():
         reply(matches.groups()[0] + ' ❤')
     if message["sender_type"] != "bot":
         if text.startswith("!"):
-            command, parameters = tuple(text[1:].split(" ", 1))
-            command = command.lower()
+            instructions = text[1:].split(" ", 1)
+            command = instructions.pop(0).lower()
+            query = instructions[0] if len(instructions) > 0 else None
             module = {
                 "zalgo": modules.Zalgo,
                 "flip": modules.Flip,
@@ -39,7 +40,7 @@ def webhook():
                 "vet": modules.Vet,
                 "bulldog": modules.Bulldog,
             }[command]()
-            response = module.response()
+            response = module.response(query)
             if response is not None:
                 reply(response)
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
