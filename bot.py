@@ -56,8 +56,6 @@ def webhook():
             reply(bulldog_countdown())
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
             reply("You're welcome! :)")
-        if "polls" in message["text"].lower():
-            reply("There have been way too goddamn many polls in this chat.")
         if "favorite song" in message["text"].lower():
             reply(BOOLA_BOOLA)
         if "dad" in message["text"].lower():
