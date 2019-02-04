@@ -64,12 +64,12 @@ def webhook():
             new_text = message["text"].strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + message["name"] + ", did you mean \"" + new_text + "\"?")
     if message["system"]:
-
-        name = message["text"].replace(" has rejoined the group", "").replace(" has joined the group", "")
-        string = name + " "
-        string += "is" if name in ALLOWED_MEMBERS else "is NOT"
-        string += " a verified Yale admit according to the official Yale '23 Facebook group."
-        reply(string)
+        if not message["text"].startswith("Poll '") and message["text"].contains("the group") and not message.contains("changed name"):
+            name = message["text"].replace(" has rejoined the group", "").replace(" has joined the group", "")
+            string = name + " "
+            string += "is" if name in ALLOWED_MEMBERS else "is NOT"
+            string += " a verified Yale admit according to the official Yale '23 Facebook group."
+            reply(string)
 
     return "ok", 200
 
