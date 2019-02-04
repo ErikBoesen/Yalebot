@@ -7,7 +7,6 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
 import facebook
-import upsidedown
 
 
 app = Flask(__name__)
@@ -50,12 +49,11 @@ def webhook():
             command = command.lower()
             module = {
                 "zalgo": modules.Zalgo,
+                "flip": modules.Flip,
             }[command]()
             response = module.response()
             if response is not None:
                 reply(response)
-        if message["text"].lower().startswith("flip"):
-            reply(upsidedown.transform(message["text"][5:]))
         if message["text"] == "!vet":
             reply(vetting_report())
         if "bulldog days" in message["text"].lower():
