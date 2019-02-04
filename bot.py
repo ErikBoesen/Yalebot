@@ -1,6 +1,5 @@
 import modules
 import os
-import json
 import re
 import os
 from urllib.parse import urlencode
@@ -14,6 +13,13 @@ F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | r
 GROUP_ID = 1140136552771525
 UNI_GROUPS = {
     'University of Michigan': 'https://groupme.com/join_group/46781389/hZehS1',
+}
+commands = {
+    "zalgo": modules.Zalgo(),
+    "flip": modules.Flip(),
+    "countdown": modules.Countdown(),
+    "vet": modules.Vet(),
+    "bulldog": modules.Bulldog(),
 }
 
 @app.route("/", methods=["POST"])
@@ -33,14 +39,7 @@ def webhook():
             instructions = text[1:].split(" ", 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else None
-            module = {
-                "zalgo": modules.Zalgo,
-                "flip": modules.Flip,
-                "countdown": modules.Countdown,
-                "vet": modules.Vet,
-                "bulldog": modules.Bulldog,
-            }[command]()
-            response = module.response(query)
+            response = commands[command].response(query)
             if response is not None:
                 reply(response)
         if "thank" in text.lower() and "yalebot" in text.lower():
