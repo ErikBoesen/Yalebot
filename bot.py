@@ -2,8 +2,7 @@ import modules
 import os
 import re
 import os
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
+import requests
 from flask import Flask, request
 
 
@@ -13,7 +12,7 @@ GROUPS = {
     47743475: {"name": "The loud minority", "bot_id": "004330a9e1f501c837041763fc"},
 }
 simple_responses = {
-    "ping": "pong"
+    "ping": "Pong!"
 }
 commands = {
     "zalgo": modules.Zalgo(),
@@ -76,9 +75,8 @@ def reply(text, group_id):
         "bot_id": GROUPS[group_id]["bot_id"],
         "text": text,
     }
-    request = Request(url, urlencode(data).encode())
-    response = urlopen(request).read().decode()
-    print("Response after message send: %s" % response)
+    response = requests.post(url, data=data)
+    print("Response after message send: %s" % response.get_json())
 
 if __name__ == "__main__":
     print(commands["countdown"].response(""))
