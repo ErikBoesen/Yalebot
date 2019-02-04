@@ -50,7 +50,7 @@ def webhook():
     if message["system"]:
         if not text.startswith("Poll '") and text.contains("the group") and not text.contains("changed name"):
             name = text.replace(" has rejoined the group", "").replace(" has joined the group", "")
-            reply(modules.Vet().check_user(name))
+            reply(commands["vet"].check_user(name))
     return "ok", 200
 
 def reply(text):
@@ -67,5 +67,5 @@ def reply(text):
     print("Response after message send: %s" % response)
 
 if __name__ == "__main__":
-    print(modules.Countdown().response(""))
-    print(modules.Zalgo().response("Test zalgo"))
+    print(commands["countdown"].response(""))
+    print(commands["zalgo"].response("Test zalgo"))
