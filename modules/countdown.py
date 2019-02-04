@@ -16,7 +16,7 @@ class Countdown:
     def __init__(self):
         pass
 
-    def response(self, query: str = None):
+    def response(self, query=None):
         """
         Calculate response given input.
         :param query: text input to command.
