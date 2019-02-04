@@ -21,7 +21,10 @@ class Countdown:
         Calculate response given input.
         :param query: text input to command.
         """
-        return "There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until %s." % (self.time())
+        remaining = self.time()
+        if remaining is None:
+            return "There are no events scheduled."
+        return "There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until %s." % remaining
 
     def next_event(self, now: datetime.datetime) -> Event:
         """
@@ -38,6 +41,8 @@ class Countdown:
         """
         now = datetime.datetime.now()
         event = self.next_event(now)
+        if event is None:
+            return None
         delta = event.date - now
         seconds = delta.total_seconds()
         weeks, seconds = divmod(seconds, 60*60*24*7)
