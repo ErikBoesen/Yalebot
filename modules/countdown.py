@@ -21,7 +21,7 @@ class Countdown:
         Calculate response given input.
         :param query: text input to command.
         """
-        return "There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until Bulldog Days." % (self.time())
+        return "There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until %s." % (self.time())
 
     def next_event(self, now: datetime.datetime) -> Event:
         """
@@ -44,4 +44,4 @@ class Countdown:
         days, seconds = divmod(seconds, 60*60*24)
         hours, seconds = divmod(seconds, 60*60)
         minutes, seconds = divmod(seconds, 60)
-        return weeks, days, hours, minutes, seconds
+        return weeks, days, hours, minutes, seconds, event.name
