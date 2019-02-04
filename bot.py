@@ -52,7 +52,7 @@ def webhook():
         if message["text"] == "!vet":
             reply(vetting_report())
         if "bulldog days" in message["text"].lower():
-            reply(modules.countdown.Countdown().respond())
+            reply(modules.Countdown().response())
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
             reply("You're welcome! :)")
         if "favorite song" in message["text"].lower():
