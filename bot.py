@@ -1,7 +1,6 @@
 import modules
 import os
 import re
-import os
 import requests
 from flask import Flask, request
 
@@ -12,7 +11,8 @@ GROUPS = {
     47743475: {"name": "The loud minority", "bot_id": "004330a9e1f501c837041763fc"},
 }
 simple_responses = {
-    "ping": "Pong!"
+    "ping": "Pong!",
+    "about": "Yalebot is a program written in Python and maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. The bot's source code can be viewed and contributed to at https://github.com/ErikBoesen/Yalebot.",
 }
 commands = {
     "zalgo": modules.Zalgo(),
