@@ -45,8 +45,6 @@ def webhook():
                 reply(response)
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
             reply("You're welcome! :)")
-        if "favorite song" in message["text"].lower():
-            reply(BOOLA_BOOLA)
         if "dad" in message["text"].lower():
             new_text = message["text"].strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + message["name"] + ", did you mean \"" + new_text + "\"?")
