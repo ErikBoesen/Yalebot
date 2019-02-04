@@ -7,7 +7,6 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
 import facebook
-import zalgoify
 import upsidedown
 
 
@@ -40,11 +39,19 @@ def webhook():
     """
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
+    text = message["text"]
     print("Message received: %s" % message)
     matches = F_PATTERN.match(message["text"])
     if matches is not None and len(matches.groups()):
         reply(matches.groups()[0] + ' ' + SUFFIX)
     if message["sender_type"] != "bot":
+        if text.startswith("!"):
+            command, parameters = text[1:].split(" ", 1)
+            command = command.lower()
+            function = {
+                "zalgo": modules.Zalgo,
+            }
+
         if message["text"].lower().startswith("zalgo"):
             reply(zalgoify.process(message["text"][6:]))
         if message["text"].lower().startswith("flip"):
