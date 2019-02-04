@@ -48,12 +48,12 @@ def webhook():
         if text.startswith("!"):
             command, parameters = text[1:].split(" ", 1)
             command = command.lower()
-            function = {
+            module = {
                 "zalgo": modules.Zalgo,
-            }
-
-        if message["text"].lower().startswith("zalgo"):
-            reply(zalgoify.process(message["text"][6:]))
+            }[command]()
+            response = module.response()
+            if response is not None:
+                reply(response)
         if message["text"].lower().startswith("flip"):
             reply(upsidedown.transform(message["text"][5:]))
         if message["text"] == "!vet":
@@ -105,3 +105,4 @@ def vet_user(name: str):
 
 if __name__ == "__main__":
     print(modules.Countdown().response())
+    print(modules.Zalgo().response("Test zalgo"))
