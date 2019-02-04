@@ -51,12 +51,12 @@ def webhook():
                 "zalgo": modules.Zalgo,
                 "flip": modules.Flip,
                 "countdown": modules.Countdown,
+                "vet": modules.Vet,
+                "bulldog": modules.Bulldog,
             }[command]()
             response = module.response()
             if response is not None:
                 reply(response)
-        if message["text"] == "!vet":
-            reply(vetting_report())
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
             reply("You're welcome! :)")
         if "favorite song" in message["text"].lower():
@@ -74,13 +74,6 @@ def webhook():
 
     return "ok", 200
 
-def vetting_report():
-    """
-    Compare list of users in GroupMe with Facebook.
-    """
-    return "Coming soon!"
-
-
 def reply(text):
     """
     Reply in chat.
@@ -93,12 +86,6 @@ def reply(text):
     request = Request(url, urlencode(data).encode())
     response = urlopen(request).read().decode()
     print("Response after message send: %s" % response)
-
-def vet_user(name: str):
-    """
-    Check Facebook to determine if user is part of the Yale '23 group.
-    """
-    os.environ['FACEBOOK_TOKEN']
 
 if __name__ == "__main__":
     print(modules.Countdown().response())
