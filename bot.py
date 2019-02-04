@@ -43,14 +43,14 @@ def webhook():
             response = module.response(query)
             if response is not None:
                 reply(response)
-        if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
+        if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome! :)")
-        if "dad" in message["text"].lower():
-            new_text = message["text"].strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
+        if "dad" in text.lower():
+            new_text = text.strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + message["name"] + ", did you mean \"" + new_text + "\"?")
     if message["system"]:
-        if not message["text"].startswith("Poll '") and message["text"].contains("the group") and not message.contains("changed name"):
-            name = message["text"].replace(" has rejoined the group", "").replace(" has joined the group", "")
+        if not text.startswith("Poll '") and text.contains("the group") and not text.contains("changed name"):
+            name = text.replace(" has rejoined the group", "").replace(" has joined the group", "")
             reply(modules.Vet().check_user(name))
     return "ok", 200
 
