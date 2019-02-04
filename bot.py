@@ -30,7 +30,7 @@ def webhook():
         reply(matches.groups()[0] + ' ❤')
     if message["sender_type"] != "bot":
         if text.startswith("!"):
-            command, parameters = text[1:].split(" ", 1)
+            command, parameters = tuple(text[1:].split(" ", 1))
             command = command.lower()
             module = {
                 "zalgo": modules.Zalgo,
@@ -69,5 +69,5 @@ def reply(text):
     print("Response after message send: %s" % response)
 
 if __name__ == "__main__":
-    print(modules.Countdown().response())
+    print(modules.Countdown().response(""))
     print(modules.Zalgo().response("Test zalgo"))
