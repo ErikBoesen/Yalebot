@@ -10,6 +10,7 @@ class Event:
 class Countdown:
     events = [
         Event("Bulldog Days", datetime.datetime(year=2019, month=4, day=15), datetime.timedelta(days=3)),
+        Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20), datetime.timedelta(days=1)),
     ]
 
     def __init__(self):
