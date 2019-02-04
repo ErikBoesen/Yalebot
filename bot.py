@@ -50,14 +50,13 @@ def webhook():
             module = {
                 "zalgo": modules.Zalgo,
                 "flip": modules.Flip,
+                "countdown": modules.Countdown,
             }[command]()
             response = module.response()
             if response is not None:
                 reply(response)
         if message["text"] == "!vet":
             reply(vetting_report())
-        if "bulldog days" in message["text"].lower():
-            reply(modules.Countdown().response())
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
             reply("You're welcome! :)")
         if "favorite song" in message["text"].lower():
