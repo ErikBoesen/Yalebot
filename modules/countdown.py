@@ -2,7 +2,7 @@ import datetime
 
 
 class Event:
-    def __init__(self, name: str, date, duration):
+    def __init__(self, name: str, date: datetime.datetime, duration: datetime.timedelta):
         self.name = name
         self.date = date
         self.duration = duration
