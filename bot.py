@@ -1,3 +1,4 @@
+import modules
 import os
 import json
 import re
@@ -7,7 +8,6 @@ from urllib.request import Request, urlopen
 from flask import Flask, request
 import facebook
 import zalgoify
-import datetime
 import upsidedown
 
 
@@ -15,7 +15,6 @@ app = Flask(__name__)
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 SUFFIX = '❤️'
 GROUP_ID = 1140136552771525
-BDD_TIME = datetime.datetime(year=2019, month=4, day=15)
 BOOLA_BOOLA = """Bulldog!  Bulldog!
 Bow, wow, wow
 Eli Yale
@@ -53,7 +52,7 @@ def webhook():
         if message["text"] == "!vet":
             reply(vetting_report())
         if "bulldog days" in message["text"].lower():
-            reply(bulldog_countdown())
+            reply(modules.countdown.Countdown().respond())
         if "thank" in message["text"].lower() and "yalebot" in message["text"].lower():
             reply("You're welcome! :)")
         if "favorite song" in message["text"].lower():
@@ -77,23 +76,6 @@ def vetting_report():
     """
     return "Coming soon!"
 
-def bulldog_countdown():
-    """
-    Get time until Bulldog Days.
-    """
-    delta = BDD_TIME - datetime.datetime.now()
-    seconds = delta.total_seconds()
-    weeks, seconds = divmod(seconds, 60*60*24*7)
-    days, seconds = divmod(seconds, 60*60*24)
-    hours, seconds = divmod(seconds, 60*60)
-    minutes, seconds = divmod(seconds, 60)
-    string = 'There are '
-    string += '%d weeks, ' % weeks
-    string += '%d days, ' % days
-    string += '%d hours, ' % hours
-    string += '%d minutes, ' % minutes
-    string += 'and %d seconds left until Bulldog Days.' % seconds
-    return string
 
 def reply(text):
     """
