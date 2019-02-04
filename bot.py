@@ -95,3 +95,6 @@ def vet_user(name: str):
     Check Facebook to determine if user is part of the Yale '23 group.
     """
     os.environ['FACEBOOK_TOKEN']
+
+if __name__ == "__main__":
+    print(modules.Countdown().response())

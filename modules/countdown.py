@@ -27,7 +27,7 @@ class Countdown:
         :return: next event in list.
         """
         for event in self.events:
-            if event.date + event.duration - now > 0:
+            if (event.date + event.duration - now).total_seconds() > 0:
                 return event
         return None
 
@@ -37,7 +37,7 @@ class Countdown:
         """
         now = datetime.datetime.now()
         event = self.next_event(now)
-        delta = event - now
+        delta = event.date - now
         seconds = delta.total_seconds()
         weeks, seconds = divmod(seconds, 60*60*24*7)
         days, seconds = divmod(seconds, 60*60*24)
