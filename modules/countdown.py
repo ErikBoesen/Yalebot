@@ -13,9 +13,6 @@ class Countdown:
         Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20), datetime.timedelta(days=1)),
     ]
 
-    def __init__(self):
-        pass
-
     def response(self, query):
         """
         Calculate response given input.
