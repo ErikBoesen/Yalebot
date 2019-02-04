@@ -9,19 +9,17 @@ import facebook
 
 
 app = Flask(__name__)
-F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 GROUP_ID = 1140136552771525
-UNI_GROUPS = {
-    'University of Michigan': 'https://groupme.com/join_group/46781389/hZehS1',
-}
 commands = {
     "zalgo": modules.Zalgo(),
     "flip": modules.Flip(),
     "countdown": modules.Countdown(),
     "vet": modules.Vet(),
     "bulldog": modules.Bulldog(),
+    "groups": modules.Groups(),
 }
 
+F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 @app.route("/", methods=["POST"])
 def webhook():
     """
@@ -69,3 +67,4 @@ def reply(text):
 if __name__ == "__main__":
     print(commands["countdown"].response(""))
     print(commands["zalgo"].response("Test zalgo"))
+    print(commands["groups"].response(""))
