@@ -11,7 +11,7 @@ class Countdown:
         Calculate response given input.
         :param query: text input to command.
         """
-        return 'There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until %s.' % (self.time())
+        return 'There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until Bulldog Days.' % (self.time())
 
     def time(self):
         """
