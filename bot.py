@@ -45,13 +45,15 @@ def webhook():
             query = instructions[0] if len(instructions) > 0 else None
             # Check if there's an automatic response for this command
             if command in simple_responses:
-                response = simple_responses[command]
-            else if command in commands:
+                reply(simple_responses[command], group_id)
+            elif command in commands:
                 # If not, query appropriate module for a response
                 response = commands[command].response(query)
+                if response is not None:
+                    reply(response, group_id)
+            else:
+                reply("Command not found.")
 
-            if response is not None:
-                reply(response, group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome! :)", group_id)
         if "dad" in text.lower():
