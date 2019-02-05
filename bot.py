@@ -13,7 +13,7 @@ GROUPS = {
 }
 simple_responses = {
     "ping": "Pong!",
-    "about": "Yalebot is maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. The bot's source code can be viewed and contributed to on GitHub: github.com/ErikBoesen/Yalebot",
+    "about": "Yalebot is maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
     "flex": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
 }
 commands = {
