@@ -8,3 +8,4 @@ from .chat import Chat
 from .meme import Drake
 from .weather import Weather
 from .sad import Sad
+from .eightball import EightBall

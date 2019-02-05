@@ -26,6 +26,7 @@ commands = {
     "chat": modules.Chat(),
     "weather": modules.Weather(),
     "sad": modules.Sad(),
+    "eightball": modules.EightBall(),
 }
 meme_commands = {
     "drake": modules.Drake(),
