@@ -39,5 +39,3 @@ class Chat:
 
     def response(self, query):
         return self.client.query(query)
-
-print(Chat().response("Hey there!"))
