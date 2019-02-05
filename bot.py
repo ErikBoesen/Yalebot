@@ -68,7 +68,7 @@ def webhook():
             reply(commands["chat"].response(text.split(" ", 1)[1]), group_id)
 
         if H_PATTERN.search(text) is not None:
-            reply(H_PATTERN.sub("H******", text), group_id)
+            reply(message["name"].split(" ")[0] + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"?", group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome! :)", group_id)
         if "dad" in text.lower():
