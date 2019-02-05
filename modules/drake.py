@@ -32,4 +32,4 @@ class Drake:
         }
         r = requests.post("https://image.groupme.com/pictures", data=output.getvalue(), headers=headers)
         print(r.json())
-        return r.json()["url"]
+        return r.json()["payload"]["url"]
