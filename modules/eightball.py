@@ -1,4 +1,5 @@
 from .base import Module
+import random
 
 
 class EightBall(Module):
@@ -9,5 +10,6 @@ class EightBall(Module):
         "Don't count on it.", "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful."
     ]
     def response(self, query):
-        query_hash = sum([ord(character) for character in query])
-        return self.OPTIONS[query_hash % len(self.OPTIONS)]
+        #query_hash = sum([ord(character) for character in query])
+        #return self.OPTIONS[query_hash % len(self.OPTIONS)]
+        return random.choice(self.OPTIONS)
