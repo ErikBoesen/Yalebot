@@ -29,8 +29,10 @@ headers = {
     "X-Access-Token": os.environ["GROUPME_ACCESS_TOKEN"],
     "Content-Type": "image/jpeg",
 }
-r = requests.post("https://image.groupme.com/pictures", files={"image": output}, headers=headers)
+#    "image": output.getvalue()
+raw=  open("resources/memes/drake.jpg", "rb")
+r = requests.post("https://image.groupme.com/pictures", data=raw, headers=headers)
 print(r.json())
 
-im.show()
+#im.show()
 
