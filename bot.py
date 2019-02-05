@@ -57,7 +57,8 @@ def webhook():
                 if response is not None:
                     reply(response, group_id)
             elif command in meme_commands:
-                reply("@" + message["name"], group_id, image=meme_commands[command].response(query))
+                #reply("@" + message["name"], group_id, image=meme_commands[command].response(query))
+                reply(meme_commands[command].response(query), group_id)
             else:
                 reply("Command not found.")
 
