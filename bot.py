@@ -41,7 +41,7 @@ def webhook():
     group_id = int(message["group_id"])
     text = message["text"]
     print("Message received: %s" % message)
-    matches = F_PATTERN.match(message["text"])
+    matches = F_PATTERN.search(message["text"])
     if matches is not None and len(matches.groups()):
         reply(matches.groups()[0] + ' ❤', group_id)
     if message["sender_type"] != "bot":
