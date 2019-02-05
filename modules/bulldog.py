@@ -1,3 +1,5 @@
+from .base import Module
+
 BOOLA_BOOLA = """Bulldog!  Bulldog!
 Bow, wow, wow
 Eli Yale
@@ -12,6 +14,6 @@ Bulldog!  Bulldog!
 Bow, wow, wow
 Eli Yale!"""
 
-class Bulldog:
+class Bulldog(Module):
     def response(self, query):
         return BOOLA_BOOLA

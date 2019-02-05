@@ -1,9 +1,11 @@
+from .base import Module
+
 import os
 import requests
 import json
 
 
-class CleverBot(object):
+class CleverBot:
     def __init__(self, user, key):
         self.user = user
         self.key = key
@@ -33,9 +35,10 @@ class CleverBot(object):
             return None
 
 
-class Chat:
+class Chat(Module):
     def __init__(self):
         self.client = CleverBot(user=os.environ["CLEVERBOT_USER"], key=os.environ["CLEVERBOT_KEY"])
+        super().__init__()
 
     def response(self, query):
         return self.client.query(query)

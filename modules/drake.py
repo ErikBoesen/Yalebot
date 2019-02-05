@@ -1,3 +1,4 @@
+from .base import Module
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
@@ -5,12 +6,13 @@ import os
 import io
 
 
-class Drake:
+class Drake(Module):
     FONT_SIZE = 30
     BLACK = (0, 0, 0)
     def __init__(self):
         self.template = Image.open("resources/memes/drake.jpg")
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
+        super().__init__()
 
     def response(self, query):
         image = self.template.copy()

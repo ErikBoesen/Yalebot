@@ -1,4 +1,6 @@
-class Groups:
+from .base import Module
+
+class Groups(Module):
     links = {
         "University of Michigan": "46781389/hZehS1",
     }
