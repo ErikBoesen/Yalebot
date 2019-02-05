@@ -56,7 +56,7 @@ def webhook():
                 reply("Command not found.")
 
         if text.startswith("@Yalebot "):
-            reply(commands["chat"].response(text.split(" ", 1)[1], group_id))
+            reply(commands["chat"].response(text.split(" ", 1)[1]), group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome! :)", group_id)
         if "dad" in text.lower():
