@@ -13,23 +13,25 @@ class Drake:
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
 
     def response(self, query):
-        image = self.template
-        left_border = 330
-        right_border = 620
-
+        image = self.template.copy()
         captions = query.split("\n")
         draw = ImageDraw.Draw(image)
+
+        self.mark_image(draw, captions)
+        output = io.BytesIO()
+        image.save(output, format="JPEG")
+        image_url = self.upload_image(output.getvalue())
+        return image_url
+
+    def mark_image(self, draw: ImageDraw, captions):
+        LEFT_BORDER = 350
+        RIGHT_BORDER = 620
 
         START_Y = 100
         for caption_index, caption in enumerate(captions):
             lines = wrap(caption, 20)
             for line_index, line in enumerate(lines):
-                draw.text((left_border + 20, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
-
-        output = io.BytesIO()
-        image.save(output, format="JPEG")
-        image_url = self.upload_image(output.getvalue())
-        return image_url
+                draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
 
     def upload_image(self, data) -> str:
         """
