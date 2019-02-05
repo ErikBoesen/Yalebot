@@ -24,6 +24,8 @@ commands = {
     "bulldog": modules.Bulldog(),
     "groups": modules.Groups(),
     "chat": modules.Chat(),
+}
+meme_commands = {
     "drake": modules.Drake(),
 }
 
@@ -54,6 +56,8 @@ def webhook():
                 response = commands[command].response(query)
                 if response is not None:
                     reply(response, group_id)
+            elif command in meme_commands:
+                reply("", group_id, image=meme_commands[command].response(query))
             else:
                 reply("Command not found.")
 
@@ -70,17 +74,25 @@ def webhook():
             reply(commands["vet"].check_user(name), group_id)
     return "ok", 200
 
-def reply(text, group_id):
+def reply(text, group_id, image: str = None):
     """
     Reply in chat.
     :param text: text of message to send.
     :param group_id: ID of group in which to send message.
+    :param image: URL of image to attach.
     """
     url = "https://api.groupme.com/v3/bots/post"
     data = {
         "bot_id": GROUPS[group_id]["bot_id"],
         "text": text,
     }
+    if image is not None:
+        data["attachments"] = [
+            {
+                "type": "image",
+                "url": image,
+            }
+        ]
     response = requests.post(url, data=data)
     print("Response after message send: %s" % response.json())
 
