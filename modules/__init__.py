@@ -7,3 +7,4 @@ from .groups import Groups
 from .chat import Chat
 from .meme import Drake
 from .weather import Weather
+from .sad import Sad
