@@ -43,6 +43,7 @@ class Meme(Module):
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
+        print(r.json())
         return r.json()["payload"]["url"]
 
 class Drake(Meme):
