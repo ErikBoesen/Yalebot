@@ -80,7 +80,7 @@ def reply(text, group_id):
         "text": text,
     }
     response = requests.post(url, data=data)
-    print("Response after message send: %s" % response.get_json())
+    print("Response after message send: %s" % response.json())
 
 if __name__ == "__main__":
     print(commands["countdown"].response(""))
