@@ -1,5 +1,6 @@
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
+
 im = Image.open("resources/memes/drake.jpg")
 FONT_SIZE = 30
 font = ImageFont.truetype("resources/Lato-Regular.ttf", FONT_SIZE)
@@ -17,6 +18,19 @@ for caption_index, caption in enumerate(captions):
     lines = wrap(caption, 20)
     for line_index, line in enumerate(lines):
         draw.text((left_border + 20, 80 * (caption_index + 1)**2 + FONT_SIZE * 1.3 * line_index), line, font=font, fill=BLACK)
+
+import requests
+import os
+import io
+
+output = io.BytesIO()
+im.save(output, format='JPEG')
+headers = {
+    "X-Access-Token": os.environ["GROUPME_ACCESS_TOKEN"],
+    "Content-Type": "image/jpeg",
+}
+r = requests.post("https://image.groupme.com/pictures", files={"image": output}, headers=headers)
+print(r.json())
 
 im.show()
 
