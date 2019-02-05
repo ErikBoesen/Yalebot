@@ -94,7 +94,6 @@ def reply(text, group_id, image: str = None):
             }
         ]
     response = requests.post(url, data=data)
-    print("Response after message send: %s" % response.json())
 
 if __name__ == "__main__":
     pass
