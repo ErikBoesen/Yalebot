@@ -93,6 +93,7 @@ def reply(text, group_id, image: str = None):
                 "url": image,
             }
         ]
+    print(data)
     response = requests.post(url, data=data)
 
 if __name__ == "__main__":
