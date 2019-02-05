@@ -87,6 +87,7 @@ def reply(text, group_id, image: str = None):
         "text": text,
     }
     if image is not None:
+        print('Attaching image %s' % image)
         data["attachments"] = [
             {
                 "type": "image",
