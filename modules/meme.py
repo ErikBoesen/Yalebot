@@ -23,6 +23,7 @@ class Meme(Module):
         output = io.BytesIO()
         image.save(output, format="JPEG")
         image_url = self.upload_image(output.getvalue())
+        print(image_url)
         return image_url
 
     def mark_image(self, draw: ImageDraw, captions):
@@ -43,7 +44,6 @@ class Meme(Module):
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
-        print(r.json())
         return r.json()["payload"]["url"]
 
 class Drake(Meme):

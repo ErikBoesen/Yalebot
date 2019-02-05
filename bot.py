@@ -97,5 +97,4 @@ def reply(text, group_id, image: str = None):
     print("Response after message send: %s" % response.json())
 
 if __name__ == "__main__":
-    print(commands["countdown"].response(""))
-    print(commands["groups"].response(""))
+    pass
