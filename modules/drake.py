@@ -31,4 +31,5 @@ class Drake:
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=output.getvalue(), headers=headers)
+        print(r.json())
         return r.json()["url"]
