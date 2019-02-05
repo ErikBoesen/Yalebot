@@ -14,6 +14,7 @@ class Sad(Module):
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIMZVUg9Y630THs3IxHQkxNJ_zjOYEqF3N0Dk8NNswsi-y9gFw",
         "https://naturaldogcompany.com/wp-content/uploads/2017/09/Cute-English-Bulldog-Puppies-web.jpg",
         "https://i.pinimg.com/originals/d5/99/4b/d5994ba1f2fd2af3fff905888cadbd32.jpg",
+        "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",  # cat
     ]
     def response(self, query):
         return random.choice(self.PICTURES)
