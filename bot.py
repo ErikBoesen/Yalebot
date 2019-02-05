@@ -9,7 +9,7 @@ app = Flask(__name__)
 GROUPS = {
     46649296: {"name": "Main Yale chat", "bot_id": "1520c98b3da635c8c6383951a6"},
     47743475: {"name": "The loud minority", "bot_id": "004330a9e1f501c837041763fc"},
-    47894954: {"name": "Yalebot testing server", "bot_id": "1520c98b3da635c8c6383951a6"},
+    47894954: {"name": "Yalebot testing server", "bot_id": "d4e61d0ecd65cbabc8a7ad36e3"},
 }
 simple_responses = {
     "ping": "Pong!",
