@@ -41,6 +41,8 @@ def webhook():
     message = request.get_json()
     group_id = int(message["group_id"])
     text = message["text"]
+    name = message["name"]
+    forename = name.split(" ", 1)[0]
     print("Message received: %s" % message)
     matches = F_PATTERN.search(text)
     if matches is not None and len(matches.groups()):
@@ -66,14 +68,13 @@ def webhook():
 
         if text.startswith("@Yalebot "):
             reply(commands["chat"].response(text.split(" ", 1)[1]), group_id)
-
         if H_PATTERN.search(text) is not None:
-            reply(message["name"].split(" ")[0] + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"? Perhaps you meant to say \"" + H_PATTERN.sub("The H Place", text) + "\" instead?", group_id)
+            reply(forename + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"? Perhaps you meant to say \"" + H_PATTERN.sub("The H Place", text) + "\" instead?", group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
-            reply("You're welcome! :)", group_id)
+            reply("You're welcome, " + forename + "! :)", group_id)
         if "dad" in text.lower():
             new_text = text.strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
-            reply("Hey " + message["name"] + ", did you mean \"" + new_text + "\"?", group_id)
+            reply("Hey " + forename + ", did you mean \"" + new_text + "\"?", group_id)
     if message["system"]:
         if not text.startswith("Poll '") and text.contains("the group") and not text.contains("changed name"):
             name = text.replace(" has rejoined the group", "").replace(" has joined the group", "")
