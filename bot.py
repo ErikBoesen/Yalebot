@@ -31,6 +31,7 @@ meme_commands = {
 }
 
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
+H_PATTERN = re.compile('(harvard)', flags=re.IGNORECASE)
 @app.route("/", methods=["POST"])
 def webhook():
     """
@@ -41,7 +42,7 @@ def webhook():
     group_id = int(message["group_id"])
     text = message["text"]
     print("Message received: %s" % message)
-    matches = F_PATTERN.search(message["text"])
+    matches = F_PATTERN.search(text)
     if matches is not None and len(matches.groups()):
         reply(matches.groups()[0] + ' ❤', group_id)
     if message["sender_type"] != "bot":
@@ -65,6 +66,9 @@ def webhook():
 
         if text.startswith("@Yalebot "):
             reply(commands["chat"].response(text.split(" ", 1)[1]), group_id)
+
+        if H_PATTERN.search(text) is not None:
+            reply(H_PATTERN.sub("H******", text), group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome! :)", group_id)
         if "dad" in text.lower():
