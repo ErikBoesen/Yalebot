@@ -31,7 +31,7 @@ headers = {
 }
 #    "image": output.getvalue()
 raw=  open("resources/memes/drake.jpg", "rb")
-r = requests.post("https://image.groupme.com/pictures", data=raw, headers=headers)
+r = requests.post("https://image.groupme.com/pictures", data=output.getvalue(), headers=headers)
 print(r.json())
 
 #im.show()
