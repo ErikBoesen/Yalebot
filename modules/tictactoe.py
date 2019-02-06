@@ -1,4 +1,5 @@
 #from .base import Module
+import re
 
 
 class Game():#Module):
@@ -13,81 +14,68 @@ class Game():#Module):
 
 
 class TicTacToe(Game):
-    RES = 3
-    def __init__(self):
-        super().__init__()
+    EMPTY = '-'
+    PLAYER_X = 'X'
+    PLAYER_O = 'O'
+    size = 3
+    started = False
 
-    def value_to_char(self, value: int):
-        # TODO: Better name
-        if value is None:
-            return "_"
+    def init_board(self):
+        self.board = {}
+        for x in range(self.size):
+            for y in range(self.size):
+                self.board[(x, y)] = EMPTY
+        return self.board
+
+    def print_board(self):
+        for coord in sorted(self.board.keys()):
+            x, y = coord
+            if y == 0 and x != 0:           # if is new row
+                print('\n' + '-' * 2* len(self.board))
+
+            val = self.board[coord]
+            if val is not EMPTY:
+                print(" %s |" % (val), end="")
+            else:
+                print("%1d,%1d|" % (coord), end="")
+
+    def place_piece(self, coord, player):
+        if coord in self.board.keys() and self.board[coord] is EMPTY:
+            self.board[coord] = player
+            return True
         else:
-            return ("X", "O")[value]
+            return False
 
-    def render_board(self):
-        string = ""
-        for y in range(self.RES):
-            for x in range(self.RES):
-                string += self.value_to_char(self.board[y][x])
-            string += "\n"
-        return string
+    def has_won(self, player):
+        for n in range(self.size):
+            rows = [board[(x, y)] for x, y in sorted(board.keys()) if n is x]
+            cols = [board[(x, y)] for x, y in sorted(board.keys()) if n is y]
+            diagonals = [board[(x, y)] for x, y in sorted(board.keys()) if x is y]
+            if rows.count(player) is size or cols.count(player) is size or diagonals.count(player) is size:
+                return True
+        return False
 
-    def start_game(self, players):
-        self.started = True
-        self.board = [
-            [None, None, None],
-            [None, None, None],
-            [None, None, None]
-        ]
-        self.render_board()
-        self.turn = 0
-        self.players = players
-        return "Tic-Tac-Toe game started between {player1} & {player2}! It is {player1}'s turn (X) first.\n{board}".format(player1=players[0],
-                                                                                                                           player2=players[1],
-                                                                                                                           board=self.render_board())
-    def end_game(self):
-        self.started = False
-        self.board = None
-        self.players = []
+    def board_full(self):
+        return list(self.board.values()).count(EMPTY) == 0
 
-    def cancel_game(self):
-        self.end_game()
-        return "Tic-Tac-Toe game cancelled."
+    def game_ended(self):
+        return board_full() or has_won(PLAYER_X) or has_won(PLAYER_O)
 
-    def place(self, x, y):
-        self.board[y][x] = self.turn
-        if self.check_win():
-            self.end_game()
-            return self.render_board() + "\n" + self.players[self.turn] + " wins!"
-        self.turn = (1, 0)[self.turn]
-        return self.render_board() + "\n" + ("It is now %s's turn" % self.players[self.turn])
-
-    def parse_position(self, string):
-        """
-        Given a word describing a position on the board, give the X or Y value to which that word corresponds.
-        :param string: single word, such as "top", "middle", or "right".
-        """
-        if string in ("top", "left"):
-            return 0
-        elif string in ("middle", "center"):
-            return 1
-        elif string in ("bottom", "right"):
-            return 2
-        else:
+    def game_winner(self):
+        if self.has_won(self.size, PLAYER_X):
+            return PLAYER_X
+        elif self.has_won(self.size, PLAYER_O):
+            return PLAYER_O
+        elif self.board_full():
             return None
 
-    def check_win(self):
-        # TODO I am so tired
-        if self.board[0][0] == self.board[0][1] == self.board[0][2] or \
-                self.board[1][0] == self.board[1][0] == self.board[1][2] or \
-                self.board[2][0] == self.board[2][1] == self.board[2][2] or \
-                self.board[0][0] == self.board[1][0] == self.board[2][0] or \
-                self.board[0][1] == self.board[1][1] == self.board[2][1] or \
-                self.board[0][2] == self.board[1][2] == self.board[2][2] or \
-                self.board[0][0] == self.board[1][1] == self.board[2][2] or \
-                self.board[0][2] == self.board[1][1] == self.board[2][0]:
-            return True
-        return False
+    def valid_move(self, user_in):
+        user_in = user_in.strip()
+        matches = re.match(r"[0-9]+\s*,\s*[0-9]+", user_in)
+        if matches is not None:
+            return tuple(map(int, user_in.split(',')))
+        else:
+            return False
 
     def response(self, query, name):
         #super().response(query)
@@ -99,18 +87,33 @@ class TicTacToe(Game):
             elif len(parameters) == 0:
                 return "Please specify your opponent."
             else:
-                return self.start_game(players=[name, " ".join(parameters)[1:]])
+                self.board = self.init_board(self.size)
+                print("\n*****************************************")
+                print("Let's play some tic tac toe!")
+                print("X: Player X, O: Player O, (x,y): Empty spot")
+                print("Enter coordinate in empty spot to fill it\n")
+
+                self.print_board(self.board)
+                self.turn = PLAYER_O
         elif command == "cancel":
             if self.started:
                 return self.cancel_game()
             else:
                 return "No game is in progress."
         elif command == "place":
-            if name != self.players[self.turn]:
-                return "You didn't really think I wouldn't have checked that you're the right person? Try harder, fool. It's %s's turn." % self.players[self.turn]
-            x = self.parse_position(parameters.pop(0))
-            y = self.parse_position(parameters.pop(0))
-            return self.place(x, y)
+            #if name != self.players[self.turn]:
+            #    return "You didn't really think I wouldn't have checked that you're the right person? Try harder, fool. It's %s's turn." % self.players[self.turn]
+            user_in = input("Player " +  turn + ", place your piece: ")
+            coord = valid_move(user_in)
+
+            if coord and place_piece(coord, turn):
+                print_board(board)
+                #switch turns
+                turn = PLAYER_X  if turn is PLAYER_O else PLAYER_O
+            else:
+                print("Invalid move.")
+            if self.game_ended(size):
+                print("Winner: " + self.game_winner(size))
         else:
             return "Invalid action."
 
