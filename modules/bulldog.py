@@ -15,6 +15,6 @@ Bow, wow, wow
 Eli Yale!"""
 
 class Bulldog(Module):
-    DESCRIPTION = "Sing everybody's favorite song!"
+    DESCRIPTION = "Sing everybody's favorite song"
     def response(self, query):
         return BOOLA_BOOLA

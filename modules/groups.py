@@ -1,7 +1,7 @@
 from .base import Module
 
 class Groups(Module):
-    DESCRIPTION = "Get links to other admit groups!"
+    DESCRIPTION = "Get links to other admit groups"
     links = {
         "University of Michigan": "46781389/hZehS1",
     }

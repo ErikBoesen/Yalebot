@@ -6,7 +6,6 @@ import json
 
 
 class CleverBot:
-    DESCRIPTION = "Converse with Yalebot! Also accessible by mentioning @Yalebot."
     def __init__(self, user, key):
         self.user = user
         self.key = key
@@ -37,6 +36,7 @@ class CleverBot:
 
 
 class Chat(Module):
+    DESCRIPTION = "Converse with Yalebot; also accessible by mentioning @Yalebot"
     def __init__(self):
         self.client = CleverBot(user=os.environ["CLEVERBOT_USER"], key=os.environ["CLEVERBOT_KEY"])
         super().__init__()
