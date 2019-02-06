@@ -1,3 +1,4 @@
 class Module:
+    DESCRIPTION = ""
     def __init__(self):
-        print('Loaded module %s.' % self.__class__.__name__)
+        print("Loaded module %s." % self.__class__.__name__)
