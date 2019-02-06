@@ -31,6 +31,9 @@ commands = {
 meme_commands = {
     "drake": modules.Drake(),
 }
+game_commands = {
+    "tictactoe": modules.TicTacToe(),
+}
 
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 H_PATTERN = re.compile('(harvard)', flags=re.IGNORECASE)
@@ -65,8 +68,11 @@ def webhook():
             elif command in meme_commands:
                 #reply("@" + message["name"], group_id, image=meme_commands[command].response(query))
                 reply(meme_commands[command].response(query), group_id)
+            elif command in game_commands:
+                reply(game_commands[command].response(query, name), group_id)
             else:
                 reply("Command not found.")
+
 
         if text.startswith("@Yalebot "):
             reply(commands["chat"].response(text.split(" ", 1)[1]), group_id)
