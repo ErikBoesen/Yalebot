@@ -71,8 +71,9 @@ def webhook():
                 for title in commands:
                     help_string += f"!{title}: {title.DESCRIPTION}\n"
                 help_string += "Memes: " + ", ".join(["!" + title for title in meme_commands])
+                reply(help_string, group_id)
             else:
-                reply("Command not found.")
+                reply("Command not found.", group_id)
 
 
         if text.startswith("@Yalebot "):
