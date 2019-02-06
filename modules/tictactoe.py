@@ -25,11 +25,12 @@ class TicTacToe(Game):
             return ("X", "O")[value]
 
     def render_board(self):
-        # TODO: This function is actual garbage even if it's working garbage
-        board_template = "%c | %c | %c\n--+---+--\n%c | %c | %c\n--+---+--\n%c | %c | %c"
-        board_items = [item for sublist in self.board for item in sublist]
-        board_items = [self.value_to_char(item) for item in board_items]
-        return board_template % tuple(board_items)
+        string = ""
+        for y in range(self.RES):
+            for x in range(self.RES):
+                string += self.value_to_char(self.board[y][x])
+            string += "\n"
+        return string
 
     def start_game(self, players):
         self.started = True
@@ -76,6 +77,7 @@ class TicTacToe(Game):
             return None
 
     def check_win(self):
+        # TODO I am so tired
         if self.board[0][0] == self.board[0][1] == self.board[0][2] or \
                 self.board[1][0] == self.board[1][0] == self.board[1][2] or \
                 self.board[2][0] == self.board[2][1] == self.board[2][2] or \
@@ -114,6 +116,7 @@ class TicTacToe(Game):
 
 if __name__ == "__main__":
     ttt = TicTacToe()
+    print(ttt.response("start @Crista Falk", "Erik Bøsen"))
     while True:
         print(ttt.response(input("> "), 'Erik Bøsen'))
 
