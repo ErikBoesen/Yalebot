@@ -67,7 +67,7 @@ def webhook():
                 reply(meme_commands[command].response(query), group_id)
             elif command == "help":
                 help_string = "--- Yalebot Commands ---\n"
-                help_string += "Simple commands: " + ", ".join(["!" + title for title in simple_commands])
+                help_string += "Simple commands: " + ", ".join(["!" + title for title in simple_responses])
                 for title in commands:
                     help_string += f"!{title}: {title.DESCRIPTION}\n"
                 help_string += "Memes: " + ", ".join(["!" + title for title in meme_commands])
