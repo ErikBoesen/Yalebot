@@ -2,6 +2,7 @@ from .base import Module
 import random
 
 class Sad(Module):
+    DESCRIPTION = "Instantly dispel all mental health problems"
     PICTURES = [
         "https://vetstreet.brightspotcdn.com/dims4/default/3407f3b/2147483647/thumbnail/645x380/quality/90/?url=https%3A%2F%2Fvetstreet-brightspot.s3.amazonaws.com%2Ffb%2F31%2F032a6aae436a9821acda211044fb%2Fbulldog-ap-rn4myi-645.jpg",
         "https://upload.wikimedia.org/wikipedia/commons/1/13/Clyde_The_Bulldog.jpg",

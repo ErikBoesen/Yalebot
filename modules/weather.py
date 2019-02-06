@@ -3,6 +3,7 @@ import requests
 import os
 
 class Weather(Module):
+    DESCRIPTION = "Check the weather in everyone's favorite city"
     NH_COORDINATES = {
         "x": 41.3083,
         "y": -72.9279

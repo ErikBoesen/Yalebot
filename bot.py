@@ -65,6 +65,12 @@ def webhook():
             elif command in meme_commands:
                 #reply("@" + message["name"], group_id, image=meme_commands[command].response(query))
                 reply(meme_commands[command].response(query), group_id)
+            elif command == "help":
+                help_string = "--- Yalebot Commands ---\n"
+                help_string += "Simple commands: " + ", ".join(["!" + title for title in simple_commands])
+                for title in commands:
+                    help_string += f"!{title}: {title.DESCRIPTION}\n"
+                help_string += "Memes: " + ", ".join(["!" + title for title in meme_commands])
             else:
                 reply("Command not found.")
 

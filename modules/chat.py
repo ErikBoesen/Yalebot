@@ -6,6 +6,7 @@ import json
 
 
 class CleverBot:
+    DESCRIPTION = "Converse with Yalebot! Also accessible by mentioning @Yalebot."
     def __init__(self, user, key):
         self.user = user
         self.key = key
