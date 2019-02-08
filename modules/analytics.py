@@ -5,37 +5,15 @@ import sys
 from pprint import pprint
 import os
 
+# The initial code this is based on was taken from https://github.com/octohub/GroupMeAnalytics
+# All credit goes to the author of that program.
+
 at = os.environ["GROUPME_ACCESS_TOKEN"]
+GROUP = 46649296
 
 class Analytics:
-    def menu():
-        groups_data = print_all_groups_with_number_beside_each()
-        try:
-            group_number = int(input("Enter the number of the group you would like to analyze:"))
-            group_id = get_group_id(groups_data, group_number)
-            prepare_analysis_of_group(groups_data, group_id)
-        except ValueError:
-            print("Not a number")
-
-
-    def print_all_groups_with_number_beside_each():
-        response = requests.get('https://api.groupme.com/v3/groups?token='+at)
-        data = response.json()
-
-        if len(data['response']) == 0:
-            print("You are not part of any groups.")
-            return
-        for i in range(len(data['response'])):
-            group = data['response'][i]['name']
-            print(str(i)+"\'"+group+"\'")
-        return data
-
-
-    def get_group_id(groups_data, group_number):
-
-        group_id = groups_data['response'][group_number]['id']
-        return group_id
-
+    def __init__(self):
+        self.prepare_analysis_of_group(groups_data, group_id)
 
     def prepare_analysis_of_group(groups_data, group_id):
         # these three lines simply display info to the user before the analysis begins
