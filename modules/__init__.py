@@ -10,3 +10,4 @@ from .weather import Weather
 from .sad import Sad
 from .eightball import EightBall
 from .roulette import Roulette
+from .analytics import Analytics
