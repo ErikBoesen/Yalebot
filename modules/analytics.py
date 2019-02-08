@@ -9,61 +9,55 @@ import os
 # All credit goes to the author of that program.
 
 at = os.environ["GROUPME_ACCESS_TOKEN"]
-GROUP = 46649296
+GROUP_ID = 46649296
 
 class Analytics:
     def __init__(self):
-        groups_data = self.get_group_data()
-        self.prepare_analysis_of_group(groups_data, GROUP)
+        group = self.get_group(GROUP_ID)
+        self.prepare_analysis_of_group(group)
 
-    def get_group_data(self):
+    def get_group_data(self, group_id):
         response = requests.get('https://api.groupme.com/v3/groups?token='+at)
         data = response.json()
 
-        if len(data['response']) == 0:
-            print("You are not part of any groups.")
-            return
-        for i in range(len(data['response'])):
-            group = data['response'][i]['name']
-            print(str(i)+"\'"+group+"\'")
-        return data
+        return data['response']
 
-    def prepare_analysis_of_group(self, groups_data, GROUP):
+    def prepare_analysis_of_group(self, group):
         # these three lines simply display info to the user before the analysis begins
-        number_of_messages = self.get_number_of_messages_in_group(groups_data, GROUP)
-        print("Analyzing "+str(number_of_messages) + " messages from " + group_name)
+        message_count = group['messages']['count']
+        print("Analyzing " + str(message_count) + " messages.")
 
-        #these two lines put all the members currently in the group into a dictionary
-        members_of_group_data = self.get_group_members(groups_data, GROUP)
-        user_dictionary = self.prepare_user_dictionary(members_of_group_data)
+        # Make dictionary of members
+        members = self.get_members(group)
+        user_dictionary = self.prepare_user_dictionary(members)
 
         #this line calls the "analyze_group" method which goes through the entire conversation
-        user_id_mapped_to_user_data = self.analyze_group(GROUP, user_dictionary, number_of_messages)
+        user_id_mapped_to_user_data = self.analyze_group(GROUP_ID, user_dictionary, message_count)
 
         #this line displays the data to the user
         self.display_data(user_id_mapped_to_user_data)
 
-    def get_number_of_messages_in_group(self, groups_data, GROUP):
+    def get_message_count_in_group(self, group):
         i = 0
         while True:
-            if GROUP == groups_data['response'][i]['group_id']:
+            if GROUP_ID == groups_data['response'][i]['group_id']:
                 return groups_data['response'][i]['messages']['count']
             i += 1
 
-    def get_group_members(self, groups_data, GROUP):
+    def get_members(self, group):
         i = 0
         while True:
-            if GROUP == groups_data['response'][i]['group_id']:
+            if GROUP_ID == groups_data['response'][i]['group_id']:
                 return groups_data['response'][i]['members']
             i += 1
 
-    def prepare_user_dictionary(self, members_of_group_data):
+    def prepare_user_dictionary(self, members):
         user_dictionary = {}
         i = 0
         while True:
             try:
-                user_id = members_of_group_data[i]['user_id']
-                nickname = members_of_group_data[i]['nickname']
+                user_id = members[i]['user_id']
+                nickname = members[i]['nickname']
                 user_dictionary[user_id] = [nickname, 0.0, 0.0, 0.0, 0.0, {}, {}, 0.0]
                 # [0] = nickname, [1] = total messages sent in group, like count, [2] = likes per message,
                 # [3] = average likes received per message, [4] = total words sent, [5] = dictionary of likes received from each member
@@ -75,9 +69,9 @@ class Analytics:
         return user_dictionary
 
 
-    def analyze_group(self, GROUP, user_id_mapped_to_user_data, number_of_messages):
+    def analyze_group(self, GROUP_ID, user_id_mapped_to_user_data, message_count):
 
-        response = requests.get('https://api.groupme.com/v3/groups/'+GROUP+'/messages?token='+at)
+        response = requests.get('https://api.groupme.com/v3/groups/'+GROUP_ID+'/messages?token='+at)
         data = response.json()
         message_with_only_alphanumeric_characters = ''
         message_id = 0
@@ -147,13 +141,13 @@ class Analytics:
 
             if i == 19:
                     message_id = data['response']['messages'][i]['id']
-                    remaining = iterations/number_of_messages
+                    remaining = iterations/message_count
                     remaining *= 100
                     remaining = round(remaining, 2)
                     print(str(remaining)+' percent done')
 
             payload = {'before_id': message_id}
-            response = requests.get('https://api.groupme.com/v3/groups/'+GROUP+'/messages?token='+at, params=payload)
+            response = requests.get('https://api.groupme.com/v3/groups/'+GROUP_ID+'/messages?token='+at, params=payload)
             data = response.json()
 
     def display_data(self, user_id_mapped_to_user_data):
