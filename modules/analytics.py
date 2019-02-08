@@ -67,7 +67,7 @@ class Analytics:
                 for liker_id in likers:
                     if liker_id not in self.users.keys():
                         # Leave name blank until user sends their first message
-                        self.users[user_id] = self.new_user('')
+                        self.users[liker_id] = self.new_user('')
                     self.users[liker_id]["likes"] += 1
 
                 self.users[sender_id]["messages"] += 1  # add one to sent message count
