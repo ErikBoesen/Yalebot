@@ -9,6 +9,8 @@ at = os.environ["GROUPME_ACCESS_TOKEN"]
 GROUP_ID = 46649296
 
 class Analytics:
+    DESCRIPTION = 'View statistics on user activity in the chat'
+
     users = {}
     def __init__(self):
         self.users = {}
