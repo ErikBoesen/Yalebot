@@ -11,6 +11,7 @@ GROUP_ID = 46649296
 class Analytics:
     users = {}
     def __init__(self):
+        self.users = {}
         group = self.get_group(GROUP_ID)
 
         # Display info to user before the analysis begins
@@ -21,7 +22,7 @@ class Analytics:
         self.populate_users(group['members'])
 
         # Perform analysis
-        self.users = self.analyze_group(GROUP_ID, message_count)
+        self.analyze_group(GROUP_ID, message_count)
 
         # Show results
         self.display_data()
@@ -70,7 +71,7 @@ class Analytics:
                         self.users[liker_id] = self.new_user('')
                     self.users[liker_id]["likes"] += 1
 
-                self.users[sender_id]["messages"] += 1  # add one to sent message count
+                self.users[sender_id]["messages"] += 1  # Increment sent message count
                 self.users[sender_id]["likes_received"] += len(likers)
 
             message_id = messages[-1]['id']  # Get last message's ID for next request
