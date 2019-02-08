@@ -21,10 +21,10 @@ class Analytics:
         self.populate_users(group['members'])
 
         # Perform analysis
-        self.users = self.analyze_messages(message_count)
+        self.users = self.analyze_group(GROUP_ID, message_count)
 
-        #this line displays the data to the user
-        self.display_data(self.users)
+        # Show results
+        self.display_data()
 
     def get_group(self, group_id):
         response = requests.get('https://api.groupme.com/v3/groups/%d?token=%s' % (group_id, at))
@@ -38,8 +38,8 @@ class Analytics:
         for member in members:
             self.users[member['user_id']] = self.new_user(member['name'])
 
-    def analyze_group(self, message_count):
-        response = requests.get('https://api.groupme.com/v3/groups/' + GROUP_ID + '/messages?token=' + at)
+    def analyze_group(self, group_id, message_count):
+        response = requests.get('https://api.groupme.com/v3/groups/%d/messages?token=%s' % (group_id, at))
         messages = response.json()['response']['messages']
         message_id = 0
         message_number = 0
@@ -47,7 +47,6 @@ class Analytics:
             for message in messages:  # API sends 20 messages at once
                 message_number += 1
                 name = message['name']
-                message = message['text']
 
                 sender_id = message['sender_id']
                 likers = message['favorited_by']
@@ -73,7 +72,7 @@ class Analytics:
             print(str(remaining)+'% done')
 
             payload = {'before_id': message_id}
-            response = requests.get('https://api.groupme.com/v3/groups/'+GROUP_ID+'/messages?token='+at, params=payload)
+            response = requests.get('https://api.groupme.com/v3/groups/%d/messages?token=%s' % (group_id, at), params=payload)
             data = response.json()
 
     def display_data(self):
