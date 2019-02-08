@@ -69,14 +69,14 @@ class Analytics:
 
             message_id = messages[-1]['id']  # Get last message's ID for next request
             remaining = 100 *  message_number / message_count
-            print('%.2f done' % remaining)
+            print('\r%.2f done' % remaining, end='')
 
             payload = {'before_id': message_id}
             response = requests.get('https://api.groupme.com/v3/groups/%d/messages?token=%s' % (group_id, at), params=payload)
             data = response.json()
 
     def display_data(self):
-        for key in sorted(self.users, key=lambda user: user['messages'], reversed=True):
+        for key in self.users:
             print(self.users[key]['name'])
             print('Messages Sent: %d' % self.users[key]["messages"])
             print('Likes Given: %d' % self.users[key]["likes"])
