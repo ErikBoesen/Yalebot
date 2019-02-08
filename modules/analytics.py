@@ -9,10 +9,9 @@ at = os.environ["GROUPME_ACCESS_TOKEN"]
 GROUP_ID = 46649296
 
 class Analytics:
-    users = []
+    users = {}
     def __init__(self):
         group = self.get_group(GROUP_ID)
-        self.prepare_analysis_of_group(group)
 
         # Display info to user before the analysis begins
         message_count = group['messages']['count']
@@ -22,13 +21,13 @@ class Analytics:
         self.populate_users(group['members'])
 
         # Perform analysis
-        self.users = self.analyze_group(GROUP_ID, user_dictionary, message_count)
+        self.users = self.analyze_messages(message_count)
 
         #this line displays the data to the user
         self.display_data(self.users)
 
-    def get_group_data(self, group_id):
-        response = requests.get('https://api.groupme.com/v3/groups?token=' + at)
+    def get_group(self, group_id):
+        response = requests.get('https://api.groupme.com/v3/groups/%d?token=%s' % (group_id, at))
         data = response.json()
         return data['response']
 
@@ -39,7 +38,7 @@ class Analytics:
         for member in members:
             self.users[member['user_id']] = self.new_user(member['name'])
 
-    def analyze_group(self, GROUP_ID, self.users, message_count):
+    def analyze_group(self, message_count):
         response = requests.get('https://api.groupme.com/v3/groups/' + GROUP_ID + '/messages?token=' + at)
         messages = response.json()['response']['messages']
         message_id = 0
