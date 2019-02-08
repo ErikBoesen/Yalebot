@@ -16,6 +16,7 @@ simple_responses = {
     "about": "Yalebot is maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
     "flex": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
     "essays": "Submit your essays here, or read your classmates'! https://drive.google.com/open?id=1IUG1cNxmxBHhv1sSemi92fYO6y5lG6of",
+    "spreadsheet": "https://docs.google.com/spreadsheets/d/10m_0glWVUncKCxERsNf6uOJhfeYU96mOK0KvgNURIBk/edit?fbclid=IwAR35OaPO6czQxZv26A6DEgEH-Qef0kCSe4nXxl8wcIfDml-BfLx4ksVtp6Y#gid=0",
 }
 commands = {
     "zalgo": modules.Zalgo(),
