@@ -12,14 +12,14 @@ at = os.environ["GROUPME_ACCESS_TOKEN"]
 GROUP_ID = 46649296
 
 class Analytics:
+    users = []
     def __init__(self):
         group = self.get_group(GROUP_ID)
         self.prepare_analysis_of_group(group)
 
     def get_group_data(self, group_id):
-        response = requests.get('https://api.groupme.com/v3/groups?token='+at)
+        response = requests.get('https://api.groupme.com/v3/groups?token=' + at)
         data = response.json()
-
         return data['response']
 
     def prepare_analysis_of_group(self, group):
@@ -28,74 +28,43 @@ class Analytics:
         print("Analyzing " + str(message_count) + " messages.")
 
         # Make dictionary of members
-        members = self.get_members(group)
-        user_dictionary = self.prepare_user_dictionary(members)
+        self.populate_users(group['members'])
 
-        #this line calls the "analyze_group" method which goes through the entire conversation
+        # This line calls the "analyze_group" method which goes through the entire conversation
         user_id_mapped_to_user_data = self.analyze_group(GROUP_ID, user_dictionary, message_count)
 
         #this line displays the data to the user
         self.display_data(user_id_mapped_to_user_data)
 
-    def get_message_count_in_group(self, group):
-        i = 0
-        while True:
-            if GROUP_ID == groups_data['response'][i]['group_id']:
-                return groups_data['response'][i]['messages']['count']
-            i += 1
+    def new_user(self, name):
+        return {"name": name, "messages": 0, "likes": 0, "average_likes_per_message": 0.0, "average_likes_received": 0.0}
 
-    def get_members(self, group):
-        i = 0
-        while True:
-            if GROUP_ID == groups_data['response'][i]['group_id']:
-                return groups_data['response'][i]['members']
-            i += 1
-
-    def prepare_user_dictionary(self, members):
-        user_dictionary = {}
-        i = 0
-        while True:
-            try:
-                user_id = members[i]['user_id']
-                nickname = members[i]['nickname']
-                user_dictionary[user_id] = [nickname, 0.0, 0.0, 0.0, 0.0, {}, {}, 0.0]
-                # [0] = nickname, [1] = total messages sent in group, like count, [2] = likes per message,
-                # [3] = average likes received per message, [4] = total words sent, [5] = dictionary of likes received from each member
-                # [6] = dictionary of shared likes, [7] = total likes given
-
-            except IndexError:  # it will reach here when it gets to the end of the members
-                return user_dictionary
-            i += 1
-        return user_dictionary
-
+    def populate_users(self, members):
+        for member in members:
+            user_id = member['user_id']
+            name = member['name']  # TODO: May need to be nickname not name
+            user_dictionary[user_id] = self.new_user(nickname)
+            # TODO: This is a terrible system and will be removed once it no longer needs to be referenced.
+            # [0] = nickname, [1] = total messages sent in group, like count, [2] = likes per message,
+            # [3] = average likes received per message, [4] = total words sent, [5] = dictionary of likes received from each member
+            # [6] = dictionary of shared likes, [7] = total likes given
 
     def analyze_group(self, GROUP_ID, user_id_mapped_to_user_data, message_count):
-
-        response = requests.get('https://api.groupme.com/v3/groups/'+GROUP_ID+'/messages?token='+at)
-        data = response.json()
-        message_with_only_alphanumeric_characters = ''
         message_id = 0
         iterations = 0.0
         while True:
-            for i in range(20):  # in range of 20 because API sends 20 messages at once
+            response = requests.get('https://api.groupme.com/v3/groups/'+GROUP_ID+'/messages?token='+at)
+            messages = response.json()['response']['messages']
+            for i in range(20):  # API sends 20 messages at once
                 try:
-
                     iterations += 1
-                    name = data['response']['messages'][i]['name']  # grabs name of sender
-                    message = data['response']['messages'][i]['text']  # grabs text of message
-                    #print(message)
-                    try:
-                        #  strips out special characters
-                        message_with_only_alphanumeric_characters = re.sub(r'\W+', ' ', str(message))
-                    except ValueError:
-                        pass  # this is here to catch errors when there are special characters in the message e.g. emoticons
-                    sender_id = data['response']['messages'][i]['sender_id']  # grabs sender id
-                    list_of_favs = data['response']['messages'][i]['favorited_by']  # grabs list of who favorited message
-                    length_of_favs = len(list_of_favs)  # grabs number of users who liked message
+                    name = messages[i]['name']
+                    message = messages[i]['text']
 
+                    sender_id = messages[i]['sender_id']
+                    list_of_favs = messages[i]['favorited_by']
+                    length_of_favs = len(list_of_favs)
 
-                    #grabs the number of words in message
-                    number_of_words_in_message = len(re.findall(r'\w+', str(message_with_only_alphanumeric_characters)))
 
                     if sender_id not in user_id_mapped_to_user_data.keys():
                         user_id_mapped_to_user_data[sender_id] = [name, 0.0, 0.0, 0.0, 0.0, {}, {}, 0.0]
@@ -127,7 +96,6 @@ class Analytics:
 
                     user_id_mapped_to_user_data[sender_id][1] += 1  # add one to sent message count
                     user_id_mapped_to_user_data[sender_id][2] += length_of_favs
-                    user_id_mapped_to_user_data[sender_id][4] += number_of_words_in_message
 
                 except IndexError:
                     print("COMPLETE")
@@ -140,7 +108,7 @@ class Analytics:
                     return user_id_mapped_to_user_data
 
             if i == 19:
-                    message_id = data['response']['messages'][i]['id']
+                    message_id = messages[i]['id']
                     remaining = iterations/message_count
                     remaining *= 100
                     remaining = round(remaining, 2)
@@ -151,7 +119,6 @@ class Analytics:
             data = response.json()
 
     def display_data(self, user_id_mapped_to_user_data):
-
         for key in user_id_mapped_to_user_data:
             print(user_id_mapped_to_user_data[key][0] + ' Data:')
             print('Messages Sent: ' + str(user_id_mapped_to_user_data[key][1]))
