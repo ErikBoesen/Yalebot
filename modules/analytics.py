@@ -51,13 +51,13 @@ class Analytics:
         while True:
             response = requests.get('https://api.groupme.com/v3/groups/' + GROUP_ID + '/messages?token=' + at)
             messages = response.json()['response']['messages']
-            for i in range(20):  # API sends 20 messages at once
+            for message in messages:  # API sends 20 messages at once
                 message_number += 1
-                name = messages[i]['name']
-                message = messages[i]['text']
+                name = message['name']
+                message = message['text']
 
-                sender_id = messages[i]['sender_id']
-                likers = messages[i]['favorited_by']
+                sender_id = message['sender_id']
+                likers = message['favorited_by']
                 likers_count = len(likers)
 
                 if sender_id not in self.users.keys():
@@ -77,10 +77,8 @@ class Analytics:
                 self.users[sender_id][2] += likers_count
 
             message_id = messages[19]['id']  # Get last message's ID for next request
-            remaining = message_number / message_count
-            remaining *= 100
-            remaining = round(remaining, 2)
-            print(str(remaining)+' percent done')
+            remaining = 100 *  message_number / message_count
+            print(str(remaining)+'% done')
 
             payload = {'before_id': message_id}
             response = requests.get('https://api.groupme.com/v3/groups/'+GROUP_ID+'/messages?token='+at, params=payload)
