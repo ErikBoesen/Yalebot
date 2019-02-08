@@ -12,8 +12,6 @@ class Analytics:
     DESCRIPTION = "View statistics on user activity in the chat"
 
     users = {}
-    def __init__(self):
-        self.generate_data()
 
     def generate_data(self):
         self.users = {}
