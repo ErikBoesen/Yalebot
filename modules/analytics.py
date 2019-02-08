@@ -88,7 +88,7 @@ class Analytics:
             users.sort(key=lambda user: user["messages"], reverse=True)
             leaders = users[:10]
             for place, user in enumerate(leaders):
-                output += user['name'] + ' / Messages Sent: %d' % user["messages"]
+                output += str(place + 1) + '. ' + user['name'] + ' / Messages Sent: %d' % user["messages"]
                 output += ' / Likes Given: %d' % user["likes"]
                 output += ' / Likes Received: %d' % user["likes_received"]
                 output += '\n'
