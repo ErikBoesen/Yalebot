@@ -78,6 +78,7 @@ class Analytics:
     def response(self, query):
         parameters = query.split(' ')
         command = parameters.pop(0)
+        output = ''
         if command == "profile":
             return "Profiling coming soon"
         elif command == "leaderboard":
@@ -85,9 +86,11 @@ class Analytics:
             users.sort(key=lambda user: user["messages"], reverse=True)
             leaders = users[:10]
             for place, user in enumerate(leaders):
-                print(user['name'] + ' / Messages Sent: %d' % user["messages"])
-                print(' / Likes Given: %d' % user["likes"])
-                print(' / Likes Received: %d' % user["likes_received"])
+                output += user['name'] + ' / Messages Sent: %d' % user["messages"]
+                output += ' / Likes Given: %d' % user["likes"]
+                output += ' / Likes Received: %d' % user["likes_received"]
+                output += '\n'
+        return output
 
 if __name__ == "__main__":
     print(Analytics().response("leaderboard"))
