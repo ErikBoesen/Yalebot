@@ -39,12 +39,18 @@ class Analytics:
             self.users[member['user_id']] = self.new_user(member['name'])
 
     def analyze_group(self, group_id, message_count):
-        response = requests.get('https://api.groupme.com/v3/groups/%d/messages?token=%s' % (group_id, at))
-        messages = response.json()['response']['messages']
         message_id = 0
         message_number = 0
         while message_number < message_count:
-            for message in messages:  # API sends 20 messages at once
+            params = {
+                # Get maximum number of messages at a time
+                'limit': 100,
+            }
+            if message_id:
+                params['before_id'] = message_id
+            response = requests.get('https://api.groupme.com/v3/groups/%d/messages?token=%s' % (group_id, at), params=params)
+            messages = response.json()['response']['messages']
+            for message in messages:
                 message_number += 1
                 name = message['name']
 
@@ -55,7 +61,7 @@ class Analytics:
                     self.users[sender_id] = self.new_user(name)
 
                 # Fill the name in if user liked a message but hasn't yet been added to the dictionary
-                if self.users[sender_id]['name'] == '':
+                if not self.users[sender_id].get('name'):
                     self.users[sender_id]['name'] = name
 
                 for liker_id in likers:
@@ -69,11 +75,7 @@ class Analytics:
 
             message_id = messages[-1]['id']  # Get last message's ID for next request
             remaining = 100 *  message_number / message_count
-            print('\r%.2f done' % remaining, end='')
-
-            payload = {'before_id': message_id}
-            response = requests.get('https://api.groupme.com/v3/groups/%d/messages?token=%s' % (group_id, at), params=payload)
-            data = response.json()
+            print('\r%.2f%% done' % remaining, end='')
 
     def display_data(self):
         for key in self.users:
