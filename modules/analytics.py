@@ -43,7 +43,7 @@ class Analytics:
         for member in members:
             user_id = member['user_id']
             name = member['name']  # TODO: May need to be nickname not name
-            user_dictionary[user_id] = self.new_user(nickname)
+            self.users[user_id] = self.new_user(nickname)
 
     def analyze_group(self, GROUP_ID, self.users, message_count):
         message_id = 0
@@ -58,7 +58,6 @@ class Analytics:
 
                 sender_id = message['sender_id']
                 likers = message['favorited_by']
-                likers_count = len(likers)
 
                 if sender_id not in self.users.keys():
                     self.users[sender_id] = self.new_user(name)
@@ -73,8 +72,8 @@ class Analytics:
                         self.users[user_id] = self.new_user('')
                     self.users[liker_id]["likes"] += 1
 
-                self.users[sender_id][1] += 1  # add one to sent message count
-                self.users[sender_id][2] += likers_count
+                self.users[sender_id]["messages"] += 1  # add one to sent message count
+                self.users[sender_id]["likes_received"] += len(likers)
 
             message_id = messages[19]['id']  # Get last message's ID for next request
             remaining = 100 *  message_number / message_count
