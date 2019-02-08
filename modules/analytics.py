@@ -5,9 +5,6 @@ import sys
 from pprint import pprint
 import os
 
-# The initial code this is based on was taken from https://github.com/octohub/GroupMeAnalytics
-# All credit goes to the author of that program.
-
 at = os.environ["GROUPME_ACCESS_TOKEN"]
 GROUP_ID = 46649296
 
@@ -17,40 +14,37 @@ class Analytics:
         group = self.get_group(GROUP_ID)
         self.prepare_analysis_of_group(group)
 
-    def get_group_data(self, group_id):
-        response = requests.get('https://api.groupme.com/v3/groups?token=' + at)
-        data = response.json()
-        return data['response']
-
-    def prepare_analysis_of_group(self, group):
-        # these three lines simply display info to the user before the analysis begins
+        # Display info to user before the analysis begins
         message_count = group['messages']['count']
         print("Analyzing " + str(message_count) + " messages.")
 
         # Make dictionary of members
         self.populate_users(group['members'])
 
-        # This line calls the "analyze_group" method which goes through the entire conversation
+        # Perform analysis
         self.users = self.analyze_group(GROUP_ID, user_dictionary, message_count)
 
         #this line displays the data to the user
         self.display_data(self.users)
+
+    def get_group_data(self, group_id):
+        response = requests.get('https://api.groupme.com/v3/groups?token=' + at)
+        data = response.json()
+        return data['response']
 
     def new_user(self, name):
         return {"name": name, "messages": 0, "likes": 0, "likes_received": 0.0}
 
     def populate_users(self, members):
         for member in members:
-            user_id = member['user_id']
-            name = member['name']  # TODO: May need to be nickname not name
-            self.users[user_id] = self.new_user(nickname)
+            self.users[member['user_id']] = self.new_user(member['name'])
 
     def analyze_group(self, GROUP_ID, self.users, message_count):
+        response = requests.get('https://api.groupme.com/v3/groups/' + GROUP_ID + '/messages?token=' + at)
+        messages = response.json()['response']['messages']
         message_id = 0
         message_number = 0
-        while True:
-            response = requests.get('https://api.groupme.com/v3/groups/' + GROUP_ID + '/messages?token=' + at)
-            messages = response.json()['response']['messages']
+        while message_number < message_count:
             for message in messages:  # API sends 20 messages at once
                 message_number += 1
                 name = message['name']
@@ -75,7 +69,7 @@ class Analytics:
                 self.users[sender_id]["messages"] += 1  # add one to sent message count
                 self.users[sender_id]["likes_received"] += len(likers)
 
-            message_id = messages[19]['id']  # Get last message's ID for next request
+            message_id = messages[-1]['id']  # Get last message's ID for next request
             remaining = 100 *  message_number / message_count
             print(str(remaining)+'% done')
 
@@ -83,7 +77,7 @@ class Analytics:
             response = requests.get('https://api.groupme.com/v3/groups/'+GROUP_ID+'/messages?token='+at, params=payload)
             data = response.json()
 
-    def display_data(self, self.users):
+    def display_data(self):
         for key in self.users:
             print(self.users[key]['name'])
             print('Messages Sent: ' + str(self.users[key]["messages"]))
