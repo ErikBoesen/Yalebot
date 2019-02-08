@@ -24,9 +24,6 @@ class Analytics:
         # Perform analysis
         self.analyze_group(GROUP_ID, message_count)
 
-        # Show results
-        self.display_data()
-
     def get_group(self, group_id):
         response = requests.get('https://api.groupme.com/v3/groups/%d?token=%s' % (group_id, at))
         data = response.json()
@@ -78,12 +75,19 @@ class Analytics:
             remaining = 100 *  message_number / message_count
             print('\r%.2f%% done' % remaining, end='')
 
-    def display_data(self):
-        for key in self.users:
-            print(self.users[key]['name'])
-            print('Messages Sent: %d' % self.users[key]["messages"])
-            print('Likes Given: %d' % self.users[key]["likes"])
-            print('Likes Received: %d' % self.users[key]["likes_received"])
+    def response(self, query):
+        parameters = query.split(' ')
+        command = parameters.pop(0)
+        if command == "profile":
+            return "Profiling coming soon"
+        elif command == "leaderboard":
+            users = [self.users[key] for key in self.users]
+            users.sort(key=lambda user: user["messages"], reverse=True)
+            leaders = users[:10]
+            for place, user in enumerate(leaders):
+                print(user['name'] + ' / Messages Sent: %d' % user["messages"])
+                print(' / Likes Given: %d' % user["likes"])
+                print(' / Likes Received: %d' % user["likes_received"])
 
 if __name__ == "__main__":
-    print(Analytics().response(""))
+    print(Analytics().response("leaderboard"))
