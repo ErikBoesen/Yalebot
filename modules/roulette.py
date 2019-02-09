@@ -8,7 +8,7 @@ TOKEN = client = Client.from_token(os.environ['GROUPME_ACCESS_TOKEN'])
 group = client.groups.get(id=GROUP_ID)
 
 class Roulette(Module):
-    DESCRIPTION = "Choose a person from a comma-separated list"
+    DESCRIPTION = "Choose a random person to kill"
     def response(self, query):
         victim = random.choice(group.members)
         victim.remove()
