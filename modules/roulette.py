@@ -12,7 +12,7 @@ class Roulette(Module):
     def response(self, query, message):
         if random.randint(1, 6) == 6:
             #victim = random.choice(group.members)
-            victim = group.members(id=message["sender_id"])
+            victim = group.members.find(id=message["sender_id"])
             victim.remove()
             return "Bang"
         else:

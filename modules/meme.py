@@ -14,7 +14,7 @@ class Meme(Module):
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
         super().__init__()
 
-    def response(self, query, message):
+    def response(self, query):
         image = self.template.copy()
         captions = query.split("\n")
         draw = ImageDraw.Draw(image)
