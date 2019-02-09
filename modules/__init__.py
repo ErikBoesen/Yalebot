@@ -11,3 +11,4 @@ from .sad import Sad
 from .eightball import EightBall
 from .roulette import Roulette
 from .analytics import Analytics
+from .pick import Pick

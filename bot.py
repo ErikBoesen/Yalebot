@@ -31,6 +31,7 @@ commands = {
     "eightball": modules.EightBall(),
     "roulette": modules.Roulette(),
     "analytics": modules.Analytics(),
+    "pick": modules.Pick(),
 }
 meme_commands = {
     "drake": modules.Drake(),
