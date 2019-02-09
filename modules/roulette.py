@@ -10,6 +10,9 @@ group = client.groups.get(id=GROUP_ID)
 class Roulette(Module):
     DESCRIPTION = "Choose a random person to kill"
     def response(self, query):
-        victim = random.choice(group.members)
-        victim.remove()
-        return "Bang"
+        if random.randint(1, 6) == 6:
+            victim = random.choice(group.members)
+            victim.remove()
+            return "Bang"
+        else:
+            return "Click"
