@@ -64,7 +64,7 @@ def webhook():
                 reply(simple_responses[command], group_id)
             elif command in commands:
                 # If not, query appropriate module for a response
-                response = commands[command].response(query)
+                response = commands[command].response(query, message)
                 if response is not None:
                     reply(response, group_id)
             elif command in meme_commands:
@@ -81,7 +81,6 @@ def webhook():
                 reply(help_string, group_id)
             else:
                 reply("Command not found. Use !help to view a list of commands.", group_id)
-
 
         if text.startswith("@Yalebot "):
             reply(commands["chat"].response(text.split(" ", 1)[1]), group_id)

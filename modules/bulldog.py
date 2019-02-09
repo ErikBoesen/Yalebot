@@ -16,5 +16,5 @@ Eli Yale!"""
 
 class Bulldog(Module):
     DESCRIPTION = "Sing everybody's favorite song"
-    def response(self, query):
+    def response(self, query, message):
         return BOOLA_BOOLA

@@ -79,7 +79,7 @@ class Analytics(Module):
             remaining = 100 *  message_number / message_count
             print("\r%.2f%% done" % remaining, end="")
 
-    def response(self, query):
+    def response(self, query, message):
         parameters = query.split(" ")
         command = parameters.pop(0)
         output = ""

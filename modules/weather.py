@@ -9,7 +9,7 @@ class Weather(Module):
         "y": -72.9279
     }
 
-    def response(self, query):
+    def response(self, query, message):
         r = requests.get("https://api.weather.gov/points/{x},{y}/forecast".format(x=self.NH_COORDINATES["x"],
                                                                                   y=self.NH_COORDINATES["y"]))
         forecast = r.json()['properties']['periods'][0]['detailedForecast']

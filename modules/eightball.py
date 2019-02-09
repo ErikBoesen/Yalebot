@@ -10,7 +10,7 @@ class EightBall(Module):
         "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.",
         "Don't count on it.", "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful."
     ]
-    def response(self, query):
+    def response(self, query, message):
         #query_hash = sum([ord(character) for character in query])
         #return self.OPTIONS[query_hash % len(self.OPTIONS)]
         return random.choice(self.OPTIONS)

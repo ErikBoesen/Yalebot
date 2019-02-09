@@ -41,5 +41,5 @@ class Chat(Module):
         self.client = CleverBot(user=os.environ["CLEVERBOT_USER"], key=os.environ["CLEVERBOT_KEY"])
         super().__init__()
 
-    def response(self, query):
+    def response(self, query, message):
         return self.client.query(query)

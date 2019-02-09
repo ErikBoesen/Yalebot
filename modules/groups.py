@@ -6,5 +6,5 @@ class Groups(Module):
         "University of Michigan": "46781389/hZehS1",
         "UNC Chapel Hill": "47739618/Ubl6Cn",
     }
-    def response(self, query):
+    def response(self, query, message):
         return '\n'.join(["%s -> https://groupme.com/join_group/%s" % (name, self.links[name]) for name in self.links])

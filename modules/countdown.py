@@ -15,7 +15,7 @@ class Countdown(Module):
         Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20), datetime.timedelta(days=1)),
     ]
 
-    def response(self, query):
+    def response(self, query, message):
         """
         Calculate response given input.
         :param query: text input to command.
