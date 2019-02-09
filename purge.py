@@ -9,7 +9,8 @@ def get_members(group_id):
     return response.json()['response']['members']
 
 def kick(group_id, target_id):
-    response = requests.get('https://api.groupme.com/v3/groups/%d/members/%s/remove?token=%s' % (group_id, TOKEN, target_id))
+    response = requests.post('https://api.groupme.com/v3/groups/%d/members/%s/remove?token=%s' % (group_id, TOKEN, target_id))
+    print(response.json())
 
 targets = ['Chike Iwuagwu', 'hiba hamid', 'AIDAN YOO(NOT SIMON)', 'Walli Chen (penn daddy)', 'Simon', 'Nick Bausenwein (Penn)', 'Eashan Sahai', 'AJ Manning', 'Margaret LaMarche', 'Rachel Wilson', 'Nitin S', 'Mia McDonald', 'David Yang', 'David Lu', 'serin b', 'Halsey Ziglar', 'Langston Luck', 'Sophie Hirt']
 
