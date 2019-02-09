@@ -29,7 +29,6 @@ commands = {
     "weather": modules.Weather(),
     "sad": modules.Sad(),
     "eightball": modules.EightBall(),
-    "roulette": modules.Roulette(),
     "analytics": modules.Analytics(),
     "pick": modules.Pick(),
 }
