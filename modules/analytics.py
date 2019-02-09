@@ -1,4 +1,4 @@
-#from .base import Module
+from .base import Module
 import requests
 import re
 import sys
