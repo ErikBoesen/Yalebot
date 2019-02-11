@@ -5,7 +5,7 @@ YALE_STUDENTS = ["Erik Kieran Boesen","John Yi","Hannah Mendlowitz","Christopher
 class Vet(Module):
     DESCRIPTION = "Check if users are actually Yale admits"
     def response(self, query, message):
-        return "Coming soon!"
+        return self.check_user(query.strip('@'))
 
     def is_admit(name: str):
         """
