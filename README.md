@@ -22,3 +22,8 @@ heroku config:set GROUPME_ACCESS_TOKEN=abcdef12345  # obtained from dev.groupme.
 
 After that, simply push the code via Heroku CLI and the bot will launch.
 
+## Authorship
+Yalebot is maintained by [Erik Boesen](https://github.com/ErikBoesen).
+
+## License
+[GPL](LICENSE)
