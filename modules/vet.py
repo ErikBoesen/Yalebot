@@ -7,7 +7,7 @@ class Vet(Module):
     def response(self, query, message):
         return self.check_user(query.strip('@'))
 
-    def is_admit(name: str):
+    def is_admit(self, name: str):
         """
         Check Facebook to determine if user is part of the Yale '23 group.
         TODO: Actually query Facebook.
@@ -15,7 +15,7 @@ class Vet(Module):
         #os.environ["FACEBOOK_TOKEN"]
         return (name in YALE_STUDENTS)
 
-    def check_user(name: str):
+    def check_user(self, name: str):
         """
         Get a string-formatted report on whether a user is verified.
         """
