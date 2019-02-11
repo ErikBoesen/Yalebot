@@ -14,4 +14,11 @@ In order to keep its code clean and maintainable, most of Yalebot's functions ar
 ## Platform
 Yalebot runs best on [Heroku](https://heroku.com).
 
-Y
+To run Yalebot, you must provide your own API key for certain modules to function properly:
+
+```sh
+heroku config:set GROUPME_ACCESS_TOKEN=abcdef12345  # obtained from dev.groupme.com
+```
+
+After that, simply push the code via Heroku CLI and the bot will launch.
+
