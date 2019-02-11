@@ -13,14 +13,14 @@ class Vet(Module):
         TODO: Actually query Facebook.
         """
         #os.environ["FACEBOOK_TOKEN"]
-        if name.lower() == "yalebot":
-            return "Y'all think you're smart, don't you?"
         return (name in YALE_STUDENTS)
 
     def check_user(self, name: str):
         """
         Get a string-formatted report on whether a user is verified.
         """
+        if name.lower() == "yalebot":
+            return "Y'all think you're smart, don't you?"
         return "{name} {status} a verified Yale admit according to the official Yale '23 Facebook group.".format(name=name,
                                                                                                                  status="is" if self.is_admit(name) else "is NOT")
 
