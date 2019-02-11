@@ -13,7 +13,7 @@ class Vet(Module):
         TODO: Actually query Facebook.
         """
         #os.environ["FACEBOOK_TOKEN"]
-        if name.lower() == "Yalebot":
+        if name.lower() == "yalebot":
             return "Y'all think you're smart, don't you?"
         return (name in YALE_STUDENTS)
 
