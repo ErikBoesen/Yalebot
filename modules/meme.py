@@ -9,7 +9,7 @@ import io
 class Meme(Module):
     FONT_SIZE = 30
     SMALL_FONT_SIZE = 20
-    LARGE_FONT_SIZE = 60
+    LARGE_FONT_SIZE = 50
     BLACK = (0, 0, 0)
     TEMPLATE_NAME = ""
     def __init__(self):
@@ -98,7 +98,7 @@ class ChangeMyMind(Meme):
 
         text_layer = text_layer.rotate(ROTATION, expand=0)
         """
-        lines = wrap(captions[0], 20)
+        lines = wrap(captions[0], 17)
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.large_font)
             draw.text((SIGN_X-line_width/2, SIGN_Y-line_height/2 + line_index * 65), line, font=self.large_font, fill=self.BLACK)
