@@ -82,7 +82,7 @@ class Juice(Meme):
             draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 20), line, font=self.small_font, fill=self.BLACK)
 
 class ChangeMyMind(Meme):
-    TEMPLATE_NAME = "changemymind.png"
+    TEMPLATE_NAME = "changemymind.jpg"
     def mark_image(self, draw: ImageDraw, captions):
         SIGN_X, SIGN_Y = (579, 460)
         """
