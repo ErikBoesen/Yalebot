@@ -1,4 +1,4 @@
-#from .base import Module
+from .base import Module
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
@@ -6,7 +6,7 @@ import os
 import io
 
 
-class Meme():#Module):
+class Meme(Module):
     FONT_SIZE = 30
     SMALL_FONT_SIZE = 15
     BLACK = (0, 0, 0)
@@ -23,8 +23,6 @@ class Meme():#Module):
         draw = ImageDraw.Draw(image)
 
         self.mark_image(draw, captions)
-        image.show()
-        return
         output = io.BytesIO()
         image.save(output, format="JPEG")
         image_url = self.upload_image(output.getvalue())
@@ -80,6 +78,3 @@ class Juice(Meme):
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.small_font)
             draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 20), line, font=self.small_font, fill=self.BLACK)
-
-if __name__ == "__main__":
-    Juice().response("hey there this is a test\nThis is the second caption for this test  ouasdh oa doihasd osaih ")
