@@ -35,6 +35,7 @@ commands = {
 meme_commands = {
     "drake": modules.Drake(),
     "yaledrake": modules.YaleDrake(),
+    "juice": modules.Juice(),
 }
 
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
