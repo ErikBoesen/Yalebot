@@ -9,8 +9,9 @@ import io
 class Meme(Module):
     FONT_SIZE = 30
     BLACK = (0, 0, 0)
-    def __init__(self, name):
-        self.template = Image.open("resources/memes/%s.jpg" % name)
+    TEMPLATE_NAME = ""
+    def __init__(self):
+        self.template = Image.open("resources/memes/%s.jpg" % self.TEMPLATE_NAME)
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
         super().__init__()
 
@@ -47,8 +48,7 @@ class Meme(Module):
         return r.json()["payload"]["url"]
 
 class Drake(Meme):
-    def __init__(self):
-        super().__init__("drake")
+    TEMPLATE_NAME = "drake"
 
     def mark_image(self, draw: ImageDraw, captions):
         LEFT_BORDER = 350
@@ -59,3 +59,7 @@ class Drake(Meme):
             lines = wrap(caption, 20)
             for line_index, line in enumerate(lines):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
+
+class YaleDrake(Drake):
+    def __init__(self):
+        pass
