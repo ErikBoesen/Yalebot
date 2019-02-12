@@ -8,7 +8,7 @@ import io
 
 class Meme(Module):
     FONT_SIZE = 30
-    SMALL_FONT_SIZE = 15
+    SMALL_FONT_SIZE = 20
     BLACK = (0, 0, 0)
     TEMPLATE_NAME = ""
     def __init__(self):
@@ -74,7 +74,7 @@ class Juice(Meme):
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.font)
             draw.text((HEAD_X-line_width/2, HEAD_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.BLACK)
-        lines = wrap(captions[1], 25)
+        lines = wrap(captions[1], 25
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.small_font)
             draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 20), line, font=self.small_font, fill=self.BLACK)
