@@ -61,5 +61,4 @@ class Drake(Meme):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
 
 class YaleDrake(Drake):
-    def __init__(self):
-        pass
+    TEMPLATE_NAME = "yaledrake"

@@ -5,9 +5,9 @@ from .vet import Vet
 from .bulldog import Bulldog
 from .groups import Groups
 from .chat import Chat
-from .meme import Drake
 from .weather import Weather
 from .sad import Sad
 from .eightball import EightBall
 from .analytics import Analytics
 from .pick import Pick
+from .meme import Drake, YaleDrake
