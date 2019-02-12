@@ -12,7 +12,7 @@ class Meme(Module):
     BLACK = (0, 0, 0)
     TEMPLATE_NAME = ""
     def __init__(self):
-        self.template = Image.open("resources/memes/%s.jpg" % self.TEMPLATE_NAME)
+        self.template = Image.open("resources/memes/%s" % self.TEMPLATE_NAME)
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
         self.small_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.SMALL_FONT_SIZE)
         super().__init__()
@@ -50,7 +50,7 @@ class Meme(Module):
         return r.json()["payload"]["url"]
 
 class Drake(Meme):
-    TEMPLATE_NAME = "drake"
+    TEMPLATE_NAME = "drake.jpg"
     def mark_image(self, draw: ImageDraw, captions):
         LEFT_BORDER = 350
         RIGHT_BORDER = 620
@@ -62,10 +62,10 @@ class Drake(Meme):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
 
 class YaleDrake(Drake):
-    TEMPLATE_NAME = "yaledrake"
+    TEMPLATE_NAME = "yaledrake.jpg"
 
 class Juice(Meme):
-    TEMPLATE_NAME = "juice"
+    TEMPLATE_NAME = "juice.jpg"
     def mark_image(self, draw: ImageDraw, captions):
         HEAD_X, HEAD_Y = (327, 145)
         JUG_X, JUG_Y = (373, 440)
@@ -78,3 +78,4 @@ class Juice(Meme):
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.small_font)
             draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 20), line, font=self.small_font, fill=self.BLACK)
+
