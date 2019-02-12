@@ -76,10 +76,10 @@ class Juice(Meme):
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.font)
             draw.text((HEAD_X-line_width/2, HEAD_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.BLACK)
-        lines = wrap(captions[1], 20)
+        lines = wrap(captions[1], 25)
         for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.font)
-            draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 35), line, font=self.small_font, fill=self.BLACK)
+            line_width, line_height = draw.textsize(line, font=self.small_font)
+            draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 20), line, font=self.small_font, fill=self.BLACK)
 
 if __name__ == "__main__":
-    Juice().response("hey there this is a test\nThis is the second caption for this test")
+    Juice().response("hey there this is a test\nThis is the second caption for this test  ouasdh oa doihasd osaih ")
