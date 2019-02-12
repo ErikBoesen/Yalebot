@@ -8,11 +8,13 @@ import io
 
 class Meme():#Module):
     FONT_SIZE = 30
+    SMALL_FONT_SIZE = 15
     BLACK = (0, 0, 0)
     TEMPLATE_NAME = ""
     def __init__(self):
         self.template = Image.open("resources/memes/%s.jpg" % self.TEMPLATE_NAME)
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
+        self.small_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.SMALL_FONT_SIZE)
         super().__init__()
 
     def response(self, query):
@@ -77,7 +79,7 @@ class Juice(Meme):
         lines = wrap(captions[1], 20)
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.font)
-            draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.BLACK)
+            draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 35), line, font=self.small_font, fill=self.BLACK)
 
 if __name__ == "__main__":
     Juice().response("hey there this is a test\nThis is the second caption for this test")
