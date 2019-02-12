@@ -1,4 +1,4 @@
-from .base import Module
+#from .base import Module
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
@@ -6,7 +6,7 @@ import os
 import io
 
 
-class Meme(Module):
+class Meme():#Module):
     FONT_SIZE = 30
     BLACK = (0, 0, 0)
     TEMPLATE_NAME = ""
@@ -21,6 +21,8 @@ class Meme(Module):
         draw = ImageDraw.Draw(image)
 
         self.mark_image(draw, captions)
+        image.show()
+        return
         output = io.BytesIO()
         image.save(output, format="JPEG")
         image_url = self.upload_image(output.getvalue())
@@ -49,7 +51,6 @@ class Meme(Module):
 
 class Drake(Meme):
     TEMPLATE_NAME = "drake"
-
     def mark_image(self, draw: ImageDraw, captions):
         LEFT_BORDER = 350
         RIGHT_BORDER = 620
@@ -62,3 +63,21 @@ class Drake(Meme):
 
 class YaleDrake(Drake):
     TEMPLATE_NAME = "yaledrake"
+
+class Juice(Meme):
+    TEMPLATE_NAME = "juice"
+    def mark_image(self, draw: ImageDraw, captions):
+        HEAD_X, HEAD_Y = (327, 145)
+        JUG_X, JUG_Y = (373, 440)
+
+        lines = wrap(captions[0], 20)
+        for line_index, line in enumerate(lines):
+            line_width, line_height = draw.textsize(line, font=self.font)
+            draw.text((HEAD_X-line_width/2, HEAD_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.BLACK)
+        lines = wrap(captions[1], 20)
+        for line_index, line in enumerate(lines):
+            line_width, line_height = draw.textsize(line, font=self.font)
+            draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.BLACK)
+
+if __name__ == "__main__":
+    Juice().response("hey there this is a test\nThis is the second caption for this test")
