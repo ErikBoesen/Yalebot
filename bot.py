@@ -28,6 +28,7 @@ commands = {
     "chat": modules.Chat(),
     "weather": modules.Weather(),
     "sad": modules.Sad(),
+    "youtube": modules.Youtube(),
     "eightball": modules.EightBall(),
     "analytics": modules.Analytics(),
     "pick": modules.Pick(),
