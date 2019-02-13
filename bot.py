@@ -58,6 +58,10 @@ def webhook():
         reply(matches.groups()[0] + ' ❤', group_id)
     if message["sender_type"] != "bot":
         if text.startswith("!"):
+            # Bully Kelly
+            if int(message["sender_id"]) == 31944910:
+                reply("lelly not real name", group_id)
+                return "ok", 200
             instructions = text[1:].split(" ", 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else None
