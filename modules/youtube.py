@@ -13,6 +13,6 @@ class Youtube(Module):
         for link in soup.find_all('a'):
             result = link.get('href')
             if result.startswith('/watch'):
-                response = link.get('href')
+                response = result
                 break
         return 'https://www.youtube.com' + response
