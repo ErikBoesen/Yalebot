@@ -7,6 +7,7 @@ from .groups import Groups
 from .chat import Chat
 from .weather import Weather
 from .kelly import Kelly
+from .chose import Chose
 from .sad import Sad
 from .eightball import EightBall
 from .analytics import Analytics
