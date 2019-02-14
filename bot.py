@@ -27,6 +27,7 @@ commands = {
     "groups": modules.Groups(),
     "chat": modules.Chat(),
     "weather": modules.Weather(),
+    "kelly": modules.Kelly(),
     "sad": modules.Sad(),
     "eightball": modules.EightBall(),
     "analytics": modules.Analytics(),
@@ -60,7 +61,7 @@ def webhook():
         if text.startswith("!"):
             # Bully Kelly
             if int(message["sender_id"]) == 31944910:
-                reply("lelly not real name", group_id)
+                reply(commands["kelly"].response(), group_id)
                 return "ok", 200
             instructions = text[1:].split(" ", 1)
             command = instructions.pop(0).lower()
