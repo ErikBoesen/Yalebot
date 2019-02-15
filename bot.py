@@ -64,6 +64,7 @@ def webhook():
             instructions = text[1:].split(" ", 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else None
+            query = query.strip()
             # Check if there's an automatic response for this command
             if command in simple_responses:
                 reply(simple_responses[command], group_id)
