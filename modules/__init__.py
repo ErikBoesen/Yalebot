@@ -13,4 +13,4 @@ from .sad import Sad
 from .eightball import EightBall
 from .analytics import Analytics
 from .pick import Pick
-from .meme import Drake, YaleDrake, Juice, ChangeMyMind
+from .meme import Drake, YaleDrake, Juice, ChangeMyMind, Catch
