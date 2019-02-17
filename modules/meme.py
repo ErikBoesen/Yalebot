@@ -118,7 +118,7 @@ class Catch(Meme):
             draw.text((BALL_X-line_width/2, BALL_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
 
         ARMS_X, ARMS_Y = (550, 275)
-        lines = wrap(captions[1], 20)
+        lines = wrap(captions[1] if len(captions) > 1 else "me", 20)
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.font)
             draw.text((ARMS_X-line_width/2, ARMS_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
