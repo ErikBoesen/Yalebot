@@ -1,4 +1,4 @@
-from .base import Module
+#from .base import Module
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
@@ -6,11 +6,12 @@ import os
 import io
 
 
-class Meme(Module):
+class Meme():#Module):
     FONT_SIZE = 30
     SMALL_FONT_SIZE = 20
     LARGE_FONT_SIZE = 50
     BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
     TEMPLATE_NAME = ""
     def __init__(self):
         self.template = Image.open("resources/memes/%s" % self.TEMPLATE_NAME)
@@ -25,6 +26,8 @@ class Meme(Module):
         draw = ImageDraw.Draw(image)
 
         self.mark_image(draw, captions)
+        image.show()
+        return
         output = io.BytesIO()
         image.save(output, format="JPEG")
         image_url = self.upload_image(output.getvalue())
@@ -103,7 +106,20 @@ class ChangeMyMind(Meme):
             line_width, line_height = draw.textsize(line, font=self.large_font)
             draw.text((SIGN_X-line_width/2, SIGN_Y-line_height/2 + line_index * 55), line, font=self.large_font, fill=self.BLACK)
 
-"""
+class Catch(Meme):
+    TEMPLATE_NAME = "catch.jpg"
+    def mark_image(self, draw: ImageDraw, captions):
+        BALL_X, BALL_Y = (250, 90)
+        lines = wrap(captions[0], 20)
+        for line_index, line in enumerate(lines):
+            line_width, line_height = draw.textsize(line, font=self.font)
+            draw.text((BALL_X-line_width/2, BALL_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
+
+        ARMS_X, ARMS_Y = (550, 275)
+        lines = wrap(captions[1], 20)
+        for line_index, line in enumerate(lines):
+            line_width, line_height = draw.textsize(line, font=self.font)
+            draw.text((ARMS_X-line_width/2, ARMS_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
+
 if __name__ == "__main__":
-    ChangeMyMind().response("aosdh sadoi asd sioas idas")
-"""
+    Catch().response("feelings\nme")
