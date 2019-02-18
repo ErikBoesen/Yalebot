@@ -5,3 +5,4 @@ zalgoify>=1.0
 upsidedown
 pillow
 GroupyAPI
+beautifulsoup4
