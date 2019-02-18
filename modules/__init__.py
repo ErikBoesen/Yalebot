@@ -16,3 +16,4 @@ from .pick import Pick
 from .meme import Drake, YaleDrake, Juice, ChangeMyMind, Catch
 from .system import Welcome
 from .youtube import YouTube
+from .price import Price

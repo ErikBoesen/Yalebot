@@ -35,6 +35,7 @@ commands = {
     "pick": modules.Pick(),
     "thatswhyichoseyale": modules.Chose(),
     "love": modules.Love(),
+    "price": modules.Price(),
 }
 meme_commands = {
     "drake": modules.Drake(),
