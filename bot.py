@@ -42,6 +42,9 @@ meme_commands = {
     "changemymind": modules.ChangeMyMind(),
     "catch": modules.Catch(),
 }
+system_responses = [
+    modules.Welcome(),
+]
 
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 H_PATTERN = re.compile('(harvard)', flags=re.IGNORECASE)
@@ -98,6 +101,9 @@ def webhook():
             new_text = text.strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + forename + ", did you mean \"" + new_text + "\"?", group_id)
     if message["system"]:
+        for option in system_responses:
+            if option.RE.match(text):
+                reply(option.response(), group_id)
         if not text.startswith("Poll '") and text.contains("the group") and not text.contains("changed name"):
             name = text.replace(" has rejoined the group", "").replace(" has joined the group", "")
             reply(commands["vet"].check_user(name), group_id)
