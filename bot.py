@@ -31,6 +31,7 @@ commands = {
     "sad": modules.Sad(),
     "eightball": modules.EightBall(),
     "analytics": modules.Analytics(),
+    "youtube": modules.YouTube(),
     "pick": modules.Pick(),
     "thatswhyichoseyale": modules.Chose(),
     "love": modules.Love(),
