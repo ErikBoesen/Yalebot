@@ -1,7 +1,7 @@
 import requests
-from requests.auth import HTTPDigestAuth
 import os
 from bs4 import BeautifulSoup
+import json
 
 ADMITS_PAGE = 'https://apps.admissions.yale.edu/portal/admits?cmd=faces'
 LOGIN_PAGE = 'https://apps.admissions.yale.edu/account/login'
@@ -29,4 +29,7 @@ while not finished:
     names += page_names
     print('Page {page_number} processed, with {admit_count} admits.'.format(page_number=page_number,
                                                                             admit_count=len(page_names)))
-print(names)
+
+print('{name_count} admit names fetched.'.format(name_count=len(names)))
+with open('resources/admit_names.json', 'w+') as f:
+    json.dump(names, f)
