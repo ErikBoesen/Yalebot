@@ -27,4 +27,6 @@ while not finished:
         # Page isn't full, implying this is the last.
         finished = True
     names += page_names
+    print('Page {page_number} processed, with {admit_count} admits.'.format(page_number=page_number,
+                                                                            admit_count=len(page_names)))
 print(names)
