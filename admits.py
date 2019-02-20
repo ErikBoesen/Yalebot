@@ -1,15 +1,25 @@
 import requests
 from requests.auth import HTTPDigestAuth
 import os
+from bs4 import BeautifulSoup
 
-ADMITS = 'https://apps.admissions.yale.edu/portal/admits?cmd=faces'
-LOGIN = 'https://apps.admissions.yale.edu/account/login'
+ADMITS_PAGE = 'https://apps.admissions.yale.edu/portal/admits?cmd=faces'
+LOGIN_PAGE = 'https://apps.admissions.yale.edu/account/login'
 session = requests.Session()
 
-payload = {
+credentials = {
     'email': os.environ['YALE_PORTAL_EMAIL'],
     'password': os.environ['YALE_PORTAL_PASSWORD'],
 }
-r = session.post(LOGIN, data=payload)
-r = session.get(ADMITS + '&page=2')
-print(r.text)
+# Log in to portal using credentials, persisting authentication through session
+session.post(LOGIN_PAGE, data=credentials)
+
+# Iterate through paginated admits list, scraping names from each page
+finished = False
+page_number = 1
+while not finished:
+    page_number += 1
+    page = session.get(ADMITS_PAGE + '&page=%d' % page_number)
+    bs = BeautifulSoup(page.text, 'html5lib')
+    print(bs.prettify())
+    break
