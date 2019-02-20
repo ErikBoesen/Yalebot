@@ -23,6 +23,6 @@ class Vet(Module):
         """
         if name.lower() == "yalebot":
             return "Y'all think you're smart, don't you?"
-        return "{name} {status} a verified Yale admit according to the official Yale '23 Facebook group.".format(name=name,
-                                                                                                                 status="is" if self.is_admit(name) else "is NOT")
+        return "{name} {status} a verified admit according to the Yale 2023 Admits website.".format(name=name,
+                                                                                                    status="is" if self.is_admit(name) else "is NOT")
 
