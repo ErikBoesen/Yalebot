@@ -24,4 +24,5 @@ BODY = """
 class Minion(Module):
     DESCRIPTION = "Die"
     def response(self, query, message):
-        return BODY % query.strip()
+        emote = query.strip()
+        return BODY % (emote, emote)
