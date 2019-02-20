@@ -38,6 +38,7 @@ commands = {
     "love": modules.Love(),
     "price": modules.Price(),
     "minion": modules.Minion(),
+    "house": modules.House(),
 }
 meme_commands = {
     "drake": modules.Drake(),
