@@ -16,10 +16,15 @@ session.post(LOGIN_PAGE, data=credentials)
 
 # Iterate through paginated admits list, scraping names from each page
 finished = False
-page_number = 1
+page_number = 0
+names = []
 while not finished:
     page_number += 1
     page = session.get(ADMITS_PAGE + '&page=%d' % page_number)
     bs = BeautifulSoup(page.text, 'html5lib')
-    print(bs.prettify())
-    break
+    page_names = [name_element.string for name_element in bs.find_all('div', {'class': 'facebook_name'})]
+    if len(page_names) < 4 * 12:
+        # Page isn't full, implying this is the last.
+        finished = True
+    names += page_names
+print(names)
