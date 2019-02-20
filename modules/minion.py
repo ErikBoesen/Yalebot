@@ -24,4 +24,4 @@ BODY = """
 class Minion(Module):
     DESCRIPTION = "Die"
     def response(self, query, message):
-        return BODY % query.split()
+        return BODY % query.strip()
