@@ -1,7 +1,7 @@
 from .base import Module
+from textwrap import wrap
 
-HOUSE = """
-┏┓
+HOUSE = """┏┓
 ┃┃╱╲ in
 ┃╱╱╲╲ this
 ╱╱╭╮╲╲house
@@ -9,9 +9,8 @@ HOUSE = """
 ╱▔▔▔▔▔▔▔▔▔▔╲
 %s
 ╱╱┏┳┓╭╮┏┳┓ ╲╲
-▔▏┗┻┛┃┃┗┻┛▕▔
-"""
+▔▏┗┻┛┃┃┗┻┛▕▔"""
 
 class House(Module):
     def response(self, query, message):
-        return HOUSE % query
+        return HOUSE % '\n'.join(wrap(query, 15))
