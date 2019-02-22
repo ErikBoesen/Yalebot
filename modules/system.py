@@ -14,5 +14,7 @@ class Welcome(System):
         Get the name of the user described in the message.
         :param query: message text to parse.
         """
-        names = self.RE.findall(query)
-        return names[-1]
+        # TODO: Clean up this logic
+        results = self.RE.findall(query)
+        results = [result for result in results if result not in ("", "re")]
+        return results.pop()
