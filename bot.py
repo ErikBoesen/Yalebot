@@ -105,12 +105,14 @@ def webhook():
         if "dad" in text.lower():
             new_text = text.strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + forename + ", did you mean \"" + new_text + "\"?", group_id)
-    if message["system"]:
+    if message["system"] or text.startswith("!system"):
         for option in system_responses:
             if system_responses[option].RE.match(text):
                 reply(system_responses[option].response(), group_id)
         if system_responses["welcome"].RE.match(text):
-            reply(commands["vet"].check_user(system_responses["welcome"].get_name(text)), group_id)
+            check_name = system_responses["welcome"].get_name(text)
+            print(check_name)
+            reply(commands["vet"].check_user(check_name), group_id)
     return "ok", 200
 
 def reply(text, group_id, image: str = None):
