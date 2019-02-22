@@ -109,9 +109,8 @@ def webhook():
         for option in system_responses:
             if option.RE.match(text):
                 reply(option.response(), group_id)
-        if not text.startswith("Poll '") and "the group" in text and not "changed name" in text:
-            name = text.replace(" has rejoined the group", "").replace(" has joined the group", "")
-            reply(commands["vet"].check_user(name), group_id)
+        if system_responses["welcome"].RE.match(text):
+            reply(commands["vet"].check_user(system_responses["welcome"].get_name(query)), group_id)
     return "ok", 200
 
 def reply(text, group_id, image: str = None):
