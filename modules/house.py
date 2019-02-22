@@ -13,4 +13,4 @@ HOUSE = """┏┓
 
 class House(Module):
     def response(self, query, message):
-        return HOUSE % '\n'.join(wrap(query, 15))
+        return HOUSE % '\n'.join(wrap(query, 30))
