@@ -47,9 +47,9 @@ meme_commands = {
     "changemymind": modules.ChangeMyMind(),
     "catch": modules.Catch(),
 }
-system_responses = [
-    modules.Welcome(),
-]
+system_responses = {
+    "welcome": modules.Welcome(),
+}
 
 F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
 H_PATTERN = re.compile('(harvard)', flags=re.IGNORECASE)
@@ -107,8 +107,8 @@ def webhook():
             reply("Hey " + forename + ", did you mean \"" + new_text + "\"?", group_id)
     if message["system"]:
         for option in system_responses:
-            if option.RE.match(text):
-                reply(option.response(), group_id)
+            if system_responses[option].RE.match(text):
+                reply(system_responses[option].response(), group_id)
         if system_responses["welcome"].RE.match(text):
             reply(commands["vet"].check_user(system_responses["welcome"].get_name(query)), group_id)
     return "ok", 200
