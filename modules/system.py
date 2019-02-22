@@ -15,4 +15,4 @@ class Welcome(System):
         :param query: message text to parse.
         """
         names = self.RE.findall(query)
-        return names.pop()
+        return names[-1]
