@@ -15,6 +15,6 @@ class Welcome(System):
         :param query: message text to parse.
         """
         # TODO: Clean up this logic
-        results = self.RE.findall(query)
+        results = self.RE.findall(query).pop()
         results = [result for result in results if result not in ("", "re")]
         return results.pop()
