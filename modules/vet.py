@@ -24,6 +24,7 @@ class Vet(Module):
         """
         Get a string-formatted report on whether a user is verified.
         """
+        name = name.strip()
         if name.lower() == "yalebot":
             return "Y'all think you're smart, don't you?"
         verified = self.is_admit(name)
