@@ -1,8 +1,11 @@
 from .base import Module
+import random
 import json
 
 class Vet(Module):
     DESCRIPTION = "Check if users are actually Yale admits"
+    POSITIVE_EMOJI = "😀😁😄😍👌✌️🤟👏⭐️ 🔥❤️🧡💛💚💙💜🖤✅"
+    NEGATIVE_EMOJI = "🤨😨😰😱🤔👎🌧⁉️❌🚫"
     def __init__(self):
         super().__init__()
         with open('resources/admit_names.json') as f:
@@ -23,6 +26,8 @@ class Vet(Module):
         """
         if name.lower() == "yalebot":
             return "Y'all think you're smart, don't you?"
-        return "{name} {status} a verified admit according to the Yale 2023 Admits website.".format(name=name,
-                                                                                                    status="is" if self.is_admit(name) else "is NOT")
+        verified = self.is_admit(name)
+        icon = random.choice(self.POSITIVE_EMOJI if verified else self.NEGATIVE_EMOJI)
+        status = "is" if verified else "is NOT"
+        return f"{icon} {name} {status} a verified admit according to the Yale 2023 Admits website."
 
