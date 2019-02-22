@@ -110,7 +110,7 @@ def webhook():
             if system_responses[option].RE.match(text):
                 reply(system_responses[option].response(), group_id)
         if system_responses["welcome"].RE.match(text):
-            reply(commands["vet"].check_user(system_responses["welcome"].get_name(query)), group_id)
+            reply(commands["vet"].check_user(system_responses["welcome"].get_name(text)), group_id)
     return "ok", 200
 
 def reply(text, group_id, image: str = None):
