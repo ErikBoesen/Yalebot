@@ -19,3 +19,4 @@ from .youtube import YouTube
 from .price import Price
 from .minion import Minion
 from .house import House
+from .location import Location
