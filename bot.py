@@ -105,7 +105,7 @@ def webhook():
         if "dad" in text.lower():
             new_text = text.strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
             reply("Hey " + forename + ", did you mean \"" + new_text + "\"?", group_id)
-    if message["system"] or text.startswith("!system"):
+    if message["system"]:
         for option in system_responses:
             if system_responses[option].RE.match(text):
                 reply(system_responses[option].response(), group_id)

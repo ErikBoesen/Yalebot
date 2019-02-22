@@ -14,7 +14,10 @@ class Welcome(System):
         Get the name of the user described in the message.
         :param query: message text to parse.
         """
-        # TODO: Clean up this logic
+        # TODO: Clean up this logic for choosing the name of the joining/added user
+        # This returns a list of tuples, each having the content of of the parenthesized groups
         results = self.RE.findall(query).pop()
+        # Filter out empty groups and "re" (which would only be there if someone rejoined the group)
         results = [result for result in results if result not in ("", "re")]
+        # Return the last non-empty (and non-re) match
         return results.pop()
