@@ -40,7 +40,7 @@ commands = {
     "minion": modules.Minion(),
     "house": modules.House(),
     "location": modules.Location(),
-    "lyrics": modules.lyrics.Lyrics(),
+    "lyrics": modules.Lyrics(),
 }
 meme_commands = {
     "drake": modules.Drake(),
@@ -91,8 +91,9 @@ def webhook():
                 help_string += "Simple commands: " + ", ".join(["!" + title for title in simple_responses])
                 help_string += "\n\n"
                 help_string += "Tools:\n"
+                help_string += "(Run !help [tool] for in-depth explanations.)\n"
                 for title in commands:
-                    help_string += "- !" + title + ": " + commands[title].DESCRIPTION + "\n"
+                    help_string += "- !" + title + "\n"
                 help_string += "\nMemes: " + ", ".join(["!" + title for title in meme_commands])
                 reply(help_string, group_id)
             else:
