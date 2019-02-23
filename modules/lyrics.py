@@ -21,7 +21,7 @@ class Lyrics(Module):
         text += '\n\n'
         text += column.find('div', {'id': 'content'}).text.strip()
         if len(text) > 1000:
-            more = '...\nFull lyrics: ' + lyrics_page
+            more = '...\n\nFull lyrics: ' + lyrics_page
             text = text[:1000-len(more)]
             text += more
         return text
