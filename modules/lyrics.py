@@ -13,6 +13,8 @@ class Lyrics(Module):
         r = requests.get(ENDPOINT + song_name.replace(' ', '+'), headers=self.headers)
         bs = BeautifulSoup(r.text, 'html.parser')
         link = bs.find('a', {'class': 'song'})
+        if link is None:
+            return 'Could not find song.'
         lyrics_page = 'https://www.lyricsfreak.com' + link['href']
         r = requests.get(lyrics_page, headers=self.headers)
         bs = BeautifulSoup(r.text, 'html.parser')
