@@ -12,5 +12,6 @@ HOUSE = """┏┓
 ▔▏┗┻┛┃┃┗┻┛▕▔"""
 
 class House(Module):
+    DESCRIPTION = 'What do we do in this house?'
     def response(self, query, message):
         return HOUSE % '\n'.join(wrap(query, 30))

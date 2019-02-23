@@ -90,12 +90,11 @@ def webhook():
                 if query:
                     reply("!" + query + ": " +  commands[query].DESCRIPTION, group_id)
                 else:
-                    help_string = ">--- Yalebot Help ---\n\n"
-                    help_string += "Simple commands: " + ", ".join(["!" + title for title in simple_responses])
-                    help_string += "\n"
-                    help_string += "Tools:" + ", ".join(["!" + title for title in commands])
-                    help_string += "\n(Run !help [tool] for in-depth explanations.)\n"
-                    help_string += "\nMemes: " + ", ".join(["!" + title for title in meme_commands])
+                    help_string = ">--- Yalebot Help ---"
+                    help_string += "\nSimple commands: " + ", ".join(["!" + title for title in simple_responses])
+                    help_string += "\nTools: " + ", ".join(["!" + title for title in commands])
+                    help_string += "\n(Run !help [tool] for in-depth explanations.)"
+                    help_string += "\n\nMemes: " + ", ".join(["!" + title for title in meme_commands])
                     reply(help_string, group_id)
             else:
                 reply("Command not found. Use !help to view a list of commands.", group_id)
