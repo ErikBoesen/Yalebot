@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 ENDPOINT = 'https://www.lyricsfreak.com/search.php?q='
 
 class Lyrics(Module):
+    DESCRIPTION = 'Because Googling song titles is too hard sometimes'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:67.0) Gecko/20100101 Firefox/67.0',
     }
