@@ -13,10 +13,15 @@ class Lyrics(Module):
         r = requests.get(ENDPOINT + song_name.replace(' ', '+'), headers=self.headers)
         bs = BeautifulSoup(r.text, 'html.parser')
         link = bs.find('a', {'class': 'song'})
-        r = requests.get('https://www.lyricsfreak.com' + link['href'], headers=self.headers)
+        lyrics_page = 'https://www.lyricsfreak.com' + link['href']
+        r = requests.get(lyrics_page, headers=self.headers)
         bs = BeautifulSoup(r.text, 'html.parser')
         column = bs.find('div', {'class': 'maincont d-cell al-t floatfix'})
         text = column.find('div', {'class': 'l_title'}).text.strip()
-        text += '\n' + '-' * 20 + '\n\n'
+        text += '\n\n'
         text += column.find('div', {'id': 'content'}).text.strip()
+        if len(text) > 1000:
+            more = '...\nFull lyrics: ' + lyrics_page
+            text = text[:1000-len(more)]
+            text += more
         return text
