@@ -41,6 +41,7 @@ commands = {
     "house": modules.House(),
     "location": modules.Location(),
     "lyrics": modules.Lyrics(),
+    "nasa": modules.NASA(),
 }
 meme_commands = {
     "drake": modules.Drake(),

@@ -21,3 +21,4 @@ from .minion import Minion
 from .house import House
 from .location import Location
 from .lyrics import Lyrics
+from .nasa import NASA
