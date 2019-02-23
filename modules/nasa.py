@@ -9,4 +9,4 @@ class NASA(Module):
         photo = requests.get('https://api.nasa.gov/planetary/apod?api_key=%s' % (os.environ.get('APOD_KEY') or 'DEMO_KEY')).json()
 
         # Send URL for image along with image's title
-        reply(photo['url'])
+        return photo['url']
