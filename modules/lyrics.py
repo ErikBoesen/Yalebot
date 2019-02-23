@@ -2,7 +2,7 @@ from .base import Module
 import requests
 from bs4 import BeautifulSoup
 
-ENDPOINT = 'https://search.azlyrics.com/search.php?q='
+ENDPOINT = 'https://www.lyricsfreak.com/search.php?q='
 
 class Lyrics(Module):
     headers = {
@@ -12,12 +12,11 @@ class Lyrics(Module):
         song_name = query
         r = requests.get(ENDPOINT + song_name.replace(' ', '+'), headers=self.headers)
         bs = BeautifulSoup(r.text, 'html.parser')
-        link = bs.find('div', {'class': 'panel'}).find('a')
-        r = requests.get(link['href'], headers=self.headers)
-        print(r.text)
+        link = bs.find('a', {'class': 'song'})
+        r = requests.get('https://www.lyricsfreak.com' + link['href'], headers=self.headers)
         bs = BeautifulSoup(r.text, 'html.parser')
-        column = bs.find('div', {'class': 'col-xs-12 col-lg-8 text-center'})
-        divs = column.find_all('div', recursive=False)
-        text = column.find('b', recursive=False).text
-        text += divs[4].text
+        column = bs.find('div', {'class': 'maincont d-cell al-t floatfix'})
+        text = column.find('div', {'class': 'l_title'}).text.strip()
+        text += '\n' + '-' * 20 + '\n\n'
+        text += column.find('div', {'id': 'content'}).text.strip()
         return text
