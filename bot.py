@@ -10,6 +10,7 @@ GROUPS = {
     46649296: {"name": "Main Yale chat", "bot_id": "1520c98b3da635c8c6383951a6"},
     48071223: {"name": "Active chat", "bot_id": "d0bb06c46660d9bf5c5cb4fcff"},
     47894954: {"name": "Yalebot testing server", "bot_id": "d4e61d0ecd65cbabc8a7ad36e3"},
+    46633207: {"name": "Penn", "bot_id": "b90e67a3cf12dcbd9ecccb5280"},
 }
 simple_responses = {
     "ping": "Pong!",
