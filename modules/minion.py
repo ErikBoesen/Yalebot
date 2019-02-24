@@ -1,7 +1,6 @@
 from .base import Module
 
-BODY = """
-⁣   😶😶😶😶😶  
+BODY = """>⁣   😶😶😶😶😶  
   😶😶😶😶😶😶
  😶😶😶😶😶😶😶
 😶😶😶💣💣😶😶😶
