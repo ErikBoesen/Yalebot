@@ -43,6 +43,7 @@ commands = {
     "minion": modules.Minion(),
     "house": modules.House(),
     "location": modules.Location(),
+    "twitter": modules.Twitter(),
     "lyrics": modules.Lyrics(),
     "nasa": modules.NASA(),
     "amber": modules.Amber(),
