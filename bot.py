@@ -44,6 +44,7 @@ commands = {
     "house": modules.House(),
     "location": modules.Location(),
     "twitter": modules.Twitter(),
+    "tea": modules.Tea(),
     "lyrics": modules.Lyrics(),
     "nasa": modules.NASA(),
     "amber": modules.Amber(),
