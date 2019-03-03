@@ -23,3 +23,4 @@ from .location import Location
 from .lyrics import Lyrics
 from .nasa import NASA
 from .amber import Amber
+from .twitter import Twitter
