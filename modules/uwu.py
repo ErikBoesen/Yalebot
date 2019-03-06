@@ -26,11 +26,11 @@ class UWU(Module):
 
             # Scale uwu mask
             width, height = self.uwu.size
-            uwu_width = int((right - left) * 0.6)
+            uwu_width = int((right - left) * 0.7)
             uwu_height = int(uwu_width * height / width)
             scaled_uwu = self.uwu.resize((uwu_width, uwu_height), Image.ANTIALIAS)
 
-            pil_image.paste(scaled_uwu, (left + int(0.2 *1.0/0.6* uwu_width), top + (bottom - top) // 5), scaled_uwu)
+            pil_image.paste(scaled_uwu, (left + int(0.15 *1.0/0.7* uwu_width), top + (bottom - top) // 4), scaled_uwu)
         #pil_image.save('out.png')
         output = BytesIO()
         pil_image.save(output, format="JPEG")
