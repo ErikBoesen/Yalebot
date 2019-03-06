@@ -17,7 +17,7 @@ class UWU(Module):
         source_url = source_url or message['avatar_url']
         print('Image source URL: ' + source_url)
 
-        image = io.imread(source_url)
+        image = io.imread(source_url)[:,:,:3]
         pil_image = Image.fromarray(image)
         faces = face_recognition.face_locations(image)
         if len(faces) == 0:
@@ -50,3 +50,5 @@ class UWU(Module):
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
+
+print(UWU().response('', {'attachments': [{'type': 'image', 'url': 'https://i.groupme.com/594x405.png.8607cf02f88c44068bdb2dcbe245fa9b.large'}]}))
