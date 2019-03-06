@@ -6,6 +6,8 @@ upsidedown
 pillow
 GroupyAPI
 beautifulsoup4
+
+skbuild
 boost==0.1
 cmake==0.7.1
 boost-py
