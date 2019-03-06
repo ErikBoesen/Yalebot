@@ -6,4 +6,9 @@ upsidedown
 pillow
 GroupyAPI
 beautifulsoup4
+boost==0.1
+cmake==0.7.1
+boost-py
+face_recognition_models
 face_recognition
+dlib>=19.3.0
