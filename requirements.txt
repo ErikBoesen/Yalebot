@@ -8,5 +8,5 @@ GroupyAPI
 beautifulsoup4
 
 cmake
-face_recognition_models
+face_recognition
 scikit-image
