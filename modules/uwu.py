@@ -16,7 +16,8 @@ class UWU(Module):
 
         r = requests.get(source_url)
         pil_image = Image.open(BytesIO(r.content))
-        faces = face_recognition.face_locations(np.array(pil_image.getdata()))
+        print(np.array(pil_image))
+        faces = face_recognition.face_locations(np.array(np.array(pil_image.getdata(), dtype='uint8')))
         print(faces)
         for face in faces:
             top, right, bottom, left = face
@@ -31,4 +32,4 @@ class UWU(Module):
 
         pil_image.save('out.png')
 
-print(UWU().response('', {'attachments': [{'type': 'image', 'url': 'https://i.groupme.com/1296x972.jpeg.91ab436782064b278a647dd7cf924c81.preview'}]}))
+print(UWU().response('', {'attachments': [{'type': 'image', 'url': 'https://media.newyorker.com/photos/5c7fe383bcd36b2ccb09a628/master/w_649,c_limit/Borowitz-ObamaTrumpElementarySchool.jpg'}]}))
