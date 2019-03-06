@@ -19,6 +19,8 @@ class UWU(Module):
         image = io.imread(source_url)
         pil_image = Image.fromarray(image)
         faces = face_recognition.face_locations(image)
+        if len(faces) == 0:
+            return 'No faces found in image.'
         for face in faces:
             top, right, bottom, left = face
 
