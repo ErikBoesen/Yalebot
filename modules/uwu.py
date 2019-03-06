@@ -17,7 +17,7 @@ class UWU(Module):
             source_url = image_attachments[0]['url']
         else:
             # If no image was sent, use sender's avatar
-            source_url = source_url or message['avatar_url']
+            source_url = message['avatar_url']
         print('Image source URL: ' + source_url)
 
         image = io.imread(source_url)[:,:,:3]
