@@ -32,3 +32,4 @@ class UWU(Module):
         pil_image.save('out.png')
 
 if __name__ == '__main__':
+    print(UWU.response('', {'attachments': [{'type': 'image', 'url': 'https://i.groupme.com/1296x972.jpeg.91ab436782064b278a647dd7cf924c81.preview'}]}))
