@@ -6,3 +6,4 @@ upsidedown
 pillow
 GroupyAPI
 beautifulsoup4
+face_recognition
