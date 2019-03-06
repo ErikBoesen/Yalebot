@@ -2,8 +2,9 @@ from .base import Module
 import face_recognition
 from PIL import Image, ImageDraw
 import requests
-import numpy as np
+import os
 from io import BytesIO
+# TODO: skimage is so heavy for just using it for this...
 from skimage import io
 
 class UWU(Module):
@@ -16,10 +17,8 @@ class UWU(Module):
         source_url = source_url or message['avatar_url']
 
         image = io.imread(source_url)
-        print(image)
         pil_image = Image.fromarray(image)
         faces = face_recognition.face_locations(image)
-        print(faces)
         for face in faces:
             top, right, bottom, left = face
 
@@ -30,7 +29,23 @@ class UWU(Module):
             scaled_uwu = self.uwu.resize((uwu_width, uwu_height), Image.ANTIALIAS)
 
             pil_image.paste(scaled_uwu, (left + int(0.2 *1.0/0.6* uwu_width), top + (bottom - top) // 5), scaled_uwu)
+        #pil_image.save('out.png')
+        output = BytesIO()
+        pil_image.save(output, format="JPEG")
+        return self.upload_image(output.getvalue())
 
-        pil_image.save('out.png')
+    def upload_image(self, data) -> str:
+        """
+        Send image to GroupMe Image API.
+
+        :param data: compressed image data.
+        :return: URL of image now hosted on GroupMe server.
+        """
+        headers = {
+            "X-Access-Token": os.environ["GROUPME_ACCESS_TOKEN"],
+            "Content-Type": "image/jpeg",
+        }
+        r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
+        return r.json()["payload"]["url"]
 
 print(UWU().response('', {'attachments': [{'type': 'image', 'url': 'https://media.newyorker.com/photos/5c7fe383bcd36b2ccb09a628/master/w_649,c_limit/Borowitz-ObamaTrumpElementarySchool.jpg'}]}))
