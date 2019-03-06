@@ -11,10 +11,13 @@ class UWU(Module):
     DESCRIPTION = 'Abuse photographs of your compatriots'
     uwu = Image.open('resources/uwu.png')
     def response(self, query, message):
-        # Get sent image
-        source_url = [attachment for attachment in message['attachments'] if attachment['type'] == 'image'][0].get('url')
-        # If no image was sent, use sender's avatar
-        source_url = source_url or message['avatar_url']
+        image_attachments = [attachment for attachment in message['attachments'] if attachment['type'] == 'image']
+        if len(image_attachments) > 0:
+            # Get sent image
+            source_url = image_attachments[0]['url']
+        else:
+            # If no image was sent, use sender's avatar
+            source_url = source_url or message['avatar_url']
         print('Image source URL: ' + source_url)
 
         image = io.imread(source_url)[:,:,:3]
@@ -50,5 +53,3 @@ class UWU(Module):
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
-
-print(UWU().response('', {'attachments': [{'type': 'image', 'url': 'https://i.groupme.com/594x405.png.8607cf02f88c44068bdb2dcbe245fa9b.large'}]}))
