@@ -47,5 +47,3 @@ class UWU(Module):
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
-
-print(UWU().response('', {'attachments': [{'type': 'image', 'url': 'https://media.newyorker.com/photos/5c7fe383bcd36b2ccb09a628/master/w_649,c_limit/Borowitz-ObamaTrumpElementarySchool.jpg'}]}))
