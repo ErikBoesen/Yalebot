@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw
 import requests
 import numpy as np
 from io import BytesIO
+from skimage import io
 
 class UWU(Module):
     DESCRIPTION = 'Abuse photographs of your compatriots'
@@ -14,10 +15,10 @@ class UWU(Module):
         # If no image was sent, use sender's avatar
         source_url = source_url or message['avatar_url']
 
-        r = requests.get(source_url)
-        pil_image = Image.open(BytesIO(r.content))
-        print(np.array(pil_image))
-        faces = face_recognition.face_locations(np.array(np.array(pil_image.getdata(), dtype='uint8')))
+        image = io.imread(source_url)
+        print(image)
+        pil_image = Image.fromarray(image)
+        faces = face_recognition.face_locations(image)
         print(faces)
         for face in faces:
             top, right, bottom, left = face
