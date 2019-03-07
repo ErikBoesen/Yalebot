@@ -21,5 +21,5 @@ class Tea(Module):
         msg3 = '{0: <9}'.format(query[24:33])
         msg4 = '{0: <7}'.format(query[33:40])
 
-        tea = CUP.format(str1=msg1, str2 = msg2, str3 = msg3, str4 = msg4).replace(' ', ' ')
+        tea = CUP.format(str1=msg1, str2 = msg2, str3 = msg3, str4 = msg4).replace(' ', ' ')
         return tea
