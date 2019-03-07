@@ -20,6 +20,7 @@ simple_responses = {
     "quack": "quack",
     "test": "https://erikboesen.com/yalepuritytest",
     "dislike": "👎😬👎\n 🦵🦵",
+    "shrug": "¯\_(ツ)_/¯",
 }
 commands = {
     "zalgo": modules.Zalgo(),
