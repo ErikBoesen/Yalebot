@@ -96,7 +96,7 @@ def webhook():
                 reply(meme_commands[command].response(query), group_id)
             elif command == "help":
                 if query:
-                    reply("!" + query + ": " +  commands[query].DESCRIPTION, group_id)
+                    reply("!" + query + ": " +  commands[query.strip("!")].DESCRIPTION, group_id)
                 else:
                     help_string = "--- Help ---"
                     help_string += "\nSimple commands: " + ", ".join(["!" + title for title in simple_responses])
