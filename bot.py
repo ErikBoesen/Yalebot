@@ -10,9 +10,10 @@ app = Flask(__name__)
 with open("groups.json", "r") as f:
     GROUPS = json.load(f)
 
+PREFIX = "!"
 simple_responses = {
     "ping": "Pong!",
-    "about": "I am a bot maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. Use the command !help to view a list of bot capabilities. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
+    "about": f"I am a bot maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. Use the command {PREFIX} help to view a list of bot capabilities. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
     "sam": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
     "essays": "Submit your essays here, or read your classmates'! https://drive.google.com/open?id=1IUG1cNxmxBHhv1sSemi92fYO6y5lG6of",
     "spreadsheet": "https://docs.google.com/spreadsheets/d/10m_0glWVUncKCxERsNf6uOJhfeYU96mOK0KvgNURIBk/edit?fbclid=IwAR35OaPO6czQxZv26A6DEgEH-Qef0kCSe4nXxl8wcIfDml-BfLx4ksVtp6Y#gid=0",
@@ -79,7 +80,7 @@ def webhook():
     if matches is not None and len(matches.groups()):
         reply(matches.groups()[0] + " ❤", group_id)
     if message["sender_type"] != "bot":
-        if text.startswith("!"):
+        if text.startswith(PREFIX):
             instructions = text[1:].split(" ", 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else None
@@ -96,13 +97,13 @@ def webhook():
                 reply(meme_commands[command].response(query), group_id)
             elif command == "help":
                 if query:
-                    reply("!" + query + ": " +  commands[query.strip("!")].DESCRIPTION, group_id)
+                    reply(PREFIX + query + ": " +  commands[query.strip(PREFIX)].DESCRIPTION, group_id)
                 else:
                     help_string = "--- Help ---"
-                    help_string += "\nSimple commands: " + ", ".join(["!" + title for title in simple_responses])
-                    help_string += "\nTools: " + ", ".join(["!" + title for title in commands])
-                    help_string += "\n(Run !help [tool] for in-depth explanations.)"
-                    help_string += "\n\nMemes: " + ", ".join(["!" + title for title in meme_commands])
+                    help_string += "\nSimple commands: " + ", ".join([PREFIX + title for title in simple_responses])
+                    help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
+                    help_string += f"\n(Run {PREFIX}help [tool] for in-depth explanations.)"
+                    help_string += "\n\nMemes: " + ", ".join([PREFIX + title for title in meme_commands])
                     reply(help_string, group_id)
             else:
                 reply("Command not found. Use !help to view a list of commands.", group_id)
