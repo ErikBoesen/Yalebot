@@ -89,12 +89,18 @@ def webhook():
                 reply(simple_responses[command], group_id)
             elif command in commands:
                 # If not, query appropriate module for a response
-                response = commands[command].response(query, message)
-                if response is not None:
-                    reply(response, group_id)
+                if len(query.split("\n")) < commands[command].ARGC:
+                    reply("Not enough parameters!", group_id)
+                else:
+                    response = commands[command].response(query, message)
+                    if response is not None:
+                        reply(response, group_id)
             elif command in meme_commands:
-                #reply("@" + message["name"], group_id, image=meme_commands[command].response(query))
-                reply(meme_commands[command].response(query), group_id)
+                if len(query.split("\n")) < meme_commands[command].ARGC:
+                    reply("Not enough captions (make sure to separate with newlines).", group_id)
+                else:
+                    #reply("@" + message["name"], group_id, image=meme_commands[command].response(query))
+                    reply(meme_commands[command].response(query), group_id)
             elif command == "help":
                 if query:
                     query = query.strip(PREFIX)
