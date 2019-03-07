@@ -35,7 +35,7 @@ commands = {
     "analytics": modules.Analytics(),
     "youtube": modules.YouTube(),
     "pick": modules.Pick(),
-    "thatswhyichoseyale": modules.Chose(),
+    "chose": modules.Chose(),
     "love": modules.Love(),
     "price": modules.Price(),
     "minion": modules.Minion(),
@@ -50,7 +50,7 @@ commands = {
 }
 meme_commands = {
     "drake": modules.Drake(),
-    "yaledrake": modules.YaleDrake(),
+    "ydrake": modules.YaleDrake(),
     "juice": modules.Juice(),
     "changemymind": modules.ChangeMyMind(),
     "catch": modules.Catch(),
