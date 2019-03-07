@@ -100,10 +100,12 @@ def webhook():
                     query = query.strip(PREFIX)
                     if query in simple_commands:
                         reply(PREFIX + query + ": static command", group_id)
-                    if query in commands:
+                    elif query in commands:
                         reply(PREFIX + query + ": " + commands[query.strip(PREFIX)].DESCRIPTION, group_id)
-                    if query in meme_commands:
+                    elif query in meme_commands:
                         reply(PREFIX + query + ": meme command; provide captions separated by newlines.", group_id)
+                    else:
+                        reply("No such command.", group_id)
                 else:
                     help_string = "--- Help ---"
                     help_string += "\nSimple commands: " + ", ".join([PREFIX + title for title in simple_responses])
