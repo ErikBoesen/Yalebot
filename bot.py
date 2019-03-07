@@ -2,16 +2,14 @@ import modules
 import os
 import re
 import requests
+import json
 from flask import Flask, request
 
 
 app = Flask(__name__)
-GROUPS = {
-    46649296: {"name": "Main Yale chat", "bot_id": "1520c98b3da635c8c6383951a6"},
-    48071223: {"name": "Active chat", "bot_id": "d0bb06c46660d9bf5c5cb4fcff"},
-    47894954: {"name": "Yalebot testing server", "bot_id": "d4e61d0ecd65cbabc8a7ad36e3"},
-    46633207: {"name": "Penn", "bot_id": "b90e67a3cf12dcbd9ecccb5280"},
-}
+with open("groups.json", "r") as f:
+    GROUPS = json.load(f)
+
 simple_responses = {
     "ping": "Pong!",
     "about": "Yalebot is maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. Use the command !help to view a list of bot capabilities. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
@@ -71,7 +69,7 @@ def webhook():
     """
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
-    group_id = int(message["group_id"])
+    group_id = message["group_id"]
     text = message["text"]
     name = message["name"]
     forename = name.split(" ", 1)[0]
