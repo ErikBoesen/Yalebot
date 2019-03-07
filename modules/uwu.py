@@ -9,7 +9,6 @@ from skimage import io
 
 class UWU(Module):
     DESCRIPTION = 'Abuse photographs of your compatriots'
-    uwu = Image.open('resources/uwu.png')
     def response(self, query, message):
         image_attachments = [attachment for attachment in message['attachments'] if attachment['type'] == 'image']
         if len(image_attachments) > 0:
@@ -20,6 +19,7 @@ class UWU(Module):
             source_url = message['avatar_url']
         print('Image source URL: ' + source_url)
 
+        uwu = Image.open('resources/uwu.png')
         image = io.imread(source_url)[:,:,:3]
         pil_image = Image.fromarray(image)
         faces = face_recognition.face_locations(image)
@@ -29,12 +29,12 @@ class UWU(Module):
             top, right, bottom, left = face
 
             # Scale uwu mask
-            width, height = self.uwu.size
+            width, height = uwu.size
             uwu_width = int((right - left) * 0.7)
             uwu_height = int(uwu_width * height / width)
-            scaled_uwu = self.uwu.resize((uwu_width, uwu_height), Image.ANTIALIAS)
+            uwu = uwu.resize((uwu_width, uwu_height), Image.ANTIALIAS)
 
-            pil_image.paste(scaled_uwu, (left + int(0.15 *1.0/0.7* uwu_width), top + (bottom - top) // 4), scaled_uwu)
+            pil_image.paste(uwu, (left + int(0.15 *1.0/0.7* uwu_width), top + (bottom - top) // 4), uwu)
         #pil_image.save('out.png')
         output = BytesIO()
         pil_image.save(output, format="JPEG")
