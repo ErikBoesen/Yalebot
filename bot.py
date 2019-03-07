@@ -97,12 +97,18 @@ def webhook():
                 reply(meme_commands[command].response(query), group_id)
             elif command == "help":
                 if query:
-                    reply(PREFIX + query + ": " +  commands[query.strip(PREFIX)].DESCRIPTION, group_id)
+                    query = query.strip(PREFIX)
+                    if query in simple_commands:
+                        reply(PREFIX + query + ": static command", group_id)
+                    if query in commands:
+                        reply(PREFIX + query + ": " + commands[query.strip(PREFIX)].DESCRIPTION, group_id)
+                    if query in meme_commands:
+                        reply(PREFIX + query + ": meme command; provide captions separated by newlines.", group_id)
                 else:
                     help_string = "--- Help ---"
                     help_string += "\nSimple commands: " + ", ".join([PREFIX + title for title in simple_responses])
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
-                    help_string += f"\n(Run {PREFIX}help [tool] for in-depth explanations.)"
+                    help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
                     help_string += "\n\nMemes: " + ", ".join([PREFIX + title for title in meme_commands])
                     reply(help_string, group_id)
             else:
