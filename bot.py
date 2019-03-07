@@ -97,7 +97,7 @@ def webhook():
                 if query:
                     reply("!" + query + ": " +  commands[query].DESCRIPTION, group_id)
                 else:
-                    help_string = "--- Yalebot Help ---"
+                    help_string = "--- Help ---"
                     help_string += "\nSimple commands: " + ", ".join(["!" + title for title in simple_responses])
                     help_string += "\nTools: " + ", ".join(["!" + title for title in commands])
                     help_string += "\n(Run !help [tool] for in-depth explanations.)"
