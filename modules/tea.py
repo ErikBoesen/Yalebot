@@ -1,5 +1,18 @@
 from .base import Module
 
+CUP = '''>today's tea:
+
+          (
+      )      )
+    )     (      )
+_(___(____)____(___(_
+\                   /__
+ \  {str1}  /   |
+  \  {str2}  /____|
+   \  {str3}  /
+    \  {str4}  /
+     \_________/'''.replace(' ', ' ')
+
 class Tea(Module):
     DESCRIPTION = 'Spills the tea.'
     def response(self, query, message):
@@ -8,17 +21,5 @@ class Tea(Module):
         msg3 = '{0: <9}'.format(query[24:33])
         msg4 = '{0: <7}'.format(query[33:40])
 
-        tea = '''>today's tea:
-
-                  (
-              )      )
-            )     (      )
-        _(___(____)____(___(_
-        \                   /__
-         \  {str1}  /   |
-          \  {str2}  /____|
-           \  {str3}  /
-            \  {str4}  /
-             \_________/
-             '''.format(str1=msg1, str2 = msg2, str3 = msg3, str4 = msg4).replace(' ', ' ')
+        tea = CUP.format(str1=msg1, str2 = msg2, str3 = msg3, str4 = msg4)
         return tea
