@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 class YouTube(Module):
     DESCRIPTION = 'Searches and sends YouTube video'
+    ARGC = 1
     def response(self, query, message):
         url = 'https://www.youtube.com/results?search_query='
         soup = BeautifulSoup(requests.get(url+query.replace(' ', '+').lower()).text, 'html.parser')

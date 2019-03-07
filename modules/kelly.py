@@ -4,6 +4,7 @@ import random
 
 class Kelly(Module):
     DESCRIPTION = "Generate Elizabethan insults for our favorite person"
+
     primary_adjectives = []
     secondary_adjectives = []
     nouns = []

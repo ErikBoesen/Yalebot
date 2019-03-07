@@ -4,6 +4,7 @@ import requests
 
 class Twitter(Module):
     DESCRIPTION = 'Creates Twitter DM button'
+    ARGC = 1
     def response(self, query, message):
         msg = ''
         if '@' not in query:

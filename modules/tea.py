@@ -15,6 +15,7 @@ _(___(____)____(___(_
 
 class Tea(Module):
     DESCRIPTION = 'Spills the tea.'
+    ARGC = 1
     def width(self, row):
         """
         Given the number of the row, calculate how long that row should be.

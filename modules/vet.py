@@ -4,6 +4,7 @@ import json
 
 class Vet(Module):
     DESCRIPTION = "Check if users are actually Yale admits"
+    ARGC = 1
     POSITIVE_EMOJI = "😀😁😄😍👌\U0001f91f👏⭐️🔥\U0001f9e1💛💚💙💜🖤✅"
     NEGATIVE_EMOJI = '\U0001f928😨😰😱🤔👎🌧❌🚫'
     def __init__(self):

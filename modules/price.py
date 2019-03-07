@@ -5,6 +5,7 @@ SOCK_URL = "https://yale.bncollege.com/webapp/wcs/stores/servlet/TCK_Quarter_Soc
 
 class Price(Module):
     DESCRIPTION = "Convert USD to YSK"
+    ARGC = 1
     def response(self, query, message):
         query = query.strip().strip('$')
         price = float(query)

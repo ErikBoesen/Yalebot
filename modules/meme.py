@@ -58,6 +58,7 @@ class Meme(Module):
 
 class Drake(Meme):
     TEMPLATE_NAME = "drake.jpg"
+    ARGC = 1
     def mark_image(self, draw: ImageDraw, captions):
         LEFT_BORDER = 350
         RIGHT_BORDER = 620
@@ -73,6 +74,7 @@ class YaleDrake(Drake):
 
 class Juice(Meme):
     TEMPLATE_NAME = "juice.jpg"
+    ARGC = 1
     def mark_image(self, draw: ImageDraw, captions):
         HEAD_X, HEAD_Y = (327, 145)
         JUG_X, JUG_Y = (373, 440)
@@ -88,6 +90,7 @@ class Juice(Meme):
 
 class ChangeMyMind(Meme):
     TEMPLATE_NAME = "changemymind.jpg"
+    ARGC = 1
     def mark_image(self, draw: ImageDraw, captions):
         SIGN_X, SIGN_Y = (579, 460)
         """
@@ -110,6 +113,7 @@ class ChangeMyMind(Meme):
 
 class Catch(Meme):
     TEMPLATE_NAME = "catch.jpg"
+    ARGC = 1
     def mark_image(self, draw: ImageDraw, captions):
         BALL_X, BALL_Y = (250, 90)
         lines = wrap(captions[0], 20)

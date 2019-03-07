@@ -6,6 +6,8 @@ ENDPOINT = 'https://www.lyricsfreak.com/search.php?q='
 
 class Lyrics(Module):
     DESCRIPTION = 'Because Googling song titles is too hard sometimes'
+    ARGC = 1
+
     def response(self, query, message):
         song_name = query
         r = requests.get(ENDPOINT + song_name.replace(' ', '+'))

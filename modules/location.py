@@ -6,5 +6,7 @@ TEMPLATE = """%s wants to:
 
 class Location(Module):
     DESCRIPTION = "For when sending images is just too much work"
+    ARGC = 1
+
     def response(self, query, message):
         return TEMPLATE % query
