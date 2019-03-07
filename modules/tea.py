@@ -16,11 +16,13 @@ _(___(____)____(___(_
 class Tea(Module):
     DESCRIPTION = 'Spills the tea.'
     def response(self, query, message):
-        msg0 = '{0: <15}'.format(query[0:15])
-        msg1 = '{0: <13}'.format(query[15:28])
-        msg2 = '{0: <11}'.format(query[28:39])
-        msg3 = '{0: <9}'.format(query[39:33])
-        msg4 = '{0: <7}'.format(query[33:40])
+        lines = []
+        offset = 0
+        for row in range(0, 5):
+            lines.append(('{0: <' + str(15-2*row) + '}').format(query[offset:offset+(15-2*row)]))
+            offset += (15-2*row)
 
-        tea = CUP.format(str1=msg1, str2 = msg2, str3 = msg3, str4 = msg4).replace(' ', ' ')
+        tea = CUP.format(str0=lines[0], str1=lines[1], str2=lines[2], str3=lines[3], str4=lines[4]).replace(' ', ' ')
         return tea
+
+print(Tea().response('this is a test', None))
