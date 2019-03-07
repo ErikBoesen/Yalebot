@@ -7,13 +7,12 @@ class Tea(Module):
         msg2 = '{0: <11}'.format(query[13:24])
         msg3 = '{0: <9}'.format(query[24:33])
         msg4 = '{0: <7}'.format(query[33:40])
-    
-        tea = '''
-        today’s tea:
-                
+
+        tea = '''>today's tea:
+
                   (
               )      )
-            )     (      )   
+            )     (      )
         _(___(____)____(___(_
         \                   /__
          \  {str1}  /   |
@@ -21,5 +20,5 @@ class Tea(Module):
            \  {str3}  /
             \  {str4}  /
              \_________/
-             '''.format(str1=msg1, str2 = msg2, str3 = msg3, str4 = msg4)
+             '''.format(str1=msg1, str2 = msg2, str3 = msg3, str4 = msg4).replace(' ', ' ')
         return tea
