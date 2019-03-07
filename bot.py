@@ -14,7 +14,7 @@ simple_responses = {
     "ping": "Pong!",
     "about": "I am a bot maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. Use the command !help to view a list of bot capabilities. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
     "sam": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
-    "essays": "Submit your essays here, or read your classmates'! https://drive.google.com/open?id=1IUG1cNxmxBHhv1sSemi92fYO6y5lG6of",
+    "essays": "Submit your essays here, or read your classmates"! https://drive.google.com/open?id=1IUG1cNxmxBHhv1sSemi92fYO6y5lG6of",
     "spreadsheet": "https://docs.google.com/spreadsheets/d/10m_0glWVUncKCxERsNf6uOJhfeYU96mOK0KvgNURIBk/edit?fbclid=IwAR35OaPO6czQxZv26A6DEgEH-Qef0kCSe4nXxl8wcIfDml-BfLx4ksVtp6Y#gid=0",
     "meetup": "https://i.groupme.com/750x1200.jpeg.b0ca5f6e660a4356be2925222e6f8246.large",
     "quack": "quack",
@@ -60,8 +60,8 @@ system_responses = {
     "welcome": modules.Welcome(),
 }
 
-F_PATTERN = re.compile('can i get an? (.+) in the chat', flags=re.IGNORECASE | re.MULTILINE)
-H_PATTERN = re.compile('(harvard)', flags=re.IGNORECASE)
+F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | re.MULTILINE)
+H_PATTERN = re.compile("(harvard)", flags=re.IGNORECASE)
 @app.route("/", methods=["POST"])
 def webhook():
     """
@@ -76,7 +76,7 @@ def webhook():
     print("Message received: %s" % message)
     matches = F_PATTERN.search(text)
     if matches is not None and len(matches.groups()):
-        reply(matches.groups()[0] + ' ❤', group_id)
+        reply(matches.groups()[0] + " ❤", group_id)
     if message["sender_type"] != "bot":
         if text.startswith("!"):
             instructions = text[1:].split(" ", 1)
@@ -121,10 +121,11 @@ def webhook():
         for option in system_responses:
             if system_responses[option].RE.match(text):
                 reply(system_responses[option].response(), group_id)
+        """
         if system_responses["welcome"].RE.match(text):
             check_name = system_responses["welcome"].get_name(text)
-            print(check_name)
             reply(commands["vet"].check_user(check_name), group_id)
+        """
     return "ok", 200
 
 def reply(text, group_id, image: str = None):
@@ -140,7 +141,7 @@ def reply(text, group_id, image: str = None):
         "text": text,
     }
     if image is not None:
-        print('Attaching image %s' % image)
+        print("Attaching image %s" % image)
         data["attachments"] = [
             {
                 "type": "image",
