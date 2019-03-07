@@ -19,6 +19,7 @@ simple_responses = {
     "meetup": "https://i.groupme.com/750x1200.jpeg.b0ca5f6e660a4356be2925222e6f8246.large",
     "quack": "quack",
     "test": "https://erikboesen.com/yalepuritytest",
+    "dislike": "👎😬👎\n 🦵🦵",
 }
 commands = {
     "zalgo": modules.Zalgo(),
