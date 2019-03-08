@@ -3,6 +3,7 @@ from .base import Module
 class Groups(Module):
     DESCRIPTION = "Get links to other admit groups"
     links = {
+        "Yale University": "46649296/URP6KiXC",
         "University of Michigan": "46781389/hZehS1",
         "UNC Chapel Hill": "47712261/2K9zx7",
         "University of Virginia": "47680748/aLDXS1",
