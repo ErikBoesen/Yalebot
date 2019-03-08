@@ -58,7 +58,7 @@ class Meme(Module):
 
 class Drake(Meme):
     TEMPLATE_NAME = "drake.jpg"
-    ARGC = 1
+    ARGC = 2
     def mark_image(self, draw: ImageDraw, captions):
         LEFT_BORDER = 350
         RIGHT_BORDER = 620
