@@ -87,10 +87,11 @@ def webhook():
             # Check if there's an automatic response for this command
             if command in simple_responses:
                 reply(simple_responses[command], group_id)
+            # If not, query appropriate module for a response
             elif command in commands:
-                # If not, query appropriate module for a response
+                # Make sure there are enough arguments
                 if len(list(filter(None, query.split("\n")))) < commands[command].ARGC:
-                    reply("Not enough parameters!", group_id)
+                    reply("Not enough arguments!", group_id)
                 else:
                     response = commands[command].response(query, message)
                     if response is not None:
