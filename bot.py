@@ -50,6 +50,7 @@ commands = {
     "nasa": modules.NASA(),
     "amber": modules.Amber(),
     "uwu": modules.UWU(),
+    "conversationstarter": modules.ConversationStarter(),
 }
 meme_commands = {
     "drake": modules.Drake(),
