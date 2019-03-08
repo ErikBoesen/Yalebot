@@ -108,7 +108,7 @@ def webhook():
             elif command == "help":
                 if query:
                     query = query.strip(PREFIX)
-                    if query in simple_commands:
+                    if query in simple_responses:
                         reply(PREFIX + query + ": static command", group_id)
                     elif query in commands:
                         reply(PREFIX + query + ": " + commands[query.strip(PREFIX)].DESCRIPTION, group_id)
