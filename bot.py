@@ -111,7 +111,7 @@ def webhook():
                     if query in simple_responses:
                         reply(PREFIX + query + ": static command", group_id)
                     elif query in commands:
-                        reply(PREFIX + query + ": " + commands[query.strip(PREFIX)].DESCRIPTION, group_id)
+                        reply(PREFIX + query + ": " + commands[query].DESCRIPTION + ", ", group_id)
                     elif query in meme_commands:
                         reply(PREFIX + query + ": meme command; provide captions separated by newlines.", group_id)
                     else:
