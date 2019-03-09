@@ -14,6 +14,7 @@ class Dog(Module):
         lists = bs.find("div", {"class": "mw-parser-output"}).find_all("ul", recursive=False)
         for ul in lists:
             self.dogs += [BeautifulSoup(str(li), "html.parser").text for li in ul]
+        self.dogs = [dog for dog in self.dogs if dog]
 
     def response(self, query, message):
         return random.choice(self.dogs)
