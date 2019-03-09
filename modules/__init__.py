@@ -28,3 +28,4 @@ from .tea import Tea
 from .uwu import UWU
 from .conversationstarter import ConversationStarter
 from .quote import Quote
+from .dog import Dog

@@ -52,6 +52,7 @@ commands = {
     "uwu": modules.UWU(),
     "conversationstarter": modules.ConversationStarter(),
     "quote": modules.Quote(),
+    "dog": modules.Dog(),
 }
 meme_commands = {
     "drake": modules.Drake(),
