@@ -31,16 +31,17 @@ class Countdown(Module):
             if event is None:
                 return "Couldn't find the event '%s'" % query
         else:
-            event = self.next_event(now)
+            event = self.next_event()
         remaining = self.time(event)
         if remaining is None:
             return "There are no events scheduled."
         return "There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until %s." % remaining
 
-    def next_event(self, now: datetime.datetime) -> Event:
+    def next_event(self) -> Event:
         """
         :return: next event in list.
         """
+        now = datetime.datetime.now()
         for event in self.events:
             if (event.date + event.duration - now).total_seconds() > 0:
                 return event
