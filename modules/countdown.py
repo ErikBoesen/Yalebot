@@ -15,12 +15,24 @@ class Countdown(Module):
         Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20), datetime.timedelta(days=1)),
     ]
 
+    def get_event(self, name):
+        for option in self.events:
+            if option.name == query:
+                return option
+        return None
+
     def response(self, query, message):
         """
         Calculate response given input.
         :param query: text input to command.
         """
-        remaining = self.time()
+        if query:
+            event = self.get_event(query)
+            if event is None:
+                return "Couldn't find the event '%s'" % query
+        else:
+            event = self.next_event(now)
+        remaining = self.time(event)
         if remaining is None:
             return "There are no events scheduled."
         return "There are %d weeks, %d days, %d hours, %d minutes, and %d seconds left until %s." % remaining
@@ -34,12 +46,11 @@ class Countdown(Module):
                 return event
         return None
 
-    def time(self):
+    def time(self, event):
         """
         Get time split into units until Bulldog Days.
         """
         now = datetime.datetime.now()
-        event = self.next_event(now)
         if event is None:
             return None
         delta = event.date - now
