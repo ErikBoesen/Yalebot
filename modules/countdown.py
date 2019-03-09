@@ -17,7 +17,7 @@ class Countdown(Module):
 
     def get_event(self, name):
         for option in self.events:
-            if option.name == query:
+            if option.name == name:
                 return option
         return None
 
