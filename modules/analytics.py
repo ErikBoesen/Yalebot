@@ -5,7 +5,7 @@ import sys
 from pprint import pprint
 import os
 
-at = os.environ["GROUPME_ACCESS_TOKEN"]
+token = os.environ["GROUPME_ACCESS_TOKEN"]
 GROUP_ID = 46649296
 
 class Analytics(Module):
@@ -29,7 +29,7 @@ class Analytics(Module):
         return "%d messages processed."
 
     def get_group(self, group_id):
-        response = requests.get("https://api.groupme.com/v3/groups/%d?token=%s" % (group_id, at))
+        response = requests.get("https://api.groupme.com/v3/groups/%d?token=%s" % (group_id, token))
         data = response.json()
         return data["response"]
 
@@ -50,7 +50,7 @@ class Analytics(Module):
             }
             if message_id:
                 params["before_id"] = message_id
-            response = requests.get("https://api.groupme.com/v3/groups/%d/messages?token=%s" % (group_id, at), params=params)
+            response = requests.get("https://api.groupme.com/v3/groups/%d/messages?token=%s" % (group_id, token), params=params)
             messages = response.json()["response"]["messages"]
             for message in messages:
                 message_number += 1
