@@ -1,6 +1,7 @@
 from .base import Module
 import random
 import json
+import requests
 
 class Vet(Module):
     DESCRIPTION = "Check if users are actually Yale admits"
