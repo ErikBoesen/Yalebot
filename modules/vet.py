@@ -14,6 +14,7 @@ class Vet(Module):
             self.admits = json.load(f)
 
     def get_members(self, group_id):
+        token = os.environ["GROUPME_ACCESS_TOKEN"]
         members = requests.get("https://api.groupme.com/v3/groups/%d/members?token=%s" % (group_id, token)).json()["response"]["members"]
         return [member["name"] for member in members]
 

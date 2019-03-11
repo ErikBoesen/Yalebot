@@ -22,6 +22,7 @@ simple_responses = {
     "test": "https://erikboesen.com/yalepuritytest",
     "dislike": "👎😬👎\n 🦵🦵",
     "shrug": "¯\_(ツ)_/¯",
+    "snort": "😤",
 }
 commands = {
     "zalgo": modules.Zalgo(),
