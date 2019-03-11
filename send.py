@@ -11,5 +11,6 @@ for candidate in groups:
     if groups[candidate]["name"]:
         group_id = candidate
 print(group_id)
+
 text = input('Message: ')
-requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": os.environ["BOT_ID"]})
+requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
