@@ -10,7 +10,8 @@ group_name = pick([groups[group_id]["name"] for group_id in groups])[0]
 for candidate in groups:
     if groups[candidate]["name"] == group_name:
         group_id = candidate
-print(group_id)
+        break
+print(f"Selected group {group_id}/{group_name}.")
 
 text = input("Message: ")
 requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
