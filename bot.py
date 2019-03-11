@@ -175,4 +175,3 @@ def reply(message, group_id):
     if image is not None:
         data["picture_url"] = image
     response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
-reply(("Hi, I am testing attaching images, please disregard", "https://i.groupme.com/500x375.jpeg.a164d81acb7b416e9e3c3f2a563b3a75"), group_id="47894954")
