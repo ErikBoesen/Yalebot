@@ -1,4 +1,4 @@
-from .base import Module
+#from .base import Module
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
@@ -6,7 +6,8 @@ import os
 import io
 
 
-class Meme(Module):
+#class Meme(Module):
+class Meme:
     FONT_SIZE = 30
     SMALL_FONT_SIZE = 20
     LARGE_FONT_SIZE = 50
@@ -26,10 +27,10 @@ class Meme(Module):
         draw = ImageDraw.Draw(image)
 
         self.mark_image(draw, captions)
-        """
+        #"""
         image.show()
         return
-        """
+        #"""
         output = io.BytesIO()
         image.save(output, format="JPEG")
         image_url = self.upload_image(output.getvalue())
@@ -127,7 +128,14 @@ class Catch(Meme):
             line_width, line_height = draw.textsize(line, font=self.font)
             draw.text((ARMS_X-line_width/2, ARMS_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
 
-"""
+class Kirby(Meme):
+    TEMPLATE_NAME = "kirby.jpg"
+    ARGC = 1
+    def mark_image(self, draw: ImageDraw, captions):
+        BOARD_X, BOARD_Y = (90, 80)
+        lines = wrap(captions[0], 20)
+        for line_index, line in enumerate(lines):
+            draw.text((BOARD_X, BOARD_Y + line_index * 35), line, font=self.font, fill=self.BLACK)
+
 if __name__ == "__main__":
-    Catch().response("feelings\nme")
-"""
+    Kirby().response("im baby asad osad sd saoidas doisahdoisa dh oasidhaos dihasdo sai dis")
