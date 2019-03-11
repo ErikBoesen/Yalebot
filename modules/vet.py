@@ -24,7 +24,7 @@ class Vet(Module):
     def response(self, query, message):
         if not query:
             members = self.get_members(message["group_id"])
-            return "\n".join([self.check_user(member) for member in members])
+            return "\n".join([self.check_member(member) for member in members])
         return self.check_user(query.strip('@'))
 
     def is_admit(self, name: str):
@@ -33,9 +33,17 @@ class Vet(Module):
         """
         return (name in self.admits)
 
+    def check_member(self, name: str):
+        """
+        Get a SHORT report on whether a user is verified.
+        """
+        verified = self.is_admit(name)
+        icon = random.choice(self.POSITIVE_EMOJI if verified else self.NEGATIVE_EMOJI)
+        return f"{icon} {name}"
+
     def check_user(self, name: str):
         """
-        Get a string-formatted report on whether a user is verified.
+        Get a LONG string-formatted report on whether a user is verified.
         """
         name = name.strip()
         if name.lower() == "yalebot":
