@@ -34,8 +34,7 @@ class Meme(Module):
         output = io.BytesIO()
         image.save(output, format="JPEG")
         image_url = self.upload_image(output.getvalue())
-        print(image_url)
-        return "", image_url
+        return ("", image_url)
 
     def mark_image(self, draw: ImageDraw, captions):
         """
