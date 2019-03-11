@@ -23,6 +23,7 @@ simple_responses = {
     "dislike": "👎😬👎\n 🦵🦵",
     "shrug": "¯\_(ツ)_/¯",
     "snort": "😤",
+    "oh": "https://i.groupme.com/766x750.jpeg.9209520c57e848369444ca498e31f90a.large",
 }
 commands = {
     "zalgo": modules.Zalgo(),
