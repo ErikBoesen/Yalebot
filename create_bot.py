@@ -13,7 +13,9 @@ bot = {
     "name": read("name", "Yalebot"),
     "group_id": pick([groups[group_id]["name"] for group_id in groups])[0]
     "avatar_url": read("Avatar URL", "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c"),
-
+    "callback_url": read("Callback URL", "https://yalebot.herokuapp.com/"),
+    "dm_notification": True,
 }
+result = requests.post(f"https://api.groupme.com/v3/bots?token={token}").json()
 
 
