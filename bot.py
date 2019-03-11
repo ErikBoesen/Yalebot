@@ -63,6 +63,7 @@ meme_commands = {
     "juice": modules.Juice(),
     "changemymind": modules.ChangeMyMind(),
     "catch": modules.Catch(),
+    "kirby": modules.Kirby(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

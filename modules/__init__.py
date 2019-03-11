@@ -13,7 +13,7 @@ from .sad import Sad
 from .eightball import EightBall
 from .analytics import Analytics
 from .pick import Pick
-from .meme import Drake, YaleDrake, Juice, ChangeMyMind, Catch
+from .meme import Drake, YaleDrake, Juice, ChangeMyMind, Catch, Kirby
 from .system import Welcome
 from .youtube import YouTube
 from .price import Price
