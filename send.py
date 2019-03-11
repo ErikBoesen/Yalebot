@@ -5,7 +5,7 @@ from pick import pick
 
 with open("groups.json", "r") as f:
     groups = json.load(f)
-group_name = pick([groups[group_id]["name"] for group_id in groups])
+group_name = pick([groups[group_id]["name"] for group_id in groups])[0]
 # Knowing name chosen, get group ID
 for candidate in groups:
     if groups[candidate]["name"] == group_name:
