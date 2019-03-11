@@ -4,6 +4,8 @@ import json
 import requests
 import os
 
+token = os.environ["GROUPME_ACCESS_TOKEN"]
+
 class Vet(Module):
     DESCRIPTION = "Check if users are actually Yale admits"
     ARGC = 0
@@ -15,18 +17,14 @@ class Vet(Module):
             self.admits = json.load(f)
 
     def get_members(self, group_id):
-        token = os.environ["GROUPME_ACCESS_TOKEN"]
-        members = requests.get("https://api.groupme.com/v3/groups/%s/members?token=%s" % (group_id, token)).json()["response"]["members"]
+        response = requests.get("https://api.groupme.com/v3/groups/%s?token=%s" % (group_id, token)).json()
+        members = response["response"]["members"]
         return [member["name"] for member in members]
 
     def response(self, query, message):
         if not query:
-            # TODO: Messy
-            string = ""
             members = self.get_members(message["group_id"])
-            for member in members:
-                string += self.check_user(member)
-            return string
+            return "\n".join([self.check_user(member) for member in members])
         return self.check_user(query.strip('@'))
 
     def is_admit(self, name: str):
@@ -46,4 +44,3 @@ class Vet(Module):
         icon = random.choice(self.POSITIVE_EMOJI if verified else self.NEGATIVE_EMOJI)
         status = "is" if verified else "is NOT"
         return f"{icon} {name} {status} a verified admit according to the Yale 2023 Admits website."
-
