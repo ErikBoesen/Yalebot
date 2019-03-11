@@ -155,28 +155,24 @@ def webhook():
         """
     return "ok", 200
 
-def reply(text, group_id, image: str = None):
+def reply(message, group_id):
     """
     Reply in chat.
-    :param text: text of message to send.
+    :param message: text of message to send. May be a tuple with further data.
     :param group_id: ID of group in which to send message.
-    :param image: URL of image to attach.
     """
-    url = "https://api.groupme.com/v3/bots/post"
+    # TODO: This is less than ideal.
+    if isinstance(message, tuple):
+        text = message[0]
+        image = message[1]
+    else:
+        text = message
+        image = None
     data = {
         "bot_id": GROUPS[group_id]["bot_id"],
         "text": text,
     }
     if image is not None:
-        print("Attaching image %s" % image)
-        data["attachments"] = [
-            {
-                "type": "image",
-                "url": image,
-            }
-        ]
-    print(data)
-    response = requests.post(url, data=data)
-
-if __name__ == "__main__":
-    pass
+        data["picture_url"] = image
+    response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
+reply(("Hi, I am testing attaching images, please disregard", "https://i.groupme.com/500x375.jpeg.a164d81acb7b416e9e3c3f2a563b3a75"), group_id="47894954")
