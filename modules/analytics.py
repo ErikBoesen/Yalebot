@@ -29,7 +29,7 @@ class Analytics(Module):
         return "%d messages processed."
 
     def get_group(self, group_id):
-        response = requests.get("https://api.groupme.com/v3/groups/%d?token=%s" % (group_id, token))
+        response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={token}")
         data = response.json()
         return data["response"]
 
@@ -50,7 +50,7 @@ class Analytics(Module):
             }
             if message_id:
                 params["before_id"] = message_id
-            response = requests.get("https://api.groupme.com/v3/groups/%d/messages?token=%s" % (group_id, token), params=params)
+            response = requests.get("https://api.groupme.com/v3/groups/{group_id}/messages?token={token}", params=params)
             messages = response.json()["response"]["messages"]
             for message in messages:
                 message_number += 1
