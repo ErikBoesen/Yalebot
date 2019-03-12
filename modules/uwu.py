@@ -9,15 +9,19 @@ from skimage import io
 
 class UWU(Module):
     DESCRIPTION = "Abuse photographs of your compatriots"
-    def eye_position(self, element):
-        # TODO: I feel like I shouldn't have to do this myself, but it does work ok.
+    def tear_position(self, element):
+        # TODO: I feel like I shouldn't have to do this logic myself, but it does work ok.
         top = None
         left = None
         right = None
         for x, y in element:
             if top is None or top < y:
                 top = y
-        return , top
+            if left is None or left > x:
+                left = x
+            if right is None or right < x:
+                right = x
+        return (left + right) / 2, top
 
     def response(self, query, message):
         image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
