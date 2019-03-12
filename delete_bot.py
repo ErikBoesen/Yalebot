@@ -14,4 +14,12 @@ for candidate in groups:
         group_id = candidate
         break
 print(f"Leaving group {group_id}/{group_name}.")
-requests.post("https://api.groupme.com/v3/bots/destroy", data={"bot_id": groups[group_id]["bot_id"]})
+request = requests.post("https://api.groupme.com/v3/bots/destroy?token={token}", data={"bot_id": groups[group_id]["bot_id"]})
+if request.ok:
+    print("Success.")
+    with open("groups.json", "w") as f:
+        del groups[group_id]
+        json.dump(groups, f)
+else:
+    print("Failure: ")
+    print(request.json())
