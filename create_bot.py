@@ -31,6 +31,6 @@ with open("groups.json", "r+") as f:
     groups = json.load(f)
     groups[result["group_id"]] = {
         "name": bot["name"],
-        "bot_id": result["bot_id"],
+        "bot_id": result["bot"]["bot_id"],
     }
     json.dump(groups, f)
