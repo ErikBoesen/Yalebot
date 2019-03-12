@@ -21,5 +21,5 @@ if request.ok:
         del groups[group_id]
         json.dump(groups, f)
 else:
-    print("Failure: ")
+    print("Failure: ", end="")
     print(request.json())

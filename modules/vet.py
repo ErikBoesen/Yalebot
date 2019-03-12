@@ -31,7 +31,7 @@ class Vet(Module):
         """
         Check calculated list of admits to determine if user is part of Yale '23.
         """
-        return (name in self.admits)
+        return (name.lower() in self.admits)
 
     def check_member(self, name: str):
         """
