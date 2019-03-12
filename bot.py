@@ -181,7 +181,7 @@ def reply(message, group_id):
         image = None
     if len(text) > MAX_MESSAGE_LENGTH:
         # If text is too long for one message, split it up over several
-        for block in [line[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(text), MAX_MESSAGE_LENGTH)]:
+        for block in [text[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(text), MAX_MESSAGE_LENGTH)]:
             data["text"] = block
             send_message(data)
         data["text"] = ""
