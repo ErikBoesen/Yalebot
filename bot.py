@@ -185,6 +185,8 @@ def reply(message, group_id):
             data["text"] = block
             send_message(data)
         data["text"] = ""
+    else:
+        data["text"] = text
     if image is not None:
         data["picture_url"] = image
     send_message(data)
