@@ -13,7 +13,7 @@ class Vet(Module):
     NEGATIVE_EMOJI = "🌧"
     def __init__(self):
         super().__init__()
-        with open('resources/admit_names.json') as f:
+        with open("resources/admit_names.json") as f:
             self.admits = json.load(f)
 
     def get_members(self, group_id):
@@ -25,7 +25,7 @@ class Vet(Module):
         if not query:
             members = self.get_members(message["group_id"])
             return "\n".join([self.check_member(member) for member in members])
-        return self.check_user(query.strip('@'))
+        return self.check_user(query.strip("@"))
 
     def is_admit(self, name: str):
         """
