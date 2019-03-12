@@ -29,7 +29,7 @@ result = requests.post(f"https://api.groupme.com/v3/bots?token={token}",
 
 with open("groups.json", "r+") as f:
     groups = json.load(f)
-    groups[result["group_id"]] = {
+    groups[result["bot"]["group_id"]] = {
         "name": bot["name"],
         "bot_id": result["bot"]["bot_id"],
     }
