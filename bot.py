@@ -10,7 +10,9 @@ app = Flask(__name__)
 with open("groups.json", "r") as f:
     GROUPS = json.load(f)
 
+MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
+
 simple_responses = {
     "ping": "Pong!",
     "about": f"I am a bot maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. Use the command {PREFIX}help to view a list of bot capabilities. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
@@ -155,12 +157,21 @@ def webhook():
         """
     return "ok", 200
 
+def send_message(message):
+    """
+    Send raw message data, without pre-processing.
+    """
+    response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
+
 def reply(message, group_id):
     """
     Reply in chat.
     :param message: text of message to send. May be a tuple with further data.
     :param group_id: ID of group in which to send message.
     """
+    data = {
+        "bot_id": GROUPS[group_id]["bot_id"],
+    }
     # TODO: This is less than ideal.
     if isinstance(message, tuple):
         text = message[0]
@@ -168,10 +179,12 @@ def reply(message, group_id):
     else:
         text = message
         image = None
-    data = {
-        "bot_id": GROUPS[group_id]["bot_id"],
-        "text": text,
-    }
+    if len(text) > MAX_MESSAGE_LENGTH:
+        # If text is too long for one message, split it up over several
+        for block in [line[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(text), MAX_MESSAGE_LENGTH)]:
+            data["text"] = block
+            send_message(data)
+        data["text"] = ""
     if image is not None:
         data["picture_url"] = image
-    response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
+    send_message(data)
