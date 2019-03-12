@@ -1,6 +1,9 @@
 import requests
 import json
 from pick import pick
+import os
+
+token = os.environ["GROUPME_ACCESS_TOKEN"]
 
 with open("groups.json", "r") as f:
     groups = json.load(f)
