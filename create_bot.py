@@ -25,12 +25,12 @@ bot = {
     "dm_notification": False,
 }
 result = requests.post(f"https://api.groupme.com/v3/bots?token={token}",
-                       json={"bot": bot}).json()["response"]
+                       json={"bot": bot}).json()["response"]["bot"]
 
 with open("groups.json", "r+") as f:
     groups = json.load(f)
-    groups[result["bot"]["group_id"]] = {
+    groups[result["group_id"]] = {
         "name": bot["name"],
-        "bot_id": result["bot"]["bot_id"],
+        "bot_id": result["bot_id"],
     }
     json.dump(groups, f)
