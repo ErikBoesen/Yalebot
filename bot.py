@@ -157,7 +157,7 @@ def webhook():
         """
     return "ok", 200
 
-def send_message(message):
+def send_message(data):
     """
     Send raw message data, without pre-processing.
     """
