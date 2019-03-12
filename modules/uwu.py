@@ -52,4 +52,4 @@ class UWU(Module):
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
-        return r.json()["payload"]["url"]
+        return "", r.json()["payload"]["url"]
