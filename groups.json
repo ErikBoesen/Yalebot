@@ -1,9 +1,1 @@
-{
-    "46649296": {"name": "Main Yale chat", "bot_id": "1520c98b3da635c8c6383951a6"},
-    "48071223": {"name": "Active chat", "bot_id": "d0bb06c46660d9bf5c5cb4fcff"},
-    "47894954": {"name": "Yalebot testing server", "bot_id": "d4e61d0ecd65cbabc8a7ad36e3"},
-    "46633207": {"name": "Penn", "bot_id": "b90e67a3cf12dcbd9ecccb5280"},
-    "47712261": {"name": "UNC", "bot_id": "49fdc0f40340d3f47fb3eeb468"},
-    "46579394": {"name": "Cornell", "bot_id": "09593eccdb810a350c30ea5ba8"},
-    "45272939": {"name": "Physeance", "bot_id": "96cce942eaa9a55bcc95ead745"}
-}
+{"46649296": {"name": "Main Yale chat", "bot_id": "1520c98b3da635c8c6383951a6"}, "48071223": {"name": "Active chat", "bot_id": "d0bb06c46660d9bf5c5cb4fcff"}, "47894954": {"name": "Yalebot testing server", "bot_id": "d4e61d0ecd65cbabc8a7ad36e3"}, "46633207": {"name": "Penn", "bot_id": "b90e67a3cf12dcbd9ecccb5280"}, "47712261": {"name": "UNC", "bot_id": "49fdc0f40340d3f47fb3eeb468"}, "46579394": {"name": "Cornell", "bot_id": "09593eccdb810a350c30ea5ba8"}}
