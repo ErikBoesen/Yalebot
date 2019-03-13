@@ -1,4 +1,4 @@
-import modules
+﻿import modules
 import os
 import re
 import requests
@@ -14,15 +14,15 @@ PREFIX = "!"
 simple_responses = {
     "ping": "Pong!",
     "about": f"I am a bot maintained by Erik Bøsen, whom you should follow on Instagram @erikboesen. Use the command {PREFIX}help to view a list of bot capabilities. The bot's source code can be viewed and contributed to on GitHub: https://github.com/ErikBoesen/Yalebot",
-    "sam": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
+    "sam": "❗❗❗N O ðﾟﾒﾪ F L E X ðﾟﾒﾪ Z O N E ❗❗❗",
     "essays": "Submit your essays here, or read your classmates'! https://drive.google.com/open?id=1IUG1cNxmxBHhv1sSemi92fYO6y5lG6of",
     "spreadsheet": "https://docs.google.com/spreadsheets/d/10m_0glWVUncKCxERsNf6uOJhfeYU96mOK0KvgNURIBk/edit?fbclid=IwAR35OaPO6czQxZv26A6DEgEH-Qef0kCSe4nXxl8wcIfDml-BfLx4ksVtp6Y#gid=0",
     "meetup": "https://i.groupme.com/750x1200.jpeg.b0ca5f6e660a4356be2925222e6f8246.large",
     "quack": "quack",
     "test": "https://erikboesen.com/yalepuritytest",
-    "dislike": "👎😬👎\n 🦵🦵",
+    "dislike": "ðﾟﾑﾎðﾟﾘﾬðﾟﾑﾎ\n ðﾟﾦﾵðﾟﾦﾵ",
     "shrug": "¯\_(ツ)_/¯",
-    "snort": "😤",
+    "snort": "ðﾟﾘﾤ",
     "oh": "https://i.groupme.com/766x750.jpeg.9209520c57e848369444ca498e31f90a.large",
 }
 commands = {
@@ -52,6 +52,8 @@ commands = {
     "nasa": modules.NASA(),
     "amber": modules.Amber(),
     "uwu": modules.UWU(),
+    "pwease": modules.PWEASE(),
+	"enquote": modules.ENQUOTE(),
     "conversationstarter": modules.ConversationStarter(),
     "quote": modules.Quote(),
     "dog": modules.Dog(),
