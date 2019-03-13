@@ -66,16 +66,16 @@ class UWU(Module):
 
             # Center blush between eyes
             blush_x = (left_tear_x + right_tear_x) / 2
-            # Put blush halfway down tears
-            blush_y = (left_tear_y + right_tear_y) / 2 + tear_height / 2
+            # Position blush based on tear position (easier than alternatives)
+            blush_y = (left_tear_y + right_tear_y) / 2 + tear_height / 4
 
             # Scale blush mask
             blush_natural_width, blush_natural_height = blush.size
-            blush_height = int(tear_height * 0.7)
-            blush_width = int(blueh_height * blush_natural_width / blush_natural_height)
-            scaled_blush = blush.resuze((blush_width, blush_height), Image.ANTIALIAS)
+            blush_height = int(tear_height * 0.3)
+            blush_width = int(blush_height * blush_natural_width / blush_natural_height)
+            scaled_blush = blush.resize((blush_width, blush_height), Image.ANTIALIAS)
 
-            pil_image.paste(scaled_blush, (int(blush_x - blush_width / 2), int(blush_tear_y)), scaled_blush)
+            pil_image.paste(scaled_blush, (int(blush_x - blush_width / 2), int(blush_y)), scaled_blush)
 
         #pil_image.save("out.png")
         pil_image.show()
