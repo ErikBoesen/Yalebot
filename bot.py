@@ -43,6 +43,7 @@ commands = {
     "youtube": modules.YouTube(),
     "pick": modules.Pick(),
     "chose": modules.Chose(),
+    "meme": modules.Meme(),
     "love": modules.Love(),
     "price": modules.Price(),
     "minion": modules.Minion(),
@@ -59,14 +60,6 @@ commands = {
     "dog": modules.Dog(),
     "funfact": modules.FunFact(),
     "kelbo": modules.Kelbo(),
-}
-meme_commands = {
-    "drake": modules.Drake(),
-    "ydrake": modules.YaleDrake(),
-    "juice": modules.Juice(),
-    "changemymind": modules.ChangeMyMind(),
-    "catch": modules.Catch(),
-    "kirby": modules.Kirby(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

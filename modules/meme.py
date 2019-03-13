@@ -14,15 +14,15 @@ class Meme(Module):
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     TEMPLATE_NAME = ""
-    memes = {
-        "drake": (self.mark_drake, 2),
-        "yaledrake": (self.mark_drake, 2),
-    }
     def __init__(self):
         self.template = Image.open("resources/memes/%s" % self.TEMPLATE_NAME)
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
         self.small_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.SMALL_FONT_SIZE)
         self.large_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.LARGE_FONT_SIZE)
+        memes = {
+            "drake": (self.mark_drake, 2),
+            "yaledrake": (self.mark_drake, 2),
+        }
         super().__init__()
 
     def response(self, query):
