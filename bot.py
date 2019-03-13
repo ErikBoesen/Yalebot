@@ -30,7 +30,7 @@ simple_responses = {
 }
 # Correct people when they try to use old memes
 for meme_response in ("drake", "ydrake", "juice", "kirby", "changemymind", "catch"):
-    simple_responses[meme_response] = "Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n..."
+    simple_responses[meme_response] = "Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n...\n\nWelcome to the future, bitch."
 
 commands = {
     "zalgo": modules.Zalgo(),
