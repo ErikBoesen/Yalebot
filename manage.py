@@ -36,11 +36,14 @@ def pick_joined_group(groups=None) -> str:
             print(f"Selected group {group_id}/{group_name}.")
             return group_id
 
-def pick_user_group() -> str:
+def pick_user_group(groups=None) -> str:
     """
     :return:
     """
-    groups = get_user_groups()
+    print(groups)
+    if groups is None:
+        groups = get_user_groups()
+    print(groups)
     group_name = pick([group["name"] for group in groups])[0]
     # Knowing name chosen, get group id
     for candidate in groups:
@@ -51,7 +54,8 @@ def pick_user_group() -> str:
 
 
 if args.verb == "create_bot":
-    group_id = pick_user_group()
+    groups = get_joined_groups()
+    group_id = pick_user_group(groups)
 
     bot = {
         "name": read("name", "yalebot"),
@@ -63,7 +67,6 @@ if args.verb == "create_bot":
     result = requests.post(f"https://api.groupme.com/v3/bots?token={args.token}",
                            json={"bot": bot}).json()["response"]["bot"]
 
-    groups = get_joined_groups()
     groups[result["group_id"]] = {
         "name": bot["name"],
         "bot_id": result["bot_id"],
