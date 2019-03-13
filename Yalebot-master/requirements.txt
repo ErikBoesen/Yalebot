@@ -1,0 +1,11 @@
+Flask
+gunicorn==19.6.0
+zalgoify>=1.0
+upsidedown
+pillow
+GroupyAPI
+beautifulsoup4
+
+cmake
+face_recognition
+scikit-image
