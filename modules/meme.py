@@ -59,7 +59,7 @@ class Meme(Module):
         :return: URL of image now hosted on GroupMe server.
         """
         headers = {
-            "X-Access-Token": os.environ["GROUPME_ACCESS_TOKEN"],
+            "X-Access-Token": self.ACCESS_TOKEN,
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
@@ -74,10 +74,6 @@ class Meme(Module):
             lines = wrap(caption, 20)
             for line_index, line in enumerate(lines):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
-
-    def mark_yaledrake(self, draw: ImageDraw, captions):
-        # TODO: Is there a better way to do this?
-        self.mark_drake(draw, captions)
 
     def mark_juice(self, draw: ImageDraw, captions):
         HEAD_X, HEAD_Y = (327, 145)
