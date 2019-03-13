@@ -61,9 +61,6 @@ class UWU(Module):
             tear_height = int(tear_width * tear_natural_height / tear_natural_width)
             scaled_tear = tear.resize((tear_width, tear_height), Image.ANTIALIAS)
 
-            pil_image.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
-            pil_image.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
-
             # Center blush between eyes
             blush_x = (left_tear_x + right_tear_x) / 2
             # Position blush based on tear position (easier than alternatives)
@@ -75,7 +72,10 @@ class UWU(Module):
             blush_width = int(blush_height * blush_natural_width / blush_natural_height)
             scaled_blush = blush.resize((blush_width, blush_height), Image.ANTIALIAS)
 
+            # Actually draw blush and tears
             pil_image.paste(scaled_blush, (int(blush_x - blush_width / 2), int(blush_y)), scaled_blush)
+            pil_image.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
+            pil_image.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
 
         #pil_image.save("out.png")
         """
