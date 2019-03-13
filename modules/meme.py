@@ -23,7 +23,7 @@ class Meme(Module):
         self.templates = {
             "drake": (self.mark_drake, 2),
             "yaledrake": (self.mark_drake, 2),
-            "juice": (self.mark_juice, 1),
+            "juice": (self.mark_juice, 2),
             "changemymind": (self.mark_changemymind, 1),
             "catch": (self.mark_catch, 1),
             "kirby": (self.mark_kirby, 1),
