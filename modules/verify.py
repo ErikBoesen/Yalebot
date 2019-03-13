@@ -4,7 +4,6 @@ import json
 import requests
 import os
 
-token = os.environ["GROUPME_ACCESS_TOKEN"]
 
 class Verify(Module):
     DESCRIPTION = "Check if users are actually Yale admits"
@@ -17,7 +16,7 @@ class Verify(Module):
             self.admits = json.load(f)
 
     def get_members(self, group_id):
-        response = requests.get("https://api.groupme.com/v3/groups/%s?token=%s" % (group_id, token)).json()
+        response = requests.get("https://api.groupme.com/v3/groups/%s?token=%s" % (group_id, self.ACCESS_TOKEN)).json()
         members = response["response"]["members"]
         return [member["name"] for member in members]
 
