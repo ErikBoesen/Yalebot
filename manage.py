@@ -13,8 +13,11 @@ args = parser.parse_args()
 def read(prop, default):
     return input(f"{prop} [{default}]: ") or default
 
+def get_user_groups():
+    return requests.get(f"https://api.groupme.com/v3/groups?token={args.token}").json()["response"]
+
 if args.verb == "create_bot":
-    groups = requests.get(f"https://api.groupme.com/v3/groups?token={args.token}").json()["response"]
+    groups = get_user_groups()
     group_name = pick([group["name"] for group in groups])[0]
     # Knowing name chosen, get group id
     for candidate in groups:
