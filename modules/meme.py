@@ -94,19 +94,6 @@ class Meme(Module):
 
     def mark_changemymind(self, draw: ImageDraw, captions):
         SIGN_X, SIGN_Y = (579, 460)
-        """
-        ROTATION = -20.6
-
-        text_layer = Image.new('L', (W, H))
-        text_draw = ImageDraw.Draw(text_layer)
-
-        lines = wrap(captions[0], 20)
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.font)
-            text_draw.text((SIGN_X-line_width/2, SIGN_Y-line_height/2 + line_index * 35), line, font=self.font)
-
-        text_layer = text_layer.rotate(ROTATION, expand=0)
-        """
         lines = wrap(captions[0], 19)
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.large_font)
