@@ -127,8 +127,6 @@ def webhook():
 
         if H_PATTERN.search(text) is not None:
             reply(forename + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"? Perhaps you meant to say \"" + H_PATTERN.sub("The H Place", text) + "\" instead?", group_id)
-        if "prize" in text.lower():
-            reply("stop", group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome, " + forename + "! :)", group_id)
         if "dad" in text.lower():

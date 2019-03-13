@@ -8,7 +8,6 @@ import io
 
 #class Meme:
 class Meme(Module):
-    # TODO: This only checks whether a template name was provided, without regard to captions.
     ARGC = 1
 
     FONT_SIZE = 30
@@ -17,9 +16,6 @@ class Meme(Module):
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     def __init__(self):
-        self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
-        self.small_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.SMALL_FONT_SIZE)
-        self.large_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.LARGE_FONT_SIZE)
         self.templates = {
             "drake": (self.mark_drake, 2),
             "yaledrake": (self.mark_drake, 2),
