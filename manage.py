@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import requests
 import os
 import json
@@ -83,7 +85,12 @@ elif args.verb == "send":
     groups = get_joined_groups()
     group_id = pick_joined_group(groups)
     while True:
-        text = input("> ")
+        try:
+            text = input("> ")
+        except:
+            print("\r", end="")
+            break
         if not text:
+            print("\r", end="")
             break
         requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
