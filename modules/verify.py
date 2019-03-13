@@ -38,8 +38,11 @@ class Verify(Module):
         Get a SHORT report on whether a user is verified.
         """
         verified = self.is_admit(name)
-        icon = random.choice(self.POSITIVE_EMOJI if verified else self.NEGATIVE_EMOJI)
+        icon = self.emojus(verified)
         return f"{icon} {name}"
+
+    def emojus(self, verified: bool):
+        return self.POSITIVE_EMOJI if verified else self.NEGATIVE_EMOJI
 
     def check_user(self, name: str):
         """
@@ -49,6 +52,6 @@ class Verify(Module):
         if name.lower() == "yalebot":
             return "Y'all think you're smart, don't you?"
         verified = self.is_admit(name)
-        icon = random.choice(self.POSITIVE_EMOJI if verified else self.NEGATIVE_EMOJI)
+        icon = self.emojus(verified)
         status = "is" if verified else "is NOT"
         return f"{icon} {name} {status} a verified admit according to the Yale 2023 Admits website."
