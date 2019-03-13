@@ -30,7 +30,7 @@ class Meme(Module):
         }
         super().__init__()
 
-    def response(self, query):
+    def response(self, query, message):
         captions = query.split("\n")
 
         template = captions.pop(0)
