@@ -7,13 +7,11 @@ class Twitter(Module):
     ARGC = 1
     def response(self, query, message):
         msg = ''
-        if '@' not in query:
-            return 'Incorrect format, be sure to use the @ symbol'
         if ',' in query:
             qlist = query.split(',', 1)
             query = qlist[0].strip()
             msg = qlist[1].strip()
-        url = 'http://gettwitterid.com/?user_name={user}&submit=GET+USER+ID'.format(user=query[query.find('@')+1:])
+        url = 'http://gettwitterid.com/?user_name={user}&submit=GET+USER+ID'.format(user=query)
         soup = BeautifulSoup(requests.get(url).text, 'html.parser')
         try:
             id = str(soup.find_all('p')[2])
