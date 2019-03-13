@@ -36,7 +36,7 @@ class CleverBot:
 
 
 class Chat(Module):
-    DESCRIPTION = "Converse with Yalebot; also accessible by mentioning @Yalebot"
+    DESCRIPTION = "Converse with Yalebot intelligently"
     ARGC = 1
     def __init__(self):
         self.client = CleverBot(user=os.environ["CLEVERBOT_USER"], key=os.environ["CLEVERBOT_KEY"])
