@@ -1,3 +1,5 @@
+import os
+
 class Module:
     DESCRIPTION = ""
     ARGC = 0
