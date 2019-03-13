@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser(description="Control Yalebot directly")
 parser.add_argument("verb")
 args = parser.parse_args()
 
-token = os.environ["groupme_access_token"]
+token = os.environ["GROUPME_ACCESS_TOKEN"]
 
 def read(prop, default):
     return input(f"{prop} [{default}]: ") or default
@@ -16,12 +16,12 @@ def read(prop, default):
 if args.verb == "create_bot":
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={token}").json()["response"]
     group_name = pick([group["name"] for group in groups])[0]
-    # knowing name chosen, get group id
+    # Knowing name chosen, get group id
     for candidate in groups:
         if candidate["name"] == group_name:
             group_id = candidate["group_id"]
             break
-    print(f"selected group {group_id}/{group_name}.")
+    print(f"Selected group {group_id}/{group_name}.")
 
     bot = {
         "name": read("name", "yalebot"),
