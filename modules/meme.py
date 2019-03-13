@@ -21,7 +21,7 @@ class Meme(Module):
             "yaledrake": (self.mark_drake, 2),
             "juice": (self.mark_juice, 2),
             "changemymind": (self.mark_changemymind, 1),
-            "catch": (self.mark_catch, 1),
+            "catch": (self.mark_catch, 2),
             "kirby": (self.mark_kirby, 1),
         }
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
@@ -93,17 +93,18 @@ class Meme(Module):
             draw.text((SIGN_X-line_width/2, SIGN_Y-line_height/2 + line_index * 55), line, font=self.large_font, fill=self.BLACK)
 
     def mark_catch(self, draw: ImageDraw, captions):
-        BALL_X, BALL_Y = (250, 90)
-        lines = wrap(captions[0], 20)
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.font)
-            draw.text((BALL_X-line_width/2, BALL_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
 
         ARMS_X, ARMS_Y = (550, 275)
-        lines = wrap(captions[1] if len(captions) > 1 else "me", 20)
+        lines = wrap(captions[0])
         for line_index, line in enumerate(lines):
             line_width, line_height = draw.textsize(line, font=self.font)
             draw.text((ARMS_X-line_width/2, ARMS_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
+
+        BALL_X, BALL_Y = (250, 90)
+        lines = wrap(captions[1], 20)
+        for line_index, line in enumerate(lines):
+            line_width, line_height = draw.textsize(line, font=self.font)
+            draw.text((BALL_X-line_width/2, BALL_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
 
     def mark_kirby(self, draw: ImageDraw, captions):
         BOARD_X, BOARD_Y = (80, 70)
