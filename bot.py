@@ -119,6 +119,7 @@ def webhook():
                     help_string += "\nSimple commands: " + ", ".join([PREFIX + title for title in simple_responses])
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
+                    help_string += "\n\nPlease note that all meme commands have now been merged into !meme. Run `!help meme` for more information."
                     reply(help_string, group_id)
             else:
                 reply("Command not found. Use !help to view a list of commands.", group_id)
