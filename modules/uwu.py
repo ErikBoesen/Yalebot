@@ -35,7 +35,7 @@ class UWU(Module):
         members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={token}").json()["response"]["members"]
         for member in members:
             if member["user_id"] == user_id:
-                return member["imge_url"]
+                return member["image_url"]
 
     def response(self, query, message):
         image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
