@@ -30,6 +30,9 @@ class UWU(Module):
                 right = x
         return (left + right) / 2, top - 0.5 * (bottom - top)
 
+    def blush_position(self, chin):
+        pass
+
     def response(self, query, message):
         image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
         if len(image_attachments) > 0:
@@ -40,8 +43,8 @@ class UWU(Module):
             source_url = message["avatar_url"]
         print("Image source URL: " + source_url)
 
-        uwu = Image.open("resources/uwu/uwu.png")
-        tear = Image.open("resources/uwu/eye.png")
+        tear = Image.open("resources/uwu/tear.png")
+        blush = Image.open("resources/uwu/blush.png")
         image = io.imread(source_url)[:,:,:3]
         pil_image = Image.fromarray(image)
         #faces = face_recognition.face_locations(image)
