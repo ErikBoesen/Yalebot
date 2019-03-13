@@ -28,7 +28,7 @@ class UWU(Module):
                 left = x
             if right is None or right < x:
                 right = x
-        return (left + right) / 2, (bottom + top) / 2
+        return (left + right) / 2, (bottom + 2 * top) / 3
 
     def get_portrait(self, user_id, group_id):
         # TODO: Figure out a way to not get entire list of members to find one
