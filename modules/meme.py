@@ -16,9 +16,7 @@ class Meme(Module):
     LARGE_FONT_SIZE = 50
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
-    TEMPLATE_NAME = ""
     def __init__(self):
-        self.template = Image.open("resources/memes/%s" % self.TEMPLATE_NAME)
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
         self.small_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.SMALL_FONT_SIZE)
         self.large_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.LARGE_FONT_SIZE)
@@ -29,9 +27,7 @@ class Meme(Module):
         super().__init__()
 
     def response(self, query):
-        image = self.template.copy()
         captions = query.split("\n")
-        draw = ImageDraw.Draw(image)
 
         template = captions.pop(0)
         if self.templates.get(template) is None:
@@ -39,8 +35,9 @@ class Meme(Module):
         mark_function, captions_needed = self.templates[template]
         if len(captions) < captions_needed:
             return "Not enough captions provided (remember to separate with newlines)."
-
-        # TODO: WARN ABOUT NOT ENOUGH ARGS
+        image = Image.open(f"resources/memes/{template}.jpg")
+        draw = ImageDraw.Draw(image)
+        mark_function(draw, captions)
         """
         image.show()
         return
