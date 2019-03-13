@@ -44,7 +44,7 @@ class UWU(Module):
             # Get sent image
             source_url = image_attachments[0]["url"]
         if len(mention_attachments) > 0:
-            source_url = self.get_portrait(message["user_id"], message["group_id"])
+            source_url = self.get_portrait(mention_attachments[0]["user_ids"][0], message["group_id"])
         else:
             # If no image was sent, use sender's avatar
             source_url = message["avatar_url"]
