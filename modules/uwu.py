@@ -63,6 +63,20 @@ class UWU(Module):
 
             pil_image.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
             pil_image.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
+
+            # Center blush between eyes
+            blush_x = (left_tear_x + right_tear_x) / 2
+            # Put blush halfway down tears
+            blush_y = (left_tear_y + right_tear_y) / 2 + tear_height / 2
+
+            # Scale blush mask
+            blush_natural_width, blush_natural_height = blush.size
+            blush_height = int(tear_height * 0.7)
+            blush_width = int(blueh_height * blush_natural_width / blush_natural_height)
+            scaled_blush = blush.resuze((blush_width, blush_height), Image.ANTIALIAS)
+
+            pil_image.paste(scaled_blush, (int(blush_x - blush_width / 2), int(blush_tear_y)), scaled_blush)
+
         #pil_image.save("out.png")
         pil_image.show()
         return
@@ -85,8 +99,6 @@ class UWU(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
-avatar = "https://i.groupme.com/1296x972.jpeg.91ab436782064b278a647dd7cf924c81"
 avatar = "https://i.groupme.com/1023x1024.jpeg.1d34cf6dbad346b2b25bd8fbb2e71a97"
 avatar = "https://i.groupme.com/750x704.jpeg.150575509d5e4449b9904faf3bb2ad10"
-avatar = "https://i.groupme.com/640x641.jpeg.51280991bee246cbb933dd1fe4a8d28c"
 UWU().response("", {"avatar_url": avatar, "attachments": []})
