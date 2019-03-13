@@ -9,7 +9,7 @@ class Kelbo(Module):
         """
         :return: random string of underscores separated by spaces
         """
-        return " ".join(["_" * random.randint(1, 5) for _ in range(random.randint(2, 10)])
+        return " ".join(["_" * random.randint(1, 5) for _ in range(random.randint(2, 10))])
 
     def kelboify(self, text):
         """
