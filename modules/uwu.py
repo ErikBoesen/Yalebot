@@ -28,7 +28,7 @@ class UWU(Module):
                 left = x
             if right is None or right < x:
                 right = x
-        return (left + right) / 2, top - 1 * (bottom - top)
+        return (left + right) / 2, top - 0.5 * (bottom - top)
 
     def response(self, query, message):
         image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
@@ -82,4 +82,4 @@ class UWU(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
-UWU().response("", {"avatar_url": "https://i.groupme.com/1023x1024.jpeg.1d34cf6dbad346b2b25bd8fbb2e71a97.large", "attachments": []})
+UWU().response("", {"avatar_url": "https://i.groupme.com/1296x972.jpeg.91ab436782064b278a647dd7cf924c81", "attachments": []})
