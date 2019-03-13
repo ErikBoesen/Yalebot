@@ -78,9 +78,10 @@ class UWU(Module):
             pil_image.paste(scaled_blush, (int(blush_x - blush_width / 2), int(blush_y)), scaled_blush)
 
         #pil_image.save("out.png")
+        """
         pil_image.show()
         return
-
+        """
         output = BytesIO()
         pil_image.save(output, format="JPEG")
         return "", self.upload_image(output.getvalue())
@@ -99,6 +100,8 @@ class UWU(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
+"""
 avatar = "https://i.groupme.com/1023x1024.jpeg.1d34cf6dbad346b2b25bd8fbb2e71a97"
 avatar = "https://i.groupme.com/750x704.jpeg.150575509d5e4449b9904faf3bb2ad10"
 UWU().response("", {"avatar_url": avatar, "attachments": []})
+"""
