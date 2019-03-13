@@ -26,13 +26,13 @@ simple_responses = {
     "shrug": "¯\_(ツ)_/¯",
     "snort": "😤",
     "oh": "https://i.groupme.com/766x750.jpeg.9209520c57e848369444ca498e31f90a.large",
+    "bulldog": "Bulldog!  Bulldog!\nBow, wow, wow\nEli Yale\nBulldog!  Bulldog!\nBow, wow, wow\nOur team can never fail\n\nWhen the sons of Eli\nBreak through the line\nThat is the sign we hail\nBulldog!  Bulldog!\nBow, wow, wow\nEli Yale!",
 }
 commands = {
     "zalgo": modules.Zalgo(),
     "flip": modules.Flip(),
     "countdown": modules.Countdown(),
     "verify": modules.Verify(),
-    "bulldog": modules.Bulldog(),
     "groups": modules.Groups(),
     "chat": modules.Chat(),
     "weather": modules.Weather(),
