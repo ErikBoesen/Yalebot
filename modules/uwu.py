@@ -8,12 +8,13 @@ from io import BytesIO
 from skimage import io
 import math
 
+token = os.environ["GROUPME_ACCESS_TOKEN"]
+
 
 class UWU(Module):
     DESCRIPTION = "Abuse photographs of your compatriots"
 
     def tear_position(self, element):
-        # TODO: I feel like I shouldn't have to do this logic myself, but it does work ok.
         top = None
         bottom = None
         left = None
@@ -29,11 +30,21 @@ class UWU(Module):
                 right = x
         return (left + right) / 2, top - 0.5 * (bottom - top)
 
+    def get_portrait(self, user_id, group_id):
+        # TODO: Figure out a way to not get entire list of members to find one
+        members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={token}").json()["response"]["members"]
+        for member in members:
+            if member["user_id"] == user_id:
+                return member["imge_url"]
+
     def response(self, query, message):
         image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
+        mention_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "mentions"]
         if len(image_attachments) > 0:
             # Get sent image
             source_url = image_attachments[0]["url"]
+        if len(mention_attachments) > 0:
+            source_url = self.get_portrait(message["user_id"], message["group_id"])
         else:
             # If no image was sent, use sender's avatar
             source_url = message["avatar_url"]
