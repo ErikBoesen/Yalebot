@@ -77,7 +77,6 @@ class UWU(Module):
             pil_image.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
             pil_image.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
 
-        #pil_image.save("out.png")
         """
         pil_image.show()
         return
