@@ -58,6 +58,7 @@ commands = {
     "quote": modules.Quote(),
     "dog": modules.Dog(),
     "funfact": modules.FunFact(),
+    "kelbo": modules.Kelbo(),
 }
 meme_commands = {
     "drake": modules.Drake(),
