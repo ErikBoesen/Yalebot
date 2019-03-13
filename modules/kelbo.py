@@ -15,12 +15,15 @@ class Kelbo(Module):
             kelboed_message += " "
         return kelboed_message
 
-    # returns a kelboified version of a text arg
     def kelboify(self, text):
+        """
+        :param text: text to convert to underscores
+        :return: converted text
+        """
         return "".join([" " if char == " " else "_" for char in text])
 
     def response(self, query, message):
         if len(query) > 0:
-            return self.random()
-        else:
             return self.kelboify(query)
+        else:
+            return self.random()
