@@ -16,7 +16,7 @@ class Verify(Module):
             self.admits = json.load(f)
 
     def get_members(self, group_id):
-        response = requests.get("https://api.groupme.com/v3/groups/%s?token=%s" % (group_id, self.ACCESS_TOKEN)).json()
+        response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()
         members = response["response"]["members"]
         return [member["name"] for member in members]
 
