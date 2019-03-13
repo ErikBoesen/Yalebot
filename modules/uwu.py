@@ -16,16 +16,19 @@ class UWU(Module):
     def tear_position(self, element):
         # TODO: I feel like I shouldn't have to do this logic myself, but it does work ok.
         top = None
+        bottom = None
         left = None
         right = None
         for x, y in element:
+            if bottom is None or bottom < y:
+                bottom = y
             if top is None or top > y:
                 top = y
             if left is None or left > x:
                 left = x
             if right is None or right < x:
                 right = x
-        return (left + right) / 2, top
+        return (left + right) / 2, top - 1 * (bottom - top)
 
     def response(self, query, message):
         image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
