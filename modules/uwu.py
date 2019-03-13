@@ -6,8 +6,8 @@ import os
 from io import BytesIO
 # TODO: skimage is so heavy for just using it for this...
 from skimage import io
-
 import math
+
 
 class UWU(Module):
     DESCRIPTION = "Abuse photographs of your compatriots"
