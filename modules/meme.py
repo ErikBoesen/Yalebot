@@ -15,6 +15,11 @@ class Meme(Module):
     LARGE_FONT_SIZE = 50
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
+
+    font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
+    small_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.SMALL_FONT_SIZE)
+    large_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.LARGE_FONT_SIZE)
+
     def __init__(self):
         self.templates = {
             "drake": (self.mark_drake, 2),
