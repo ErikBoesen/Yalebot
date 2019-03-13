@@ -14,6 +14,10 @@ class Meme(Module):
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     TEMPLATE_NAME = ""
+    memes = {
+        "drake": (self.mark_drake, 2),
+        "yaledrake": (self.mark_drake, 2),
+    }
     def __init__(self):
         self.template = Image.open("resources/memes/%s" % self.TEMPLATE_NAME)
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
@@ -36,12 +40,6 @@ class Meme(Module):
         image_url = self.upload_image(output.getvalue())
         return ("", image_url)
 
-    def mark_image(self, draw: ImageDraw, captions):
-        """
-        Should be overwritten in subclass.
-        """
-        raise NotImplementedError
-
     def upload_image(self, data) -> str:
         """
         Send image to GroupMe Image API.
@@ -56,10 +54,7 @@ class Meme(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
-class Drake(Meme):
-    TEMPLATE_NAME = "drake.jpg"
-    ARGC = 2
-    def mark_image(self, draw: ImageDraw, captions):
+    def mark_drake(self, draw: ImageDraw, captions):
         LEFT_BORDER = 350
         RIGHT_BORDER = 620
 
@@ -69,8 +64,9 @@ class Drake(Meme):
             for line_index, line in enumerate(lines):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
 
-class YaleDrake(Drake):
-    TEMPLATE_NAME = "yaledrake.jpg"
+    def mark_yaledrake(self, draw: ImageDraw, captions):
+        # TODO: Is there a better way to do this?
+        self.mark_drake(draw, captions)
 
 class Juice(Meme):
     TEMPLATE_NAME = "juice.jpg"
