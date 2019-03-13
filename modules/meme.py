@@ -28,6 +28,7 @@ class Meme(Module):
             "catch": (self.mark_catch, 1),
             "kirby": (self.mark_kirby, 1),
         }
+        self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
         super().__init__()
 
     def response(self, query, message):
