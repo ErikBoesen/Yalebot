@@ -6,15 +6,14 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Control Yalebot directly")
 parser.add_argument("verb")
+parser.add_argument("--token", default=os.environ["GROUPME_ACCESS_TOKEN"])
 args = parser.parse_args()
-
-token = os.environ["GROUPME_ACCESS_TOKEN"]
 
 def read(prop, default):
     return input(f"{prop} [{default}]: ") or default
 
 if args.verb == "create_bot":
-    groups = requests.get(f"https://api.groupme.com/v3/groups?token={token}").json()["response"]
+    groups = requests.get(f"https://api.groupme.com/v3/groups?token={args.token}").json()["response"]
     group_name = pick([group["name"] for group in groups])[0]
     # Knowing name chosen, get group id
     for candidate in groups:
@@ -30,7 +29,7 @@ if args.verb == "create_bot":
         "callback_url": read("callback url", "https://yalebot.herokuapp.com/"),
         "dm_notification": false,
     }
-    result = requests.post(f"https://api.groupme.com/v3/bots?token={token}",
+    result = requests.post(f"https://api.groupme.com/v3/bots?token={args.token}",
                            json={"bot": bot}).json()["response"]["bot"]
 
     with open("groups.json", "r+") as f:
@@ -51,7 +50,7 @@ elif args.verb == "destroy_bot":
             group_id = candidate
             break
     print(f"Leaving group {group_id}/{group_name}.")
-    request = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={token}", data={"bot_id": groups[group_id]["bot_id"]})
+    request = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={args.token}", data={"bot_id": groups[group_id]["bot_id"]})
     if request.ok:
         print("Success.")
         with open("groups.json", "w") as f:
