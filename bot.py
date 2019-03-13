@@ -53,7 +53,7 @@ commands = {
     "amber": modules.Amber(),
     "uwu": modules.UWU(),
     "pwease": modules.PWEASE(),
-	"enquote": modules.ENQUOTE(),
+    "enquote": modules.ENQUOTE(),
     "conversationstarter": modules.ConversationStarter(),
     "quote": modules.Quote(),
     "dog": modules.Dog(),
