@@ -5,8 +5,10 @@ class Kelbo(Module):
     DESCRIPTION = '____ __ _____'
     ARGC = 0
 
-    # returns a random string of ___ __ _ ____
     def random(self):
+        """
+        :return: random string of underscores separated by spaces
+        """
         kelboed_message = ""
         for x in range(0, random.randint(2, 10)):
             kelboed_message += "_" * random.randint(1, 5)
