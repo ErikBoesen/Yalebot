@@ -8,8 +8,6 @@ from io import BytesIO
 from skimage import io
 import math
 
-token = os.environ["GROUPME_ACCESS_TOKEN"]
-
 
 class UWU(Module):
     DESCRIPTION = "Abuse photographs of your compatriots"
@@ -32,7 +30,7 @@ class UWU(Module):
 
     def get_portrait(self, user_id, group_id):
         # TODO: Figure out a way to not get entire list of members to find one
-        members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={token}").json()["response"]["members"]
+        members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]["members"]
         for member in members:
             if member["user_id"] == user_id:
                 return member["image_url"]
