@@ -7,6 +7,7 @@ import argparse
 parser = argparse.ArgumentParser(description="Control Yalebot directly")
 parser.add_argument("verb")
 parser.add_argument("--token", default=os.environ["GROUPME_ACCESS_TOKEN"])
+parser.add_argument("--groups-file", default="groups.json")
 args = parser.parse_args()
 
 def read(prop, default):
@@ -32,16 +33,15 @@ if args.verb == "create_bot":
     result = requests.post(f"https://api.groupme.com/v3/bots?token={args.token}",
                            json={"bot": bot}).json()["response"]["bot"]
 
-    with open("groups.json", "r+") as f:
+    with open(args.groups_file, "r+") as f:
         groups = json.load(f)
         groups[result["group_id"]] = {
             "name": bot["name"],
             "bot_id": result["bot_id"],
         }
         json.dump(groups, f)
-
 elif args.verb == "destroy_bot":
-    with open("groups.json", "r") as f:
+    with open(args.groups_file, "r") as f:
         groups = json.load(f)
     group_name = pick([groups[group_id]["name"] for group_id in groups])[0]
     # Knowing name chosen, get group ID
@@ -53,14 +53,14 @@ elif args.verb == "destroy_bot":
     request = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={args.token}", data={"bot_id": groups[group_id]["bot_id"]})
     if request.ok:
         print("Success.")
-        with open("groups.json", "w") as f:
+        with open(args.groups_file, "w") as f:
             del groups[group_id]
             json.dump(groups, f)
     else:
         print("Failure: ", end="")
         print(request.json())
 elif args.verb == "send":
-    with open("groups.json", "r") as f:
+    with open(args.groups_file, "r") as f:
         groups = json.load(f)
     group_name = pick([groups[group_id]["name"] for group_id in groups])[0]
     # Knowing name chosen, get group ID
