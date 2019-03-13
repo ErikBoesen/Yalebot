@@ -7,6 +7,10 @@ from io import BytesIO
 # TODO: skimage is so heavy for just using it for this...
 from skimage import io
 
+import math
+def distance(p0, p1):
+    return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
+
 class UWU(Module):
     DESCRIPTION = "Abuse photographs of your compatriots"
     def tear_position(self, element):
@@ -15,7 +19,7 @@ class UWU(Module):
         left = None
         right = None
         for x, y in element:
-            if top is None or top < y:
+            if top is None or top > y:
                 top = y
             if left is None or left > x:
                 left = x
@@ -34,26 +38,27 @@ class UWU(Module):
         print("Image source URL: " + source_url)
 
         uwu = Image.open("resources/uwu/uwu.png")
-        eye = Image.open("resources/uwu/eye.png")
+        tear = Image.open("resources/uwu/eye.png")
         image = io.imread(source_url)[:,:,:3]
         pil_image = Image.fromarray(image)
         #faces = face_recognition.face_locations(image)
         faces = face_recognition.face_landmarks(image)
-        print(faces);return
         if len(faces) == 0:
             return "No faces found in image."
         for face in faces:
-            top, right, bottom, left = face
+            left_tear_x, left_tear_y = self.tear_position(face["left_eye"])
+            right_tear_x, right_tear_y = self.tear_position(face["right_eye"])
 
-            # Scale uwu mask
-            eye_natural_width, eye_natural_height = eye.size
-            eye_width = int((right - left) * 0.7)
-            eye_height = int(eye_width * eye_natural_height / eye_natural_width)
-            scaled_eye = eye.resize((eye_width, eye_height), Image.ANTIALIAS)
+            # Scale tear mask
+            tear_natural_width, tear_natural_height = tear.size
+            tear_width = int(distance((left_tear_x, left_tear_y), (right_tear_x, right_tear_y)) * 0.4)
+            tear_height = int(tear_width * tear_natural_height / tear_natural_width)
+            scaled_tear = tear.resize((tear_width, tear_height), Image.ANTIALIAS)
 
-            pil_image.paste(scaled_eye, (left + int(0.15 *1.0/0.7* eye_width), top + (bottom - top) // 4), scaled_eye)
+            pil_image.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
+            pil_image.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
         #pil_image.save("out.png")
-        pil_image.imshow()
+        pil_image.show()
         return
 
         output = BytesIO()
