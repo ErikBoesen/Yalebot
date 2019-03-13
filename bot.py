@@ -174,8 +174,7 @@ def reply(message, group_id):
     }
     # TODO: This is less than ideal.
     if isinstance(message, tuple):
-        text = message[0]
-        image = message[1]
+        text, image = message
     else:
         text = message
         image = None
