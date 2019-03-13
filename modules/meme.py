@@ -23,6 +23,10 @@ class Meme(Module):
         self.templates = {
             "drake": (self.mark_drake, 2),
             "yaledrake": (self.mark_drake, 2),
+            "juice": (self.mark_juice, 1),
+            "changemymind": (self.mark_changemymind, 1),
+            "catch": (self.mark_catch, 1),
+            "kirby": (self.mark_kirby, 1),
         }
         super().__init__()
 
@@ -75,10 +79,7 @@ class Meme(Module):
         # TODO: Is there a better way to do this?
         self.mark_drake(draw, captions)
 
-class Juice(Meme):
-    TEMPLATE_NAME = "juice.jpg"
-    ARGC = 1
-    def mark_image(self, draw: ImageDraw, captions):
+    def mark_juice(self, draw: ImageDraw, captions):
         HEAD_X, HEAD_Y = (327, 145)
         JUG_X, JUG_Y = (373, 440)
 
@@ -91,10 +92,7 @@ class Juice(Meme):
             line_width, line_height = draw.textsize(line, font=self.small_font)
             draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 20), line, font=self.small_font, fill=self.BLACK)
 
-class ChangeMyMind(Meme):
-    TEMPLATE_NAME = "changemymind.jpg"
-    ARGC = 1
-    def mark_image(self, draw: ImageDraw, captions):
+    def mark_changemymind(self, draw: ImageDraw, captions):
         SIGN_X, SIGN_Y = (579, 460)
         """
         ROTATION = -20.6
@@ -114,10 +112,7 @@ class ChangeMyMind(Meme):
             line_width, line_height = draw.textsize(line, font=self.large_font)
             draw.text((SIGN_X-line_width/2, SIGN_Y-line_height/2 + line_index * 55), line, font=self.large_font, fill=self.BLACK)
 
-class Catch(Meme):
-    TEMPLATE_NAME = "catch.jpg"
-    ARGC = 1
-    def mark_image(self, draw: ImageDraw, captions):
+    def mark_catch(self, draw: ImageDraw, captions):
         BALL_X, BALL_Y = (250, 90)
         lines = wrap(captions[0], 20)
         for line_index, line in enumerate(lines):
@@ -130,16 +125,8 @@ class Catch(Meme):
             line_width, line_height = draw.textsize(line, font=self.font)
             draw.text((ARMS_X-line_width/2, ARMS_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
 
-class Kirby(Meme):
-    TEMPLATE_NAME = "kirby.jpg"
-    ARGC = 1
-    def mark_image(self, draw: ImageDraw, captions):
+    def mark_kirby(self, draw: ImageDraw, captions):
         BOARD_X, BOARD_Y = (80, 70)
         lines = wrap(captions[0], 20)
         for line_index, line in enumerate(lines):
             draw.text((BOARD_X, BOARD_Y + line_index * 25), line, font=self.small_font, fill=self.BLACK)
-
-"""
-if __name__ == "__main__":
-    Kirby().response("im baby")
-"""
