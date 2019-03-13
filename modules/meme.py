@@ -34,7 +34,7 @@ class Meme(Module):
     def response(self, query, message):
         captions = query.split("\n")
 
-        template = captions.pop(0)
+        template = captions.pop(0).strip()
         if self.templates.get(template) is None:
             return f"No template found called {template}."
         mark_function, captions_needed = self.templates[template]
