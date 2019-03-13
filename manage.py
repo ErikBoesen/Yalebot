@@ -31,9 +31,8 @@ def pick_joined_group(groups=None) -> str:
     for candidate in groups:
         if groups[candidate]["name"] == group_name:
             group_id = candidate
-            break
-    print(f"Selected group {group_id}/{group_name}.")
-    return group_id
+            print(f"Selected group {group_id}/{group_name}.")
+            return group_id
 
 def pick_user_group() -> str:
     """
@@ -45,9 +44,8 @@ def pick_user_group() -> str:
     for candidate in groups:
         if candidate["name"] == group_name:
             group_id = candidate["group_id"]
-            break
-    print(f"Selected group {group_id}/{group_name}.")
-    return group_id
+            print(f"Selected group {group_id}/{group_name}.")
+            return group_id
 
 
 if args.verb == "create_bot":
@@ -85,7 +83,7 @@ elif args.verb == "send":
     groups = get_joined_groups()
     group_id = pick_joined_group(groups)
     while True:
-        text = input("Message: ")
+        text = input("> ")
         if not text:
             break
         requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
