@@ -11,6 +11,7 @@ class Groups(Module):
         "Baylor University": "42341652/aTexzNBA",
         "Virginia Tech": "46663109/rzmWS4",
         "University of Pennsylvania": "46633207/jo1Mk4wv",
+        "Cornell University": "46579394/HJFvEV",
     }
     def response(self, query, message):
         return '\n'.join(["%s -> https://groupme.com/join_group/%s" % (name, self.links[name]) for name in self.links])
