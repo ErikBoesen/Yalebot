@@ -5,7 +5,7 @@ from pick import pick
 import argparse
 
 parser = argparse.ArgumentParser(description="Control Yalebot directly")
-parser.add_argument("verb")
+parser.add_argument("verb", choices=("create_bot", "destroy_bot", "send"))
 parser.add_argument("--token", default=os.environ["GROUPME_ACCESS_TOKEN"])
 parser.add_argument("--groups-file", default="groups.json")
 args = parser.parse_args()
