@@ -45,12 +45,12 @@ class Verify(Module):
 
     def check_user(self, name: str):
         """
-        Get a LONG string-formatted report on whether a user is verified.
+        Get a LONG report on whether a user is verified.
         """
         name = name.strip()
         if name.lower() == "yalebot":
             return "Y'all think you're smart, don't you?"
         verified = self.is_admit(name)
         icon = self.emojus(verified)
-        status = "is" if verified else "is NOT"
-        return f"{icon} {name} {status} a verified admit according to the Yale 2023 Admits website."
+        status = "is" if verified else "isn't"
+        return f"{icon} {name} {status} listed on the Yale 2023 Admits website."
