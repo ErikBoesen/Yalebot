@@ -82,4 +82,8 @@ class UWU(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
-UWU().response("", {"avatar_url": "https://i.groupme.com/1296x972.jpeg.91ab436782064b278a647dd7cf924c81", "attachments": []})
+avatar = "https://i.groupme.com/1296x972.jpeg.91ab436782064b278a647dd7cf924c81"
+avatar = "https://i.groupme.com/1023x1024.jpeg.1d34cf6dbad346b2b25bd8fbb2e71a97"
+avatar = "https://i.groupme.com/750x704.jpeg.150575509d5e4449b9904faf3bb2ad10"
+avatar = "https://i.groupme.com/640x641.jpeg.51280991bee246cbb933dd1fe4a8d28c"
+UWU().response("", {"avatar_url": avatar, "attachments": []})
