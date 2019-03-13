@@ -31,7 +31,7 @@ commands = {
     "zalgo": modules.Zalgo(),
     "flip": modules.Flip(),
     "countdown": modules.Countdown(),
-    "vet": modules.Vet(),
+    "verify": modules.Verify(),
     "bulldog": modules.Bulldog(),
     "groups": modules.Groups(),
     "chat": modules.Chat(),
@@ -172,7 +172,6 @@ def reply(message, group_id):
     data = {
         "bot_id": GROUPS[group_id]["bot_id"],
     }
-    # TODO: This is less than ideal.
     if isinstance(message, tuple):
         text, image = message
     else:

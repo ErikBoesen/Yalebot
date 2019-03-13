@@ -6,11 +6,11 @@ import os
 
 token = os.environ["GROUPME_ACCESS_TOKEN"]
 
-class Vet(Module):
+class Verify(Module):
     DESCRIPTION = "Check if users are actually Yale admits"
     ARGC = 0
-    POSITIVE_EMOJI = "😁"
-    NEGATIVE_EMOJI = "🌧"
+    POSITIVE_EMOJI = "✅"
+    NEGATIVE_EMOJI = "❓"
     def __init__(self):
         super().__init__()
         with open("resources/admit_names.json") as f:
