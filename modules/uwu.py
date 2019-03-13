@@ -12,9 +12,6 @@ import math
 class UWU(Module):
     DESCRIPTION = "Abuse photographs of your compatriots"
 
-    def distance(p0, p1):
-        return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
-
     def tear_position(self, element):
         # TODO: I feel like I shouldn't have to do this logic myself, but it does work ok.
         top = None
@@ -56,7 +53,7 @@ class UWU(Module):
 
             # Scale tear mask
             tear_natural_width, tear_natural_height = tear.size
-            tear_width = int(self.distance((left_tear_x, left_tear_y), (right_tear_x, right_tear_y)) * 0.4)
+            tear_width = int(math.sqrt((right_tear_x - left_tear_x)**2 + (right_tear_y - left_tear_y)**2) * 0.4)
             tear_height = int(tear_width * tear_natural_height / tear_natural_width)
             scaled_tear = tear.resize((tear_width, tear_height), Image.ANTIALIAS)
 
