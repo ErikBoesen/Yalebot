@@ -151,8 +151,9 @@ def webhook():
                 reply(system_responses[option].response(), group_id)
         """
         if system_responses["welcome"].RE.match(text):
-            check_name = system_responses["welcome"].get_name(text)
-            reply(commands["vet"].check_user(check_name), group_id)
+            check_names = system_responses["welcome"].get_names(text)
+            for check_name in check_names:
+                reply(commands["vet"].check_user(check_name), group_id)
         """
     return "ok", 200
 
