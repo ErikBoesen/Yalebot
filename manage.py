@@ -33,8 +33,10 @@ def pick_joined_group() -> str:
             break
     print(f"Selected group {group_id}/{group_name}.")
 
-
-if args.verb == "create_bot":
+def pick_user_group() -> str:
+    """
+    :return:
+    """
     groups = get_user_groups()
     group_name = pick([group["name"] for group in groups])[0]
     # Knowing name chosen, get group id
@@ -43,6 +45,10 @@ if args.verb == "create_bot":
             group_id = candidate["group_id"]
             break
     print(f"Selected group {group_id}/{group_name}.")
+
+
+if args.verb == "create_bot":
+    group_id = pick_user_group()
 
     bot = {
         "name": read("name", "yalebot"),
@@ -62,14 +68,7 @@ if args.verb == "create_bot":
     with open(args.groups_file, "r+") as f:
         json.dump(groups, f)
 elif args.verb == "destroy_bot":
-    groups = get_joined_groups()
-    group_name = pick([groups[group_id]["name"] for group_id in groups])[0]
-    # Knowing name chosen, get group ID
-    for candidate in groups:
-        if groups[candidate]["name"] == group_name:
-            group_id = candidate
-            break
-    print(f"Leaving group {group_id}/{group_name}.")
+    group_id = pick_joined_group()
     request = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={args.token}", data={"bot_id": groups[group_id]["bot_id"]})
     if request.ok:
         print("Success.")
