@@ -20,11 +20,12 @@ def get_joined_groups():
     with open(args.groups_file, "r") as f:
         return json.load(f)
 
-def pick_joined_group() -> str:
+def pick_joined_group(groups=None) -> str:
     """
     :return: ID of group chosen
     """
-    groups = get_joined_groups()
+    if groups is None:
+        groups = get_joined_groups()
     group_name = pick([groups[group_id]["name"] for group_id in groups])[0]
     # Knowing name chosen, get group ID
     for candidate in groups:
@@ -32,6 +33,7 @@ def pick_joined_group() -> str:
             group_id = candidate
             break
     print(f"Selected group {group_id}/{group_name}.")
+    return group_id
 
 def pick_user_group() -> str:
     """
@@ -45,6 +47,7 @@ def pick_user_group() -> str:
             group_id = candidate["group_id"]
             break
     print(f"Selected group {group_id}/{group_name}.")
+    return group_id
 
 
 if args.verb == "create_bot":
@@ -79,6 +82,10 @@ elif args.verb == "destroy_bot":
         print("Failure: ", end="")
         print(request.json())
 elif args.verb == "send":
-    group_id = pick_joined_group()
-    text = input("Message: ")
-    requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
+    groups = get_joined_groups()
+    group_id = pick_joined_group(groups)
+    while True:
+        text = input("Message: ")
+        if not text:
+            break
+        requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
