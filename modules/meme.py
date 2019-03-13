@@ -8,6 +8,9 @@ import io
 
 #class Meme:
 class Meme(Module):
+    # TODO: This only checks whether a template name was provided, without regard to captions.
+    ARGC = 1
+
     FONT_SIZE = 30
     SMALL_FONT_SIZE = 20
     LARGE_FONT_SIZE = 50
@@ -19,7 +22,7 @@ class Meme(Module):
         self.font = ImageFont.truetype("resources/Lato-Regular.ttf", self.FONT_SIZE)
         self.small_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.SMALL_FONT_SIZE)
         self.large_font = ImageFont.truetype("resources/Lato-Regular.ttf", self.LARGE_FONT_SIZE)
-        memes = {
+        self.templates = {
             "drake": (self.mark_drake, 2),
             "yaledrake": (self.mark_drake, 2),
         }
@@ -30,7 +33,14 @@ class Meme(Module):
         captions = query.split("\n")
         draw = ImageDraw.Draw(image)
 
-        self.mark_image(draw, captions)
+        template = captions.pop(0)
+        if self.templates.get(template) is None:
+            return f"No template found called {template}."
+        mark_function, captions_needed = self.templates[template]
+        if len(captions) < captions_needed:
+            return "Not enough captions provided (remember to separate with newlines)."
+
+        # TODO: WARN ABOUT NOT ENOUGH ARGS
         """
         image.show()
         return
