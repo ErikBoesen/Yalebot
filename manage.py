@@ -72,14 +72,15 @@ if args.verb == "create_bot":
         "name": bot["name"],
         "bot_id": result["bot_id"],
     }
-    store_groups(groups)
+    save_groups(groups)
 elif args.verb == "destroy_bot":
-    group_id = pick_joined_group()
+    groups = get_joined_groups()
+    group_id = pick_joined_group(groups)
     request = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={args.token}", data={"bot_id": groups[group_id]["bot_id"]})
     if request.ok:
         print("Success.")
         del groups[group_id]
-        store_groups(groups)
+        save_groups(groups)
     else:
         print("Failure: ", end="")
         print(request.json())
