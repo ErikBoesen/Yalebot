@@ -1,6 +1,5 @@
 from .base import Module
 import requests
-import re
 
 class FunFact(Module):
     DESCRIPTION = "Learn a fun fact"
@@ -13,7 +12,7 @@ class FunFact(Module):
     def response(self, query, message):
         if len(self.facts) == 0:
             self.fill_queue()
-        raw_text = self.facts.pop()
-        cleanr = re.compile('<.*?>')
-        clean_text = re.sub(cleanr, '', raw_text)
-        return clean_text
+        text = self.facts.pop()
+        text.replace('<em>','')
+        text.replace('</em>','')
+        return text
