@@ -12,4 +12,7 @@ class FunFact(Module):
     def response(self, query, message):
         if len(self.facts) == 0:
             self.fill_queue()
-        return self.facts.pop()
+        text = self.facts.pop()
+        text.replace('<em>','')
+        text.replace('</em>','')
+        return text

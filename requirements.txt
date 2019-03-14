@@ -5,6 +5,7 @@ upsidedown
 pillow
 GroupyAPI
 beautifulsoup4
+praw
 
 cmake
 face_recognition

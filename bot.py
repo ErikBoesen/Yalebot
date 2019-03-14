@@ -60,6 +60,7 @@ commands = {
     "quote": modules.Quote(),
     "dog": modules.Dog(),
     "funfact": modules.FunFact(),
+    "funny": modules.Funny(),
     "kelbo": modules.Kelbo(),
 }
 system_responses = {

@@ -29,4 +29,5 @@ from .conversationstarter import ConversationStarter
 from .quote import Quote
 from .dog import Dog
 from .funfact import FunFact
+from .funny import Funny
 from .kelbo import Kelbo
