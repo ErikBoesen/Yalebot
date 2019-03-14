@@ -5,7 +5,6 @@ import sys
 from pprint import pprint
 import os
 
-token = os.environ["GROUPME_ACCESS_TOKEN"]
 GROUP_ID = 46649296
 
 class Analytics(Module):
@@ -29,7 +28,7 @@ class Analytics(Module):
         return "%d messages processed."
 
     def get_group(self, group_id):
-        response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={token}")
+        response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}")
         data = response.json()
         return data["response"]
 

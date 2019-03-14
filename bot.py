@@ -19,20 +19,21 @@ simple_responses = {
     "sam": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
     "essays": "Submit your essays here, or read your classmates'! https://drive.google.com/open?id=1IUG1cNxmxBHhv1sSemi92fYO6y5lG6of",
     "spreadsheet": "https://docs.google.com/spreadsheets/d/10m_0glWVUncKCxERsNf6uOJhfeYU96mOK0KvgNURIBk/edit?fbclid=IwAR35OaPO6czQxZv26A6DEgEH-Qef0kCSe4nXxl8wcIfDml-BfLx4ksVtp6Y#gid=0",
-    "meetup": "https://i.groupme.com/750x1200.jpeg.b0ca5f6e660a4356be2925222e6f8246.large",
+    "meetup": ("", "https://i.groupme.com/750x1200.jpeg.b0ca5f6e660a4356be2925222e6f8246.large"),
     "quack": "quack",
     "test": "https://erikboesen.com/yalepuritytest",
     "dislike": "👎😬👎\n 🦵🦵",
     "shrug": "¯\_(ツ)_/¯",
     "snort": "😤",
-    "oh": "https://i.groupme.com/766x750.jpeg.9209520c57e848369444ca498e31f90a.large",
+    "oh": ("", "https://i.groupme.com/766x750.jpeg.9209520c57e848369444ca498e31f90a.large"),
+    "bulldog": "Bulldog!  Bulldog!\nBow, wow, wow\nEli Yale\nBulldog!  Bulldog!\nBow, wow, wow\nOur team can never fail\n\nWhen the sons of Eli\nBreak through the line\nThat is the sign we hail\nBulldog!  Bulldog!\nBow, wow, wow\nEli Yale!",
 }
+
 commands = {
     "zalgo": modules.Zalgo(),
     "flip": modules.Flip(),
     "countdown": modules.Countdown(),
-    "vet": modules.Vet(),
-    "bulldog": modules.Bulldog(),
+    "verify": modules.Verify(),
     "groups": modules.Groups(),
     "chat": modules.Chat(),
     "weather": modules.Weather(),
@@ -43,6 +44,7 @@ commands = {
     "youtube": modules.YouTube(),
     "pick": modules.Pick(),
     "chose": modules.Chose(),
+    "meme": modules.Meme(),
     "love": modules.Love(),
     "price": modules.Price(),
     "minion": modules.Minion(),
@@ -59,14 +61,7 @@ commands = {
     "dog": modules.Dog(),
     "funfact": modules.FunFact(),
     "funny": modules.Funny(),
-}
-meme_commands = {
-    "drake": modules.Drake(),
-    "ydrake": modules.YaleDrake(),
-    "juice": modules.Juice(),
-    "changemymind": modules.ChangeMyMind(),
-    "catch": modules.Catch(),
-    "kirby": modules.Kirby(),
+    "kelbo": modules.Kelbo(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
@@ -106,22 +101,13 @@ def webhook():
                     response = commands[command].response(query, message)
                     if response is not None:
                         reply(response, group_id)
-            elif command in meme_commands:
-                # TODO: This is clumsy logic. First of all it's done twice, first in the normal commands
-                # section, and then again here. Second, meme commands split the query into lines
-                # already; we're just doing it twice with this.
-                if len(list(filter(None, query.split("\n")))) < meme_commands[command].ARGC:
-                    reply("Not enough captions (make sure to separate with newlines).", group_id)
-                else:
-                    #reply("@" + message["name"], group_id, image=meme_commands[command].response(query))
-                    reply(meme_commands[command].response(query), group_id)
             elif command == "help":
                 if query:
                     query = query.strip(PREFIX)
                     if query in simple_responses:
                         reply(PREFIX + query + ": static command", group_id)
                     elif query in commands:
-                        reply(PREFIX + query + ": " + commands[query].DESCRIPTION + f". Requires {commands[query].ARGC} arguments.", group_id)
+                        reply(PREFIX + query + ": " + commands[query].DESCRIPTION + f". Requires {commands[query].ARGC} argument(s).", group_id)
                     elif query in meme_commands:
                         reply(PREFIX + query + ": meme command; provide captions separated by newlines.", group_id)
                     else:
@@ -131,17 +117,17 @@ def webhook():
                     help_string += "\nSimple commands: " + ", ".join([PREFIX + title for title in simple_responses])
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
-                    help_string += "\n\nMemes: " + ", ".join([PREFIX + title for title in meme_commands])
+                    help_string += "\n\nPlease note that all meme commands have now been merged into !meme. Run `!help meme` for more information."
                     reply(help_string, group_id)
+
+            # Correct people when they try to use old memes
+            elif command in ("drake", "ydrake", "juice", "kirby", "changemymind", "catch"):
+                reply("Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n...", group_id)
             else:
                 reply("Command not found. Use !help to view a list of commands.", group_id)
 
-        if text.startswith("@Yalebot "):
-            reply(commands["chat"].response(text.split(" ", 1)[1], message), group_id)
         if H_PATTERN.search(text) is not None:
             reply(forename + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"? Perhaps you meant to say \"" + H_PATTERN.sub("The H Place", text) + "\" instead?", group_id)
-        if "prize" in text.lower():
-            reply("stop", group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome, " + forename + "! :)", group_id)
         if "dad" in text.lower():
@@ -153,8 +139,9 @@ def webhook():
                 reply(system_responses[option].response(), group_id)
         """
         if system_responses["welcome"].RE.match(text):
-            check_name = system_responses["welcome"].get_name(text)
-            reply(commands["vet"].check_user(check_name), group_id)
+            check_names = system_responses["welcome"].get_names(text)
+            for check_name in check_names:
+                reply(commands["vet"].check_user(check_name), group_id)
         """
     return "ok", 200
 
@@ -173,10 +160,8 @@ def reply(message, group_id):
     data = {
         "bot_id": GROUPS[group_id]["bot_id"],
     }
-    # TODO: This is less than ideal.
     if isinstance(message, tuple):
-        text = message[0]
-        image = message[1]
+        text, image = message
     else:
         text = message
         image = None

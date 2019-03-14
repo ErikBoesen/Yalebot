@@ -12,11 +12,7 @@ import math
 class UWU(Module):
     DESCRIPTION = "Abuse photographs of your compatriots"
 
-    def distance(p0, p1):
-        return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
-
     def tear_position(self, element):
-        # TODO: I feel like I shouldn't have to do this logic myself, but it does work ok.
         top = None
         bottom = None
         left = None
@@ -30,13 +26,23 @@ class UWU(Module):
                 left = x
             if right is None or right < x:
                 right = x
-        return (left + right) / 2, top - 0.5 * (bottom - top)
+        return (left + right) / 2, top
+
+    def get_portrait(self, user_id, group_id):
+        # TODO: Figure out a way to not get entire list of members to find one
+        members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]["members"]
+        for member in members:
+            if member["user_id"] == user_id:
+                return member["image_url"]
 
     def response(self, query, message):
         image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
+        mention_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "mentions"]
         if len(image_attachments) > 0:
             # Get sent image
             source_url = image_attachments[0]["url"]
+        elif len(mention_attachments) > 0:
+            source_url = self.get_portrait(mention_attachments[0]["user_ids"][0], message["group_id"])
         else:
             # If no image was sent, use sender's avatar
             source_url = message["avatar_url"]
@@ -56,7 +62,7 @@ class UWU(Module):
 
             # Scale tear mask
             tear_natural_width, tear_natural_height = tear.size
-            tear_width = int(self.distance((left_tear_x, left_tear_y), (right_tear_x, right_tear_y)) * 0.4)
+            tear_width = int(math.sqrt((right_tear_x - left_tear_x)**2 + (right_tear_y - left_tear_y)**2) * 0.4)
             tear_height = int(tear_width * tear_natural_height / tear_natural_width)
             scaled_tear = tear.resize((tear_width, tear_height), Image.ANTIALIAS)
 

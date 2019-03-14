@@ -1,8 +1,7 @@
 from .countdown import Countdown
 from .zalgo import Zalgo
 from .flip import Flip
-from .vet import Vet
-from .bulldog import Bulldog
+from .verify import Verify
 from .groups import Groups
 from .chat import Chat
 from .weather import Weather
@@ -13,7 +12,7 @@ from .sad import Sad
 from .eightball import EightBall
 from .analytics import Analytics
 from .pick import Pick
-from .meme import Drake, YaleDrake, Juice, ChangeMyMind, Catch, Kirby
+from .meme import Meme
 from .system import Welcome
 from .youtube import YouTube
 from .price import Price
@@ -31,3 +30,4 @@ from .quote import Quote
 from .dog import Dog
 from .funfact import FunFact
 from .funny import Funny
+from .kelbo import Kelbo
