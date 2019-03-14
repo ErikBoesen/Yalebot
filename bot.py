@@ -120,7 +120,7 @@ def webhook():
                     reply(help_string, group_id)
 
             # Correct people when they try to use old memes
-            if command in ("drake", "ydrake", "juice", "kirby", "changemymind", "catch"):
+            elif command in ("drake", "ydrake", "juice", "kirby", "changemymind", "catch"):
                 reply("Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n...", group_id)
             else:
                 reply("Command not found. Use !help to view a list of commands.", group_id)
