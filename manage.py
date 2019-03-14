@@ -7,7 +7,7 @@ from pick import pick
 import argparse
 
 parser = argparse.ArgumentParser(description="Control Yalebot directly")
-parser.add_argument("verb", choices=("create_bot", "destroy_bot", "send"))
+parser.add_argument("verb", choices=("join", "leave", "send"))
 parser.add_argument("--token", default=os.environ.get("GROUPME_ACCESS_TOKEN"))
 parser.add_argument("--groups-file", default="groups.json")
 args = parser.parse_args()
@@ -54,7 +54,7 @@ def pick_user_group(groups=None) -> str:
             return group_id
 
 
-if args.verb == "create_bot":
+if args.verb == "join":
     group_id = pick_user_group()
 
     bot = {
@@ -73,7 +73,7 @@ if args.verb == "create_bot":
         "bot_id": result["bot_id"],
     }
     save_groups(groups)
-elif args.verb == "destroy_bot":
+elif args.verb == "leave":
     groups = get_joined_groups()
     group_id = pick_joined_group(groups)
     request = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={args.token}", data={"bot_id": groups[group_id]["bot_id"]})
