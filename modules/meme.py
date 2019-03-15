@@ -131,7 +131,7 @@ class Meme(Module):
                 if setting.get("center"):
                     line_width, line_height = draw.textsize(line, font=setting.get("font"))
                     x -= line_width / 2
-                    y -= line_width / 2
+                    #y -= line_width / 2
                 draw.text((x, y + line_index * (setting.get("font_size") + 5)),
                           line,
                           font=setting.get("font") or self.font,
