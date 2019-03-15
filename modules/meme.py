@@ -61,14 +61,12 @@ class Meme(Module):
             }, {
                 "x": 250,
                 "y": 90,
-                "
+                "wrap": 20,
+                "font": self.font,
+                "font_size": self.FONT_SIZE,
+                "color": self.WHITE,
+                "center": True,
             }),
-        BALL_X, BALL_Y = (250, 90)
-        lines = wrap(captions[1], 20)
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.font)
-            draw.text((BALL_X-line_width/2, BALL_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
-
             "kirby": (self.mark_kirby, 1),
         }
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
