@@ -79,7 +79,6 @@ class Meme(Module):
                 "font": self.small_font,
                 "font_size": self.SMALL_FONT_SIZE,
                 "color": self.BLACK,
-                "center": False,
             }),
         }
         self.templates["yaledrake"] = self.templates["drake"]
@@ -92,6 +91,8 @@ class Meme(Module):
         template = captions.pop(0).strip()
         if self.templates.get(template) is None:
             return f"No template found called {template}."
+        print("Captions provided: %d" % len(captions))
+        print("Captions necessary for this template: %d" % len(self.templates[template]))
         if len(captions) < len(self.templates[template]):
             return "Not enough captions provided (remember to separate with newlines)."
         image = Image.open(f"resources/memes/{template}.jpg")
