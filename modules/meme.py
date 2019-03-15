@@ -67,7 +67,15 @@ class Meme(Module):
                 "color": self.WHITE,
                 "center": True,
             }),
-            "kirby": (self.mark_kirby, 1),
+            "kirby": ({
+                "x": 80,
+                "y": 70,
+                "wrap": 20,
+                "font": self.small_font,
+                "font_size": self.SMALL_FONT_SIZE,
+                "color": self.BLACK,
+                "center": False,
+            }),
         }
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
         super().__init__()
@@ -135,8 +143,3 @@ class Meme(Module):
             for line_index, line in enumerate(lines):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
 
-    def mark_kirby(self, draw: ImageDraw, captions):
-        BOARD_X, BOARD_Y = (80, 70)
-        lines = wrap(captions[0], 20)
-        for line_index, line in enumerate(lines):
-            draw.text((BOARD_X, BOARD_Y + line_index * 25), line, font=self.small_font, fill=self.BLACK)
