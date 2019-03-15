@@ -4,6 +4,7 @@ from .flip import Flip
 from .verify import Verify
 from .groups import Groups
 from .about import About
+from .xkcd import XKCD
 from .chat import Chat
 from .weather import Weather
 from .kelly import Kelly
