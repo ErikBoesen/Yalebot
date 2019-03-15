@@ -22,51 +22,42 @@ class Meme(Module):
                 "x": 350, "y": 100,
                 "wrap": 20,
                 "font_size": self.FONT_SIZE,
-                "color": self.BLACK,
+                center: False,
             }, {
                 "x": 350, "y": 300,
                 "wrap": 20,
                 "font_size": self.FONT_SIZE,
-                "color": self.BLACK,
+                "center": False,
             },),
             "juice": ({
                 "x": 327, "y": 145,
                 "wrap": 20,
                 "font_size": self.FONT_SIZE,
-                "color": self.BLACK,
-                "center": True,
             }, {
                 "x": 373, "y": 440,
                 "wrap": 25,
                 "font_size": self.SMALL_FONT_SIZE,
-                "color": self.BLACK,
-                "center": True,
             },),
             "changemymind": ({
                 "x": 579, "y": 460,
                 "wrap": 19,
                 "font_size": self.LARGE_FONT_SIZE,
-                "color": self.BLACK,
-                "center": True,
             },),
             "catch": ({
                 "x": 550, "y": 275,
                 "wrap": 30,
                 "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
-                "center": True,
             }, {
                 "x": 250, "y": 90,
                 "wrap": 20,
                 "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
-                "center": True,
             },),
             "kirby": ({
                 "x": 80, "y": 70,
                 "wrap": 20,
                 "font_size": self.SMALL_FONT_SIZE,
-                "color": self.BLACK,
             },),
         }
         self.templates["yaledrake"] = self.templates["drake"]
@@ -114,7 +105,7 @@ class Meme(Module):
             for line_index, line in enumerate(lines):
                 x = setting.get("x")
                 y = setting.get("y")
-                if setting.get("center"):
+                if setting.get("center") or True:
                     line_width, line_height = draw.textsize(line, font=setting.get("font"))
                     x -= line_width / 2
                 draw.text((x, y + line_index * (setting.get("font_size") + 5)),
