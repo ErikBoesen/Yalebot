@@ -16,36 +16,28 @@ class Meme(Module):
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
 
-    font = ImageFont.truetype("resources/Lato-Regular.ttf", FONT_SIZE)
-    small_font = ImageFont.truetype("resources/Lato-Regular.ttf", SMALL_FONT_SIZE)
-    large_font = ImageFont.truetype("resources/Lato-Regular.ttf", LARGE_FONT_SIZE)
-
     def __init__(self):
         self.templates = {
             "drake": ({
                 "x": 350, "y": 100,
                 "wrap": 20,
-                "font": self.font,
                 "font_size": self.FONT_SIZE,
                 "color": self.BLACK,
             }, {
                 "x": 350, "y": 300,
                 "wrap": 20,
-                "font": self.font,
                 "font_size": self.FONT_SIZE,
                 "color": self.BLACK,
             },),
             "juice": ({
                 "x": 327, "y": 145,
                 "wrap": 20,
-                "font": self.font,
                 "font_size": self.FONT_SIZE,
                 "color": self.BLACK,
                 "center": True,
             }, {
                 "x": 373, "y": 440,
                 "wrap": 25,
-                "font": self.small_font,
                 "font_size": self.SMALL_FONT_SIZE,
                 "color": self.BLACK,
                 "center": True,
@@ -53,7 +45,6 @@ class Meme(Module):
             "changemymind": ({
                 "x": 579, "y": 460,
                 "wrap": 19,
-                "font": self.large_font,
                 "font_size": self.LARGE_FONT_SIZE,
                 "color": self.BLACK,
                 "center": True,
@@ -61,14 +52,12 @@ class Meme(Module):
             "catch": ({
                 "x": 550, "y": 275,
                 "wrap": 30,
-                "font": self.font,
                 "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
                 "center": True,
             }, {
                 "x": 250, "y": 90,
                 "wrap": 20,
-                "font": self.font,
                 "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
                 "center": True,
@@ -76,7 +65,6 @@ class Meme(Module):
             "kirby": ({
                 "x": 80, "y": 70,
                 "wrap": 20,
-                "font": self.small_font,
                 "font_size": self.SMALL_FONT_SIZE,
                 "color": self.BLACK,
             },),
@@ -91,8 +79,6 @@ class Meme(Module):
         template = captions.pop(0).strip()
         if self.templates.get(template) is None:
             return f"No template found called {template}."
-        print("Captions provided: %d" % len(captions))
-        print("Captions necessary for this template: %d" % len(self.templates[template]))
         if len(captions) < len(self.templates[template]):
             return "Not enough captions provided (remember to separate with newlines)."
         image = Image.open(f"resources/memes/{template}.jpg")
@@ -131,8 +117,7 @@ class Meme(Module):
                 if setting.get("center"):
                     line_width, line_height = draw.textsize(line, font=setting.get("font"))
                     x -= line_width / 2
-                    #y -= line_width / 2
                 draw.text((x, y + line_index * (setting.get("font_size") + 5)),
                           line,
-                          font=setting.get("font") or self.font,
+                          font=ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size")),
                           fill=setting.get("color") or self.BLACK)
