@@ -53,8 +53,10 @@ class Meme(Module):
         if self.templates.get(template) is None:
             return f"No template found called {template}."
         mark_function, captions_needed = self.templates[template]
-        if len(captions) < captions_needed:
+        """
+        if (isinstance(mark_function, dict) and len(captions) < len(self.templates[template])) or len(captions) < captions_needed:
             return "Not enough captions provided (remember to separate with newlines)."
+        """
         image = Image.open(f"resources/memes/{template}.jpg")
         draw = ImageDraw.Draw(image)
         # TODO: This is SUPER TEMPORARY AND BAD
