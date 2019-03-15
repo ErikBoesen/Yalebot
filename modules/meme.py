@@ -50,7 +50,25 @@ class Meme(Module):
                 "color": self.BLACK,
                 "center": True,
             }),
-            "catch": (self.mark_catch, 2),
+            "catch": ({
+                "x": 550,
+                "y": 275,
+                "wrap": 30,
+                "font": self.font,
+                "font_size": self.FONT_SIZE,
+                "color": self.WHITE,
+                "center": True,
+            }, {
+                "x": 250,
+                "y": 90,
+                "
+            }),
+        BALL_X, BALL_Y = (250, 90)
+        lines = wrap(captions[1], 20)
+        for line_index, line in enumerate(lines):
+            line_width, line_height = draw.textsize(line, font=self.font)
+            draw.text((BALL_X-line_width/2, BALL_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
+
             "kirby": (self.mark_kirby, 1),
         }
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
@@ -69,11 +87,7 @@ class Meme(Module):
         """
         image = Image.open(f"resources/memes/{template}.jpg")
         draw = ImageDraw.Draw(image)
-        # TODO: This is SUPER TEMPORARY AND BAD
-        if isinstance(mark_function, dict):
-            self.mark_image(draw, captions, self.templates[template])
-        else:
-            mark_function(draw, captions)
+        self.mark_image(draw, captions, self.templates[template])
         """
         image.show()
         return
@@ -122,20 +136,6 @@ class Meme(Module):
             lines = wrap(caption, 20)
             for line_index, line in enumerate(lines):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
-
-    def mark_catch(self, draw: ImageDraw, captions):
-
-        ARMS_X, ARMS_Y = (550, 275)
-        lines = wrap(captions[0])
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.font)
-            draw.text((ARMS_X-line_width/2, ARMS_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
-
-        BALL_X, BALL_Y = (250, 90)
-        lines = wrap(captions[1], 20)
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.font)
-            draw.text((BALL_X-line_width/2, BALL_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.WHITE)
 
     def mark_kirby(self, draw: ImageDraw, captions):
         BOARD_X, BOARD_Y = (80, 70)
