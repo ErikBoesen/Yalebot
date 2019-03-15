@@ -98,10 +98,11 @@ class Meme(Module):
             for line_index, line in enumerate(lines):
                 x = setting.get("x")
                 y = setting.get("y")
+                font = ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size") or self.FONT_SIZE)
                 if setting.get("center") or True:
-                    line_width, line_height = draw.textsize(line, font=setting.get("font"))
+                    line_width, line_height = draw.textsize(line, font=font)
                     x -= line_width / 2
                 draw.text((x, y + line_index * (setting.get("font_size") + 5)),
                           line,
-                          font=ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size")),
+                          font=font,
                           fill=setting.get("color") or self.BLACK)
