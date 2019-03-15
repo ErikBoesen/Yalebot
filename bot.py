@@ -164,6 +164,7 @@ def reply(message, group_id):
     if isinstance(message, list):
         for item in message:
             reply(item, group_id)
+        return
     data = {
         "bot_id": GROUPS[group_id]["bot_id"],
     }
