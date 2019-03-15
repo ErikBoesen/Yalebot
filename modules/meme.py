@@ -20,18 +20,15 @@ class Meme(Module):
         self.templates = {
             "drake": ({
                 "x": 350, "y": 100,
-                "wrap": 20,
                 "font_size": self.FONT_SIZE,
-                center: False,
+                "center": False,
             }, {
                 "x": 350, "y": 300,
-                "wrap": 20,
                 "font_size": self.FONT_SIZE,
                 "center": False,
             },),
             "juice": ({
                 "x": 327, "y": 145,
-                "wrap": 20,
                 "font_size": self.FONT_SIZE,
             }, {
                 "x": 373, "y": 440,
@@ -40,23 +37,19 @@ class Meme(Module):
             },),
             "changemymind": ({
                 "x": 579, "y": 460,
-                "wrap": 19,
                 "font_size": self.LARGE_FONT_SIZE,
             },),
             "catch": ({
                 "x": 550, "y": 275,
-                "wrap": 30,
                 "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
             }, {
                 "x": 250, "y": 90,
-                "wrap": 20,
                 "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
             },),
             "kirby": ({
                 "x": 80, "y": 70,
-                "wrap": 20,
                 "font_size": self.SMALL_FONT_SIZE,
             },),
         }
@@ -101,7 +94,7 @@ class Meme(Module):
     def mark_image(self, draw: ImageDraw, captions, settings):
         for setting in settings:
             caption = captions.pop(0)
-            lines = wrap(caption, setting.get("wrap"))
+            lines = wrap(caption, setting.get("wrap") or 20)
             for line_index, line in enumerate(lines):
                 x = setting.get("x")
                 y = setting.get("y")
