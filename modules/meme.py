@@ -92,8 +92,8 @@ class Meme(Module):
             caption = captions.pop(0)
             lines = wrap(caption, setting.get("wrap"))
             for line_index, line in enumerate(lines):
-                x = settings.get("x")
-                y = settings.get("y")
+                x = setting.get("x")
+                y = setting.get("y")
                 if setting.get("center"):
                     line_width, line_height = draw.textsize(line, font=setting.get("font"))
                     x -= line_width / 2
