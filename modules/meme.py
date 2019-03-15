@@ -34,7 +34,7 @@ class Meme(Module):
                 "font": self.font,
                 "font_size": self.FONT_SIZE,
                 "color": self.BLACK,
-            }),
+            },),
             "juice": ({
                 "x": 327, "y": 145,
                 "wrap": 20,
@@ -49,7 +49,7 @@ class Meme(Module):
                 "font_size": self.SMALL_FONT_SIZE,
                 "color": self.BLACK,
                 "center": True,
-            }),
+            },),
             "changemymind": ({
                 "x": 579, "y": 460,
                 "wrap": 19,
@@ -57,7 +57,7 @@ class Meme(Module):
                 "font_size": self.LARGE_FONT_SIZE,
                 "color": self.BLACK,
                 "center": True,
-            }),
+            },),
             "catch": ({
                 "x": 550, "y": 275,
                 "wrap": 30,
@@ -72,14 +72,14 @@ class Meme(Module):
                 "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
                 "center": True,
-            }),
+            },),
             "kirby": ({
                 "x": 80, "y": 70,
                 "wrap": 20,
                 "font": self.small_font,
                 "font_size": self.SMALL_FONT_SIZE,
                 "color": self.BLACK,
-            }),
+            },),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
