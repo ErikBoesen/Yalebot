@@ -31,6 +31,7 @@ class Meme(Module):
                 "font": self.font,
                 "font_size": self.FONT_SIZE,
                 "color": self.BLACK,
+                "center": True,
             }, {
                 "x": 373,
                 "y": 440,
@@ -38,6 +39,7 @@ class Meme(Module):
                 "font": self.small_font,
                 "font_size": self.SMALL_FONT_SIZE,
                 "color": self.BLACK,
+                "center": True,
             }),
             "changemymind": (self.mark_changemymind, 1),
             "catch": (self.mark_catch, 2),
