@@ -22,8 +22,21 @@ class Meme(Module):
 
     def __init__(self):
         self.templates = {
-            "drake": (self.mark_drake, 2),
-            "yaledrake": (self.mark_drake, 2),
+            "drake": ({
+                "x": 350,
+                "y": 100,
+                "wrap": 20,
+                "font": self.font,
+                "font_size": self.FONT_SIZE,
+                "color": self.BLACK,
+            }, {
+                "x": 350,
+                "y": 300,
+                "wrap": 20,
+                "font": self.font,
+                "font_size": self.FONT_SIZE,
+                "color": self.BLACK,
+            }),
             "juice": ({
                 "x": 327,
                 "y": 145,
@@ -77,6 +90,7 @@ class Meme(Module):
                 "center": False,
             }),
         }
+        self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
         super().__init__()
 
@@ -129,14 +143,3 @@ class Meme(Module):
                           line,
                           font=setting.get("font") or self.font,
                           fill=setting.get("color") or self.BLACK)
-
-    def mark_drake(self, draw: ImageDraw, captions):
-        LEFT_BORDER = 350
-        RIGHT_BORDER = 620
-
-        START_Y = 100
-        for caption_index, caption in enumerate(captions):
-            lines = wrap(caption, 20)
-            for line_index, line in enumerate(lines):
-                draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
-
