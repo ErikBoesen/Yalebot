@@ -17,19 +17,17 @@ class Meme(Module):
     WHITE = (255, 255, 255)
 
     def __init__(self):
+        super().__init__()
         self.templates = {
             "drake": ({
                 "x": 350, "y": 100,
-                "font_size": self.FONT_SIZE,
                 "center": False,
             }, {
                 "x": 350, "y": 300,
-                "font_size": self.FONT_SIZE,
                 "center": False,
             },),
             "juice": ({
                 "x": 327, "y": 145,
-                "font_size": self.FONT_SIZE,
             }, {
                 "x": 373, "y": 440,
                 "wrap": 25,
@@ -41,11 +39,9 @@ class Meme(Module):
             },),
             "catch": ({
                 "x": 550, "y": 275,
-                "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
             }, {
                 "x": 250, "y": 90,
-                "font_size": self.FONT_SIZE,
                 "color": self.WHITE,
             },),
             "kirby": ({
@@ -55,7 +51,6 @@ class Meme(Module):
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
-        super().__init__()
 
     def response(self, query, message):
         captions = query.split("\n")
@@ -102,7 +97,7 @@ class Meme(Module):
                 if setting.get("center") or True:
                     line_width, line_height = draw.textsize(line, font=font)
                     x -= line_width / 2
-                draw.text((x, y + line_index * (setting.get("font_size") + 5)),
+                draw.text((x, y + line_index * ((setting.get("font_size") or self.FONT_SIZE) + 5)),
                           line,
                           font=font,
                           fill=setting.get("color") or self.BLACK)
