@@ -155,9 +155,15 @@ def send_message(data):
 def reply(message, group_id):
     """
     Reply in chat.
-    :param message: text of message to send. May be a tuple with further data.
+    :param message: text of message to send. May be a tuple with further data, or a list of messages.
     :param group_id: ID of group in which to send message.
     """
+    # Recurse to send a list of messages.
+    # This is useful when a module must respond with multiple messages.
+    # TODO: This feels sort of clunky.
+    if isinstance(message, list):
+        for item in message:
+            reply(item, group_id)
     data = {
         "bot_id": GROUPS[group_id]["bot_id"],
     }
