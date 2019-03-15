@@ -24,7 +24,21 @@ class Meme(Module):
         self.templates = {
             "drake": (self.mark_drake, 2),
             "yaledrake": (self.mark_drake, 2),
-            "juice": (self.mark_juice, 2),
+            "juice": ({
+                "x": 327,
+                "y": 145,
+                "wrap": 20,
+                "font": self.font,
+                "font_size": self.FONT_SIZE,
+                "color": self.BLACK,
+            }, {
+                "x": 373,
+                "y": 440,
+                "wrap": 25,
+                "font": self.small_font,
+                "font_size": self.SMALL_FONT_SIZE,
+                "color": self.BLACK,
+            }),
             "changemymind": (self.mark_changemymind, 1),
             "catch": (self.mark_catch, 2),
             "kirby": (self.mark_kirby, 1),
@@ -43,7 +57,11 @@ class Meme(Module):
             return "Not enough captions provided (remember to separate with newlines)."
         image = Image.open(f"resources/memes/{template}.jpg")
         draw = ImageDraw.Draw(image)
-        mark_function(draw, captions)
+        # TODO: This is SUPER TEMPORARY AND BAD
+        if isinstance(mark_function, dict):
+            self.mark_image(draw, captions, self.templates[template])
+        else:
+            mark_function(draw, captions)
         """
         image.show()
         return
@@ -67,6 +85,22 @@ class Meme(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
+    def mark_image(self, draw: ImageDraw, captions, settings):
+        for setting in settings:
+            caption = captions.pop(0)
+            lines = wrap(caption, setting.get("wrap"))
+            for line_index, line in enumerate(lines):
+                x = settings.get("x")
+                y = settings.get("y")
+                if setting.get("center"):
+                    line_width, line_height = draw.textsize(line, font=setting.get("font"))
+                    x -= line_width / 2
+                    y -= line_width / 2
+                draw.text((x, y + line_index * (setting.get("font_size") + 5)),
+                          line,
+                          font=setting.get("font") or self.font,
+                          fill=setting.get("color") or self.BLACK)
+
     def mark_drake(self, draw: ImageDraw, captions):
         LEFT_BORDER = 350
         RIGHT_BORDER = 620
@@ -76,19 +110,6 @@ class Meme(Module):
             lines = wrap(caption, 20)
             for line_index, line in enumerate(lines):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
-
-    def mark_juice(self, draw: ImageDraw, captions):
-        HEAD_X, HEAD_Y = (327, 145)
-        JUG_X, JUG_Y = (373, 440)
-
-        lines = wrap(captions[0], 20)
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.font)
-            draw.text((HEAD_X-line_width/2, HEAD_Y-line_height/2 + line_index * 35), line, font=self.font, fill=self.BLACK)
-        lines = wrap(captions[1], 25)
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.small_font)
-            draw.text((JUG_X-line_width/2, JUG_Y-line_height/2 + line_index * 20), line, font=self.small_font, fill=self.BLACK)
 
     def mark_changemymind(self, draw: ImageDraw, captions):
         SIGN_X, SIGN_Y = (579, 460)
