@@ -41,7 +41,15 @@ class Meme(Module):
                 "color": self.BLACK,
                 "center": True,
             }),
-            "changemymind": (self.mark_changemymind, 1),
+            "changemymind": ({
+                "x": 579,
+                "y": 460,
+                "wrap": 19,
+                "font": self.large_font,
+                "font_size": self.LARGE_FONT_SIZE,
+                "color": self.BLACK,
+                "center": True,
+            }),
             "catch": (self.mark_catch, 2),
             "kirby": (self.mark_kirby, 1),
         }
@@ -114,13 +122,6 @@ class Meme(Module):
             lines = wrap(caption, 20)
             for line_index, line in enumerate(lines):
                 draw.text((LEFT_BORDER, 80 * (caption_index + 1)**2 + self.FONT_SIZE * 1.3 * line_index), line, font=self.font, fill=self.BLACK)
-
-    def mark_changemymind(self, draw: ImageDraw, captions):
-        SIGN_X, SIGN_Y = (579, 460)
-        lines = wrap(captions[0], 19)
-        for line_index, line in enumerate(lines):
-            line_width, line_height = draw.textsize(line, font=self.large_font)
-            draw.text((SIGN_X-line_width/2, SIGN_Y-line_height/2 + line_index * 55), line, font=self.large_font, fill=self.BLACK)
 
     def mark_catch(self, draw: ImageDraw, captions):
 
