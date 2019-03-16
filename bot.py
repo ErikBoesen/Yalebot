@@ -128,7 +128,7 @@ def webhook():
                 reply("Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n...", group_id)
             else:
                 try:
-                    closest = difflib.get_close_matches(command, simple_responses.keys() + commands.keys(), 1)[0]
+                    closest = difflib.get_close_matches(command, list(simple_responses.keys()) + list(commands.keys()), 1)[0]
                     advice = f"Perhaps you meant {closest}? "
                 except IndexError:
                     advice = ""
