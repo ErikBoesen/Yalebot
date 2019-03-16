@@ -129,7 +129,7 @@ def webhook():
             else:
                 try:
                     closest = difflib.get_close_matches(command, list(simple_responses.keys()) + list(commands.keys()), 1)[0]
-                    advice = f"Perhaps you meant {closest}? "
+                    advice = f"Perhaps you meant {PREFIX}{closest}? "
                 except IndexError:
                     advice = ""
                 reply(f"Command not found. {advice}Use !help to view a list of commands.", group_id)
