@@ -146,12 +146,6 @@ def webhook():
         """
     return "ok", 200
 
-def send_message(data):
-    """
-    Send raw message data, without pre-processing.
-    """
-    response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
-
 def reply(message, group_id):
     """
     Reply in chat.
@@ -176,11 +170,10 @@ def reply(message, group_id):
     if len(text) > MAX_MESSAGE_LENGTH:
         # If text is too long for one message, split it up over several
         for block in [text[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(text), MAX_MESSAGE_LENGTH)]:
-            data["text"] = block
-            send_message(data)
+            reply(block, group_id)
         data["text"] = ""
     else:
         data["text"] = text
     if image is not None:
         data["picture_url"] = image
-    send_message(data)
+    response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
