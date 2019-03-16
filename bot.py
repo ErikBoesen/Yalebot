@@ -3,6 +3,7 @@ import os
 import re
 import requests
 import json
+import difflib
 from flask import Flask, request
 
 
@@ -126,7 +127,12 @@ def webhook():
             elif command in ("drake", "ydrake", "juice", "kirby", "changemymind", "catch"):
                 reply("Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n...", group_id)
             else:
-                reply("Command not found. Use !help to view a list of commands.", group_id)
+                try:
+                    closest = difflib.get_close_matches(command, simple_responses.keys() + commands.keys(), 1)[0]
+                    advice = f"Perhaps you meant {closest}? "
+                except IndexError:
+                    advice = ""
+                reply(f"Command not found. {advice}Use !help to view a list of commands.", group_id)
 
         if H_PATTERN.search(text) is not None:
             reply(forename + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"? Perhaps you meant to say \"" + H_PATTERN.sub("The H Place", text) + "\" instead?", group_id)
