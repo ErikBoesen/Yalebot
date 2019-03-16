@@ -14,7 +14,7 @@ with open("groups.json", "r") as f:
 MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
 
-simple_responses = {
+static_commands = {
     "ping": "Pong!",
     "sam": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
     "essays": "Submit your essays here, or read your classmates'! https://drive.google.com/open?id=1IUG1cNxmxBHhv1sSemi92fYO6y5lG6of",
@@ -93,8 +93,8 @@ def webhook():
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
             # Check if there's an automatic response for this command
-            if command in simple_responses:
-                reply(simple_responses[command], group_id)
+            if command in static_commands:
+                reply(static_commands[command], group_id)
             # If not, query appropriate module for a response
             elif command in commands:
                 # Make sure there are enough arguments
@@ -107,8 +107,8 @@ def webhook():
             elif command == "help":
                 if query:
                     query = query.strip(PREFIX)
-                    if query in simple_responses:
-                        reply(PREFIX + query + ": static command", group_id)
+                    if query in static_commands:
+                        reply(PREFIX + query + ": static response.", group_id)
                     elif query in commands:
                         reply(PREFIX + query + ": " + commands[query].DESCRIPTION + f". Requires {commands[query].ARGC} argument(s).", group_id)
                     elif query in meme_commands:
@@ -117,7 +117,7 @@ def webhook():
                         reply("No such command.", group_id)
                 else:
                     help_string = "--- Help ---"
-                    help_string += "\nSimple commands: " + ", ".join([PREFIX + title for title in simple_responses])
+                    help_string += "\nStatic commands: " + ", ".join([PREFIX + title for title in static_commands])
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
                     help_string += "\n\nPlease note that all meme commands have now been merged into !meme. Run `!help meme` for more information."
@@ -128,7 +128,7 @@ def webhook():
                 reply("Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n...", group_id)
             else:
                 try:
-                    closest = difflib.get_close_matches(command, list(simple_responses.keys()) + list(commands.keys()), 1)[0]
+                    closest = difflib.get_close_matches(command, list(static_commands.keys()) + list(commands.keys()), 1)[0]
                     advice = f"Perhaps you meant {PREFIX}{closest}? "
                 except IndexError:
                     advice = ""
