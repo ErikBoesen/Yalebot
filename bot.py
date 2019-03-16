@@ -26,7 +26,7 @@ simple_responses = {
     "snort": "😤",
     "oh": ("", "https://i.groupme.com/766x750.jpeg.9209520c57e848369444ca498e31f90a.large"),
     "bulldog": "Bulldog!  Bulldog!\nBow, wow, wow\nEli Yale\nBulldog!  Bulldog!\nBow, wow, wow\nOur team can never fail\n\nWhen the sons of Eli\nBreak through the line\nThat is the sign we hail\nBulldog!  Bulldog!\nBow, wow, wow\nEli Yale!",
-    "popcorn": "https://www.youtube.com/watch?v=9nwOm4AAXwc",
+    "popcorn": "https://im2.ezgif.com/tmp/ezgif-2-15f32ca130e7.gif",
 }
 
 commands = {
