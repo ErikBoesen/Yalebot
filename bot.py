@@ -176,4 +176,7 @@ def reply(message, group_id):
         data["text"] = text
     if image is not None:
         data["picture_url"] = image
-    response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
+    # Prevent sending message if there's no content
+    # It would be rejected anyway
+    if data["text"] or data["picture_url"]:
+        response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
