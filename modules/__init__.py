@@ -6,6 +6,7 @@ from .groups import Groups
 from .about import About
 from .xkcd import XKCD
 from .elizabeth import Elizabeth
+from .dania import Dania
 from .chat import Chat
 from .weather import Weather
 from .kelly import Kelly
