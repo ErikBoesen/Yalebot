@@ -19,36 +19,24 @@ class Meme(Module):
     def __init__(self):
         super().__init__()
         self.templates = {
-            "drake": ({
-                "position": (350, 100),
-                "center": False,
-            }, {
-                "position": (350, 300),
-                "center": False,
-            },),
-            "juice": ({
-                "position": (327, 145),
-            }, {
-                "position": (373, 440),
-                "wrap": 25,
-                "font_size": self.SMALL_FONT_SIZE,
-            },),
-            "changemymind": ({
-                "position": (579, 460),
-                "font_size": self.LARGE_FONT_SIZE,
-            },),
-            "catch": ({
-                "position": (550, 275),
-                "color": self.WHITE,
-            }, {
-                "position": (250, 90),
-                "color": self.WHITE,
-            },),
-            "kirby": ({
-                "position": (80, 70),
-                "font_size": self.SMALL_FONT_SIZE,
-                "center": False,
-            },),
+            "drake": (
+                {"position": (350, 100), "center": False},
+                {"position": (350, 300), "center": False},
+            ),
+            "juice": (
+                {"position": (327, 145)},
+                {"position": (373, 440), "wrap": 25, "font_size": self.SMALL_FONT_SIZE},
+            ),
+            "changemymind": (
+                {"position": (579, 460), "font_size": self.LARGE_FONT_SIZE},
+            ),
+            "catch": (
+                {"position": (550, 275), "color": self.WHITE},
+                {"position": (250, 90), "color": self.WHITE},
+            ),
+            "kirby": (
+                {"position": (80, 70), "font_size": self.SMALL_FONT_SIZE, "center": False},
+            ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. Supported templates: " + ", ".join(self.templates.keys())
