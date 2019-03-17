@@ -6,7 +6,6 @@ pillow
 GroupyAPI
 beautifulsoup4
 praw
-IMDbPY
 
 cmake
 face_recognition
