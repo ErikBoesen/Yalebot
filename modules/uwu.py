@@ -1,4 +1,4 @@
-from .base import Module
+from .base import Module, ImageUploader
 import face_recognition
 from PIL import Image, ImageDraw
 import requests
@@ -9,7 +9,7 @@ from skimage import io
 import math
 
 
-class UWU(Module):
+class UWU(Module, ImageUploader):
     DESCRIPTION = "Abuse photographs of your compatriots"
 
     def tear_position(self, element):
@@ -73,7 +73,7 @@ class UWU(Module):
 
             # Scale blush mask
             blush_natural_width, blush_natural_height = blush.size
-            blush_height = int(tear_height * 0.4)
+            blush_height = int(tear_height * 0.35)
             blush_width = int(blush_height * blush_natural_width / blush_natural_height)
             scaled_blush = blush.resize((blush_width, blush_height), Image.ANTIALIAS)
 
@@ -89,20 +89,6 @@ class UWU(Module):
         output = BytesIO()
         pil_image.save(output, format="JPEG")
         return "", self.upload_image(output.getvalue())
-
-    def upload_image(self, data) -> str:
-        """
-        Send image to GroupMe Image API.
-
-        :param data: compressed image data.
-        :return: URL of image now hosted on GroupMe server.
-        """
-        headers = {
-            "X-Access-Token": os.environ["GROUPME_ACCESS_TOKEN"],
-            "Content-Type": "image/jpeg",
-        }
-        r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
-        return r.json()["payload"]["url"]
 
 """
 avatar = "https://i.groupme.com/1023x1024.jpeg.1d34cf6dbad346b2b25bd8fbb2e71a97"

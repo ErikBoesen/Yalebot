@@ -1,4 +1,4 @@
-from .base import Module
+from .base import Module, ImageUploader
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
@@ -7,7 +7,7 @@ import io
 
 
 #class Meme:
-class Meme(Module):
+class Meme(Module, ImageUploader):
     ARGC = 1
 
     FONT_SIZE = 30
@@ -60,20 +60,6 @@ class Meme(Module):
         image.save(output, format="JPEG")
         image_url = self.upload_image(output.getvalue())
         return ("", image_url)
-
-    def upload_image(self, data) -> str:
-        """
-        Send image to GroupMe Image API.
-
-        :param data: compressed image data.
-        :return: URL of image now hosted on GroupMe server.
-        """
-        headers = {
-            "X-Access-Token": self.ACCESS_TOKEN,
-            "Content-Type": "image/jpeg",
-        }
-        r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
-        return r.json()["payload"]["url"]
 
     def mark_image(self, draw: ImageDraw, captions, settings):
         for setting in settings:
