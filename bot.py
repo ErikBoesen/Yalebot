@@ -39,6 +39,7 @@ commands = {
     "groups": modules.Groups(),
     "about": modules.About(),
     "xkcd": modules.XKCD(),
+    "elizabeth": modules.Elizabeth(),
     "chat": modules.Chat(),
     "weather": modules.Weather(),
     "kelly": modules.Kelly(),
