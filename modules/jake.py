@@ -13,8 +13,7 @@ class Jake(Module):
             bs = BeautifulSoup(requests.get("https://www.imdb.com/list/ls000071646/").text, 'html.parser')
             musical_elements = bs.find("div", {"class": "lister-list"}).find_all("div", {"class": "lister-item"})
             for entry in musical_elements:
-                musicals.append((entry.find("h3", {"class": "lister-item-header"}).find("a", recursive=False).text,
-                                 " | ".join([p.text for p in entry.find_all("p")]))
-        return random.choice(self.musicals)
-
-print(Jake().response("",""))
+                self.musicals.append((entry.find("h3", {"class": "lister-item-header"}).find("a", recursive=False).text,
+                                      entry.find_all("p")[1].text.strip()))
+        title, description = random.choice(self.musicals)
+        return f"{title}: {description}"
