@@ -73,7 +73,7 @@ class UWU(Module):
 
             # Scale blush mask
             blush_natural_width, blush_natural_height = blush.size
-            blush_height = int(tear_height * 0.5)
+            blush_height = int(tear_height * 0.4)
             blush_width = int(blush_height * blush_natural_width / blush_natural_height)
             scaled_blush = blush.resize((blush_width, blush_height), Image.ANTIALIAS)
 
