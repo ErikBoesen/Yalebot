@@ -20,32 +20,32 @@ class Meme(Module):
         super().__init__()
         self.templates = {
             "drake": ({
-                "x": 350, "y": 100,
+                "position": (350, 100),
                 "center": False,
             }, {
-                "x": 350, "y": 300,
+                "position": (350, 300),
                 "center": False,
             },),
             "juice": ({
-                "x": 327, "y": 145,
+                "position": (327, 145),
             }, {
-                "x": 373, "y": 440,
+                "position": (373, 440),
                 "wrap": 25,
                 "font_size": self.SMALL_FONT_SIZE,
             },),
             "changemymind": ({
-                "x": 579, "y": 460,
+                "position": (579, 460),
                 "font_size": self.LARGE_FONT_SIZE,
             },),
             "catch": ({
-                "x": 550, "y": 275,
+                "position": (550, 275),
                 "color": self.WHITE,
             }, {
-                "x": 250, "y": 90,
+                "position": (250, 90),
                 "color": self.WHITE,
             },),
             "kirby": ({
-                "x": 80, "y": 70,
+                "position": (80, 70),
                 "font_size": self.SMALL_FONT_SIZE,
                 "center": False,
             },),
@@ -92,8 +92,7 @@ class Meme(Module):
             caption = captions.pop(0)
             lines = wrap(caption, setting.get("wrap", 20))
             for line_index, line in enumerate(lines):
-                x = setting.get("x")
-                y = setting.get("y")
+                x, y = setting.get("position")
                 font = ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size", self.FONT_SIZE))
                 if setting.get("center", True):
                     line_width, line_height = draw.textsize(line, font=font)
