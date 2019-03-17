@@ -47,6 +47,7 @@ class Meme(Module):
             "kirby": ({
                 "x": 80, "y": 70,
                 "font_size": self.SMALL_FONT_SIZE,
+                "center": False,
             },),
         }
         self.templates["yaledrake"] = self.templates["drake"]
