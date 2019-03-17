@@ -1,5 +1,6 @@
 from .base import Module
 from glob import glob
+import json
 
 class About(Module):
     string = None
