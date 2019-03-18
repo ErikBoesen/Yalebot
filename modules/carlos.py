@@ -7,7 +7,7 @@ from skimage import io
 
 class Carlos(Module, ImageUploader):
     DESCRIPTION = "❤️"
-    hearts = [Image.open(f"resources/hearts/{number}.png") for number in range(0, 11+1)]
+    hearts = [Image.open(f"resources/hearts/{number}.png") for number in range(0, 13+1)]
     HEART_RESOLUTION = 120
     def response(self, query, message):
         source_url = self.get_source_url(message)
