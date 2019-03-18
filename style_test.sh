@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-pycodestyle *.py modules/*
+# E501 Line too long
+pycodestyle *.py modules/* --ignore=E501
