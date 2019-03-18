@@ -34,6 +34,7 @@ class UWU(Module, ImageUploader):
         tear = Image.open("resources/uwu/tear.png")
         blush = Image.open("resources/uwu/blush.png")
         image = io.imread(source_url)[:,:,:3]
+        # TODO: crashes if image is too large; need to use self.limit_image_size but that doesn't change `image` just PIL Images
         pil_image = Image.fromarray(image)
         #faces = face_recognition.face_locations(image)
         faces = face_recognition.face_landmarks(image)
