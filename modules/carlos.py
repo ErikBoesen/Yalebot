@@ -10,12 +10,18 @@ class Carlos(Module, ImageUploader):
     hearts = [Image.open(f"resources/hearts/{number}.png") for number in range(0, 13+1)]
     HEART_RESOLUTION = 120
     def response(self, query, message):
+        heart_count = query.split(" ", 1)[0]
+        try:
+            heart_count = int(heart_count)
+        except:
+            heart_count = len(self.hearts)
         source_url = self.get_source_url(message)
 
         image = io.imread(source_url)[:,:,:3]
         pil_image = Image.fromarray(image)
         image_width, image_height = pil_image.size
-        for heart in self.hearts:
+        for heart_number in range(heart_count):
+            heart = self.hearts[heart_number % len(self.hearts)]
             heart_size = random.randint(image_height // 6, image_height // 4)
             processed_heart = heart.resize((heart_size, heart_size), Image.ANTIALIAS).rotate(random.randint(0, 360))
             pil_image.paste(processed_heart,
