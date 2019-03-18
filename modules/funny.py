@@ -8,9 +8,9 @@ class Funny(Module):
     def response(self, query, message):
         reddit = praw.Reddit(client_id=os.environ["REDDIT_CLIENT_ID"],
                              client_secret=os.environ["REDDIT_SECRET"],
-                             user_agent='yalebot')
+                             user_agent="yalebot")
         response = []
-        for submission in reddit.subreddit('memes').hot(limit=25):
-            if not submission.stickied and 'jpg' in submission.url:
+        for submission in reddit.subreddit("memes").hot(limit=25):
+            if not submission.stickied and "jpg" in submission.url:
                 response.append(submission.url)
         return random.choice(response)
