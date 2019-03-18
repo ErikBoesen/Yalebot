@@ -23,9 +23,10 @@ class Carlos(Module, ImageUploader):
         for heart_number in range(heart_count):
             heart = self.hearts[heart_number % len(self.hearts)]
             heart_size = random.randint(image_height // 6, image_height // 4)
-            processed_heart = heart.resize((heart_size, heart_size), Image.ANTIALIAS).rotate(random.randint(0, 360))
+            processed_heart = heart.resize((heart_size, heart_size), Image.ANTIALIAS).rotate(random.randint(0, 360), expand=True)
+            processed_width, processed_height = processed_heart.size
             pil_image.paste(processed_heart,
-                            (int(random.random() * (image_width - heart_size)), int(random.random() * (image_height - heart_size))),
+                            (int(random.random() * (image_width - processed_width)), int(random.random() * (image_height - processed_height))),
                             processed_heart)
 
         output = BytesIO()
