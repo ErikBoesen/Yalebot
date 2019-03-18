@@ -8,6 +8,7 @@ from .xkcd import XKCD
 from .elizabeth import Elizabeth
 from .dania import Dania
 from .jake import Jake
+from .carlos import Carlos
 from .chat import Chat
 from .weather import Weather
 from .kelly import Kelly
