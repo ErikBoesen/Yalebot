@@ -28,30 +28,6 @@ class UWU(Module, ImageUploader):
                 right = x
         return (left + right) / 2, top
 
-    def get_portrait(self, user_id, group_id):
-        # TODO: Figure out a way to not get entire list of members to find one
-        members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]["members"]
-        for member in members:
-            if member["user_id"] == user_id:
-                return member["image_url"]
-
-    def get_source_url(self, message):
-        """
-        Given complete image data, choose image to use from best source.
-        First choose attached image, then use mentioned person's avatar, then sender's avatar.
-        :return: URL of image to use.
-        """
-        image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
-        mention_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "mentions"]
-        if len(image_attachments) > 0:
-            # Get sent image
-            return image_attachments[0]["url"]
-        elif len(mention_attachments) > 0:
-            return self.get_portrait(mention_attachments[0]["user_ids"][0], message["group_id"])
-        else:
-            # If no image was sent, use sender's avatar
-            return message["avatar_url"]
-
     def response(self, query, message):
         source_url = self.get_source_url(message)
 
