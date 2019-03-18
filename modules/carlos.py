@@ -9,10 +9,13 @@ class Carlos(Module, ImageUploader):
     DESCRIPTION = "❤️"
     hearts = [Image.open(f"resources/hearts/{number}.png") for number in range(0, 13+1)]
     HEART_RESOLUTION = 120
+    MAX_HEARTS = 2000
     def response(self, query, message):
         heart_count = query.split(" ", 1)[0]
         try:
             heart_count = int(heart_count)
+            if heart_count > self.MAX_HEARTS:
+                heart_count = self.MAX_HEARTS
         except:
             heart_count = len(self.hearts)
         source_url = self.get_source_url(message)
