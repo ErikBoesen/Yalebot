@@ -44,7 +44,7 @@ class Meme(Module, ImageUploader):
     def response(self, query, message):
         captions = query.split("\n")
 
-        template = captions.pop(0).strip()
+        template = captions.pop(0).strip().lower()
         if self.templates.get(template) is None:
             return f"No template found called {template}."
         if len(captions) < len(self.templates[template]):
