@@ -1,6 +1,7 @@
 from .base import Module
 import random
 
+
 class Kelbo(Module):
     DESCRIPTION = '____ __ _____'
     ARGC = 0

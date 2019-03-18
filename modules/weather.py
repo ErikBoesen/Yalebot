@@ -2,6 +2,7 @@ from .base import Module
 import requests
 import os
 
+
 class Weather(Module):
     DESCRIPTION = "Check the weather in everyone's favorite city"
     NH_COORDINATES = {

@@ -33,10 +33,9 @@ class UWU(Module, ImageUploader):
 
         tear = Image.open("resources/uwu/tear.png")
         blush = Image.open("resources/uwu/blush.png")
-        image = io.imread(source_url)[:,:,:3]
+        image = io.imread(source_url)[:, :, :3]
         # TODO: crashes if image is too large; need to use self.limit_image_size but that doesn't change `image` just PIL Images
         pil_image = Image.fromarray(image)
-        #faces = face_recognition.face_locations(image)
         faces = face_recognition.face_landmarks(image)
         if len(faces) == 0:
             return "No faces found in image."
@@ -73,6 +72,7 @@ class UWU(Module, ImageUploader):
         output = BytesIO()
         pil_image.save(output, format="JPEG")
         return "", self.upload_image(output.getvalue())
+
 
 """
 avatar = "https://i.groupme.com/1023x1024.jpeg.1d34cf6dbad346b2b25bd8fbb2e71a97"

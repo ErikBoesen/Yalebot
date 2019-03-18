@@ -23,7 +23,7 @@ static_commands = {
     "quack": "quack",
     "test": "https://erikboesen.com/yalepuritytest",
     "dislike": "👎😬👎\n 🦵🦵",
-    "shrug": "¯\_(ツ)_/¯",
+    "shrug": r"¯\_(ツ)_/¯",
     "snort": "😤",
     "oh": ("", "https://i.groupme.com/766x750.jpeg.9209520c57e848369444ca498e31f90a.large"),
     "bulldog": "Bulldog!  Bulldog!\nBow, wow, wow\nEli Yale\nBulldog!  Bulldog!\nBow, wow, wow\nOur team can never fail\n\nWhen the sons of Eli\nBreak through the line\nThat is the sign we hail\nBulldog!  Bulldog!\nBow, wow, wow\nEli Yale!",
@@ -77,6 +77,8 @@ system_responses = {
 
 F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | re.MULTILINE)
 H_PATTERN = re.compile("(harvard)", flags=re.IGNORECASE)
+
+
 @app.route("/", methods=["POST"])
 def webhook():
     """
@@ -157,6 +159,7 @@ def webhook():
                 reply(commands["vet"].check_user(check_name), group_id)
         """
     return "ok", 200
+
 
 def reply(message, group_id):
     """

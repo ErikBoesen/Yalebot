@@ -5,22 +5,23 @@ from io import BytesIO
 # TODO: This is so complicated for literally just reading an image from a URL
 from skimage import io
 
+
 class Carlos(Module, ImageUploader):
     DESCRIPTION = "❤️"
-    hearts = [Image.open(f"resources/hearts/{number}.png") for number in range(0, 13+1)]
+    hearts = [Image.open(f"resources/hearts/{number}.png") for number in range(0, 13 + 1)]
     HEART_RESOLUTION = 120
     MAX_HEARTS = 2000
+
     def response(self, query, message):
         heart_count = query.split(" ", 1)[0]
         try:
             heart_count = int(heart_count)
-            if heart_count > self.MAX_HEARTS:
-                heart_count = self.MAX_HEARTS
-        except:
+            heart_count = min(heart_count, self.MAX_HEARTS)
+        except ValueError:
             heart_count = len(self.hearts)
         source_url = self.get_source_url(message)
 
-        image = io.imread(source_url)[:,:,:3]
+        image = io.imread(source_url)[:, :, :3]
         pil_image = Image.fromarray(image)
         image_width, image_height = pil_image.size
         for heart_number in range(heart_count):

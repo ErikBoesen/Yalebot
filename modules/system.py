@@ -1,11 +1,14 @@
 from .base import Module
 import re
 
+
 class System(Module):
     pass
 
+
 class Welcome(System):
     RE = re.compile(r'(.+) added (.+) to the group\.|(.+) has (re)?joined the group')
+
     def response(self):
         return "Welcome! We're happy to have you. Type !help to see what I can do."
 

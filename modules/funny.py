@@ -3,9 +3,11 @@ import os
 import praw
 import random
 
+
 class Funny(Module):
     DESCRIPTION = "Get random meme from r/Memes"
     responses = []
+
     def __init__(self):
         super().__init__()
         self.reddit = praw.Reddit(client_id=os.environ["REDDIT_CLIENT_ID"],

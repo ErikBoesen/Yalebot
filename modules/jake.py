@@ -3,8 +3,10 @@ from bs4 import BeautifulSoup
 import requests
 import random
 
+
 class Jake(Module):
     musicals = []
+
     def __init__(self):
         super().__init__()
 

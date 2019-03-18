@@ -9,6 +9,7 @@ class Dog(Module):
     DESCRIPTION = "Get learned about a pupper"
     dogs = []
     CITATION = re.compile(r'\[\d+\]')
+
     def response(self, query, message):
         if len(self.dogs) == 0:
             r = requests.get("https://en.wikipedia.org/wiki/List_of_individual_dogs")

@@ -1,5 +1,4 @@
 from .base import Module
-
 import os
 import requests
 import json
@@ -38,6 +37,7 @@ class CleverBot:
 class Chat(Module):
     DESCRIPTION = "Converse with Yalebot intelligently"
     ARGC = 1
+
     def __init__(self):
         self.client = CleverBot(user=os.environ["CLEVERBOT_USER"], key=os.environ["CLEVERBOT_KEY"])
         super().__init__()

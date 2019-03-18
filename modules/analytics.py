@@ -7,9 +7,9 @@ import os
 
 GROUP_ID = 46649296
 
+
 class Analytics(Module):
     DESCRIPTION = "View statistics on user activity in the chat"
-
     users = {}
 
     def generate_data(self):
@@ -25,7 +25,7 @@ class Analytics(Module):
 
         # Perform analysis
         self.analyze_group(GROUP_ID, message_count)
-        return "%d messages processed."
+        return "%d messages processed." % message_count
 
     def get_group(self, group_id):
         response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}")
@@ -75,10 +75,11 @@ class Analytics(Module):
                 self.users[sender_id]["likes_received"] += len(likers)
 
             message_id = messages[-1]["id"]  # Get last message"s ID for next request
-            remaining = 100 *  message_number / message_count
+            remaining = 100 * message_number / message_count
             print("\r%.2f%% done" % remaining, end="")
 
     def response(self, query, message):
+        return "Analytics temporarily disabled."
         parameters = query.split(" ")
         command = parameters.pop(0)
         output = ""
@@ -96,6 +97,3 @@ class Analytics(Module):
                 output += " / Likes Received: %d" % user["likes_received"]
                 output += "\n"
         return output
-
-if __name__ == "__main__":
-    print(Analytics().response("leaderboard"))

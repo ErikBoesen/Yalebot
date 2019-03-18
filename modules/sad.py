@@ -1,6 +1,7 @@
 from .base import Module
 import random
 
+
 class Sad(Module):
     DESCRIPTION = "Instantly dispel all mental health problems"
     PICTURES = [
@@ -17,5 +18,6 @@ class Sad(Module):
         "https://i.pinimg.com/originals/d5/99/4b/d5994ba1f2fd2af3fff905888cadbd32.jpg",
         "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",  # cat
     ]
+
     def response(self, query, message):
         return random.choice(self.PICTURES)

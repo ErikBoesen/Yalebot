@@ -1,6 +1,7 @@
 from .base import Module
 import requests
 
+
 class FunFact(Module):
     DESCRIPTION = "Learn a fun fact"
     facts = []
@@ -13,6 +14,6 @@ class FunFact(Module):
         if len(self.facts) == 0:
             self.fill_queue()
         text = self.facts.pop()
-        text.replace('<em>','')
-        text.replace('</em>','')
+        text.replace("<em>", "")
+        text.replace("</em>", "")
         return text

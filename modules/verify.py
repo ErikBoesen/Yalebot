@@ -10,6 +10,7 @@ class Verify(Module):
     ARGC = 0
     POSITIVE_EMOJI = "✅"
     NEGATIVE_EMOJI = "❓"
+
     def __init__(self):
         super().__init__()
         with open("resources/admit_names.json") as f:

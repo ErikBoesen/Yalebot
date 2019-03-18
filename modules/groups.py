@@ -1,5 +1,6 @@
 from .base import Module
 
+
 class Groups(Module):
     DESCRIPTION = "Get links to other admit groups"
     links = {
@@ -13,5 +14,6 @@ class Groups(Module):
         "University of Pennsylvania": "46633207/jo1Mk4wv",
         "Cornell University": "46579394/HJFvEV",
     }
+
     def response(self, query, message):
         return '\n'.join(["%s -> https://groupme.com/join_group/%s" % (name, self.links[name]) for name in self.links])

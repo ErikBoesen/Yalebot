@@ -2,12 +2,14 @@ from .base import Module
 import csv
 import random
 
+
 class Kelly(Module):
     DESCRIPTION = "Generate Elizabethan insults for our favorite person"
 
     primary_adjectives = []
     secondary_adjectives = []
     nouns = []
+
     def __init__(self):
         super().__init__()
         with open("resources/insults.csv", "r") as f:

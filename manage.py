@@ -12,18 +12,24 @@ parser.add_argument("--token", default=os.environ.get("GROUPME_ACCESS_TOKEN"))
 parser.add_argument("--groups-file", default="groups.json")
 args = parser.parse_args()
 
+
 def read(prop, default):
     return input(f"{prop} [{default}]: ") or default
+
 
 def get_user_groups():
     return requests.get(f"https://api.groupme.com/v3/groups?token={args.token}").json()["response"]
 
+
 def get_joined_groups():
     with open(args.groups_file, "r") as f:
         return json.load(f)
+
+
 def save_groups(groups):
     with open(args.groups_file, "w") as f:
         json.dump(groups, f)
+
 
 def pick_joined_group(groups=None) -> str:
     """
@@ -38,6 +44,7 @@ def pick_joined_group(groups=None) -> str:
             group_id = candidate
             print(f"Selected group {group_id}/{group_name}.")
             return group_id
+
 
 def pick_user_group(groups=None) -> str:
     """
@@ -90,10 +97,11 @@ elif args.verb == "send":
     while True:
         try:
             text = input("> ")
-        except:
+        except EOFError:
             print("\r", end="")
             break
         if not text:
             print("\r", end="")
             break
+        # TODO: Merge the above two cases
         requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})

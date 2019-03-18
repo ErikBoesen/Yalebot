@@ -6,7 +6,6 @@ import os
 import io
 
 
-#class Meme:
 class Meme(Module, ImageUploader):
     ARGC = 1
 

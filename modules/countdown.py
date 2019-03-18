@@ -8,6 +8,7 @@ class Event:
         self.date = date
         self.duration = duration
 
+
 class Countdown(Module):
     DESCRIPTION = "Find out how little time's left until upcoming Yale events"
     events = [
@@ -56,8 +57,8 @@ class Countdown(Module):
             return None
         delta = event.date - now
         seconds = delta.total_seconds()
-        weeks, seconds = divmod(seconds, 60*60*24*7)
-        days, seconds = divmod(seconds, 60*60*24)
-        hours, seconds = divmod(seconds, 60*60)
+        weeks, seconds = divmod(seconds, 60 * 60 * 24 * 7)
+        days, seconds = divmod(seconds, 60 * 60 * 24)
+        hours, seconds = divmod(seconds, 60 * 60)
         minutes, seconds = divmod(seconds, 60)
         return weeks, days, hours, minutes, seconds, event.name
