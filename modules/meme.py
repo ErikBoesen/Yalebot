@@ -28,7 +28,7 @@ class Meme(Module, ImageUploader):
                 {"position": (373, 440), "wrap": 25, "font_size": self.SMALL_FONT_SIZE},
             ),
             "changemymind": (
-                {"position": (579, 460), "font_size": self.LARGE_FONT_SIZE},
+                {"position": (579, 420), "font_size": self.LARGE_FONT_SIZE},
             ),
             "catch": (
                 {"position": (550, 275), "color": self.WHITE},

@@ -17,4 +17,5 @@ class Funny(Module):
             for submission in reddit.subreddit("memes").hot(limit=25):
                 if not submission.stickied and "jpg" in submission.url:
                     self.responses.append(submission.url)
-        return random.choice(self.responses)
+            random.shuffle(self.responses)
+        return self.responses.pop()
