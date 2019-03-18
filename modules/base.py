@@ -1,5 +1,6 @@
 import os
 import requests
+from PIL import Image
 
 class Module:
     DESCRIPTION = ""
@@ -9,6 +10,7 @@ class Module:
         print("Loaded module %s." % self.__class__.__name__)
 
 class ImageUploader:
+    MAX_IMAGE_WIDTH = 2000
     def upload_image(self, data) -> str:
         """
         Send image to GroupMe Image API.
@@ -22,6 +24,14 @@ class ImageUploader:
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
+
+    def limit_image_size(self, image: Image):
+        natural_width, natural_height = image.size
+        if natural_width > self.MAX_IMAGE_WIDTH:
+            width = self.MAX_IMAGE_WIDTH
+            height = int(tear_width * tear_natural_height / tear_natural_width)
+            image = image.resize((width, height), Image.ANTIALIAS)
+        return image
 
     def get_portrait(self, user_id, group_id):
         # TODO: Figure out a way to not get entire list of members to find one
