@@ -1,4 +1,6 @@
 # Yalebot
+[![Build Status](https://travis-ci.com/ErikBoesen/Yalebot.svg?branch=master)](https://travis-ci.com/ErikBoesen/Yalebot)
+
 > A GroupMe chatbot for the Yale Class of 2023 group.
 
 ![Screenshot](screenshot.png)
