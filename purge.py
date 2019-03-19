@@ -2,12 +2,12 @@ import os
 from groupy.client import Client
 
 GROUP_ID = 46649296
-TOKEN = os.environ['GROUPME_ACCESS_TOKEN']
+TOKEN = os.environ["GROUPME_ACCESS_TOKEN"]
 client = Client.from_token(TOKEN)
 
 group = client.groups.get(id=GROUP_ID)
 
-targets = ['Chikuikem Iwuagwu', 'hiba hamid', 'AIDAN YOO(NOT SIMON)', 'Walli Chen (penn daddy)', 'Simon', 'Nick Bausenwein (Penn)', 'Eashan Sahai', 'AJ Manning', 'Margaret LaMarche', 'Rachel Wilson', 'Nitin S', 'Mia McDonald', 'David Yang', 'David Lu', 'serin b', 'Halsey Ziglar', 'Langston Luck', 'Sophie Hirt', 'Nick Bausenwein (Penn)', 'Jacob K', 'Nicole Overton']
+targets = ["Chikuikem Iwuagwu", "hiba hamid", "AIDAN YOO(NOT SIMON)", "Walli Chen (penn daddy)", "Simon", "Nick Bausenwein (Penn)", "Eashan Sahai", "AJ Manning", "Margaret LaMarche", "Rachel Wilson", "Nitin S", "Mia McDonald", "David Yang", "David Lu", "serin b", "Halsey Ziglar", "Langston Luck", "Sophie Hirt", "Nick Bausenwein (Penn)", "Jacob K", "Nicole Overton", "Ambot Li"]
 
 for member in group.members:
     if member.nickname in targets:
