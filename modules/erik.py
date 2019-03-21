@@ -1,6 +1,8 @@
 from .base import Module
 
 
-class Erik(Module):
+class Crista(Module):
+    DESCRIPTION = "s p a c e s"
+
     def response(self, query, message):
         return " ".join(query)

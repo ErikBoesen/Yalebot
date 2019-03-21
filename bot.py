@@ -43,7 +43,7 @@ commands = {
     "dania": modules.Dania(),
     "jake": modules.Jake(),
     "carlos": modules.Carlos(),
-    "erik": modules.Erik(),
+    "crista": modules.Crista(),
     "chat": modules.Chat(),
     "weather": modules.Weather(),
     "kelly": modules.Kelly(),
