@@ -128,12 +128,7 @@ def webhook():
                     help_string += "\nStatic commands: " + ", ".join([PREFIX + title for title in static_commands])
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
-                    help_string += "\n\nPlease note that all meme commands have now been merged into !meme. Run `!help meme` for more information."
                     reply(help_string, group_id)
-
-            # Correct people when they try to use old memes
-            elif command in ("drake", "ydrake", "juice", "kirby", "changemymind", "catch"):
-                reply("Memes have now been merged into !meme. They can be used like so:\n\n!meme template\ncaption\ncaption\n...", group_id)
             else:
                 try:
                     closest = difflib.get_close_matches(command, list(static_commands.keys()) + list(commands.keys()), 1)[0]
