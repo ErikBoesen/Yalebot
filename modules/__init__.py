@@ -9,6 +9,7 @@ from .elizabeth import Elizabeth
 from .dania import Dania
 from .jake import Jake
 from .carlos import Carlos
+from .erik import Erik
 from .chat import Chat
 from .weather import Weather
 from .kelly import Kelly
