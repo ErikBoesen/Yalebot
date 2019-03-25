@@ -10,6 +10,7 @@ from .dania import Dania
 from .jake import Jake
 from .carlos import Carlos
 from .crista import Crista
+from .maria import Maria
 from .chat import Chat
 from .weather import Weather
 from .kelly import Kelly
