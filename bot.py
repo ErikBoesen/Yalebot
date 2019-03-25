@@ -98,7 +98,7 @@ def webhook():
         reply(matches.groups()[0] + " ❤", group_id)
     if message["sender_type"] != "bot":
         if text.startswith(PREFIX):
-            instructions = text[len(PREFIX):].split(" ", 1).strip()
+            instructions = text[len(PREFIX):].strip().split(" ", 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
             # Check if there's an automatic response for this command
