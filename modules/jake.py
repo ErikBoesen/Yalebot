@@ -5,6 +5,7 @@ import random
 
 
 class Jake(Module):
+    DESCRIPTION = "If it's on a stage, it's a musical"
     musicals = []
 
     def __init__(self):
