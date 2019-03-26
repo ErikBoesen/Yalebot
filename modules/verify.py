@@ -1,6 +1,7 @@
 from .base import Module
 import random
 import json
+import random
 import requests
 import os
 
@@ -55,3 +56,11 @@ class Verify(Module):
         icon = self.emojus(verified)
         status = "is" if verified else "isn't"
         return f"{icon} {name} {status} listed on the Yale 2023 Admits website."
+
+
+class McCarthy(Verify):
+    DESCRIPTION = "Vet Stalinist spies in our homeland"
+    ARGC = 0
+
+    def response(self, query, message):
+        return self.check_user(random.choice(self.get_members(message["group_id"])))
