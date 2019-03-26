@@ -36,6 +36,7 @@ commands = {
     "flip": modules.Flip(),
     "countdown": modules.Countdown(),
     "verify": modules.Verify(),
+    "mccarthy": modules.McCarthy(),
     "groups": modules.Groups(),
     "about": modules.About(),
     "xkcd": modules.XKCD(),
