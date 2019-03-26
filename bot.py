@@ -46,7 +46,6 @@ commands = {
     "carlos": modules.Carlos(),
     "crista": modules.Crista(),
     "maria": modules.Maria(),
-    "contentawarescale": modules.ContentAwareScale(),
     "chat": modules.Chat(),
     "weather": modules.Weather(),
     "kelly": modules.Kelly(),

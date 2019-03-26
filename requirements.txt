@@ -10,7 +10,3 @@ praw
 cmake
 face_recognition
 scikit-image
-
-tqdm
-imageio
-numba
