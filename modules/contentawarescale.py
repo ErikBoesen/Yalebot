@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 """
-Usage: python carver.py <r/c> <scale> <image_in> <image_out>
 Copyright 2018 Karthik Karanth, MIT License
 """
 
@@ -12,6 +9,7 @@ from tqdm import trange
 import numpy as np
 from imageio import imread, imwrite
 from scipy.ndimage.filters import convolve
+
 
 
 def calc_energy(img):
@@ -101,16 +99,13 @@ def minimum_seam(img):
     return M, backtrack
 
 
-which_axis = 'r'
-scale = 0.7
+scale = 0.8
 in_filename = '/Users/boesene/src/erikboesen.github.io/images/casual-small.jpg'
 out_filename = '/Users/boesene/Desktop/out.jpg'
 
 img = imread(in_filename)
 
-if which_axis == 'r':
-    out = crop_r(img, scale)
-elif which_axis == 'c':
-    out = crop_c(img, scale)
+out = crop_r(img, scale)
+out = crop_c(out, scale)
 
 imwrite(out_filename, out)
