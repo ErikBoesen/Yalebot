@@ -1,6 +1,6 @@
 from .base import Module
 
-CUP = r""">Today"s tea:
+CUP = r""">Today's tea:
 
           (
       )      )
