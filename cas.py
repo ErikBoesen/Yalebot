@@ -7,6 +7,7 @@ Copyright 2018 Karthik Karanth, MIT License
 
 import sys
 
+import numba
 from tqdm import trange
 import numpy as np
 from imageio import imread, imwrite
@@ -58,6 +59,7 @@ def crop_r(img, scale_r):
     return img
 
 
+@numba.jit
 def carve_column(img):
     r, c, _ = img.shape
 
@@ -74,6 +76,7 @@ def carve_column(img):
     return img
 
 
+@numba.jit
 def minimum_seam(img):
     r, c, _ = img.shape
     energy_map = calc_energy(img)
@@ -98,28 +101,16 @@ def minimum_seam(img):
     return M, backtrack
 
 
-def main():
-    if len(sys.argv) != 5:
-        print('usage: carver.py <r/c> <scale> <image_in> <image_out>', file=sys.stderr)
-        sys.exit(1)
+which_axis = 'r'
+scale = 0.7
+in_filename = '/Users/boesene/src/erikboesen.github.io/images/casual-small.jpg'
+out_filename = '/Users/boesene/Desktop/out.jpg'
 
-    which_axis = sys.argv[1]
-    scale = float(sys.argv[2])
-    in_filename = sys.argv[3]
-    out_filename = sys.argv[4]
+img = imread(in_filename)
 
-    img = imread(in_filename)
+if which_axis == 'r':
+    out = crop_r(img, scale)
+elif which_axis == 'c':
+    out = crop_c(img, scale)
 
-    if which_axis == 'r':
-        out = crop_r(img, scale)
-    elif which_axis == 'c':
-        out = crop_c(img, scale)
-    else:
-        print('usage: carver.py <r/c> <scale> <image_in> <image_out>', file=sys.stderr)
-        sys.exit(1)
-
-    imwrite(out_filename, out)
-
-
-if __name__ == '__main__':
-    main()
+imwrite(out_filename, out)
