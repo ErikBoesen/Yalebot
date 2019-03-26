@@ -10,3 +10,6 @@ praw
 cmake
 face_recognition
 scikit-image
+
+tdqm
+imageio
