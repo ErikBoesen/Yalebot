@@ -61,6 +61,8 @@ class Verify(Module):
 class McCarthy(Verify):
     DESCRIPTION = "Vet Stalinist spies in our homeland"
     ARGC = 0
+    POSITIVE_EMOJI = "🇺🇸"
+    NEGATIVE_EMOJI = "☭"
 
     def response(self, query, message):
         return self.check_user(random.choice(self.get_members(message["group_id"])))
