@@ -11,5 +11,6 @@ cmake
 face_recognition
 scikit-image
 
-tdqm
+tqdm
 imageio
+numba
