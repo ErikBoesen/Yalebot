@@ -13,6 +13,7 @@ class Groups(Module):
         "Virginia Tech": "46663109/rzmWS4",
         "University of Pennsylvania": "46633207/jo1Mk4wv",
         "Cornell University": "46579394/HJFvEV",
+        "Liberty University": "49189743/Gjq3rDJX",
     }
 
     def response(self, query, message):
