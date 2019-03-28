@@ -9,7 +9,7 @@ class Groups(Module):
         "UNC Chapel Hill": "47712261/2K9zx7",
         "University of Virginia": "47680748/aLDXS1",
         "University of Miami": "48024399/XOwVQLZQ",
-        "Baylor University": "42341652/aTexzNBA",
+        "Baylor University": "42341652/O9zxGxij",
         "Virginia Tech": "46663109/rzmWS4",
         "University of Pennsylvania": "46633207/jo1Mk4wv",
         "Cornell University": "46579394/HJFvEV",
