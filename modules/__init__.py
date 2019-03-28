@@ -11,6 +11,7 @@ from .jake import Jake
 from .carlos import Carlos
 from .crista import Crista
 from .maria import Maria
+from .annie import Annie
 from .chat import Chat
 from .weather import Weather
 from .kelly import Kelly
