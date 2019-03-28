@@ -7,7 +7,33 @@ client = Client.from_token(TOKEN)
 
 group = client.groups.get(id=GROUP_ID)
 
-targets = ["Chikuikem Iwuagwu", "hiba hamid", "AIDAN YOO(NOT SIMON)", "Walli Chen (penn daddy)", "Simon", "Nick Bausenwein (Penn)", "Eashan Sahai", "AJ Manning", "Margaret LaMarche", "Rachel Wilson", "Nitin S", "Mia McDonald", "David Yang", "David Lu", "serin b", "Halsey Ziglar", "Langston Luck", "Sophie Hirt", "Nick Bausenwein (Penn)", "Jacob K", "Nicole Overton", "Ambot Li"]
+targets = [
+    "Chikachu⚡️",
+    "hiba hamid",
+    "AIDAN YOO(NOT SIMON)",
+    "Walli Chen (penn daddy)",
+    "Simon",
+    "Nick Bausenwein (Penn)",
+    "Eashan Sahai",
+    "AJ Manning",
+    "Margaret LaMarche",
+    "Rachel Wilson",
+    "Nitin S",
+    "Mia McDonald",
+    "David Yang",
+    "David Lu",
+    "serin b",
+    "Halsey Ziglar",
+    "Langston Luck",
+    "Sophie Hirt",
+    "Nick Bausenwein (Penn)",
+    "Jacob K",
+    "Nicole Overton",
+    "Brett Smith",
+    "Ambot Li",
+    "Kartik Rachakonda",
+    "Renee Paulraj",
+]
 
 for member in group.members:
     if member.nickname in targets:
