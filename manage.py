@@ -5,11 +5,13 @@ import os
 import json
 from pick import pick
 import argparse
+from groupy.client import Client
 
 parser = argparse.ArgumentParser(description="Control Yalebot directly")
-parser.add_argument("verb", choices=("join", "leave", "send"))
+parser.add_argument("verb", choices=("join", "leave", "send", "purge"))
 parser.add_argument("--token", default=os.environ.get("GROUPME_ACCESS_TOKEN"))
 parser.add_argument("--groups-file", default="groups.json")
+parser.add_argument("--users-file", default="users.txt")
 args = parser.parse_args()
 
 
@@ -105,3 +107,12 @@ elif args.verb == "send":
             break
         # TODO: Merge the above two cases
         requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
+elif args.verb == "purge":
+    group_id = pick_joined_group()
+    client = Client.from_token(args.token)
+    group = client.groups.get(id=GROUP_ID)
+    with open("extraneous_users.txt", "r") as f:
+        targets = [target.strip("\n") for target in f.readlines()]
+    for member in group.members:
+        if member.nickname in targets:
+            print(member.remove())
