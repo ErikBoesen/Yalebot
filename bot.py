@@ -29,7 +29,7 @@ static_commands = {
     "bulldog": "Bulldog!  Bulldog!\nBow, wow, wow\nEli Yale\nBulldog!  Bulldog!\nBow, wow, wow\nOur team can never fail\n\nWhen the sons of Eli\nBreak through the line\nThat is the sign we hail\nBulldog!  Bulldog!\nBow, wow, wow\nEli Yale!",
     "popcorn": "https://www.youtube.com/watch?v=9nwOm4AAXwc",
     "yyle": "https://www.youtube.com/watch?v=SsZDxL-YMYc",
-    "discord": "https://discord.gg/5EScef4",
+    "discord": "Please do not: https://discord.gg/5EScef4",
 }
 
 commands = {
