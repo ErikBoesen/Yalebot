@@ -26,6 +26,5 @@ class Minion(Module):
     ARGC = 1
 
     def response(self, query, message):
-        return "Not today, Satan"
         emote = query.strip()
         return BODY % (emote, emote)
