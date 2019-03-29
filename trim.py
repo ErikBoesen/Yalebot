@@ -9,7 +9,8 @@ group = client.groups.get(id=GROUP_ID)
 
 with open("extraneous_users.txt", "r") as f:
     targets = f.readlines()
+targets = [target.strip("\n") for target in targets]
 
 for member in group.members:
-    if if member.name in targets:
+    if member.name in targets:
         print(member.remove())
