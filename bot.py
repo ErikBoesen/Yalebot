@@ -143,7 +143,7 @@ def webhook():
                 reply(f"Command not found. {advice}Use !help to view a list of commands.", group_id)
 
         if H_PATTERN.search(text) is not None:
-            reply(forename + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"? Perhaps you meant to say \"" + H_PATTERN.sub("The H Place", text) + "\" instead?", group_id)
+            reply(forename + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"?", group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome, " + forename + "! :)", group_id)
         if "dad" in text.lower():
