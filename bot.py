@@ -152,7 +152,7 @@ def webhook():
     if message["system"]:
         for option in system_responses:
             if system_responses[option].RE.match(text):
-                reply(system_responses[option].response(), group_id)
+                reply(system_responses[option].response(text, message), group_id)
         """
         if system_responses["welcome"].RE.match(text):
             check_names = system_responses["welcome"].get_names(text)
