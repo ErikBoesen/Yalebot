@@ -234,4 +234,4 @@ def create_bot():
                            json={"bot": bot}).json()["response"]["bot"]
 
     # Store in database
-    db_cursor.execute(f"INSERT INTO {DATABASE_NAME}(group_id,bot_id) VALUES (%s)", (result["group_id"], result["bot_id"]))
+    db_cursor.execute(f"INSERT INTO {DATABASE_URL}(group_id,bot_id) VALUES (%s)", (result["group_id"], result["bot_id"]))
