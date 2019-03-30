@@ -33,8 +33,8 @@ class Meme(Module, ImageUploader):
                 {"position": (579, 420), "font_size": self.LARGE_FONT_SIZE},
             ),
             "catch": (
-                {"position": (550, 275), "color": self.WHITE},
                 {"position": (250, 90), "color": self.WHITE},
+                {"position": (550, 275), "color": self.WHITE},
             ),
             "kirby": (
                 {"position": (80, 70), "font_size": self.SMALL_FONT_SIZE, "center": False},
