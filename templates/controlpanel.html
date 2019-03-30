@@ -1,16 +1,16 @@
 {% extends "layout.html" %}
 {% block main %}
 <p>You are in {{ groups|length }} groups.</p>
-<form>
-    <input type="hidden" value="{{ access_token }}">
-    <select name="group">
-    {% for group in groups %}
-        <option>{{ group.name }}</option>
-    {% endfor %}
+<form action="/create">
+    <input name="access_token" type="hidden" value="{{ access_token }}">
+    <select name="group_id">
+        {% for group in groups %}
+        <option value="{{ group.id }}">{{ group.name }}</option>
+        {% endfor %}
     </select>
     <p>Optional customizations:</p>
     <input name="name" type="text" placeholder="Custom bot name">
-    <input name="avatar" type="text" placeholder="Custom avatar image URL">
+    <input name="avatar_url" type="text" placeholder="Custom avatar image URL">
     <input type="submit" value="Create bot">
 </form>
 {% endblock %}
