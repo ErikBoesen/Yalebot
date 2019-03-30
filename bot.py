@@ -217,7 +217,7 @@ def create_bot():
     bot = {
         "name": request.args.name or "Yalebot",
         "group_id": request.args.group_id,
-        "avatar_url": request.args.avatar_url or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c"),
+        "avatar_url": request.args.avatar_url or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
         "callback_url": "https://yalebot.herokuapp.com/",
         "dm_notification": False,
     }
