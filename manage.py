@@ -110,8 +110,8 @@ elif args.verb == "send":
 elif args.verb == "purge":
     group_id = pick_joined_group()
     client = Client.from_token(args.token)
-    group = client.groups.get(id=GROUP_ID)
-    with open("extraneous_users.txt", "r") as f:
+    group = client.groups.get(id=group_id)
+    with open(args.users_file, "r") as f:
         targets = [target.strip("\n") for target in f.readlines()]
     for member in group.members:
         if member.nickname in targets:
