@@ -213,7 +213,8 @@ def controlpanel():
 
 @app.route("/create", methods=["POST"])
 def create_bot():
-    request.args
+    print(request.args)
+    access_token = request.args["access_token"]
     bot = {
         "name": request.args.name or "Yalebot",
         "group_id": request.args.group_id,
@@ -221,7 +222,7 @@ def create_bot():
         "callback_url": "https://yalebot.herokuapp.com/",
         "dm_notification": False,
     }
-    result = requests.post(f"https://api.groupme.com/v3/bots?token={args.token}",
+    result = requests.post(f"https://api.groupme.com/v3/bots?token={args.access_token}",
                            json={"bot": bot}).json()["response"]["bot"]
     print(result)
 
@@ -229,4 +230,3 @@ def create_bot():
         "name": bot["name"],
         "bot_id": result["bot_id"],
     }
-    save_groups(groups)

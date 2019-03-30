@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block main %}
 <p>You are in {{ groups|length }} groups.</p>
-<form action="/create">
+<form action="/create" method="post">
     <input name="access_token" type="hidden" value="{{ access_token }}">
     <select name="group_id">
         {% for group in groups %}
