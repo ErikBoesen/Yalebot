@@ -213,19 +213,19 @@ def controlpanel():
 
 @app.route("/create", methods=["POST"])
 def create_bot():
-    print(request.args)
-    access_token = request.args["access_token"]
+    # Build and send bot data
+    access_token = request.form["access_token"]
     bot = {
-        "name": request.args.name or "Yalebot",
-        "group_id": request.args.group_id,
-        "avatar_url": request.args.avatar_url or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
+        "name": request.form["name"] or "Yalebot",
+        "group_id": request.form["group_id"],
+        "avatar_url": request.form["avatar_url"] or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
         "callback_url": "https://yalebot.herokuapp.com/",
         "dm_notification": False,
     }
-    result = requests.post(f"https://api.groupme.com/v3/bots?token={args.access_token}",
+    result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
                            json={"bot": bot}).json()["response"]["bot"]
-    print(result)
 
+    # Store in database
     groups[result["group_id"]] = {
         "name": bot["name"],
         "bot_id": result["bot_id"],
