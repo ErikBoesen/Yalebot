@@ -201,3 +201,9 @@ def reply(message, group_id):
 @app.route("/", methods=["GET"])
 def home():
     return render_template("index.html")
+
+
+@app.route("/controlpanel", methods=["GET"])
+def controlpanel():
+    token = request.args["client_id"]
+    return render_template("controlpanel.html")
