@@ -4,7 +4,7 @@ import re
 import requests
 import json
 import difflib
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 
 app = Flask(__name__)
@@ -196,3 +196,8 @@ def reply(message, group_id):
     # It would be rejected anyway
     if data["text"] or data["picture_url"]:
         response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
+
+
+@app.route("/", methods=["GET"])
+def home():
+    return render_template("index.html")
