@@ -205,5 +205,7 @@ def home():
 
 @app.route("/controlpanel", methods=["GET"])
 def controlpanel():
-    token = request.args["client_id"]
-    return render_template("controlpanel.html")
+    access_token = request.args["access_token"]
+    # me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
+    return render_template("controlpanel.html", access_token=access_token, groups=groups)

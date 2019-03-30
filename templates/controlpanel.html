@@ -1,4 +1,11 @@
 {% extends "layout.html" %}
 {% block main %}
-<p>Your token is {{token}}.</p>
+<p>You are in {{ groups|length }} groups.</p>
+<form>
+    <select name="group">
+    {% for group in groups %}
+        <option>{{ group.name }}</option>
+    {% endfor %}
+    </select>
+</form>
 {% endblock %}
