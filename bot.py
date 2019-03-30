@@ -5,11 +5,19 @@ import requests
 import json
 import difflib
 from flask import Flask, request, render_template
+import psycopg2
 
 
 app = Flask(__name__)
 with open("groups.json", "r") as f:
     GROUPS = json.load(f)
+
+try:
+    DATABASE_URL = os.environ["DATABASE_URL"]
+    db_connection = psycopg2.connect(DATABASE_URL, sslmode="require")
+    db_cursor = db_connection.cursor()
+except KeyError:
+    print("Couldn't reach database.")
 
 MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
@@ -226,7 +234,4 @@ def create_bot():
                            json={"bot": bot}).json()["response"]["bot"]
 
     # Store in database
-    groups[result["group_id"]] = {
-        "name": bot["name"],
-        "bot_id": result["bot_id"],
-    }
+    db_cursor.execute(f"INSERT INTO {DATABASE_NAME}(group_id,bot_id) VALUES (%s)", (result["group_id"], result["bot_id"]))
