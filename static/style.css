@@ -1,5 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background: white;
     color: #333;
     border-top: 5px solid #00356b;
+}
+header {
+    padding-bottom: 20px;
+    padding: 20px;
+}
+header #logo {
+    height: 80px;
+}
+footer {
+    color: #aaa;
+    background: #ccc;
+}
+a {
+
 }
