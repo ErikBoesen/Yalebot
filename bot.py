@@ -32,6 +32,7 @@ static_commands = {
     "yyle": "https://www.youtube.com/watch?v=SsZDxL-YMYc",
     "discord": "If you must: https://discord.gg/5EScef4",
     "bang": ("", "https://i.groupme.com/720x1440.png.c76127a21867451093edd11bbb09d75d.large"),
+    "oof": ("Oh?", "https://i.groupme.com/1500x1125.jpeg.9b2c341aa9854831ab2525d7e21e974a.large"),
 }
 
 commands = {
