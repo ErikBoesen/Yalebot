@@ -184,7 +184,7 @@ def reply(message, group_id):
         for item in message:
             reply(item, group_id)
         return
-    this_bot = Bot.query().get(group_id)
+    this_bot = Bot.query.get(group_id)
     data = {
         "bot_id": this_bot.bot_id,
     }
