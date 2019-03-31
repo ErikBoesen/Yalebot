@@ -2,7 +2,6 @@
 {% block main %}
 <section>
     <h2>Add Yalebot to a group</h2>
-    <p>You are in {{ groups|length }} groups.</p>
     <form method="post">
         <input name="access_token" type="hidden" value="{{ access_token }}">
         <select name="group_id">
@@ -19,7 +18,6 @@
 </section>
 <section>
     <h2>Active groups</h2>
-    <p>You have added Yalebot to {{ bots|length }} of your groups.</p>
     <table>
         <thead>
             <th>Avatar</th>
