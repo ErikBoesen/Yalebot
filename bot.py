@@ -205,12 +205,17 @@ def home():
     return render_template("index.html")
 
 
+def in_group(group_id):
+    return db.session.query(db.exists().where(Bot.group_id == group_id)).scalar()
+
+
 @app.route("/controlpanel", methods=["GET"])
 def controlpanel():
     access_token = request.args["access_token"]
-    # me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
     bots = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
+    groups = [group for group in groups if not Bot.query.get(group["group_id"])]
+    bots = [bot for bot in bots if Bot.query.get(bot["group_id"])]
     return render_template("controlpanel.html", access_token=access_token, groups=groups)
 
 
