@@ -256,8 +256,8 @@ def delete_bot():
     data = request.get_json()
     access_token = data["access_token"]
     req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": data["bot_id"]})
-    print(req.json())
-    if req.ok:
+    print(req.text)
+    if False:
         bot = Bot.query.get(bot_id=data["bot_id"])
         db.session.delete(bot)
         db.session.commit()
