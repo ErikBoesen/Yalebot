@@ -1,3 +1,5 @@
 body {
-    background: #00356b;
+    background: white;
+    color: #333;
+    border-top: 5px solid #00356b;
 }
