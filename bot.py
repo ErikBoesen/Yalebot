@@ -256,12 +256,11 @@ def create_bot():
 def delete_bot():
     data = request.get_json()
     access_token = data["access_token"]
-    req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": data["bot_id"]})
+    bot = Bot.query.get(data["group_id"])
+    req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": bot.bot_id})
     # TODO: Make sure this doesn't happen even if the request above had an error on GroupMe's side
     if req.ok:
         print("Status: %d" % req.status_code)
-        bot = Bot.query.get({"bot_id": data["bot_id"]})
-        print(bot)
         db.session.delete(bot)
         db.session.commit()
         return "ok", 200
