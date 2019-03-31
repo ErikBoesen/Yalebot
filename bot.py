@@ -10,8 +10,6 @@ import psycopg2
 
 
 app = Flask(__name__)
-with open("groups.json", "r") as f:
-    GROUPS = json.load(f)
 
 try:
     DATABASE_URL = os.environ["DATABASE_URL"]
