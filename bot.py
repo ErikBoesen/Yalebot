@@ -263,3 +263,5 @@ def delete_bot():
         print(bot)
         db.session.delete(bot)
         db.session.commit()
+        return "ok", 200
+    return 401
