@@ -26,14 +26,16 @@
             <th>Bot ID</th>
             <th>Group</th>
             <th>Name</th>
+            <th></th>
         </thead>
         <tbody>
             {% for bot in bots %}
             <tr>
                 <td><img src="{{ bot.avatar_url }}"></td>
-                <td>{{ bot.id }}</td>
+                <td>{{ bot.bot_id }}</td>
                 <td>{{ bot.group_name }}</td>
                 <td>{{ bot.name }}</td>
+                <td><button class="button delete" bot_id="{{ bot.bot_id }}">Delete</button></td>
             </tr>
             {% endfor %}
         </tbody>

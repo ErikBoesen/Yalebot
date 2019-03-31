@@ -29,13 +29,19 @@ header #logo {
     margin-top: 10px;
     margin-left: -18px;
 }
+section {
+    margin-bottom: 20px;
+}
+section:last-child {
+    margin-bottom: 0;
+}
 main {
     min-height: 81vh;
 }
 a {
     color: #00356b;
 }
-select, input {
+select, input, .button {
     font: inherit;
     margin: 2px 0;
     outline: none;
@@ -46,7 +52,7 @@ label {
 .button {
     color: #00356b;
     background: none;
-    padding: 10px;
+    padding: 8px 10px;
     border: solid 2px #00356b;
     text-decoration: none;
     vertical-align: middle;
@@ -54,14 +60,36 @@ label {
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
     position: relative;
     transition: 0.5s;
+    cursor: pointer;
 }
 .button[disabled] {
     opacity: 0.6;
+    cursor: default;
 }
 .button:hover, .button:focus, .button:active {
     color: white;
     background: #00356b;
     transition: 0.6s;
+}
+table {
+
+}
+th, td {
+    padding: 0 10px;
+}
+th:first-child, td:first-child {
+    padding-left: 0;
+}
+.button.delete {
+    border-color: #ea0404;
+    color: #ea0404
+}
+.button.delete:hover, .button.delete:focus, .button.delete:active {
+    color: white;
+    background-color: #ea0404;
+}
+table img {
+    width: 50px;
 }
 footer {
     color: #aaa;
