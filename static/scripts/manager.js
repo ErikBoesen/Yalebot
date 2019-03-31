@@ -9,7 +9,11 @@ onclick = function(e) {
                 // TODO: this is not a very elegant way to get the token.
                 'access_token': document.getElementsByName('access_token')[0].value,
             }));
-            location.reload();
+            req.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    location.reload();
+                }
+            };
         }
     }
 }

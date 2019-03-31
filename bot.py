@@ -224,11 +224,12 @@ def manager():
             "callback_url": "https://yalebot.herokuapp.com/",
             "dm_notification": False,
         }
+        me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
         result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
                                json={"bot": bot}).json()["response"]["bot"]
 
         # Store in database
-        registrant = Bot(result["group_id"], result["bot_id"])
+        registrant = Bot(result["group_id"], result["bot_id"], me["user_id"])
         db.session.add(registrant)
         db.session.commit()
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
@@ -244,10 +245,12 @@ class Bot(db.Model):
     # TODO: store owner also
     group_id = db.Column(db.String(16), unique=True, primary_key=True)
     bot_id = db.Column(db.String(26), unique=True)
+    owner_id = db.Column(db.String(16), unique=False)
 
-    def __init__(self, group_id, bot_id):
+    def __init__(self, group_id, bot_id, owner_id):
         self.group_id = group_id
         self.bot_id = bot_id
+        self.owner_id = owner_id
 
 
 @app.route("/delete", methods=["POST"])
@@ -257,7 +260,6 @@ def delete_bot():
     bot = Bot.query.get(data["group_id"])
     req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": bot.bot_id})
     if req.ok:
-        print("Status: %d" % req.status_code)
         db.session.delete(bot)
         db.session.commit()
         return "ok", 200
