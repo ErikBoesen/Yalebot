@@ -33,6 +33,7 @@ static_commands = {
     "discord": "If you must: https://discord.gg/5EScef4",
     "bang": ("", "https://i.groupme.com/720x1440.png.c76127a21867451093edd11bbb09d75d.large"),
     "oof": ("Oh?", "https://i.groupme.com/1500x1125.jpeg.9b2c341aa9854831ab2525d7e21e974a.large"),
+    "tease": ("", "https://i.groupme.com/936x1246.jpeg.d0d60970b329415cac1d7a1825a783a7.large"),
 }
 
 commands = {
