@@ -255,6 +255,7 @@ def create_bot():
 @app.route("/delete", methods=["POST"])
 def delete_bot():
     data = request.get_json()
+    print(data)
     access_token = data["access_token"]
     req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": data["bot_id"]})
     # TODO: this is a very messy way to make sure the request went through.
