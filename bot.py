@@ -223,7 +223,7 @@ def controlpanel():
 class Bot(db.Model):
     __tablename__ = "bots"
     # TODO: store owner also
-    group_id = db.Column(db.String(16), unique=True)
+    group_id = db.Column(db.String(16), unique=True, primary=True)
     bot_id = db.Column(db.String(26), unique=True)
 
     def __init__(self, group_id, bot_id):
