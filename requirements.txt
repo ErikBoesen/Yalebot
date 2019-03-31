@@ -1,4 +1,5 @@
 Flask
+Flask-SQLAlchemy
 gunicorn==19.6.0
 zalgoify>=1.0
 upsidedown

@@ -5,6 +5,7 @@ import requests
 import json
 import difflib
 from flask import Flask, request, render_template
+from flask.ext.sqlalchemy import SQLAlchemy
 import psycopg2
 
 
@@ -14,8 +15,8 @@ with open("groups.json", "r") as f:
 
 try:
     DATABASE_URL = os.environ["DATABASE_URL"]
-    db_connection = psycopg2.connect(DATABASE_URL, sslmode="require")
-    db_cursor = db_connection.cursor()
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+    db = SQLAlchemy(app)
 except KeyError:
     print("Couldn't reach database.")
 
@@ -219,6 +220,17 @@ def controlpanel():
     return render_template("controlpanel.html", access_token=access_token, groups=groups)
 
 
+class Bot(db.Model):
+    __tablename__ = "bots"
+    # TODO: store owner also
+    group_id = db.Column(db.String(16), unique=True)
+    bot_id = db.Column(db.String(26), unique=True)
+
+    def __init__(self, group_id, bot_id):
+        self.group_id = group_id
+        self.bot_id = bot_id
+
+
 @app.route("/create", methods=["POST"])
 def create_bot():
     # Build and send bot data
@@ -234,4 +246,6 @@ def create_bot():
                            json={"bot": bot}).json()["response"]["bot"]
 
     # Store in database
-    db_cursor.execute(f"INSERT INTO {DATABASE_URL}(group_id,bot_id) VALUES (%s)", (result["group_id"], result["bot_id"]))
+    registrant = Bot(result["group_id"], result["bot_id"])
+    db.session.add(registrant)
+    db.session.commit()
