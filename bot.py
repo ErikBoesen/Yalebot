@@ -210,9 +210,25 @@ def in_group(group_id):
     return db.session.query(db.exists().where(Bot.group_id == group_id)).scalar()
 
 
-@app.route("/manager", methods=["GET"])
+@app.route("/manager", methods=["GET", "POST"])
 def manager():
     access_token = request.args["access_token"]
+    if request.method == "POST":
+        # Build and send bot data
+        bot = {
+            "name": request.form["name"] or "Yalebot",
+            "group_id": request.form["group_id"],
+            "avatar_url": request.form["avatar_url"] or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
+            "callback_url": "https://yalebot.herokuapp.com/",
+            "dm_notification": False,
+        }
+        result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
+                               json={"bot": bot}).json()["response"]["bot"]
+
+        # Store in database
+        registrant = Bot(result["group_id"], result["bot_id"])
+        db.session.add(registrant)
+        db.session.commit()
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
     bots = requests.get(f"https://api.groupme.com/v3/bots?token={access_token}").json()["response"]
     if os.environ.get("DATABASE_URL") is not None:
@@ -232,33 +248,12 @@ class Bot(db.Model):
         self.bot_id = bot_id
 
 
-@app.route("/create", methods=["POST"])
-def create_bot():
-    # Build and send bot data
-    access_token = request.form["access_token"]
-    bot = {
-        "name": request.form["name"] or "Yalebot",
-        "group_id": request.form["group_id"],
-        "avatar_url": request.form["avatar_url"] or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
-        "callback_url": "https://yalebot.herokuapp.com/",
-        "dm_notification": False,
-    }
-    result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
-                           json={"bot": bot}).json()["response"]["bot"]
-
-    # Store in database
-    registrant = Bot(result["group_id"], result["bot_id"])
-    db.session.add(registrant)
-    db.session.commit()
-
-
 @app.route("/delete", methods=["POST"])
 def delete_bot():
     data = request.get_json()
     access_token = data["access_token"]
     bot = Bot.query.get(data["group_id"])
     req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": bot.bot_id})
-    # TODO: Make sure this doesn't happen even if the request above had an error on GroupMe's side
     if req.ok:
         print("Status: %d" % req.status_code)
         db.session.delete(bot)

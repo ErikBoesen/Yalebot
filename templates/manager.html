@@ -3,7 +3,7 @@
 <section>
     <h2>Add Yalebot to a group</h2>
     <p>You are in {{ groups|length }} groups.</p>
-    <form action="/create" method="post">
+    <form method="post">
         <input name="access_token" type="hidden" value="{{ access_token }}">
         <select name="group_id">
             {% for group in groups %}
