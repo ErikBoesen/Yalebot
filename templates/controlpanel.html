@@ -1,19 +1,43 @@
 {% extends "layout.html" %}
 {% block main %}
-<h1>Add Yalebot to a group</h1>
-<p>You are in {{ groups|length }} groups.</p>
-<form action="/create" method="post">
-    <input name="access_token" type="hidden" value="{{ access_token }}">
-    <select name="group_id">
-        {% for group in groups %}
-        <option value="{{ group.id }}">{{ group.name }}</option>
-        {% endfor %}
-    </select>
-    <p>Optional customizations:</p>
-    <label>Bot name: <input name="name" type="text" placeholder="Custom bot name"></label>
-    <label>Bot avatar: <input name="avatar_url" type="text" placeholder="Custom avatar image URL"></label>
-    <label><input type="checkbox" id="accept"> I agree to the <a href="/static/ppol.html">Yalebot Privacy Policy</a> and the <a href="/static/tac.html">Yalebot Terms and Conditions</a>. I hereby grant Yalebot access to my GroupMe account, and authorize it to perform various actions on my behalf.</label>
-    <input disabled type="submit" class="button" id="add" value="Add bot">
-</form>
+<section>
+    <h2>Add Yalebot to a group</h2>
+    <p>You are in {{ groups|length }} groups.</p>
+    <form action="/create" method="post">
+        <input name="access_token" type="hidden" value="{{ access_token }}">
+        <select name="group_id">
+            {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.name }}</option>
+            {% endfor %}
+        </select>
+        <p>Optional customizations:</p>
+        <label>Bot name: <input name="name" type="text" placeholder="Custom bot name"></label>
+        <label>Bot avatar: <input name="avatar_url" type="text" placeholder="Custom avatar image URL"></label>
+        <label><input type="checkbox" id="accept"> I agree to the <a href="/static/ppol.html">Yalebot Privacy Policy</a> and the <a href="/static/tac.html">Yalebot Terms and Conditions</a>. I hereby grant Yalebot access to my GroupMe account, and authorize it to perform various actions on my behalf.</label>
+        <input disabled type="submit" class="button" id="add" value="Add bot">
+    </form>
+</section>
+<section>
+    <h2>Active groups</h2>
+    <p>You have added Yalebot to {{ bots|length }} of your groups.</p>
+    <table>
+        <thead>
+            <th>Avatar</th>
+            <th>Bot ID</th>
+            <th>Group</th>
+            <th>Name</th>
+        </thead>
+        <tbody>
+            {% for bot in bots %}
+            <tr>
+                <td><img src="{{ bot.avatar_url }}"></td>
+                <td>{{ bot.id }}</td>
+                <td>{{ bot.group_name }}</td>
+                <td>{{ bot.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
 <script src="/static/scripts/controlpanel.js"></script>
 {% endblock %}
