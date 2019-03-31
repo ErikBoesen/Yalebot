@@ -217,11 +217,12 @@ class Bot(db.Model):
     __tablename__ = "bots"
     # TODO: store owner also
     group_id = db.Column(db.String(16), unique=True, primary_key=True)
-    owner = db.Column(db.String(16))
+    owner_id = db.Column(db.String(16))
     bot_id = db.Column(db.String(26), unique=True)
 
-    def __init__(self, group_id, bot_id):
+    def __init__(self, group_id, owner_id, bot_id):
         self.group_id = group_id
+        self.owner_id = owner_id
         self.bot_id = bot_id
 
 
@@ -240,6 +241,6 @@ def create_bot():
                            json={"bot": bot}).json()["response"]["bot"]
 
     # Store in database
-    registrant = Bot(result["group_id"], result["bot_id"])
+    registrant = Bot(result["group_id"], owner_id=, result["bot_id"])
     db.session.add(registrant)
     db.session.commit()
