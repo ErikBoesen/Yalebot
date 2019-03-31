@@ -40,9 +40,7 @@ select, input {
     margin: 2px 0;
     outline: none;
 }
-select {
-}
-input {
+input[type="text"], input[type="submit"] {
     display: block;
 }
 .button {
@@ -56,6 +54,9 @@ input {
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
     position: relative;
     transition: color 0.3s;
+}
+.button[disabled] {
+    opacity: 0.6;
 }
 .button:before {
     content: '';
