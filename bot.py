@@ -6,17 +6,11 @@ import json
 import difflib
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
-import psycopg2
 
 
 app = Flask(__name__)
-
-try:
-    DATABASE_URL = os.environ["DATABASE_URL"]
-    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-    db = SQLAlchemy(app)
-except KeyError:
-    print("Couldn't reach database.")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+db = SQLAlchemy(app)
 
 MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
@@ -223,6 +217,7 @@ class Bot(db.Model):
     __tablename__ = "bots"
     # TODO: store owner also
     group_id = db.Column(db.String(16), unique=True, primary_key=True)
+    owner = db.Column(db.String(16))
     bot_id = db.Column(db.String(26), unique=True)
 
     def __init__(self, group_id, bot_id):
