@@ -250,3 +250,14 @@ def create_bot():
     registrant = Bot(result["group_id"], result["bot_id"])
     db.session.add(registrant)
     db.session.commit()
+
+
+@app.route("/delete", methods=["POST"])
+def delete_bot():
+    data = request.get_json()
+    access_token = data["access_token"]
+    req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": data["bot_id"]})
+    if req.ok:
+        bot = bot.query.get(bot_id=data["bot_id"])
+        db.session.delete(bot)
+        db.session.commit()

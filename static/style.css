@@ -74,7 +74,7 @@ label {
 .button[disabled]:hover, .button[disabled]:focus, .button[disabled]:active {
     /* TODO: duplication */
     color: #00356b;
-    background: white;;
+    background: white;
 }
 table {
 
