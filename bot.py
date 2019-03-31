@@ -239,6 +239,6 @@ def create_bot():
                            json={"bot": bot}).json()["response"]["bot"]
 
     # Store in database
-    registrant = Bot(result["group_id"], owner_id=, result["bot_id"])
+    registrant = Bot(result["group_id"], result["bot_id"])
     db.session.add(registrant)
     db.session.commit()
