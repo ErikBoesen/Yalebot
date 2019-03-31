@@ -5,7 +5,7 @@ import requests
 import json
 import difflib
 from flask import Flask, request, render_template
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 
 
