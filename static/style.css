@@ -13,18 +13,21 @@
 html, body { height: 100%; }
 body {
     font-family: 'PT Sans', serif;
+    font-size: 16px;
     background: white;
     color: #333;
     border-top: 5px solid #00356b;
 }
 header, main, footer {
-    padding: 20px;
+    padding: 10px 40px;
 }
 header {
     padding-bottom: 20px;
 }
 header #logo {
     height: 80px;
+    margin-top: 10px;
+    margin-left: -18px;
 }
 main {
     min-height: 81vh;
@@ -32,7 +35,19 @@ main {
 a {
     color: #00356b;
 }
-a.button {
+select, input {
+    font: inherit;
+    margin: 2px 0;
+    outline: none;
+}
+select {
+}
+input {
+    display: block;
+}
+.button {
+    color: #00356b;
+    background: none;
     padding: 10px;
     border: solid 2px #00356b;
     text-decoration: none;
@@ -42,8 +57,8 @@ a.button {
     position: relative;
     transition: color 0.3s;
 }
-a.button:before {
-    content: "";
+.button:before {
+    content: '';
     position: absolute;
     z-index: -1;
     top: 0;
@@ -55,10 +70,10 @@ a.button:before {
     transform-origin: 0 50%;
     transition: transform 0.3s ease-out;
 }
-a.button:hover, a.button:focus, a.button:active {
+.button:hover, .button:focus, .button:active {
     color: white;
 }
-a.button:hover:before, a.button:focus:before, a.button:active:before {
+.button:hover:before, .button:focus:before, .button:active:before {
     transform: scaleX(1);
 }
 footer {

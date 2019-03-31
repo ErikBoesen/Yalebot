@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block main %}
+<h1>Add Yalebot to a group</h1>
 <p>You are in {{ groups|length }} groups.</p>
 <form action="/create" method="post">
     <input name="access_token" type="hidden" value="{{ access_token }}">
@@ -9,8 +10,8 @@
         {% endfor %}
     </select>
     <p>Optional customizations:</p>
-    <input name="name" type="text" placeholder="Custom bot name">
-    <input name="avatar_url" type="text" placeholder="Custom avatar image URL">
+    Bot name: <input name="name" type="text" placeholder="Custom bot name">
+    Bot avatar: <input name="avatar_url" type="text" placeholder="Custom avatar image URL">
     <input type="submit" class="button" value="Create bot">
 </form>
 {% endblock %}
