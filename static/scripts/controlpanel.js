@@ -9,7 +9,7 @@ onclick = function(e) {
             req.open('POST', '/delete');
             req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             req.send(JSON.stringify({
-                'bot_id': this.getAttribute('bot_id'),
+                'bot_id': e.target.getAttribute('bot_id'),
                 // TODO: this is not a very elegant way to get the token.
                 'access_token': document.getElementsByName('access_token')[0].value,
             }));

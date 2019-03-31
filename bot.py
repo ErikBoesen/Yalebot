@@ -214,7 +214,6 @@ def controlpanel():
     access_token = request.args["access_token"]
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
     bots = requests.get(f"https://api.groupme.com/v3/bots?token={access_token}").json()["response"]
-    print(bots)
     if False:
         groups = [group for group in groups if not Bot.query.get(group["group_id"])]
         bots = [bot for bot in bots if Bot.query.get(bot["group_id"])]
