@@ -71,6 +71,11 @@ label {
     background: #00356b;
     transition: 0.6s;
 }
+.button[disabled]:hover, .button[disabled]:focus, .button[disabled]:active {
+    /* TODO: duplication */
+    color: #00356b;
+    background: white;;
+}
 table {
 
 }
