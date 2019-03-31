@@ -16,7 +16,7 @@ body {
     font-size: 16px;
     background: white;
     color: #333;
-    border-top: 5px solid #00356b;
+    border-top: 8px solid #00356b;
 }
 header, main, footer {
     padding: 10px 40px;
@@ -27,7 +27,6 @@ header {
 header #logo {
     height: 80px;
     margin-top: 10px;
-    margin-left: -18px;
 }
 section {
     margin-bottom: 20px;
@@ -62,22 +61,10 @@ label {
     transition: 0.5s;
     cursor: pointer;
 }
-.button[disabled] {
-    opacity: 0.6;
-    cursor: default;
-}
 .button:hover, .button:focus, .button:active {
     color: white;
     background: #00356b;
     transition: 0.6s;
-}
-.button[disabled]:hover, .button[disabled]:focus, .button[disabled]:active {
-    /* TODO: duplication */
-    color: #00356b;
-    background: white;
-}
-table {
-
 }
 th, td {
     padding: 0 10px;
