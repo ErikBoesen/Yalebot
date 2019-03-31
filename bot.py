@@ -260,7 +260,7 @@ def delete_bot():
     # TODO: Make sure this doesn't happen even if the request above had an error on GroupMe's side
     if req.ok:
         print("Status: %d" % req.status_code)
-        bot = Bot.query.get(bot_id=data["bot_id"])
+        bot = Bot.query.get({"bot_id": data["bot_id"]})
         print(bot)
         db.session.delete(bot)
         db.session.commit()
