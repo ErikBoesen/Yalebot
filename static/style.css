@@ -40,7 +40,7 @@ select, input {
     margin: 2px 0;
     outline: none;
 }
-input[type="text"], input[type="submit"] {
+label {
     display: block;
 }
 .button {
@@ -53,29 +53,15 @@ input[type="text"], input[type="submit"] {
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
     position: relative;
-    transition: color 0.3s;
+    transition: 0.5s;
 }
 .button[disabled] {
     opacity: 0.6;
 }
-.button:before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #00356b;
-    transform: scaleX(0);
-    transform-origin: 0 50%;
-    transition: transform 0.3s ease-out;
-}
 .button:hover, .button:focus, .button:active {
     color: white;
-}
-.button:hover:before, .button:focus:before, .button:active:before {
-    transform: scaleX(1);
+    background: #00356b;
+    transition: 0.6s;
 }
 footer {
     color: #aaa;
