@@ -34,9 +34,6 @@ section {
 section:last-child {
     margin-bottom: 0;
 }
-main {
-    min-height: 81vh;
-}
 a {
     color: #00356b;
 }
@@ -44,6 +41,17 @@ select, input, .button {
     font: inherit;
     margin: 2px 0;
     outline: none;
+}
+input[type="text"] {
+    width: 300px;
+    display: block;
+}
+#avatar_preview {
+    width: 150px;
+    height: 150px;
+    display: block;
+    background-size: cover;
+    background-position: center;
 }
 label {
     display: block;
@@ -85,7 +93,7 @@ table img {
 }
 footer {
     color: #aaa;
-    background: #ddd;
+    font-size: 10px;
 }
 footer a {
     color: inherit;

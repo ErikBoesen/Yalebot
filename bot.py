@@ -245,7 +245,7 @@ class Bot(db.Model):
     # TODO: store owner also
     group_id = db.Column(db.String(16), unique=True, primary_key=True)
     bot_id = db.Column(db.String(26), unique=True)
-    owner_id = db.Column(db.String(16), unique=False)
+    owner_id = db.Column(db.String(16))
 
     def __init__(self, group_id, bot_id, owner_id):
         self.group_id = group_id

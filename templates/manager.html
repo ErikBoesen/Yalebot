@@ -3,15 +3,14 @@
 <section>
     <h2>Add Yalebot to a group</h2>
     <form method="post">
-        <input name="access_token" type="hidden" value="{{ access_token }}">
         <select name="group_id">
             {% for group in groups %}
             <option value="{{ group.id }}">{{ group.name }}</option>
             {% endfor %}
         </select>
-        <p>Optional customizations:</p>
-        <label>Bot name: <input name="name" type="text" placeholder="Custom bot name"></label>
-        <label>Bot avatar: <input name="avatar_url" type="text" placeholder="Custom avatar image URL"></label>
+        <label>Bot name: <input name="name" type="text" value="Yalebot"></label>
+        <label>Bot avatar: <input name="avatar_url" type="text" value="https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c"></label>
+        <div id="avatar_preview"></div>
         <input type="submit" class="button" id="add" value="Add bot">
     </form>
 </section>
