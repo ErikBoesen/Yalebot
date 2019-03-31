@@ -31,6 +31,7 @@ static_commands = {
     "popcorn": "https://www.youtube.com/watch?v=9nwOm4AAXwc",
     "yyle": "https://www.youtube.com/watch?v=SsZDxL-YMYc",
     "discord": "If you must: https://discord.gg/5EScef4",
+    "bang": ("", "https://i.groupme.com/720x1440.png.c76127a21867451093edd11bbb09d75d.large"),
 }
 
 commands = {
@@ -259,5 +260,6 @@ def delete_bot():
     # TODO: this is a very messy way to make sure the request went through.
     if req.ok and len(req.text) == 0:
         bot = Bot.query.get(bot_id=data["bot_id"])
+        print(bot)
         db.session.delete(bot)
         db.session.commit()
