@@ -1,25 +1,70 @@
+@font-face {
+    font-family: 'PT Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('PT Sans'), local('PTSans-Regular'), url(https://fonts.gstatic.com/s/ptsans/v10/jizaRExUiTo99u79D0KExcOPIDU.woff2) format('woff2');
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
+html, body { height: 100%; }
 body {
+    font-family: 'PT Sans', serif;
     background: white;
     color: #333;
     border-top: 5px solid #00356b;
 }
+header, main, footer {
+    padding: 20px;
+}
 header {
     padding-bottom: 20px;
-    padding: 20px;
 }
 header #logo {
     height: 80px;
 }
-footer {
-    color: #aaa;
-    background: #ccc;
+main {
+    min-height: 81vh;
 }
 a {
-
+    color: #00356b;
+}
+a.button {
+    padding: 10px;
+    border: solid 2px #00356b;
+    text-decoration: none;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    transition: color 0.3s;
+}
+a.button:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #00356b;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.3s ease-out;
+}
+a.button:hover, a.button:focus, a.button:active {
+    color: white;
+}
+a.button:hover:before, a.button:focus:before, a.button:active:before {
+    transform: scaleX(1);
+}
+footer {
+    color: #aaa;
+    background: #ddd;
+}
+footer a {
+    color: inherit;
 }
