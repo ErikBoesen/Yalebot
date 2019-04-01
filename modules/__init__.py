@@ -42,3 +42,4 @@ from .funfact import FunFact
 from .funny import Funny
 from .kelbo import Kelbo
 from .boink import Boink
+from .hema import Hema
