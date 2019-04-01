@@ -41,3 +41,4 @@ from .dog import Dog
 from .funfact import FunFact
 from .funny import Funny
 from .kelbo import Kelbo
+from .boink import Boink

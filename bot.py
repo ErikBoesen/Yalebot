@@ -80,6 +80,7 @@ commands = {
     "funfact": modules.FunFact(),
     "funny": modules.Funny(),
     "kelbo": modules.Kelbo(),
+    "boink": modules.Boink(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
