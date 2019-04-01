@@ -21,8 +21,8 @@
         <thead>
             <th>Avatar</th>
             <th>Bot ID</th>
-            <th>Group</th>
             <th>Name</th>
+            <th>Group</th>
             <th></th>
         </thead>
         <tbody>
@@ -30,8 +30,8 @@
             <tr>
                 <td><img src="{{ bot.avatar_url }}"></td>
                 <td>{{ bot.bot_id }}</td>
-                <td>{{ bot.group_name }}</td>
                 <td>{{ bot.name }}</td>
+                <td>{{ bot.group_name }}</td>
                 <td><button class="button delete" group_id="{{ bot.group_id }}">Leave</button></td>
             </tr>
             {% endfor %}
