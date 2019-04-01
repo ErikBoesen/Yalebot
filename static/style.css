@@ -31,7 +31,7 @@ header #logo {
 section {
     margin-bottom: 20px;
 }
-section:last-child {
+section:last-of-type {
     margin-bottom: 0;
 }
 a {
