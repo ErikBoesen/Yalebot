@@ -39,6 +39,9 @@ class Meme(Module, ImageUploader):
             "kirby": (
                 {"position": (80, 70), "font_size": self.SMALL_FONT_SIZE, "center": False},
             ),
+            "pocket": (
+                {"position": (560, 90), "wrap": 15, "font_size": self.SMALL_FONT_FIZE, "center": False},
+            ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
