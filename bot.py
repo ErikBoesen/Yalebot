@@ -88,7 +88,6 @@ system_responses = {
 }
 
 F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | re.MULTILINE)
-H_PATTERN = re.compile("(harvard)", flags=re.IGNORECASE)
 
 
 @app.route("/", methods=["POST"])
@@ -148,13 +147,8 @@ def webhook():
                     advice = ""
                 reply(f"Command not found. {advice}Use !help to view a list of commands.", group_id)
 
-        if H_PATTERN.search(text) is not None:
-            reply(forename + ", did you mean \"" + H_PATTERN.sub("H******", text) + "\"?", group_id)
         if "thank" in text.lower() and "yalebot" in text.lower():
             reply("You're welcome, " + forename + "! :)", group_id)
-        if "dad" in text.lower():
-            new_text = text.strip().replace("dad", "dyd").replace("Dad", "Dyd").replace("DAD", "DYD")
-            reply("Hey " + forename + ", did you mean \"" + new_text + "\"?", group_id)
     if message["system"]:
         for option in system_responses:
             if system_responses[option].RE.match(text):
