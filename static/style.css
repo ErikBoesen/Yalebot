@@ -24,9 +24,10 @@ header, main, footer {
 header {
     padding-bottom: 20px;
 }
-header #logo {
-    height: 80px;
-    margin-top: 10px;
+header h1 {
+    font-size: 100px;
+    color: #00356b;
+    line-height: 1;
 }
 section {
     margin-bottom: 20px;
