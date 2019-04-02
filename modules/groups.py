@@ -14,6 +14,7 @@ class Groups(Module):
         "University of Pennsylvania": "46633207/jo1Mk4wv",
         "Cornell University": "46579394/HJFvEV",
         "Liberty University": "49189743/Gjq3rDJX",
+        "Columbia University": "46422965/fy1wXH",
     }
 
     def response(self, query, message):
