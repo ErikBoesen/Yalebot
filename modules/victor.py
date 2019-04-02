@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import random
 
 class Victor(Module):
-    DESCRIPTION = ""
+    DESCRIPTION = "Watch the greatest music videos ever created"
     responses = []
 
     def response(self, query, message):
