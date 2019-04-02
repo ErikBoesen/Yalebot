@@ -1,3 +1,4 @@
+from .base import Module
 import requests
 from bs4 import BeautifulSoup
 import random
