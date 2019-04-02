@@ -40,7 +40,7 @@ class Meme(Module, ImageUploader):
                 {"position": (80, 70), "font_size": self.SMALL_FONT_SIZE, "center": False},
             ),
             "pocket": (
-                {"position": (560, 80), "font_size": self.SMALL_FONT_SIZE, "center": False},
+                {"position": (570, 80), "font_size": self.SMALL_FONT_SIZE, "center": False},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
