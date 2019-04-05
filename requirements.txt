@@ -1,5 +1,6 @@
 Flask
 Flask-SQLAlchemy
+psycopg2
 gunicorn==19.6.0
 zalgoify>=1.0
 upsidedown
