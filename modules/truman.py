@@ -12,7 +12,7 @@ class Truman(Module, ImageUploader):
     def response(self, query, message):
         source_url = self.get_source_url(message)
 
-        image = io.imread(source_url)[:, :, :3]A
+        image = io.imread(source_url)[:, :, :3]
         pil_image = Image.fromarray(image)
         image_to_string(pil_image)
 
