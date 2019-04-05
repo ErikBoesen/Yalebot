@@ -1,12 +1,9 @@
 # Yalebot
 [![Build Status](https://travis-ci.org/ErikBoesen/Yalebot.svg?branch=master)](https://travis-ci.org/ErikBoesen/Yalebot)
 
-> A GroupMe chatbot for the Yale Class of 2023 group.
+> A GroupMe chatbot for the Yale Class of 2023.
 
 ![Screenshot](screenshot.png)
-
-## Motivation
-N/A
 
 ## Design
 Yalebot uses the [GroupMe Bots API](https://dev.groupme.com/tutorials/bots) for basic message exchanging, hosting a Flask server which listens for incoming webhooks then decides on a response.
