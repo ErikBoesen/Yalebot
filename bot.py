@@ -52,7 +52,6 @@ commands = {
     "maria": modules.Maria(),
     "annie": modules.Annie(),
     "renee": modules.Renee(),
-    "victor": modules.Victor(),
     "chat": modules.Chat(),
     "weather": modules.Weather(),
     "kelly": modules.Kelly(),
@@ -82,6 +81,8 @@ commands = {
     "kelbo": modules.Kelbo(),
     "boink": modules.Boink(),
     "hema": modules.Hema(),
+    "victor": modules.Victor(),
+    "truman": modules.Truman(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
