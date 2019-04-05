@@ -103,9 +103,9 @@ def webhook():
     name = message["name"]
     forename = name.split(" ", 1)[0]
     print("Message received: %s" % message)
-    matches = F_PATTERN.search(text)
-    if matches is not None and len(matches.groups()):
-        reply(matches.groups()[0] + " ❤", group_id)
+    f_matches = F_PATTERN.search(text)
+    if f_matches is not None and len(f_matches.groups()):
+        reply(f_matches.groups()[0] + " ❤", group_id)
     if message["sender_type"] != "bot":
         if text.startswith(PREFIX):
             instructions = text[len(PREFIX):].strip().split(" ", 1)
