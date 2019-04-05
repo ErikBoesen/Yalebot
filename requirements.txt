@@ -12,4 +12,4 @@ cmake
 face_recognition
 scikit-image
 
-psycopg2-binary
+pytesseract
