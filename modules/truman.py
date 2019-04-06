@@ -11,6 +11,7 @@ class Truman(Module, ImageUploader):
     def response(self, query, message):
         source_url = self.get_source_url(message)
         string = self.api.ocr_url(source_url)["ParsedResults"][0]["ParsedText"]
+        print("Image text: " + string)
         percentages = self.PERCENTAGE_RE.search(string).groups()
         if len(percentages) > 0:
             percentage = percentages[0]
