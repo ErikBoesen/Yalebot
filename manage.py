@@ -63,37 +63,7 @@ def pick_user_group(groups=None) -> str:
             return group_id
 
 
-if args.verb == "join":
-    group_id = pick_user_group()
-
-    bot = {
-        "name": read("Name", "Yalebot"),
-        "group_id": group_id,
-        "avatar_url": read("Avatar URL", "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c"),
-        "callback_url": read("Callback URL", "https://yalebot.herokuapp.com/"),
-        "dm_notification": False,
-    }
-    result = requests.post(f"https://api.groupme.com/v3/bots?token={args.token}",
-                           json={"bot": bot}).json()["response"]["bot"]
-
-    groups = get_joined_groups()
-    groups[result["group_id"]] = {
-        "name": bot["name"],
-        "bot_id": result["bot_id"],
-    }
-    save_groups(groups)
-elif args.verb == "leave":
-    groups = get_joined_groups()
-    group_id = pick_joined_group(groups)
-    request = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={args.token}", data={"bot_id": groups[group_id]["bot_id"]})
-    if request.ok:
-        print("Success.")
-        del groups[group_id]
-        save_groups(groups)
-    else:
-        print("Failure: ", end="")
-        print(request.json())
-elif args.verb == "send":
+if args.verb == "send":
     groups = get_joined_groups()
     group_id = pick_joined_group(groups)
     while True:
