@@ -13,4 +13,4 @@ cmake
 face_recognition
 scikit-image
 
-git+git://github.com/ErikBoesen/ocr_space.git#egg=ocr_space
+git+https://github.com/ErikBoesen/ocr_space.git#egg=ocr_space
