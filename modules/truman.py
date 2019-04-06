@@ -15,7 +15,7 @@ class Truman(Module, ImageUploader):
         string = string.replace("0/0", "%")
         percentages = self.PERCENTAGE_RE.search(string).groups()
         if len(percentages) > 0:
-            percentage = percentages[0]
+            percentage = int(percentages[0])
             if percentage > 50:
                 return f"You good. ({percentage}%)"
             else:
