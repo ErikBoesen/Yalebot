@@ -22,8 +22,8 @@ class Meme(Module, ImageUploader):
         super().__init__()
         self.templates = {
             "drake": (
-                {"position": (350, 100), "center": False},
-                {"position": (350, 300), "center": False},
+                {"position": (350, 120), "center": False, "center_vertical": True},
+                {"position": (350, 405), "center": False, "center_vertical": True},
             ),
             "juice": (
                 {"position": (327, 145)},
