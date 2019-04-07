@@ -83,7 +83,7 @@ commands = {
     "hema": modules.Hema(),
     "victor": modules.Victor(),
     "truman": modules.Truman(),
-    "phonetic": modules.Phonetic(),
+    "nato": modules.NATO(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

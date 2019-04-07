@@ -45,4 +45,4 @@ from .boink import Boink
 from .hema import Hema
 from .victor import Victor
 from .truman import Truman
-from .phonetic import Phonetic
+from .nato import NATO
