@@ -7,9 +7,9 @@ class NATO(Module):
 
     def convert(self, char):
         if char.isupper():
-            return dictionary[char]
+            return self.dictionary[char]
         else:
-            return dictionary[char.upper()].lower()
+            return self.dictionary[char.upper()].lower()
 
     def translate(self, text):
         return " ".join([self.convert(char) for char in text if char.isalpha()])
