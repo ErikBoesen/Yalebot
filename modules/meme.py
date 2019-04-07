@@ -43,10 +43,10 @@ class Meme(Module, ImageUploader):
                 {"position": (570, 80), "wrap": 22, "font_size": self.SMALL_FONT_SIZE, "center": False},
             ),
             "brain": (
-                {"position": (20, 146), "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
-                {"position": (20, 450), "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
-                {"position": (20, 745), "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
-                {"position": (20, 1040), "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
+                {"position": (20, 146), "wrap": 22, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
+                {"position": (20, 450), "wrap": 22, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
+                {"position": (20, 745), "wrap": 22, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
+                {"position": (20, 1040), "wrap": 22, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
