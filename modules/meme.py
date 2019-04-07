@@ -70,13 +70,17 @@ class Meme(Module, ImageUploader):
         for setting in settings:
             caption = captions.pop(0)
             lines = wrap(caption, setting.get("wrap", 20))
+            real_line_height = setting.get("font_size", self.FONT_SIZE) + 5
+            lines_count = len(lines)
             for line_index, line in enumerate(lines):
                 x, y = setting.get("position")
                 font = ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size", self.FONT_SIZE))
+                line_width, line_height = draw.textsize(line, font=font)
                 if setting.get("center", True):
-                    line_width, line_height = draw.textsize(line, font=font)
                     x -= line_width / 2
-                draw.text((x, y + line_index * (setting.get("font_size", self.FONT_SIZE) + 5)),
+                if setting.get("center_vertical", False):
+                    y -= (lines_count * real_line_height) / 2
+                draw.text((x, y + line_index * real_line_height),
                           line,
                           font=font,
                           fill=setting.get("color", self.BLACK))
