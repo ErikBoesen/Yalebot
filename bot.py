@@ -115,8 +115,11 @@ def webhook():
             instructions = text[len(PREFIX):].strip().split(" ", 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
-            # Check if there's an automatic response for this command
-            if command in static_commands:
+            # Prevent response to long string of exclamation marks
+            if PREFIX in command and set(command) == set(PREFIX):
+                pass
+            # Check if there's a static response for this command
+            elif command in static_commands:
                 reply(static_commands[command], group_id)
             # If not, query appropriate module for a response
             elif command in commands:
