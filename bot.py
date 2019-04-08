@@ -85,6 +85,7 @@ commands = {
     "victor": modules.Victor(),
     "truman": modules.Truman(),
     "nato": modules.NATO(),
+    "tiya": modules.Tiya(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

@@ -46,3 +46,4 @@ from .hema import Hema
 from .victor import Victor
 from .truman import Truman
 from .nato import NATO
+from .tiya import Tiya
