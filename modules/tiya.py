@@ -8,4 +8,4 @@ class Tiya(Module):
         return word.upper() + "."
 
     def response(self, query, message):
-        return [self.indamnify(word) for word in query.split(" ")]
+        return " ".join([self.indamnify(word) for word in query.split(" ")])
