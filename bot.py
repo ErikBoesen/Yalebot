@@ -34,6 +34,7 @@ static_commands = {
     "oof": ("Oh?", "https://i.groupme.com/1500x1125.jpeg.9b2c341aa9854831ab2525d7e21e974a.large"),
     "tease": ("", "https://i.groupme.com/936x1246.jpeg.d0d60970b329415cac1d7a1825a783a7.large"),
     "chike": ("", "https://i.groupme.com/1021x1400.jpeg.70192657c76745ab809357d0512d4951.large"),
+    "pressed": ("", "https://i.groupme.com/540x719.jpeg.2229bdb9f15247a7a112ac0be95e065a.large"),
 }
 
 commands = {
