@@ -37,7 +37,7 @@ class Countdown(Module):
         if remaining is None:
             return "There are no events scheduled."
     
-        plurality = tuple(["" if num-1 else "s" for num in remaining[:5]])
+        plurality = tuple("" if num-1 else "s" for num in remaining[:5])
         return "There " + ("are" if remaining[0]-1 else "is") + " {0} week{6}, {1} day{7}, {2} hour{8}, {3} minute{9}, and {4} second{10} left until {5}.".format(*(remaining + plurality))
 
     def next_event(self) -> Event:
