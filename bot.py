@@ -115,7 +115,7 @@ def webhook():
         reply(f_matches.groups()[0] + " ❤", group_id)
     if message["sender_type"] != "bot":
         if text.startswith(PREFIX):
-            instructions = text[len(PREFIX):].strip().split(" ", 1)
+            instructions = text[len(PREFIX):].strip().split(None, 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
             # Prevent response to long string of exclamation marks
