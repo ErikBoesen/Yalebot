@@ -37,6 +37,7 @@ static_commands = {
     "pressed": ("", "https://i.groupme.com/540x719.jpeg.2229bdb9f15247a7a112ac0be95e065a.large"),
     "alex": ("", "https://i.groupme.com/1021x1400.jpeg.7bd963eae3824435bf749b96ce4fd84a.large"),
     "bddschedule": "https://bulldogdays2019.sched.com/",
+    "flex": "👮🏽🚨🚔 PULL OVER 👮🏽🚨🚔\n\n😤Put your hands behind your back😤\n\n🗣I'm taking you into custody🗣\n\n📝And registering you as a📝\n\n🔥😩FLEX OFFENDER😩🔥",
 }
 
 commands = {
