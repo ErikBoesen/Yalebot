@@ -78,11 +78,13 @@ if args.verb == "send":
         # TODO: Merge the above two cases
         requests.post("https://api.groupme.com/v3/bots/post", data={"text": text, "bot_id": groups[group_id]["bot_id"]})
 elif args.verb == "purge":
-    group_id = pick_joined_group()
+    group_id = 46649296
     client = Client.from_token(args.token)
     group = client.groups.get(id=group_id)
     with open(args.users_file, "r") as f:
         targets = [target.strip("\n") for target in f.readlines()]
+        print(targets)
+    print(group.members)
     for member in group.members:
-        if member.nickname in targets:
+        if member.name in targets:
             print(member.remove())
