@@ -49,7 +49,7 @@ class Meme(Module, ImageUploader):
                 {"position": (10, 1040), "wrap": 17, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
             ),
             "ask": (
-                {"position": (405, 450), "center_vertical": True},
+                {"position": (405, 450), "font_size": self.LARGE_FONT_SIZE, "center_vertical": True},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
