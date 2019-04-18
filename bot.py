@@ -41,6 +41,7 @@ static_commands = {
     "amma": ("", "https://i.groupme.com/714x456.jpeg.66fb9e9dacab4cd9b860b084eceff282.large"),
     "ohno": ("", "https://i.groupme.com/1280x720.jpeg.f7c11a529a3b4a7195f71fa6be5ebfef.large"),
     "bddalbum": "https://photos.app.goo.gl/YyFXCQHnY1KWoznY7",
+    "add": "Add me to your own group here: https://yalebot.herokuapp.com",
 }
 
 commands = {
