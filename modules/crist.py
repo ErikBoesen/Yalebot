@@ -22,7 +22,7 @@ class Crist(Module, ImageUploader):
         scaled_portrait = portrait.resize((portrait_width, portrait_height), Image.ANTIALIAS)
 
         background_width, background_height = background.size
-        background.paste(scaled_portrait, ((background_width - portrait_width) // 2, 100), scaled_portrait)
+        background.paste(scaled_portrait, ((background_width - portrait_width) // 2, 100))
 
         output = BytesIO()
         background.save(output, format="JPEG")
