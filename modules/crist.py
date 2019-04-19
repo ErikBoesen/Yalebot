@@ -1,4 +1,4 @@
-from .base import ImageUploader
+from .base import Module, ImageUploader
 from PIL import Image, ImageDraw
 import random
 from io import BytesIO
