@@ -90,6 +90,7 @@ commands = {
     "funny": modules.Funny(),
     "kelbo": modules.Kelbo(),
     "boink": modules.Boink(),
+    "ship": modules.Ship(),
     "hema": modules.Hema(),
     "victor": modules.Victor(),
     "truman": modules.Truman(),
