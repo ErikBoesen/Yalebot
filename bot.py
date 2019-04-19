@@ -96,6 +96,7 @@ commands = {
     "truman": modules.Truman(),
     "nato": modules.NATO(),
     "tiya": modules.Tiya(),
+    "crist": modules.Crist(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
