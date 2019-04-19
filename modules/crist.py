@@ -8,7 +8,7 @@ from skimage import io
 
 class Crist(Module, ImageUploader):
     DESCRIPTION = "Memorialize the fallen"
-    heaven = Image.open("resources/heaven.jpg")
+    heaven = Image.open("resources/heaven.jpg").convert("RGBA")
 
     def response(self, query, message):
         source_url = self.get_source_url(message)
