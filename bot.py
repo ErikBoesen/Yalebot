@@ -98,6 +98,7 @@ commands = {
 }
 system_responses = {
     "welcome": modules.Welcome(),
+    "mourn": modules.Mourn(),
 }
 
 F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | re.MULTILINE)

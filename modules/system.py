@@ -7,7 +7,7 @@ class System(Module):
 
 
 class Welcome(System):
-    RE = re.compile(r'(.+) added (.+) to the group\.|(.+) has (re)?joined the group')
+    RE = re.compile(r"(.+) added (.+) to the group\.|(.+) has (re)?joined the group")
 
     def response(self, query, message):
         names = ", ".join([name.split(" ", 1)[0] for name in self.get_names(query)])
@@ -26,3 +26,10 @@ class Welcome(System):
         # Return the last non-empty (and non-re) match
         # Account for multiple users being added simultaneously, also
         return results.pop().split(" and ")
+
+
+class Mourn(System):
+    RE = re.compile(r"(.+) has left the group\.|(.+) removed (.+) from the group\.")
+
+    def response(self, query, message):
+        return "Farewell sweet prince"
