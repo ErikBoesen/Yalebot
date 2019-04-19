@@ -11,6 +11,6 @@ class Ship(Module):
         if len(names) != 2:
             return "Please provide two names."
         result = requests.post(self.ENDPOINT, data={"a1": names[0], "a2": names[1].lower()}).json()
-        result += requests.post(self.ENDPOINT, data={"a1": names[1], "a2": names[2].lower()}).json()
+        result += requests.post(self.ENDPOINT, data={"a1": names[1], "a2": names[0].lower()}).json()
         return ", ".join(result)
 
