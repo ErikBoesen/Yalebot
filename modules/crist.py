@@ -20,7 +20,6 @@ class Crist(Module, ImageUploader):
         portrait_width = 600
         portrait_height = int(portrait_width * portrait_natural_height / portrait_natural_width)
         scaled_portrait = portrait.resize((portrait_width, portrait_height), Image.ANTIALIAS)
-        processed_width, processed_height = processed_heart.size
 
         background_width, background_height = background.size
         background.paste(scaled_portrait, ((background_width - portrait_width) / 2, 100), scaled_portrait)
