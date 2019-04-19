@@ -3,6 +3,7 @@ import requests
 
 
 class Ship(Module):
+    DESCRIPTION = "Save thinking time when generating names for your new favorite hypothetical couples"
     ARGC = 1
     ENDPOINT = "https://couplenamegenerator.com/combine"
 
