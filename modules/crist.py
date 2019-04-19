@@ -1,5 +1,5 @@
 from .base import Module, ImageUploader
-from PIL import Image, ImageDraw
+from PIL import Image
 import random
 from io import BytesIO
 # TODO: This is so complicated for literally just reading an image from a URL
@@ -8,7 +8,7 @@ from skimage import io
 
 class Crist(Module, ImageUploader):
     DESCRIPTION = "Memorialize the fallen"
-    heaven = Image.open("resources/heaven.jpg").convert("RGBA")
+    heaven = Image.open("resources/heaven.jpg")
 
     def response(self, query, message):
         source_url = self.get_source_url(message)
