@@ -17,7 +17,7 @@ PREFIX = "!"
 
 static_commands = {
     "ping": "Pong!",
-    "testing": "Join the Yalebot testing server: https://groupme.com/join_group/47894954/QdP8pz4B",
+    "testing": "Join the Yalebot testing server: https://groupme.com/join_group/49940116/f2x20kxx",
 
     "sam": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
     "spreadsheet": "https://docs.google.com/spreadsheets/d/10m_0glWVUncKCxERsNf6uOJhfeYU96mOK0KvgNURIBk/edit?fbclid=IwAR35OaPO6czQxZv26A6DEgEH-Qef0kCSe4nXxl8wcIfDml-BfLx4ksVtp6Y#gid=0",
