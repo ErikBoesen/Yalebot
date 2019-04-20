@@ -16,4 +16,3 @@ class Ship(Module):
         result += requests.post(self.ENDPOINT, data={"a1": names[1], "a2": names[0].lower()}).json()
         random.shuffle(result)
         return ", ".join(result)
-
