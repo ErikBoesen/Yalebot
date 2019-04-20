@@ -1,5 +1,6 @@
 from .base import Module
 import requests
+import random
 
 
 class Ship(Module):
@@ -13,5 +14,6 @@ class Ship(Module):
             return "Please provide two names."
         result = requests.post(self.ENDPOINT, data={"a1": names[0], "a2": names[1].lower()}).json()
         result += requests.post(self.ENDPOINT, data={"a1": names[1], "a2": names[0].lower()}).json()
+        random.shuffle(result)
         return ", ".join(result)
 
