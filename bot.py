@@ -45,6 +45,8 @@ static_commands = {
     "bddalbum": "https://photos.app.goo.gl/YyFXCQHnY1KWoznY7",
     "add": "Add me to your own group here: https://yalebot.herokuapp.com",
     "jah": ("", "https://i.groupme.com/766x750.jpeg.3eb07fe422db4b81947b634a1b309d48.large"),
+    "boobies": ("booby: a seabird in the genus Sula", "https://i.groupme.com/1200x920.png.4cc29fd6e7704e3cbc6663796e68a7eb.large"),
+
 }
 
 commands = {
