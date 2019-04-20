@@ -9,7 +9,7 @@ class Victor(Module):
 
     def response(self, query, message):
         if len(self.responses) == 0:
-            self.responses.extend(links)
+            self.responses.extend(self.links)
             random.shuffle(self.responses)
         fullsend = self.responses.pop() + " @Monika"
         return fullsend
