@@ -69,8 +69,8 @@ class Meme(Module, ImageUploader):
                 {"position": (292, 695), "center_vertical": True},
             ),
             "letmein": (
-                {"position": (128, 60), "center_vertical": True},
-                {"position": (261, 177), "center_vertical": True},
+                {"position": (128, 60), "color": self.WHITE, "center_vertical": True},
+                {"position": (261, 177), "color": self.WHITE, "center_vertical": True},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
