@@ -72,6 +72,10 @@ class Meme(Module, ImageUploader):
                 {"position": (128, 60), "color": self.WHITE, "center_vertical": True},
                 {"position": (261, 177), "color": self.WHITE, "center_vertical": True},
             ),
+            "sleep": (
+                {"position": (134, 123), "center_vertical": True},
+                {"position": (367, 123), "center_vertical": True},
+            ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
