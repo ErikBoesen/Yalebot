@@ -81,7 +81,7 @@ class Meme(Module, ImageUploader):
                 {"position": (544, 486), "wrap": 26, "center_vertical": True},
             ),
             "load": (
-                {"position": (104, 128), "center_vertical": True},
+                {"position": (128, 128), "center_vertical": True},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
@@ -108,7 +108,7 @@ class Meme(Module, ImageUploader):
         return ("", image_url)
 
     def mark_image(self, draw: ImageDraw, captions, settings):
-        for setting in settings:
+        zfor setting in settings:
             caption = captions.pop(0)
             lines = wrap(caption, setting.get("wrap", 20))
             real_line_height = setting.get("font_size", self.FONT_SIZE) + 5
