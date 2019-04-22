@@ -108,7 +108,7 @@ class Meme(Module, ImageUploader):
         return ("", image_url)
 
     def mark_image(self, draw: ImageDraw, captions, settings):
-        zfor setting in settings:
+        for setting in settings:
             caption = captions.pop(0)
             lines = wrap(caption, setting.get("wrap", 20))
             real_line_height = setting.get("font_size", self.FONT_SIZE) + 5
