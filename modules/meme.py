@@ -77,8 +77,8 @@ class Meme(Module, ImageUploader):
                 {"position": (134, 367), "center_vertical": True},
             ),
             "zuck": (
-                {"position": (544, 162), "center_vertical": True},
-                {"position": (544, 486), "center_vertical": True},
+                {"position": (544, 162), "wrap": 30, "center_vertical": True},
+                {"position": (544, 486), "wrap": 30, "center_vertical": True},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
