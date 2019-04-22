@@ -73,8 +73,8 @@ class Meme(Module, ImageUploader):
                 {"position": (261, 177), "color": self.WHITE, "center_vertical": True},
             ),
             "sleep": (
-                {"position": (134, 123), "center_vertical": True},
-                {"position": (134, 367), "center_vertical": True},
+                {"position": (134, 123), "wrap": 23, "center_vertical": True},
+                {"position": (134, 367), "wrap": 23, "center_vertical": True},
             ),
             "zuck": (
                 {"position": (544, 162), "wrap": 30, "center_vertical": True},
