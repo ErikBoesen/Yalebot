@@ -74,7 +74,7 @@ class Meme(Module, ImageUploader):
             ),
             "sleep": (
                 {"position": (134, 123), "center_vertical": True},
-                {"position": (367, 123), "center_vertical": True},
+                {"position": (134, 367), "center_vertical": True},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
