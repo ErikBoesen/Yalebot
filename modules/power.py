@@ -7,4 +7,4 @@ class Power(Module):
     words = ["power", "intelligence", "clearance", "access", "influence", "profile", "international implications"]
 
     def response(self, query, message):
-        return "The {word} that that has".format(word=random.choice(self.words))
+        return "The {word} that that has".format(word=random.choice(self.words).upper())
