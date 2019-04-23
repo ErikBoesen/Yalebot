@@ -161,20 +161,20 @@ class Meme(Module, ImageUploader):
         return ("", image_url)
 
     def mark_image(self, draw: ImageDraw, captions, settings):
-        for setting in settings:
+        for setting in settings[1:]:
             caption = captions.pop(0)
-            lines = wrap(caption, setting.get("wrap", 20))
-            real_line_height = setting.get("font_size", self.FONT_SIZE) + 5
+            lines = wrap(caption, setting.get("wrap", settings[0].get("wrap", 20)))
+            real_line_height = setting.get("font_size", settings[0].get("font_size", self.FONT_SIZE)) + 5
             lines_count = len(lines)
             for line_index, line in enumerate(lines):
                 x, y = setting.get("position")
-                font = ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size", self.FONT_SIZE))
+                font = ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size", settings[0].get("font_size", self.FONT_SIZE)))
                 line_width, line_height = draw.textsize(line, font=font)
-                if setting.get("center", True):
+                if setting.get("center", settings[0].get("center", True)):
                     x -= line_width / 2
-                if setting.get("center_vertical", False):
+                if setting.get("center_vertical", settings[0].get("center_vertical", False)):
                     y -= (lines_count * real_line_height) / 2
                 draw.text((x, y + line_index * real_line_height),
                           line,
                           font=font,
-                          fill=setting.get("color", self.BLACK))
+                          fill=setting.get("color", settings[0].get("color", self.BLACK)))
