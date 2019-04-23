@@ -100,7 +100,7 @@ commands = {
     "nato": modules.NATO(),
     "tiya": modules.Tiya(),
     "crist": modules.Crist(),
-    "power": modules.Power(),
+    "power": modules.Power()g
 }
 system_responses = {
     "welcome": modules.Welcome(),

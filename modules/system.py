@@ -1,5 +1,6 @@
 from .base import Module
 import re
+import random
 
 
 class System(Module):
@@ -32,4 +33,5 @@ class Mourn(System):
     RE = re.compile(r"(.+) has left the group\.|(.+) removed (.+) from the group\.")
 
     def response(self, query, message):
-        return "Farewell sweet prince"
+        return random.choice(["Farewell, sweet prince",
+                              "You hear that? That's the sound of someone committing elsehwere."])
