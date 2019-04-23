@@ -94,9 +94,9 @@ class Meme(Module, ImageUploader):
                 {"position": (265, 245), "center_vertical": True},
             ),
             "hug": (
-                {"position": (15, 508), "color": self.WHITE, "center": False},
-                {"position": (686, 301), "color": self.WHITE, "center": False},
-                {"position": (601, 202), "color": self.WHITE},
+                {"position": (15, 508), "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "center": False},
+                {"position": (686, 301), "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "center": False},
+                {"position": (601, 202), "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
