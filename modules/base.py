@@ -2,8 +2,6 @@ import os
 import requests
 from PIL import Image
 from io import BytesIO
-# TODO: skimage is so heavy for just using it for this...
-from skimage import io
 
 
 class Module:
@@ -39,8 +37,9 @@ class ImageUploader:
         return self.upload_image(output.getvalue())
 
     def pil_from_url(self, url):
-        image = io.imread(url)[:, :, :3]
-        return Image.fromarray(image)
+        response = requests.get(url, stream=True)
+        response.raw.decode_content = True
+        return Image.open(response.raw)
 
     def limit_image_size(self, image: Image):
         natural_width, natural_height = image.size
