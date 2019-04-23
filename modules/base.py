@@ -39,7 +39,7 @@ class ImageUploader:
         return self.upload_image(output.getvalue())
 
     def pil_from_url(self, url):
-        image = io.imread(source_url)[:, :, :3]
+        image = io.imread(url)[:, :, :3]
         return Image.fromarray(image)
 
     def limit_image_size(self, image: Image):
