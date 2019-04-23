@@ -58,7 +58,7 @@ class ImageUploader:
 
     def get_source_url(self, message):
         """
-        Given complete image data, choose image to use from best source.
+        Given complete image data, extract the URL of the best image to use for a command.
         First choose attached image, then use mentioned person's avatar, then sender's avatar.
         :return: URL of image to use.
         """
