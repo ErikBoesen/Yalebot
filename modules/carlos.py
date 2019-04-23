@@ -28,6 +28,7 @@ class Carlos(Module, ImageUploader):
             processed_heart = heart.resize((heart_size, heart_size), Image.ANTIALIAS).rotate(random.randint(0, 360), expand=True)
             processed_width, processed_height = processed_heart.size
             background.paste(processed_heart,
-                             (int(random.random() * (image_width - processed_width)), int(random.random() * (image_height - processed_height))))
+                             (int(random.random() * (image_width - processed_width)), int(random.random() * (image_height - processed_height))),
+                             processed_heart)
 
         return "", self.upload_pil_image(background)
