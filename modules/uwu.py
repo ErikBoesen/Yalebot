@@ -3,8 +3,6 @@ import face_recognition
 from PIL import Image, ImageDraw
 import requests
 import os
-# TODO: skimage is so heavy for just using it for this...
-from skimage import io
 import math
 
 
@@ -32,9 +30,8 @@ class UWU(Module, ImageUploader):
 
         tear = Image.open("resources/uwu/tear.png")
         blush = Image.open("resources/uwu/blush.png")
-        image = io.imread(source_url)[:, :, :3]
         # TODO: crashes if image is too large; need to use self.limit_image_size but that doesn't change `image` just PIL Images
-        pil_image = Image.fromarray(image)
+        background = self.pil_from_url(source_url)
         faces = face_recognition.face_landmarks(image)
         if len(faces) == 0:
             return "No faces found in image."
@@ -60,8 +57,8 @@ class UWU(Module, ImageUploader):
             scaled_blush = blush.resize((blush_width, blush_height), Image.ANTIALIAS)
 
             # Actually draw blush and tears
-            pil_image.paste(scaled_blush, (int(blush_x - blush_width / 2), int(blush_y)), scaled_blush)
-            pil_image.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
-            pil_image.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
+            background.paste(scaled_blush, (int(blush_x - blush_width / 2), int(blush_y)), scaled_blush)
+            background.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
+            background.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
 
-        return "", self.upload_pil_image(pil_image)
+        return "", self.upload_pil_image(background)

@@ -20,8 +20,7 @@ class Carlos(Module, ImageUploader):
             heart_count = len(self.hearts)
         source_url = self.get_source_url(message)
 
-        image = io.imread(source_url)[:, :, :3]
-        pil_image = Image.fromarray(image)
+        pil_image = self.pil_from_url(source_url)
         image_width, image_height = pil_image.size
         for heart_number in range(heart_count):
             heart = self.hearts[heart_number % len(self.hearts)]
