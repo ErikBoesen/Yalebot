@@ -1,8 +1,6 @@
 from .base import Module, ImageUploader
 import face_recognition
 from PIL import Image, ImageDraw
-import requests
-import os
 import math
 
 
