@@ -100,7 +100,7 @@ commands = {
     "nato": modules.NATO(),
     "tiya": modules.Tiya(),
     "crist": modules.Crist(),
-    "power": modules.Power()g
+    "power": modules.Power(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
@@ -110,13 +110,7 @@ system_responses = {
 F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | re.MULTILINE)
 
 
-@app.route("/", methods=["POST"])
-def webhook():
-    """
-    Receive callback to URL when message is sent in the group.
-    """
-    # Retrieve data on that single GroupMe message.
-    message = request.get_json()
+def process_message(message):
     group_id = message["group_id"]
     text = message["text"]
     name = message["name"]
@@ -182,6 +176,16 @@ def webhook():
             for check_name in check_names:
                 reply(commands["vet"].check_user(check_name), group_id)
         """
+
+
+@app.route("/", methods=["POST"])
+def webhook():
+    """
+    Receive callback to URL when message is sent in the group.
+    """
+    # Retrieve data on that single GroupMe message.
+    message = request.get_json()
+    process_message(message)
     return "ok", 200
 
 
