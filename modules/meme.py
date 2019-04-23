@@ -142,19 +142,19 @@ class Meme(Module, ImageUploader):
     def response(self, query, message):
         captions = query.split("\n")
 
-        template = captions.pop(0).strip().lower()
-        if self.templates.get(template) is None:
+        template_name = captions.pop(0).strip().lower()
+        if self.templates.get(template_name) is None:
             return f"No template found called {template}. " + self.list_templates()
         if len(captions) < len(self.templates[template]) - 1:
             return "Not enough captions provided (remember to separate with newlines)."
         image = Image.open(f"resources/memes/{template}.jpg")
         draw = ImageDraw.Draw(image)
-        self.mark_image(draw, captions, self.templates[template])
+        self.draw_captions(draw, captions, self.templates[template])
 
         image_url = self.upload_pil_image(image)
         return ("", image_url)
 
-    def mark_image(self, draw: ImageDraw, captions, settings):
+    def draw_captions(self, draw: ImageDraw, captions, settings):
         for setting in settings[1:]:
             caption = captions.pop(0)
             lines = wrap(caption, setting.get("wrap", settings[0].get("wrap", 20)))
