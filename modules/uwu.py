@@ -3,7 +3,6 @@ import face_recognition
 from PIL import Image, ImageDraw
 import requests
 import os
-from io import BytesIO
 # TODO: skimage is so heavy for just using it for this...
 from skimage import io
 import math
@@ -65,15 +64,4 @@ class UWU(Module, ImageUploader):
             pil_image.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
             pil_image.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
 
-        """
-        pil_image.show()
-        return
-        """
         return "", self.upload_pil_image(pil_image)
-
-
-"""
-avatar = "https://i.groupme.com/1023x1024.jpeg.1d34cf6dbad346b2b25bd8fbb2e71a97"
-avatar = "https://i.groupme.com/750x704.jpeg.150575509d5e4449b9904faf3bb2ad10"
-UWU().response("", {"avatar_url": avatar, "attachments": []})
-"""

@@ -3,7 +3,6 @@ from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
 import os
-import io
 
 
 class Meme(Module, ImageUploader):

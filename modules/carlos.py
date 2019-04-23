@@ -1,7 +1,6 @@
 from .base import Module, ImageUploader
 from PIL import Image, ImageDraw
 import random
-from io import BytesIO
 # TODO: This is so complicated for literally just reading an image from a URL
 from skimage import io
 
