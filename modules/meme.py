@@ -80,7 +80,7 @@ class Meme(Module, ImageUploader):
                 {"position": (156, 280)},
             ),
             "handshake": (
-                {"color": self.WHITE, "center_vertical": True}
+                {"color": self.WHITE, "center_vertical": True},
 
                 {"position": (332, 110)},
                 {"position": (170, 390)},
@@ -99,7 +99,7 @@ class Meme(Module, ImageUploader):
                 {"position": (261, 177)},
             ),
             "sleep": (
-                {"wrap": 18, "center_vertical": True}
+                {"wrap": 18, "center_vertical": True},
 
                 {"position": (134, 123)},
                 {"position": (134, 367)},
