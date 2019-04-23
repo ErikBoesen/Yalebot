@@ -49,3 +49,4 @@ from .truman import Truman
 from .nato import NATO
 from .tiya import Tiya
 from .crist import Crist
+from .power import Power
