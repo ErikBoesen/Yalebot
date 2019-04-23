@@ -24,6 +24,7 @@ class ImageUploader:
         :return: URL of image now hosted on GroupMe server.
         """
         headers = {
+            # TODO: we store this in every Module...
             "X-Access-Token": os.environ["GROUPME_ACCESS_TOKEN"],
             "Content-Type": "image/jpeg",
         }
@@ -33,7 +34,7 @@ class ImageUploader:
     def upload_pil_image(self, image: Image):
         output = BytesIO()
         image.save(output, format="JPEG")
-        image_url = self.upload_image(output.getvalue())
+        return self.upload_image(output.getvalue())
 
     def limit_image_size(self, image: Image):
         natural_width, natural_height = image.size
