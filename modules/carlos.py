@@ -33,6 +33,4 @@ class Carlos(Module, ImageUploader):
                             (int(random.random() * (image_width - processed_width)), int(random.random() * (image_height - processed_height))),
                             processed_heart)
 
-        output = BytesIO()
-        pil_image.save(output, format="JPEG")
-        return "", self.upload_image(output.getvalue())
+        return "", self.upload_pil_image(pil_image)

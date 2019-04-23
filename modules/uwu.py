@@ -69,9 +69,7 @@ class UWU(Module, ImageUploader):
         pil_image.show()
         return
         """
-        output = BytesIO()
-        pil_image.save(output, format="JPEG")
-        return "", self.upload_image(output.getvalue())
+        return "", self.upload_pil_image(pil_image)
 
 
 """

@@ -24,6 +24,4 @@ class Crist(Module, ImageUploader):
         background_width, background_height = background.size
         background.paste(scaled_portrait, ((background_width - portrait_width) // 2, 100))
 
-        output = BytesIO()
-        background.save(output, format="JPEG")
-        return "", self.upload_image(output.getvalue())
+        return "", self.upload_pil_image(background)
