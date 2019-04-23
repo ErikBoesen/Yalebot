@@ -148,13 +148,12 @@ class Meme(Module, ImageUploader):
         if len(captions) < len(self.templates[template]) - 1:
             return "Not enough captions provided (remember to separate with newlines)."
         image = Image.open(f"resources/memes/{template}.jpg")
-        draw = ImageDraw.Draw(image)
-        self.draw_captions(draw, captions, self.templates[template])
+        canvas = ImageDraw.Draw(image)
+        self.draw_captions(canvas, captions, self.templates[template])
 
-        image_url = self.upload_pil_image(image)
-        return ("", image_url)
+        return "", self.upload_pil_image(image)
 
-    def draw_captions(self, draw: ImageDraw, captions, settings):
+    def draw_captions(self, canvas: ImageDraw, captions, settings):
         for setting in settings[1:]:
             caption = captions.pop(0)
             lines = wrap(caption, setting.get("wrap", settings[0].get("wrap", 20)))
@@ -163,12 +162,12 @@ class Meme(Module, ImageUploader):
             for line_index, line in enumerate(lines):
                 x, y = setting.get("position")
                 font = ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size", settings[0].get("font_size", self.FONT_SIZE)))
-                line_width, line_height = draw.textsize(line, font=font)
+                line_width, line_height = canvas.textsize(line, font=font)
                 if setting.get("center", settings[0].get("center", True)):
                     x -= line_width / 2
                 if setting.get("center_vertical", settings[0].get("center_vertical", False)):
                     y -= (lines_count * real_line_height) / 2
-                draw.text((x, y + line_index * real_line_height),
-                          line,
-                          font=font,
-                          fill=setting.get("color", settings[0].get("color", self.BLACK)))
+                canvas.text((x, y + line_index * real_line_height),
+                            line,
+                            font=font,
+                            fill=setting.get("color", settings[0].get("color", self.BLACK)))
