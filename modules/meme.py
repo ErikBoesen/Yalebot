@@ -22,81 +22,119 @@ class Meme(Module, ImageUploader):
         super().__init__()
         self.templates = {
             "drake": (
-                {"position": (350, 120), "center": False, "center_vertical": True},
-                {"position": (350, 405), "center": False, "center_vertical": True},
+                {"center": False, "center_vertical": True},
+
+                {"position": (350, 120)},
+                {"position": (350, 405)},
             ),
             "juice": (
+                {},
+
                 {"position": (327, 145)},
                 {"position": (373, 440), "wrap": 25, "font_size": self.SMALL_FONT_SIZE},
             ),
             "changemymind": (
-                {"position": (579, 420), "font_size": self.LARGE_FONT_SIZE},
+                {"font_size": self.LARGE_FONT_SIZE},
+
+                {"position": (579, 420)},
             ),
             "catch": (
-                {"position": (250, 90), "color": self.WHITE},
-                {"position": (550, 275), "color": self.WHITE},
+                {"color": self.WHITE},
+
+                {"position": (250, 90)},
+                {"position": (550, 275)},
             ),
             "kirby": (
-                {"position": (80, 70), "font_size": self.SMALL_FONT_SIZE, "center": False},
+                {"font_size": self.SMALL_FONT_SIZE, "center": False},
+
+                {"position": (80, 70)},
             ),
             "pocket": (
-                {"position": (570, 80), "wrap": 22, "font_size": self.SMALL_FONT_SIZE, "center": False},
+                {"wrap": 22, "font_size": self.SMALL_FONT_SIZE, "center": False},
+
+                {"position": (570, 80)},
             ),
             "brain": (
-                {"position": (10, 146), "wrap": 17, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
-                {"position": (10, 450), "wrap": 17, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
-                {"position": (10, 745), "wrap": 17, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
-                {"position": (10, 1040), "wrap": 17, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
+                {"wrap": 17, "font_size": self.LARGE_FONT_SIZE, "center": False, "center_vertical": True},
+
+                {"position": (10, 146)},
+                {"position": (10, 450)},
+                {"position": (10, 745)},
+                {"position": (10, 1040)},
             ),
             "ask": (
-                {"position": (405, 450), "font_size": self.LARGE_FONT_SIZE, "center_vertical": True},
+                {"font_size": self.LARGE_FONT_SIZE, "center_vertical": True},
+
+                {"position": (405, 450)},
             ),
             "whip": (
-                {"position": (406, 438), "color": self.WHITE, "center_vertical": True},
-                {"position": (160, 620), "color": self.WHITE, "center_vertical": True},
+                {"color": self.WHITE, "center_vertical": True},
+
+                {"position": (406, 438)},
+                {"position": (160, 620)},
             ),
             "nut": (
-                {"position": (405, 197), "color": self.WHITE, "center_vertical": True},
-                {"position": (156, 280), "color": self.WHITE, "center_vertical": True},
+                {"color": self.WHITE, "center_vertical": True},
+
+                {"position": (405, 197)},
+                {"position": (156, 280)},
             ),
             "handshake": (
-                {"position": (332, 110), "color": self.WHITE, "center_vertical": True},
-                {"position": (170, 390), "color": self.WHITE, "center_vertical": True},
-                {"position": (648, 307), "color": self.WHITE, "center_vertical": True},
+                {"color": self.WHITE, "center_vertical": True}
+
+                {"position": (332, 110)},
+                {"position": (170, 390)},
+                {"position": (648, 307)},
             ),
             "oil": (
-                {"position": (200, 318), "center_vertical": True},
-                {"position": (292, 695), "center_vertical": True},
+                {"center_vertical": True},
+
+                {"position": (200, 318)},
+                {"position": (292, 695)},
             ),
             "letmein": (
-                {"position": (128, 60), "color": self.WHITE, "center_vertical": True},
-                {"position": (261, 177), "color": self.WHITE, "center_vertical": True},
+                {"color": self.WHITE, "center_vertical": True},
+
+                {"position": (128, 60)},
+                {"position": (261, 177)},
             ),
             "sleep": (
-                {"position": (134, 123), "wrap": 18, "center_vertical": True},
-                {"position": (134, 367), "wrap": 18, "center_vertical": True},
+                {"wrap": 18, "center_vertical": True}
+
+                {"position": (134, 123)},
+                {"position": (134, 367)},
             ),
             "zuck": (
-                {"position": (544, 162), "wrap": 26, "center_vertical": True},
-                {"position": (544, 486), "wrap": 26, "center_vertical": True},
+                {"wrap": 26, "center_vertical": True},
+
+                {"position": (544, 162)},
+                {"position": (544, 486)},
             ),
             "load": (
-                {"position": (128, 128), "wrap": 18, "center_vertical": True},
+                {"wrap": 18, "center_vertical": True},
+
+                {"position": (128, 128)},
             ),
             "pooh": (
-                {"position": (563, 141), "center_vertical": True},
-                {"position": (563, 441), "center_vertical": True},
+                {"center_vertical": True},
+
+                {"position": (563, 141)},
+                {"position": (563, 441)},
             ),
             "spectrum": (
-                {"position": (115, 95), "center_vertical": True},
-                {"position": (265, 95), "center_vertical": True},
-                {"position": (115, 245), "center_vertical": True},
-                {"position": (265, 245), "center_vertical": True},
+                {"center_vertical": True},
+
+                {"position": (115, 95)},
+                {"position": (265, 95)},
+                {"position": (115, 245)},
+                {"position": (265, 245)},
             ),
             "hug": (
-                {"position": (15, 508), "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "center": False},
-                {"position": (686, 301), "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "center": False},
-                {"position": (601, 202), "wrap": 10, "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE},
+                {"font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "center": False},
+
+                {"position": (15, 508)},
+                {"position": (686, 301)},
+                {"position": (601, 202), "wrap": 10, "center": True},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
