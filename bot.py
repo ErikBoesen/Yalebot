@@ -101,6 +101,7 @@ commands = {
     "tiya": modules.Tiya(),
     "crist": modules.Crist(),
     "power": modules.Power(),
+    "cah": modules.CardsAgainstHumanity(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
@@ -286,3 +287,8 @@ def delete_bot():
         db.session.delete(bot)
         db.session.commit()
         return "ok", 200
+
+
+@app.route("/cah", methods=["GET", "POST"])
+def cah():
+    data = request.get_json()

@@ -50,3 +50,4 @@ from .nato import NATO
 from .tiya import Tiya
 from .crist import Crist
 from .power import Power
+from .cah import CardsAgainstHumanity
