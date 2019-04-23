@@ -1,6 +1,7 @@
 import os
 import requests
 from PIL import Image
+from io import BytesIO
 
 
 class Module:
@@ -28,6 +29,11 @@ class ImageUploader:
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
+
+    def upload_pil_image(self, image: Image):
+        output = BytesIO()
+        image.save(output, format="JPEG")
+        image_url = self.upload_image(output.getvalue())
 
     def limit_image_size(self, image: Image):
         natural_width, natural_height = image.size

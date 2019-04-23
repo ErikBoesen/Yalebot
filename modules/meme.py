@@ -151,13 +151,8 @@ class Meme(Module, ImageUploader):
         image = Image.open(f"resources/memes/{template}.jpg")
         draw = ImageDraw.Draw(image)
         self.mark_image(draw, captions, self.templates[template])
-        """
-        image.show()
-        return
-        """
-        output = io.BytesIO()
-        image.save(output, format="JPEG")
-        image_url = self.upload_image(output.getvalue())
+
+        image_url = self.upload_pil_image(image)
         return ("", image_url)
 
     def mark_image(self, draw: ImageDraw, captions, settings):
