@@ -300,7 +300,7 @@ def cah():
     if game_group_id is None:
         # TODO: Do this better also
         return "You're not in a game yet, say !cah join"
-    my_game = commands["cah"].games[my_group_id]
+    my_game = commands["cah"].games[game_group_id]
     me = my_game.players[my_game]
     return render_template("cah.html",
                            cards=me.hand,
