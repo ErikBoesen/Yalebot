@@ -85,6 +85,8 @@ class CardsAgainstHumanity(Module):
         elif command == "join":
             if user_id in self.playing:
                 return "You're already in a game."
+            if self.games.get(group_id) is None:
+                return "No game in progress."
             self.playing[user_id] = group_id
             self.games[group_id].join(user_id)
             return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
