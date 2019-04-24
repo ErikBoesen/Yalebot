@@ -56,6 +56,7 @@ class Game:
 
 class CardsAgainstHumanity(Module):
     DESCRIPTION = "Play everyone's favorite card game for terrible people. Commands: start, end"
+    ARGC = 1
     games = {}
     # TODO: use references to Player objects??
     playing = {}
