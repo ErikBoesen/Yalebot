@@ -3,7 +3,7 @@ onclick = function(e) {
         var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.childNodes, e.target);
 
         var req = new XMLHttpRequest();
-        req.open("POST", "");
+        req.open("POST", location.href);
         req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         var url = new URL(location.href);
         req.send(JSON.stringify({
