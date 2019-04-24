@@ -96,7 +96,8 @@ class CardsAgainstHumanity(Module):
             if user_id in self.playing:
                 return "You're already in a game."
             if group_id not in self.games:
-                return "No game in progress."
+                # TODO: debug
+                return "No game in progress. Games: " + str(self.games)
             self.playing[user_id] = group_id
             self.games[group_id].join(user_id)
             return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
