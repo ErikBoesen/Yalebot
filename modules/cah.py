@@ -55,7 +55,7 @@ class Game:
 
     def deal(self, user_id):
         for i in range(self.hand_size):
-            self.players[user_id].pick_up(self.white.pop())
+            self.players[user_id].pick_up_white(self.white.pop())
 
     """
     def discard(self, user_id):
