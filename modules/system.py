@@ -34,4 +34,4 @@ class Mourn(System):
 
     def response(self, query, message):
         return random.choice(["Farewell, sweet prince",
-                              "You hear that? That's the sound of someone committing elsehwere."])
+                              "You hear that? That's the sound of someone committing elsewhere."])
