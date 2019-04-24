@@ -54,7 +54,7 @@ class Game:
         self.deal(user_id)
 
     def deal(self, user_id):
-        for i in self.hand_size:
+        for i in range(self.hand_size):
             player.pick_up(self.white.pop())
 
     """
