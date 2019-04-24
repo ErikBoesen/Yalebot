@@ -1,14 +1,17 @@
 # Yalebot
 [![Build Status](https://travis-ci.org/ErikBoesen/Yalebot.svg?branch=master)](https://travis-ci.org/ErikBoesen/Yalebot)
 
-> A GroupMe chatbot for the Yale Class of 2023.
+> A GroupMe chatbot for Yale University.
 
 ![Screenshot](screenshot.png)
 
 ## Design
-Yalebot uses the [GroupMe Bots API](https://dev.groupme.com/tutorials/bots) for basic message exchanging, hosting a Flask server which listens for incoming webhooks then decides on a response.
+Yalebot uses the [GroupMe Bots API](https://dev.groupme.com/tutorials/bots) for message exchange, hosting a Flask server which listens for incoming webhooks calculates on a response.
 
-In order to keep its code clean and maintainable, most of Yalebot's functions are compartmentalized under the subdirectory `modules/`. Each contains a class which is referenced in `bot.py` and implements a method `response` taking as parameters the query (message text following command invocation) and raw message dictionary from GroupMe. These modules inherit from the `Module` class, and a `DESCRIPTION` class variable should be assigned, primarily for `!help` pages. Each module must be instantiated in `bot.py`. Note that meme generation commands have their own dictionary for flexibility in the event of a change to their parameter structure. Simple commands (those which need no logical processing to generate a response and give a static response every time) are present in their own dictionary as well.
+### Module structure
+In order to keep code clean and maintainable, most bot systems are compartmentalized under the subdirectory `modules/`. Each contains a class that implements a method `response` taking as parameters the query (message text following command invocation) and raw message data from GroupMe. These modules inherit from the `Module` class. Class variables `DESCRIPTION` and `ARGC` should be assigned, giving a summary of component functions and the number of required arguments respectively. Each module must be instantiated in `bot.py`.
+
+Static text responses are present in the `static_commands` dictionary in `bot.py`.
 
 ## Platform
 Yalebot runs best on [Heroku](https://heroku.com).
@@ -22,7 +25,7 @@ heroku config:set GROUPME_ACCESS_TOKEN=abcdef12345  # obtained from dev.groupme.
 After that, simply push the code via Heroku CLI and the bot will launch.
 
 ## Authorship
-Yalebot is maintained by [Erik Boesen](https://github.com/ErikBoesen).
+Yalebot was created by [Erik Boesen](https://github.com/ErikBoesen).
 
 ## License
 [GPL](LICENSE)
