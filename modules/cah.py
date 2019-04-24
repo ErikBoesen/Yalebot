@@ -1,9 +1,37 @@
 from .base import Module
+import json
+import random
+
+
+class Player:
+    def __init__(self, user_id):
+        self.user_id = user_id
+        self.hand = []
+
+    def pick_up(self, card):
+        self.hand.append(card)
 
 
 class Game:
     def __init__(self, group_id):
         self.group_id = group_id
+        self.players = {}
+        with open("resources/cah/black.json", "r") as f:
+            self.black = json.load(f)
+        with open("resources/cah/white.json", "r") as f:
+            self.white = json.load(f)
+        random.shuffle(self.black)
+        random.shuffle(self.white)
+        self.hand_size = 8
+
+    def join(self, user_id):
+        if user_id in self.players:
+            return False
+        else:
+            player = Player(user_id)
+            for i in self.hand_size:
+                player.
+            self.players[user_id] = player
 
 
 class CardsAgainstHumanity(Module):
