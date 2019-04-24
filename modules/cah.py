@@ -38,7 +38,7 @@ class Game:
         self.build_white_deck()
 
     def build_black_deck(self):
-        with open("resources/caVh/black.json", "r") as f:
+        with open("resources/cah/black.json", "r") as f:
             self.black = json.load(f)
         random.shuffle(self.black)
 
