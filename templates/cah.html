@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% block main %}
 {{ cards | length }}
-{% for card in cards %}
-<div class="card">
-    {{ card }}
+<div class="cards">
+    {% for card in cards %}
+    <div class="white card">
+        {{ card }}
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 <div class="score">
     {{ score }}
 </div>

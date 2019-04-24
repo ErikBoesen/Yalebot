@@ -99,3 +99,22 @@ footer {
 footer a {
     color: inherit;
 }
+
+.cards {
+
+}
+.card {
+    display: inline-block;
+    width: 2in;
+    padding: 30px;
+    font-size: 20px;
+    border: solid 1px black;
+}
+.card.white {
+    background: white;
+    color: #111;
+}
+.card.black {
+    background: #111;
+    color: white;
+}
