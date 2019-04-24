@@ -3,6 +3,9 @@ import json
 import random
 
 
+REDIRECT_URL = "https://oauth.groupme.com/oauth/authorize?client_id=iEs9DrSihBnH0JbOGZSWK8SdsqRt0pUn8EpulL8Fia3rf6QM"
+
+
 class Player:
     def __init__(self, user_id):
         self.user_id = user_id
@@ -63,6 +66,7 @@ class CardsAgainstHumanity(Module):
         command = arguments.pop(0)
         group_id = message["group_id"]
         user_id = message["user_id"]
+        name = message["name"]
         if command == "start":
             if group_id in self.games:
                 return "Game already started!"
@@ -83,6 +87,7 @@ class CardsAgainstHumanity(Module):
                 return "You're already in a game."
             self.playing[user_id] = group_id
             self.games[group_id].join(user_id)
+            return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
         elif command == "info":
             return (f"Games in progress: {len(self.games)}\n")
         elif command == "refresh":
