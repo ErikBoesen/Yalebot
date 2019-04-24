@@ -102,6 +102,7 @@ commands = {
     "crist": modules.Crist(),
     "power": modules.Power(),
     "cah": modules.CardsAgainstHumanity(),
+    "record": modules.Record(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
