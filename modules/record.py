@@ -11,5 +11,6 @@ class Record(Module):
         r = requests.get("http://yalerecord.org/?s=" + query.replace(" ", "+"))
         bs = BeautifulSoup(r.text, "html.parser")
         link = bs.find("a", {"rel": "bookmark"})
-        print("Link found: " + link)
+        print("Link found: ")
+        print(link)
         return link.href
