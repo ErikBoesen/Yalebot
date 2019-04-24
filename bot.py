@@ -290,7 +290,7 @@ def delete_bot():
         return "ok", 200
 
 
-@app.route("/cah", methods=["GET", "POST"])
+@app.route("/cah", methods=["GET"])
 def cah():
     access_token = request.args["access_token"]
     if request.method == "POST":
@@ -306,3 +306,10 @@ def cah():
     return render_template("cah.html",
                            cards=me.hand,
                            score=len(me.won))
+
+
+@app.route("/cah", methods=["GET"])
+def cah_entry():
+    data = request.get_json()
+    access_token = data["access_token"]
+    print(data)

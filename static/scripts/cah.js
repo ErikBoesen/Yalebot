@@ -5,12 +5,10 @@ onclick = function(e) {
         var req = new XMLHttpRequest();
         req.open("POST", "");
         req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        var url = new URL(url_string);
-        ;
+        var url = new URL(location.href);
         req.send(JSON.stringify({
-            "group_id": e.target.getAttribute("group_id"),
-            // TODO: this is not a very elegant way to get the token.
             "access_token": url.searchParams.get("access_token"),
+            "card_index": cardIndex,
         }));
         req.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
