@@ -1,14 +1,12 @@
 {% extends "layout.html" %}
 {% block main %}
-{{ cards | length }}
-<div class="cards">
+<form action="post" class="cards">
     {% for card in cards %}
-    <div class="white card">
-        {{ card }}
-    </div>
+    <input type="submit" class="white card" name="{{ card }}" value="{{ card }}">
     {% endfor %}
-</div>
+</form>
 <div class="score">
     {{ score }}
 </div>
+<script src="/static/scripts/cah.js">
 {% endblock %}
