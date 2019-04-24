@@ -56,7 +56,9 @@ class CardsAgainstHumanity(Module):
     games = {}
 
     def response(self, query, message):
-        command, query = query.split(None, 1)
+        # TODO: fix this mess
+        arguments = query.split()
+        command = arguments.pop(0)
         group_id = message["group_id"]
         user_id = message["user_id"]
         if command == "start":
