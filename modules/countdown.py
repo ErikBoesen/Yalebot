@@ -3,17 +3,16 @@ import datetime
 
 
 class Event:
-    def __init__(self, name: str, date: datetime.datetime, duration: datetime.timedelta):
+    def __init__(self, name: str, date: datetime.datetime):
         self.name = name
         self.date = date
-        self.duration = duration
 
 
 class Countdown(Module):
     DESCRIPTION = "Find out how little time's left until upcoming Yale events"
     events = [
-        Event("Bulldog Days", datetime.datetime(year=2019, month=4, day=15, hour=14), datetime.timedelta(days=3)),
-        Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20), datetime.timedelta(days=1)),
+        Event("Bulldog Days", datetime.datetime(year=2019, month=4, day=15, hour=14)),
+        Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20)),
     ]
 
     def get_event(self, name):
@@ -45,7 +44,7 @@ class Countdown(Module):
         """
         now = datetime.datetime.now()
         for event in self.events:
-            if (event.date + event.duration - now).total_seconds() > 0:
+            if (event.date - now).total_seconds() > 0:
                 return event
         return None
 
