@@ -28,19 +28,21 @@ class Game:
     def __init__(self, group_id):
         self.group_id = group_id
         self.players = {}
+        self.hand_size = 8
+        self.build_deck()
+
+    def build_deck(self):
         with open("resources/cah/black.json", "r") as f:
             self.black = json.load(f)
         with open("resources/cah/white.json", "r") as f:
             self.white = json.load(f)
         random.shuffle(self.black)
         random.shuffle(self.white)
-        self.hand_size = 8
 
     def join(self, user_id):
         if user_id in self.players:
             return False
-        else:
-            self.players[user_id] = Player(user_id)
+        self.players[user_id] = Player(user_id)
 
     def deal(self, user_id):
         for i in self.hand_size:
@@ -49,9 +51,8 @@ class Game:
     def discard(self, user_id):
         if user_id not in self.players:
             return False
-        else:
-            self.white = self.players[user_id].discard_all() + self.white
-            self.deal(user_id)
+        self.white = self.players[user_id].discard_all() + self.white
+        self.deal(user_id)
 
 
 class CardsAgainstHumanity(Module):
