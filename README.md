@@ -5,6 +5,8 @@
 
 ![Screenshot](screenshot.png)
 
+To add this bot to your own server, go [here](https://yalebot.herokuapp.com)!
+
 ## Design
 Yalebot uses the [GroupMe Bots API](https://dev.groupme.com/tutorials/bots) for message exchange, hosting a Flask server which listens for incoming webhooks calculates on a response.
 
