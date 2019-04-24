@@ -91,6 +91,8 @@ class CardsAgainstHumanity(Module):
                 return "No game in progress."
             game = self.games.pop(group_id)
             # TODO: free players, etc. Otherwise they're stuck
+            for player in game.players:
+                self.playing.pop(player.user_id)
             return "Game ended. Run !cah start to start a new game."
         elif command == "join":
             if user_id in self.playing:
