@@ -104,11 +104,15 @@ footer a {
 
 }
 .card {
+    vertical-align: top;
     display: inline-block;
     width: 2in;
-    padding: 30px;
+    margin-bottom: 5px;
+    padding: 20px;
+    height: 2.8in;
     font-size: 20px;
     border: solid 1px black;
+    cursor: pointer;
 }
 .card.white {
     background: white;
