@@ -304,4 +304,4 @@ def cah():
     me = my_game.players[my_user["user_id"]]
     return render_template("cah.html",
                            cards=me.hand,
-                           score=len(me.wins))
+                           score=len(me.won))
