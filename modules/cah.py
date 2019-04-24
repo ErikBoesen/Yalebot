@@ -29,14 +29,20 @@ class Game:
         self.group_id = group_id
         self.players = {}
         self.hand_size = 8
-        self.build_deck()
+        self.build_decks()
 
-    def build_deck(self):
-        with open("resources/cah/black.json", "r") as f:
+    def build_decks(self):
+        self.build_black_deck()
+        self.build_white_deck()
+
+    def build_black_deck(self):
+        with open("resources/caVh/black.json", "r") as f:
             self.black = json.load(f)
+        random.shuffle(self.black)
+
+    def build_white_deck(self):
         with open("resources/cah/white.json", "r") as f:
             self.white = json.load(f)
-        random.shuffle(self.black)
         random.shuffle(self.white)
 
     def join(self, user_id):
