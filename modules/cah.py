@@ -54,6 +54,8 @@ class Game:
 class CardsAgainstHumanity(Module):
     DESCRIPTION = "Play everyone's favorite card game for terrible people. Commands: start, end"
     games = {}
+    # TODO: use references to Player objects??
+    playing = []
 
     def response(self, query, message):
         # TODO: fix this mess
@@ -71,10 +73,16 @@ class CardsAgainstHumanity(Module):
                         "To join the game and choose your cards, go to https://yalebot.herokuapp.com/cah")
         elif command == "end":
             if group_id in self.games:
-                self.games.pop(group_id)
+                game = self.games.pop(group_id)
+                # TODO: free players, etc. Otherwise they're stuck
                 return "Game ended. Run !cah start to start a new game."
             else:
                 return "No game in progress."
+        elif command == "join":
+            if user_id in self.playing:
+                return "You're already in a game."
+            self.playing[user_id] = group_id
+            self.games[group_id].join(user_id)
         elif command == "info":
             return (f"Games in progress: {len(self.games)}\n")
         elif command == "refresh":
