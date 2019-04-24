@@ -111,10 +111,12 @@ footer a {
     padding: 20px;
     height: 2.8in;
     font-size: 20px;
-    border: solid 1px black;
+    border: solid 1px #111;
+    border-radius: 5px;
     cursor: pointer;
     background-position: 100% 100%;
     background-repeat: no-repeat;
+    background-size: 50px;
 }
 .card.white {
     background: white;
