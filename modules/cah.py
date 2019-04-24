@@ -71,22 +71,20 @@ class CardsAgainstHumanity(Module):
         if command == "start":
             if group_id in self.games:
                 return "Game already started!"
-            else:
-                self.games[group_id] = Game(group_id)
-                return (f"Cards Against Humanity game started in group #{group_id}.\n"
-                        "Run !cah end to terminate the game.\n"
-                        "To join the game and choose your cards, go to https://yalebot.herokuapp.com/cah")
+            self.games[group_id] = Game(group_id)
+            return (f"Cards Against Humanity game started in group #{group_id}.\n"
+                    "Run !cah end to terminate the game.\n"
+                    "To join the game and choose your cards, go to https://yalebot.herokuapp.com/cah")
         elif command == "end":
-            if group_id in self.games:
-                game = self.games.pop(group_id)
-                # TODO: free players, etc. Otherwise they're stuck
-                return "Game ended. Run !cah start to start a new game."
-            else:
+            if group_id not in self.games:
                 return "No game in progress."
+            game = self.games.pop(group_id)
+            # TODO: free players, etc. Otherwise they're stuck
+            return "Game ended. Run !cah start to start a new game."
         elif command == "join":
             if user_id in self.playing:
                 return "You're already in a game."
-            if self.games.get(group_id) is None:
+            if group_id not in self.games:
                 return "No game in progress."
             self.playing[user_id] = group_id
             self.games[group_id].join(user_id)
