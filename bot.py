@@ -303,8 +303,6 @@ def cah():
         return "You're not in a game yet, say !cah join"
     my_game = commands["cah"].games[game_group_id]
     me = my_game.players[my_user["user_id"]]
-    print(me.hand)
     return render_template("cah.html",
-                           # cards=me.hand,
-                           cards=my_game.white,
+                           cards=me.hand,
                            score=len(me.won))

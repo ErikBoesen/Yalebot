@@ -51,6 +51,7 @@ class Game:
         if user_id in self.players:
             return False
         self.players[user_id] = Player(user_id)
+        self.deal(user_id)
 
     def deal(self, user_id):
         for i in self.hand_size:

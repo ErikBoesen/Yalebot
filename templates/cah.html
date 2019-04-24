@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 {% block main %}
-<form action="post" class="cards">
+<div class="cards">
     {% for card in cards %}
-    <input type="submit" class="white card" name="{{ card }}" value="{{ card }}">
+    <div class="white card">
+        {{ card }}
+    </div>
     {% endfor %}
-</form>
+</div>
 <div class="score">
     {{ score }}
 </div>
