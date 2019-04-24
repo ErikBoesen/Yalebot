@@ -113,12 +113,16 @@ footer a {
     font-size: 20px;
     border: solid 1px black;
     cursor: pointer;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
 }
 .card.white {
     background: white;
     color: #111;
+    background-image: url('/static/images/cah_black.png');
 }
 .card.black {
     background: #111;
     color: white;
+    background-image: url('/static/images/cah_white.png');
 }
