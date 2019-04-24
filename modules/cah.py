@@ -55,7 +55,7 @@ class CardsAgainstHumanity(Module):
     DESCRIPTION = "Play everyone's favorite card game for terrible people. Commands: start, end"
     games = {}
     # TODO: use references to Player objects??
-    playing = []
+    playing = {}
 
     def response(self, query, message):
         # TODO: fix this mess
