@@ -7,9 +7,18 @@ class Player:
     def __init__(self, user_id):
         self.user_id = user_id
         self.hand = []
+        self.won = []
 
-    def pick_up(self, card):
+    def pick_up_white(self, card):
         self.hand.append(card)
+
+    def score(self, card):
+        self.won.append(card)
+
+    def discard_all(self):
+        hand = self.hand
+        self.hand = None
+        return hand
 
 
 class Game:
@@ -28,10 +37,18 @@ class Game:
         if user_id in self.players:
             return False
         else:
-            player = Player(user_id)
-            for i in self.hand_size:
-                player.
-            self.players[user_id] = player
+            self.players[user_id] = Player(user_id)
+
+    def deal(self, user_id):
+        for i in self.hand_size:
+            player.pick_up(self.white.pop())
+
+    def discard(self, user_id):
+        if user_id not in self.players:
+            return False
+        else:
+            self.white = self.players[user_id].discard_all() + self.white
+            self.deal(user_id)
 
 
 class CardsAgainstHumanity(Module):
@@ -41,6 +58,7 @@ class CardsAgainstHumanity(Module):
     def response(self, query, message):
         command, query = query.split(None, 1)
         group_id = message["group_id"]
+        user_id = message["user_id"]
         if command == "start":
             if group_id in self.games:
                 return "Game already started!"
@@ -55,5 +73,7 @@ class CardsAgainstHumanity(Module):
                 return "Game ended. Run !cah start to start a new game."
             else:
                 return "No game in progress."
-
-        # TODO: allow discarding whole hand
+        elif command == "info":
+            return (f"Games in progress: {len(self.games)}\n")
+        elif command == "refresh":
+            self.games[group_id].refresh(user_id)
