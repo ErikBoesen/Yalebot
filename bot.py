@@ -103,6 +103,7 @@ commands = {
     "power": modules.Power(),
     "cah": modules.CardsAgainstHumanity(),
     "record": modules.Record(),
+    "colleges": modules.Colleges(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

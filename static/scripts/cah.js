@@ -19,4 +19,4 @@ onclick = function(e) {
             }
         };
     }
-}
+};
