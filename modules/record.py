@@ -10,4 +10,4 @@ class Record(Module):
     def response(self, query, message):
         r = requests.get("http://yalerecord.org/?s=" + query.replace(" ", "+"))
         bs = BeautifulSoup(r.text, "html.parser")
-        return bs.find({"rel": "bookmark"}).href
+        return bs.find("a", {"rel": "bookmark"}).href
