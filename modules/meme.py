@@ -153,7 +153,7 @@ class Meme(Module, ImageUploader):
                 {"position": (322, 593)},
             ),
             "highfive": (
-                {"color": self.WHITE, "center_vertical": True},
+                {"center_vertical": True},
 
                 {"position": (131, 89)},
                 # {"position": (341, 23)},
