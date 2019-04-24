@@ -18,10 +18,12 @@ class Player:
     def score(self, card):
         self.won.append(card)
 
+    """
     def discard_all(self):
         hand = self.hand
         self.hand = None
         return hand
+    """
 
 
 class Game:
@@ -54,11 +56,13 @@ class Game:
         for i in self.hand_size:
             player.pick_up(self.white.pop())
 
+    """
     def discard(self, user_id):
         if user_id not in self.players:
             return False
         self.white = self.players[user_id].discard_all() + self.white
         self.deal(user_id)
+    """
 
 
 class CardsAgainstHumanity(Module):
@@ -98,5 +102,7 @@ class CardsAgainstHumanity(Module):
             return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
         elif command == "info":
             return f"{len(self.games)} games in progress: " + ", ".join(self.games.keys())
+        """
         elif command == "refresh":
             self.games[group_id].refresh(user_id)
+        """
