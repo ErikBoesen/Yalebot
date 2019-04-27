@@ -85,8 +85,7 @@ class CardsAgainstHumanity(Module):
                 return "Game already started!"
             self.games[group_id] = Game(group_id)
             return (f"Cards Against Humanity game started in group #{group_id}.\n"
-                    "Run !cah end to terminate the game.\n"
-                    "To join the game and choose your cards, go to https://yalebot.herokuapp.com/cah")
+                    "Say !cah join to join, or !cah end to terminate the game.\n")
         elif command == "end":
             if group_id not in self.games:
                 return "No game in progress."
