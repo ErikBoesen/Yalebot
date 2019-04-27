@@ -168,9 +168,10 @@ class Meme(Module, ImageUploader):
 
         template_name = captions.pop(0).strip().lower()
         if self.templates.get(template_name) is None:
-            return f"No template found called {template}. " + self.list_templates()
-        if len(captions) < len(self.templates[template_name]) - 1:
-            return "Not enough captions provided (remember to separate with newlines)."
+            return f"No template found called {template_name}. " + self.list_templates()
+        captions_required = len(self.templates[template_name]) - 1
+        if len(captions) < captions_required:
+            return f"Not enough captions provided; {captions_required} required for template {template_name}.Remember to separate with newlines."
         image = Image.open(f"resources/memes/{template_name}.jpg")
         canvas = ImageDraw.Draw(image)
         self.draw_captions(canvas, captions, self.templates[template_name])
