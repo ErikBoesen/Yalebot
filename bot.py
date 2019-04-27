@@ -154,10 +154,13 @@ def process_message(message):
                     else:
                         reply("No such command.", group_id)
                 else:
+                    """
                     help_string = "--- Help ---"
                     help_string += "\nStatic commands: " + ", ".join([PREFIX + title for title in static_commands])
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
+                    """
+                    help_string = "https://victor-hugo-dc.github.io/yalebot-help/#help"
                     reply(help_string, group_id)
             else:
                 try:
