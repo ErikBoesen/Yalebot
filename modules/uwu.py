@@ -30,7 +30,7 @@ class UWU(Module, ImageUploader):
         blush = Image.open("resources/uwu/blush.png")
         # TODO: crashes if image is too large; need to use self.limit_image_size but that doesn't change `image` just PIL Images
         background = self.pil_from_url(source_url)
-        faces = face_recognition.face_landmarks(image)
+        faces = face_recognition.face_landmarks(background)
         if len(faces) == 0:
             return "No faces found in image."
         for face in faces:
