@@ -160,12 +160,12 @@ class Meme(Module, ImageUploader):
                 {"position": (133, 309)},
             ),
             "pyramid": (
-                {"center": False},
+                {"center": False, "center_vertical": True},
 
                 {"position": (240, 150)},
             ),
             "hannibal": (
-                {"center_vertical": True, "color": self.WHITE},
+                {"center_vertical": True, "color": self.WHITE, "font_size": self.LARGE_FONT_SIZE},
 
                 {"position": (845, 420)},
                 {"position": (300, 435)},
