@@ -69,9 +69,12 @@ class Game:
 class CardsAgainstHumanity(Module):
     DESCRIPTION = "Play everyone's favorite card game for terrible people. Commands: start, end"
     ARGC = 1
-    games = {}
-    # TODO: use references to Player objects??
-    playing = {}
+
+    def __init__(self):
+        super().__init__()
+        self.games = {}
+        # TODO: use references to Player objects??
+        self.playing = {}
 
     def response(self, query, message):
         # TODO: fix this mess
