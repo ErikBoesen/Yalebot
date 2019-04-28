@@ -12,10 +12,10 @@ class About(Module):
             total_lines = 0
             most_lines = 0
             longest_file = None
-            filenames = sum(
+            filenames = sum([
                 glob(criterion) for criterion in ["Procfile", "*.py", "*.sh", "static/*",
                                                   "static/scripts/*", "modules/*",
-                                                  "hooks/*", "templates/*"], [])
+                                                  "hooks/*", "templates/*"]], [])
             for filename in filenames:
                 with open(filename) as f:
                     lines = len(f.readlines())
