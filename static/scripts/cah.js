@@ -1,5 +1,7 @@
 onclick = function(e) {
+    console.log("Clicked somewhere.");
     if (e.target.classList.contains("card")) {
+        console.log("Clicked on a card.");
         var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
 
         var req = new XMLHttpRequest();
