@@ -182,7 +182,7 @@ class Meme(Module, ImageUploader):
                 {"center_vertical": True},
 
                 {"position": (422, 285), "font_size": 100, "wrap": 10},
-                {"position": (430, 864), "color": self.WHITE},
+                {"position": (430, 864), "font_size": 50, "color": self.WHITE},
             ),
             "stencil": (
                 {"center_vertical": True, "color": self.WHITE},
