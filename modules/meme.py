@@ -176,7 +176,7 @@ class Meme(Module, ImageUploader):
 
                 {"position": (360, 190)},
                 {"position": (162, 257)},
-                {"position": (490, 230)},
+                {"position": (490, 230), "wrap": 10},
             ),
             "woah": (
                 {"center_vertical": True},
