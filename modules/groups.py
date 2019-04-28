@@ -9,6 +9,7 @@ class Groups(Module):
         "Robotics Yalies": "48299309/LfsRP2eP",
         "Directed Studies": "49954511/RJGSTgEU",
         "Black Yale 2023": "49447961/dUZwOQEp",
+        "First Generation students": "49418581/byuFtN4q",
 
         "DMV Region": "46655481/kpn04v",
     }
