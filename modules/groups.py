@@ -7,6 +7,7 @@ class Groups(Module):
         "Yale 2023": "46649296/URP6KiXC",
         "Yale Prom": "47397377/6SQ6Z9",
         "Robotics Yalies": "48299309/LfsRP2eP",
+        "Directed Studies": "49954511/RJGSTgEU",
 
         "DMV Region": "46655481/kpn04v",
     }
