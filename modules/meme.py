@@ -179,9 +179,10 @@ class Meme(Module, ImageUploader):
                 {"position": (490, 230)},
             ),
             "woah": (
-                {},
+                {"center_vertical": True},
 
-                {"position": (422, 285)},
+                {"position": (422, 285), "font_size": 100, "wrap": 10},
+                {"position": (430, 864), "color": self.WHITE},
             ),
             "stencil": (
                 {"color": self.WHITE},
