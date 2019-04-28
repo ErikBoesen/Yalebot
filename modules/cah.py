@@ -86,7 +86,7 @@ class CardsAgainstHumanity(Module):
             self.games[group_id] = Game(group_id)
             return (f"Cards Against Humanity game started in group #{group_id}.\n"
                     "Say !cah join to join, or !cah end to terminate the game.\n"
-                    "Groups: " str(self.games) "\n" self.games[group_id])
+                    "Groups: " + str(self.games) + "\n" + str(self.games[group_id]))
         elif command == "end":
             if group_id not in self.games:
                 return "No game in progress."
