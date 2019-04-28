@@ -104,7 +104,7 @@ class CardsAgainstHumanity(Module):
             self.games[group_id].join(user_id)
             return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
         elif command == "info":
-            return f"{len(self.games)} games in progress: " + ", ".join(self.games.keys())
+            return str(self.games) + " " + str(self.playing)
         """
         elif command == "refresh":
             self.games[group_id].refresh(user_id)

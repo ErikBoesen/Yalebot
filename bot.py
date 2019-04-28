@@ -294,8 +294,6 @@ def delete_bot():
 @app.route("/cah", methods=["GET"])
 def cah():
     access_token = request.args["access_token"]
-    if request.method == "POST":
-        pass
     my_user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     # TODO: This is VERY BAD
     game_group_id = commands["cah"].playing.get(my_user["user_id"])
