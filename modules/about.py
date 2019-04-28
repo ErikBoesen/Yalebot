@@ -13,7 +13,7 @@ class About(Module):
             most_lines = 0
             longest_file = None
             filenames = sum([
-                glob(criterion) for criterion in ["Procfile", "*.py", "*.sh", "static/*",
+                glob(criterion) for criterion in ["Procfile", "*.py", "*.sh", "static/*.css",
                                                   "static/scripts/*", "modules/*",
                                                   "hooks/*", "templates/*"]], [])
             for filename in filenames:
