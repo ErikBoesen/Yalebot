@@ -185,14 +185,14 @@ class Meme(Module, ImageUploader):
                 {"position": (430, 864), "color": self.WHITE},
             ),
             "stencil": (
-                {"color": self.WHITE},
+                {"center_vertical": True, "color": self.WHITE},
 
                 {"position": (572, 346), "wrap": 10},
                 {"position": (259, 405)},
                 {"position": (368, 1043), "color": self.BLACK},
             ),
             "owl": (
-                {},
+                {"center_vertical": True},
 
                 {"position": (169, 294), "color": self.WHITE},
                 {"position": (654, 360)},
