@@ -303,6 +303,7 @@ def cah():
     my_game = commands["cah"].games[game_group_id]
     me = my_game.players[my_user["user_id"]]
     return render_template("cah.html",
+                           black_card=my_game.current_black_card,
                            cards=me.hand,
                            score=len(me.won))
 
@@ -312,3 +313,4 @@ def cah_entry():
     data = request.get_json()
     access_token = data["access_token"]
     print(data)
+    return True

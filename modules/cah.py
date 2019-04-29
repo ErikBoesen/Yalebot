@@ -32,6 +32,7 @@ class Game:
         self.players = {}
         self.hand_size = 8
         self.build_decks()
+        self.choose_black_card()
 
     def build_decks(self):
         self.build_black_deck()
@@ -46,6 +47,9 @@ class Game:
         with open("resources/cah/white.json", "r") as f:
             self.white = json.load(f)
         random.shuffle(self.white)
+
+    def choose_black_card(self):
+        self.current_black_card = self.black.pop()
 
     def join(self, user_id):
         if user_id in self.players:
