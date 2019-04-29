@@ -1,6 +1,6 @@
 onclick = function(e) {
     console.log("Clicked somewhere.");
-    if (e.target.classList.contains("card")) {
+    if (e.target.classList.contains("card") && e.target.classList.contains("white")) {
         console.log("Clicked on a card.");
         var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
 
