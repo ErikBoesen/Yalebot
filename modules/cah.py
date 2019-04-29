@@ -30,6 +30,7 @@ class Game:
     def __init__(self, group_id):
         self.group_id = group_id
         self.players = {}
+        self.selection = {}
         self.hand_size = 8
         self.build_decks()
         self.czar_user_id = None
@@ -68,6 +69,11 @@ class Game:
     def deal(self, user_id):
         for i in range(self.hand_size):
             self.players[user_id].pick_up_white(self.white.pop())
+
+    def player_choose(self, user_id, card_index):
+        # TODO: check if user has already picked a card
+        card = self.players[user_id].hand.pop(card_index)
+        self.selection[card_index] = card
 
     """
     def discard(self, user_id):
@@ -130,4 +136,4 @@ class CardsAgainstHumanity(Module):
         game_group_id = self.playing.get(user_id)
         if game_group_id is None:
             return None
-        my_game = self.games[game_group_id]
+        return self.games[game_group_id]
