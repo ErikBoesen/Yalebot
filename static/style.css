@@ -113,7 +113,6 @@ footer a {
     font-size: 20px;
     border: solid 1px #111;
     border-radius: 5px;
-    cursor: pointer;
     background-position: 90% 95%;
     background-repeat: no-repeat;
     background-size: 30px;
@@ -122,6 +121,7 @@ footer a {
     background-color: white;
     color: #111;
     background-image: url('/static/images/cah_black.png');
+    cursor: pointer;
 }
 .card.black {
     background-color: #111;
