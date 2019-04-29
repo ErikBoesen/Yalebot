@@ -322,4 +322,4 @@ def cah_entry():
         reply("The Card Czar has selected ", group_id)
     else:
         game.player_choose(user_id, data["card_index"])
-    return "ok", 400
+    return "ok", 200
