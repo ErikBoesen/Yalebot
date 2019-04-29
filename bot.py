@@ -301,10 +301,13 @@ def cah():
         return "You're not in a game yet, say !cah join"
     player = game.players[user_id]
     is_czar = game.is_czar(user_id)
+
+    cards = list(game.selection.values()) if is_czar else player.hand
+    cards = player.hand
     return render_template("cah.html",
                            is_czar=is_czar,
                            black_card=game.current_black_card,
-                           cards=list(game.selection.values()) if is_czar else player.hand,
+                           cards=,
                            score=len(player.won))
 
 
@@ -317,7 +320,7 @@ def cah_entry():
     game = commands["cah"].get_user_game(user_id)
     player = game.players[user_id]
     group_id = game.group_id
-    if game.czar_user_id == user_id:
+    if game.is_czar(user_id):
 
         reply("The Card Czar has selected ", group_id)
     else:

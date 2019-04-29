@@ -109,22 +109,19 @@ class CardsAgainstHumanity(Module):
                 return "Game already started!"
             self.games[group_id] = Game(group_id)
             return (f"Cards Against Humanity game started in group #{group_id}.\n"
-                    "Say !cah join to join, or !cah end to terminate the game.\n"
-                    "Groups: " + str(self.games) + "\n" + str(self.games[group_id]))
+                    "Say !cah join to join, or !cah end to terminate the game.\n")
         elif command == "end":
             if group_id not in self.games:
                 return "No game in progress."
             game = self.games.pop(group_id)
-            # TODO: free players, etc. Otherwise they're stuck
             for player in game.players:
                 self.playing.pop(player.user_id)
-            return "Game ended. Run !cah start to start a new game."
+            return "Game ended. Say !cah start to start a new game."
         elif command == "join":
             if user_id in self.playing:
                 return "You're already in a game."
             if group_id not in self.games:
-                # TODO: debug
-                return "No game in progress. Games: " + str(self.games)
+                return "No game in progress. Say !cah start to start a game."
             self.playing[user_id] = group_id
             self.games[group_id].join(user_id)
             return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
