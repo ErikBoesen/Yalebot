@@ -307,7 +307,7 @@ def cah():
     return render_template("cah.html",
                            is_czar=is_czar,
                            black_card=game.current_black_card,
-                           cards=,
+                           cards=cards,
                            score=len(player.won))
 
 
