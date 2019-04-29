@@ -10,8 +10,8 @@ class Funny(Module):
 
     def __init__(self):
         super().__init__()
-        self.reddit = praw.Reddit(client_id=os.environ["REDDIT_CLIENT_ID"],
-                                  client_secret=os.environ["REDDIT_SECRET"],
+        self.reddit = praw.Reddit(client_id=os.environ.get("REDDIT_CLIENT_ID"),
+                                  client_secret=os.environ.get("REDDIT_SECRET"),
                                   user_agent="yalebot")
 
     def response(self, query, message):
