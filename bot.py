@@ -307,7 +307,7 @@ def cah():
                            score=len(me.won))
 
 
-@app.route("/cah", methods=["GET"])
+@app.route("/cah", methods=["POST"])
 def cah_entry():
     data = request.get_json()
     access_token = data["access_token"]

@@ -16,8 +16,6 @@ onclick = function(e) {
         req.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 location.reload();
-            } else {
-                console.log("Failed to report data.", data);
             }
         };
     }
