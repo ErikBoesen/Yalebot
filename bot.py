@@ -296,11 +296,10 @@ def cah():
     access_token = request.args["access_token"]
     my_user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     # TODO: This is VERY BAD
-    game_group_id = commands["cah"].playing.get(my_user["user_id"])
-    if game_group_id is None:
+    my_game = commands["cah"].get_user_game(my_user["user_id"])
+    if my_game is None:
         # TODO: Do this better also
         return "You're not in a game yet, say !cah join"
-    my_game = commands["cah"].games[game_group_id]
     me = my_game.players[my_user["user_id"]]
     return render_template("cah.html",
                            black_card=my_game.current_black_card,
@@ -312,5 +311,10 @@ def cah():
 def cah_entry():
     data = request.get_json()
     access_token = data["access_token"]
-    print(data)
-    return True
+    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    user_id = user["user_id"]
+    if commands["cah"].czar_user_id == user_id:
+        pass
+    else:
+        pass
+    return "ok", 400

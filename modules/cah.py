@@ -125,3 +125,9 @@ class CardsAgainstHumanity(Module):
         elif command == "refresh":
             self.games[group_id].refresh(user_id)
         """
+
+    def get_user_game(self, user_id):
+        game_group_id = self.playing.get(user_id)
+        if game_group_id is None:
+            return None
+        my_game = self.games[game_group_id]
