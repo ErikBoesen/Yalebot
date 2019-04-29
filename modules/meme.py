@@ -13,6 +13,7 @@ class Meme(Module, ImageUploader):
     LARGE_FONT_SIZE = 50
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
+    YELLOW = (255, 255, 0)
 
     def list_templates(self):
         return "Supported templates: " + ", ".join(self.templates.keys())
@@ -169,7 +170,7 @@ class Meme(Module, ImageUploader):
 
                 {"position": (845, 420)},
                 {"position": (300, 435)},
-                {"position": (640, 1400), "wrap": 50, "color": (255, 255, 0)},
+                {"position": (640, 1400), "wrap": 50, "color": self.YELLOW},
             ),
             "distractedboyfriend": (
                 {},
@@ -196,6 +197,11 @@ class Meme(Module, ImageUploader):
 
                 {"position": (169, 294), "color": self.WHITE},
                 {"position": (654, 360)},
+            ),
+            "megan": (
+                {"center_vertical": True, "color": self.YELLOW},
+
+                {"position": (200, 240)},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
