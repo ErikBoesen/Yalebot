@@ -294,18 +294,16 @@ def delete_bot():
 @app.route("/cah", methods=["GET"])
 def cah():
     access_token = request.args["access_token"]
-    # TODO: Clean up naming
-    my_user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-    # TODO: This is VERY BAD
-    my_game = commands["cah"].get_user_game(my_user["user_id"])
-    if my_game is None:
-        # TODO: Do this better also
+    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    user_id = user["user_id"]
+    game = commands["cah"].get_user_game(user_id)
+    if game is None:
         return "You're not in a game yet, say !cah join"
-    me = my_game.players[my_user["user_id"]]
+    player = game.players[user_id]
     return render_template("cah.html",
-                           black_card=my_game.current_black_card,
-                           cards=me.hand,
-                           score=len(me.won))
+                           black_card=game.current_black_card,
+                           cards=player.hand,
+                           score=len(player.won))
 
 
 @app.route("/cah", methods=["POST"])
