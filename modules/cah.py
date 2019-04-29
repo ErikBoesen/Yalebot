@@ -75,6 +75,9 @@ class Game:
         card = self.players[user_id].hand.pop(card_index)
         self.selection[card_index] = card
 
+    def is_czar(self, user_id):
+        return self.czar_user_id == user_id
+
     """
     def discard(self, user_id):
         if user_id not in self.players:
