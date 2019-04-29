@@ -32,6 +32,7 @@ class Game:
         self.players = {}
         self.hand_size = 8
         self.build_decks()
+        self.czar_user_id = None
         self.choose_black_card()
 
     def build_decks(self):
@@ -51,11 +52,18 @@ class Game:
     def choose_black_card(self):
         self.current_black_card = self.black.pop()
 
+    def assign_czar(self, user_id=None):
+        # TODO: Do we need this function?
+        # At least make it more pythonic
+        self.czar_user_id = user_id
+
     def join(self, user_id):
         if user_id in self.players:
             return False
         self.players[user_id] = Player(user_id)
         self.deal(user_id)
+        if self.czar_user_id is None:
+            self.assign_czar(user_id)
 
     def deal(self, user_id):
         for i in range(self.hand_size):
