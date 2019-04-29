@@ -303,7 +303,6 @@ def cah():
     is_czar = game.is_czar(user_id)
 
     cards = list(game.selection.values()) if is_czar else player.hand
-    cards = player.hand
     return render_template("cah.html",
                            is_czar=is_czar,
                            black_card=game.current_black_card,
