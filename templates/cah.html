@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 {% block main %}
-<div class="cards">
+<div class="cards"
     <div class="black card">
         {{ black_card }}
     </div>
+</div>
+<div class="cards">
     {% for card in cards %}
     <div class="white card">
         {{ card }}
