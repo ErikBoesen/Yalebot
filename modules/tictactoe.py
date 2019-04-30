@@ -23,7 +23,7 @@ class TicTacToe(Module):
         return pboard
 
     def check(self):
-        #TODO: find a better way to check for three in a row
+        # TODO: find a better way to check for three in a row
         check = [self.board[0:3], self.board[3:6], self.board[6:],
                  [self.board[0], self.board[3], self.board[6]],
                  [self.board[1], self.board[4], self.board[7]],
@@ -56,9 +56,9 @@ class TicTacToe(Module):
             self.clear()
         elif command == "help":
             desc = "Possible commands: help, join, end. Positions:\n"
-            desc += "|".join(["a1","a2","a3"]) + "\n——————\n"
-            desc += "|".join(["b1","b2","b3"]) + "\n——————\n"
-            desc += "|".join(["c1","c2","c3"])
+            desc += "|".join(["a1", "a2", "a3"]) + "\n——————\n"
+            desc += "|".join(["b1", "b2", "b3"]) + "\n——————\n"
+            desc += "|".join(["c1", "c2", "c3"])
             return desc
         elif command in self.movements:
             loc = self.movements[command]
