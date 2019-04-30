@@ -104,7 +104,7 @@ commands = {
     "cah": modules.CardsAgainstHumanity(),
     "record": modules.Record(),
     "colleges": modules.Colleges(),
-    "ydn": modules.YDN(),
+    "yalenews": modules.YaleNews(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

@@ -53,4 +53,4 @@ from .power import Power
 from .cah import CardsAgainstHumanity
 from .record import Record
 from .colleges import Colleges
-from .ydn import YDN
+from .yalenews import YaleNews
