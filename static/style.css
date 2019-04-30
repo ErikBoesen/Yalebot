@@ -35,6 +35,9 @@ section {
 section:last-of-type {
     margin-bottom: 0;
 }
+p {
+    padding: 10px 0;
+}
 a {
     color: #00356b;
 }
