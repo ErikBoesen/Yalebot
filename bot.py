@@ -232,7 +232,7 @@ def reply(message, group_id):
 
 @app.route("/", methods=["GET"])
 def home():
-    return render_template("index.html")
+    return render_template("index.html", static_commands=static_commands.keys(), commands={key: command.DESCRIPTION for key, command in commands})
 
 
 def in_group(group_id):
