@@ -104,6 +104,7 @@ commands = {
     "cah": modules.CardsAgainstHumanity(),
     "record": modules.Record(),
     "colleges": modules.Colleges(),
+    "tictactoe": modules.TicTacToe(),
     "yalenews": modules.YaleNews(),
 }
 system_responses = {
