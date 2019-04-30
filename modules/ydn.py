@@ -1,13 +1,17 @@
 from .base import Module
 import requests
 from bs4 import BeautifulSoup
-import random
 
 
 class YDN(Module):
-    DESCRIPTION = "Get news from the Yale Daily News"
-    url = 'https://news.yale.edu/news-rss'
+    DESCRIPTION = 'Search for a news article on the Yale Daily News'
+    ARGC = 1
     def response(self, query, message):
-        r = requests.get(self.url)
-        soup = BeautifulSoup(r.text, 'html.parser')
-        return random.choice(list(map(lambda x: x.get_text(), soup.find_all("guid"))))
+        url = f'https://news.yale.edu/search?sort=created&order=desc&search_api_views_fulltext={query.replace(" ", "%20").lower()}'
+        soup = BeautifulSoup(requests.get(url).text, 'html.parser')
+        link = list(map(lambda x: x.get("href"), soup.find_all("a")))[22]
+        # if typo comes up, searches the suggested keyword 
+        if '/search?' in link:
+            soup = BeautifulSoup(requests.get(f'https://news.yale.edu{link}').text, 'html.parser')
+            link = list(map(lambda x: x.get("href"), soup.find_all("a")))[22]
+        return f'https://news.yale.edu{link}'
