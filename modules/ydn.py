@@ -6,8 +6,9 @@ from bs4 import BeautifulSoup
 class YaleNews(Module):
     DESCRIPTION = "Search for a news article on Yale News"
     ARGC = 1
+
     def response(self, query, message):
-        url = f"https://news.yale.edu/search?sort=created&order=desc&search_api_views_fulltext={query.replace(" ", "%20").lower()}"
+        url = f"https://news.yale.edu/search?sort=created&order=desc&search_api_views_fulltext={query}"
         soup = BeautifulSoup(requests.get(url).text, "html.parser")
         link = list(map(lambda x: x.get("href"), soup.find_all("a")))[22]
         # if typo comes up, searches the suggested keyword
