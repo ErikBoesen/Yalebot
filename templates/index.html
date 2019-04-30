@@ -1,4 +1,13 @@
 {% extends "layout.html" %}
 {% block main %}
-<a class="button" href="https://oauth.groupme.com/oauth/authorize?client_id=46tkWF26m1juUxxvRGKUjVqVjbejYK4Njz3VA4ZZjWhr5dtH">Add Yalebot to a group</a>
+<h3>A GroupMe chatbot for Yale University.</h4>
+<p>Yalebot boasts a wide variety of capabilities, including meme generation, face-recognition photo filters, inspirational quote generation, fun facts, and verification that a user is Yale-affiliated. It is an ideal tool for Yale GroupMe chats (although it's also active in non-Yale chats, such as those of the University of Pennsylvania, Ivy League 2023, University of Michigan, etc.). The bot is maintained by <a href="https://erikboesen.com"</a>Erik Boesen</a> '23.</p>
+<a class="button prominent" href="https://oauth.groupme.com/oauth/authorize?client_id=46tkWF26m1juUxxvRGKUjVqVjbejYK4Njz3VA4ZZjWhr5dtH">Add Yalebot to your group!</a>
+<h3>Bot capabilities</h3>
+<p>Static commands: {% for static_command in static_commands %}!{{ static_command }}{{ ", " if not loop.last }}{% endfor %}</p>
+<ul>
+    {% for command, description in commands %}
+    <li><strong>!{{ command }}</strong>: {{ description }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

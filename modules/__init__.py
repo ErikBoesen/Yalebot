@@ -54,3 +54,4 @@ from .cah import CardsAgainstHumanity
 from .record import Record
 from .colleges import Colleges
 from .tictactoe import TicTacToe
+from .yalenews import YaleNews

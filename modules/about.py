@@ -4,6 +4,7 @@ import json
 
 
 class About(Module):
+    DESCRIPTION = "Show basic information about Yalebot"
     string = None
 
     def response(self, query, message):

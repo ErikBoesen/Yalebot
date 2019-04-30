@@ -13,27 +13,44 @@
 html, body { height: 100%; }
 body {
     font-family: 'PT Sans', serif;
-    font-size: 16px;
+    font-size: 20px;
     background: white;
     color: #333;
     border-top: 8px solid #00356b;
 }
 header, main, footer {
-    padding: 10px 40px;
+    padding: 10px 60px;
 }
 header {
     padding-bottom: 20px;
+    padding-top: 30px;
 }
-header h1 {
+h1 {
     font-size: 100px;
     color: #00356b;
     line-height: 1;
+}
+header img {
+    height: 100px;
+    margin-left: -20px;
+}
+h3 {
+    font-size: 30px;
+}
+main {
+    max-width: 12in;
 }
 section {
     margin-bottom: 20px;
 }
 section:last-of-type {
     margin-bottom: 0;
+}
+p {
+    padding: 10px 0;
+}
+ul {
+    margin-left: 25px;
 }
 a {
     color: #00356b;
@@ -64,11 +81,9 @@ label {
     border: solid 2px #00356b;
     text-decoration: none;
     vertical-align: middle;
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    position: relative;
     transition: 0.5s;
     cursor: pointer;
+    display: inline-block;
 }
 .button:hover, .button:focus, .button:active {
     color: white;
@@ -88,6 +103,9 @@ th:first-child, td:first-child {
 .button.delete:hover, .button.delete:focus, .button.delete:active {
     color: white;
     background-color: #ea0404;
+}
+.button.prominent {
+    margin: 10px 0 20px;
 }
 table img {
     width: 50px;
@@ -113,7 +131,6 @@ footer a {
     font-size: 20px;
     border: solid 1px #111;
     border-radius: 5px;
-    cursor: pointer;
     background-position: 90% 95%;
     background-repeat: no-repeat;
     background-size: 30px;
@@ -122,6 +139,7 @@ footer a {
     background-color: white;
     color: #111;
     background-image: url('/static/images/cah_black.png');
+    cursor: pointer;
 }
 .card.black {
     background-color: #111;

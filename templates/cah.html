@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 {% block main %}
+{% if is_czar %}
+<p>You are Card Czar.</p>
+{% endif %}
+<div class="cards">
+    <div class="black card">
+        {{ black_card }}
+    </div>
+</div>
 <div class="cards">
     {% for card in cards %}
     <div class="white card">
@@ -8,5 +16,5 @@
     {% endfor %}
 </div>
 <div class="score">Your score: {{ score }}</div>
-<script src="/static/scripts/cah.js">
+<script src="/static/scripts/cah.js"></script>
 {% endblock %}
