@@ -13,21 +13,32 @@
 html, body { height: 100%; }
 body {
     font-family: 'PT Sans', serif;
-    font-size: 16px;
+    font-size: 20px;
     background: white;
     color: #333;
     border-top: 8px solid #00356b;
 }
 header, main, footer {
-    padding: 10px 40px;
+    padding: 10px 60px;
 }
 header {
     padding-bottom: 20px;
+    padding-top: 30px;
 }
-header h1 {
+h1 {
     font-size: 100px;
     color: #00356b;
     line-height: 1;
+}
+header img {
+    height: 100px;
+    margin-left: -20px;
+}
+h3 {
+    font-size: 30px;
+}
+main {
+    max-width: 12in;
 }
 section {
     margin-bottom: 20px;
@@ -37,6 +48,9 @@ section:last-of-type {
 }
 p {
     padding: 10px 0;
+}
+ul {
+    margin-left: 25px;
 }
 a {
     color: #00356b;
@@ -89,6 +103,9 @@ th:first-child, td:first-child {
 .button.delete:hover, .button.delete:focus, .button.delete:active {
     color: white;
     background-color: #ea0404;
+}
+.button.prominent {
+    margin: 20px 0 30px;
 }
 table img {
     width: 50px;
