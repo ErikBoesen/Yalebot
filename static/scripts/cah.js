@@ -1,5 +1,7 @@
 onclick = function(e) {
-    if (e.target.classList.contains("card")) {
+    console.log("Clicked somewhere.");
+    if (e.target.classList.contains("card") && e.target.classList.contains("white")) {
+        console.log("Clicked on a card.");
         var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
 
         var req = new XMLHttpRequest();
@@ -14,8 +16,6 @@ onclick = function(e) {
         req.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 location.reload();
-            } else {
-                console.log("Failed to report data.", data);
             }
         };
     }

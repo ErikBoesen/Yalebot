@@ -39,7 +39,7 @@ class Chat(Module):
     ARGC = 1
 
     def __init__(self):
-        self.client = CleverBot(user=os.environ["CLEVERBOT_USER"], key=os.environ["CLEVERBOT_KEY"])
+        self.client = CleverBot(user=os.environ.get("CLEVERBOT_USER"), key=os.environ.get("CLEVERBOT_KEY"))
         super().__init__()
 
     def response(self, query, message):

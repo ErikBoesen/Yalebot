@@ -13,6 +13,7 @@ class Meme(Module, ImageUploader):
     LARGE_FONT_SIZE = 50
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
+    YELLOW = (255, 255, 0)
 
     def list_templates(self):
         return "Supported templates: " + ", ".join(self.templates.keys())
@@ -159,6 +160,61 @@ class Meme(Module, ImageUploader):
                 # {"position": (341, 23)},
                 {"position": (133, 309)},
             ),
+            "pyramid": (
+                {"center": False, "center_vertical": True},
+
+                {"position": (240, 150), "wrap": 30},
+            ),
+            "hannibal": (
+                {"center_vertical": True, "color": self.WHITE, "font_size": self.LARGE_FONT_SIZE},
+
+                {"position": (845, 420)},
+                {"position": (300, 435)},
+                {"position": (640, 1400), "wrap": 50, "color": self.YELLOW},
+            ),
+            "distractedboyfriend": (
+                {},
+
+                {"position": (360, 190)},
+                {"position": (162, 257)},
+                {"position": (490, 230), "wrap": 10},
+            ),
+            "woah": (
+                {"center_vertical": True},
+
+                {"position": (422, 285), "font_size": 100, "wrap": 10},
+                {"position": (430, 864), "font_size": 50, "color": self.WHITE},
+            ),
+            "stencil": (
+                {"center_vertical": True, "color": self.WHITE},
+
+                {"position": (572, 346), "wrap": 10},
+                {"position": (259, 405)},
+                {"position": (368, 1043), "color": self.BLACK},
+            ),
+            "owl": (
+                {"center_vertical": True},
+
+                {"position": (169, 294), "color": self.WHITE},
+                {"position": (654, 360)},
+            ),
+            "megan": (
+                {"center_vertical": True, "color": self.YELLOW},
+
+                {"position": (200, 240)},
+            ),
+            "dilemma": (
+                {"center_vertical": True},
+
+                {"position": (152, 136)},
+                {"position": (353, 98)},
+                {"position": (174, 810), "color": self.WHITE},
+            ),
+            "scroll": (
+                {"center_vertical": True},
+
+                {"position": (227, 634), "wrap": 15},
+            )
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
@@ -168,9 +224,10 @@ class Meme(Module, ImageUploader):
 
         template_name = captions.pop(0).strip().lower()
         if self.templates.get(template_name) is None:
-            return f"No template found called {template}. " + self.list_templates()
-        if len(captions) < len(self.templates[template_name]) - 1:
-            return "Not enough captions provided (remember to separate with newlines)."
+            return f"No template found called {template_name}. " + self.list_templates()
+        captions_required = len(self.templates[template_name]) - 1
+        if len(captions) < captions_required:
+            return f"Not enough captions provided; {captions_required} required for template {template_name}. Remember to separate with newlines."
         image = Image.open(f"resources/memes/{template_name}.jpg")
         canvas = ImageDraw.Draw(image)
         self.draw_captions(canvas, captions, self.templates[template_name])

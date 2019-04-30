@@ -298,23 +298,34 @@ def delete_bot():
 @app.route("/cah", methods=["GET"])
 def cah():
     access_token = request.args["access_token"]
-    if request.method == "POST":
-        pass
-    my_user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-    # TODO: This is VERY BAD
-    game_group_id = commands["cah"].playing.get(my_user["user_id"])
-    if game_group_id is None:
-        # TODO: Do this better also
+    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    user_id = user["user_id"]
+    game = commands["cah"].get_user_game(user_id)
+    if game is None:
         return "You're not in a game yet, say !cah join"
-    my_game = commands["cah"].games[game_group_id]
-    me = my_game.players[my_user["user_id"]]
+    player = game.players[user_id]
+    is_czar = game.is_czar(user_id)
+
+    cards = list(game.selection.values()) if is_czar else player.hand
     return render_template("cah.html",
-                           cards=me.hand,
-                           score=len(me.won))
+                           is_czar=is_czar,
+                           black_card=game.current_black_card,
+                           cards=cards,
+                           score=len(player.won))
 
 
-@app.route("/cah", methods=["GET"])
+@app.route("/cah", methods=["POST"])
 def cah_entry():
     data = request.get_json()
     access_token = data["access_token"]
-    print(data)
+    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    user_id = user["user_id"]
+    game = commands["cah"].get_user_game(user_id)
+    player = game.players[user_id]
+    group_id = game.group_id
+    if game.is_czar(user_id):
+
+        reply("The Card Czar has selected ", group_id)
+    else:
+        game.player_choose(user_id, data["card_index"])
+    return "ok", 200

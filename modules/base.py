@@ -7,7 +7,7 @@ from io import BytesIO
 class Module:
     DESCRIPTION = ""
     ARGC = 0
-    ACCESS_TOKEN = os.environ["GROUPME_ACCESS_TOKEN"]
+    ACCESS_TOKEN = os.environ.get("GROUPME_ACCESS_TOKEN")
 
     def __init__(self):
         print("Loaded module %s." % self.__class__.__name__)
@@ -25,7 +25,7 @@ class ImageUploader:
         """
         headers = {
             # TODO: we store this in every Module...
-            "X-Access-Token": os.environ["GROUPME_ACCESS_TOKEN"],
+            "X-Access-Token": os.environ.get("GROUPME_ACCESS_TOKEN"),
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
