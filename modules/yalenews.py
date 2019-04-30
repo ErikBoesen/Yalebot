@@ -11,9 +11,10 @@ class YaleNews(Module):
         url = "https://news.yale.edu/search?sort=created&order=desc&search_api_views_fulltext=" + query
         soup = BeautifulSoup(requests.get(url).text, "html.parser")
         # TODO: protect against exact link index being changed
-        link = [link.get("href") for link in soup.find_all("a")][22]
-        # if typo comes up, searches the suggested keyword
-        if "/search?" in link:
-            soup = BeautifulSoup(requests.get("https://news.yale.edu" + link).text, "html.parser")
-            link = list(map(lambda x: x.get("href"), soup.find_all("a")))[22]
-        return "https://news.yale.edu" + link
+        a = soup.find_all("a")[22]
+        href = a.get("href")
+        # If no results are found, send recommendation
+        if "/search?" in href:
+            return f"No results found. Did you mean '{a.text}'?"
+            # TODO: Use recursion to get that result automatically
+        return "https://news.yale.edu" + href
