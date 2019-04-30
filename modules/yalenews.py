@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 
 class YaleNews(Module):
-    DESCRIPTION = "Search for a news article on Yale News"
+    DESCRIPTION = "Search for an article on Yale News"
     ARGC = 1
 
     def response(self, query, message):
@@ -16,5 +16,5 @@ class YaleNews(Module):
         # If no results are found, send recommendation
         if "/search?" in href:
             return f"No results found. Did you mean '{a.text}'?"
-            # TODO: Use recursion to get that result automatically
+            # TODO: Use recursion to get that result automatically?
         return "https://news.yale.edu" + href
