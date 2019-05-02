@@ -181,6 +181,7 @@ def process_message(message):
             for check_name in check_names:
                 reply(commands["vet"].check_user(check_name), group_id)
         """
+    return responses
 
 
 @app.route("/", methods=["POST"])
