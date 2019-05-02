@@ -19,7 +19,7 @@ body {
     border-top: 8px solid #00356b;
 }
 header, main, footer {
-    padding: 10px 60px;
+    padding: 10px 20px;
 }
 header {
     padding-bottom: 20px;
@@ -31,8 +31,7 @@ h1 {
     line-height: 1;
 }
 header img {
-    height: 100px;
-    margin-left: -20px;
+    max-width: 100%;
 }
 h3 {
     font-size: 30px;
@@ -145,4 +144,14 @@ footer a {
     background-color: #111;
     color: white;
     background-image: url('/static/images/cah_white.png');
+}
+
+@media (min-width: 800px) {
+    header, main, footer {
+        padding: 10px 60px;
+    }
+    header img {
+        height: 100px;
+        margin-left: -20px;
+    }
 }
