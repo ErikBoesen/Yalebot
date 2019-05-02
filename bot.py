@@ -6,6 +6,7 @@ import json
 import difflib
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
+import argparse
 
 
 app = Flask(__name__)
@@ -117,7 +118,6 @@ F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | r
 
 def process_message(message):
     responses = []
-    group_id = message["group_id"]
     text = message["text"]
     name = message["name"]
     forename = name.split(" ", 1)[0]
@@ -334,4 +334,7 @@ def cah_entry():
 
 
 if __name__ == "__main__":
-    pass
+    parser = argparse.ArgumentParser(description="Testing interface to Yalebot.")
+    parser.add_argument("message")
+    args = parser.parse_args()
+    print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "system": False}))
