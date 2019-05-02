@@ -190,7 +190,10 @@ def webhook():
     """
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
-    reply(process_message(message))
+    group_id = message["group_id"]
+    response = process_message(message)
+    if response:
+        reply(response, group_id)
     return "ok", 200
 
 
@@ -327,3 +330,7 @@ def cah_entry():
     else:
         game.player_choose(user_id, data["card_index"])
     return "ok", 200
+
+
+if __name__ == "__main__":
+    pass
