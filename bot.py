@@ -116,6 +116,7 @@ F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | r
 
 
 def process_message(message):
+    responses = []
     group_id = message["group_id"]
     text = message["text"]
     name = message["name"]
@@ -123,7 +124,7 @@ def process_message(message):
     print("Message received: %s" % message)
     f_matches = F_PATTERN.search(text)
     if f_matches is not None and len(f_matches.groups()):
-        reply(f_matches.groups()[0] + " ❤", group_id)
+        responses.append(f_matches.groups()[0] + " ❤")
     if message["sender_type"] != "bot":
         if text.startswith(PREFIX):
             instructions = text[len(PREFIX):].strip().split(None, 1)
@@ -134,47 +135,46 @@ def process_message(message):
                 pass
             # Check if there's a static response for this command
             elif command in static_commands:
-                reply(static_commands[command], group_id)
+                responses.append(static_commands[command])
             # If not, query appropriate module for a response
             elif command in commands:
                 # Make sure there are enough arguments
                 if len(list(filter(None, query.split("\n")))) < commands[command].ARGC:
-                    reply("Not enough arguments!", group_id)
+                    responses.append("Not enough arguments!")
                 else:
                     response = commands[command].response(query, message)
                     if response is not None:
-                        reply(response, group_id)
+                        responses.append(response)
             elif command == "help":
                 if query:
                     query = query.strip(PREFIX)
                     if query in static_commands:
-                        reply(PREFIX + query + ": static response.", group_id)
+                        responses.append(PREFIX + query + ": static response.")
                     elif query in commands:
-                        reply(PREFIX + query + ": " + commands[query].DESCRIPTION + f". Requires {commands[query].ARGC} argument(s).", group_id)
+                        responses.append(PREFIX + query + ": " + commands[query].DESCRIPTION + f". Requires {commands[query].ARGC} argument(s).")
                     elif query in meme_commands:
-                        reply(PREFIX + query + ": meme command; provide captions separated by newlines.", group_id)
+                        responses.append(PREFIX + query + ": meme command; provide captions separated by newlines.")
                     else:
-                        reply("No such command.", group_id)
+                        responses.append("No such command.")
                 else:
                     help_string = "--- Help ---"
                     help_string += "\nStatic commands: " + ", ".join([PREFIX + title for title in static_commands])
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
-                    reply(help_string, group_id)
+                    responses.append(help_string)
             else:
                 try:
                     closest = difflib.get_close_matches(command, list(static_commands.keys()) + list(commands.keys()), 1)[0]
                     advice = f"Perhaps you meant {PREFIX}{closest}? "
                 except IndexError:
                     advice = ""
-                reply(f"Command not found. {advice}Use !help to view a list of commands.", group_id)
-
+                responses.append(f"Command not found. {advice}Use !help to view a list of commands.")
         if "thank" in text.lower() and "yalebot" in text.lower():
-            reply("You're welcome, " + forename + "! :)", group_id)
+            responses.append("You're welcome, " + forename + "! :)")
     if message["system"]:
         for option in system_responses:
             if system_responses[option].RE.match(text):
-                reply(system_responses[option].response(text, message), group_id)
+                responses.append(system_responses[option].response(text, message))
         """
         if system_responses["welcome"].RE.match(text):
             check_names = system_responses["welcome"].get_names(text)
@@ -190,7 +190,7 @@ def webhook():
     """
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
-    process_message(message)
+    reply(process_message(message))
     return "ok", 200
 
 
