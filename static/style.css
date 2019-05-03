@@ -23,7 +23,7 @@ header, main, footer {
 }
 header {
     padding-bottom: 20px;
-    padding-top: 30px;
+    padding-top: 40px;
 }
 h1 {
     font-size: 100px;
@@ -149,6 +149,9 @@ footer a {
 @media (min-width: 800px) {
     header, main, footer {
         padding: 10px 60px;
+    }
+    header {
+        padding-top: 25px;
     }
     header img {
         height: 100px;
