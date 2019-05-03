@@ -16,7 +16,7 @@ class TicTacToe(Module):
         self.board = [" "] * 9
         self.turn = True
 
-    def board(self):
+    def string_board(self):
         pboard = "|".join(self.board[:3]) + "\n——————\n"
         pboard += "|".join(self.board[3:6]) + "\n——————\n"
         pboard += "|".join(self.board[6:])
@@ -49,7 +49,7 @@ class TicTacToe(Module):
                 return f"{name} has joined, waiting on a second player"
             elif self.players[1] == "":
                 self.players[1] = name
-                return [f"{name} has joined, ready to play", self.board()]
+                return [f"{name} has joined, ready to play", self.string_board()]
             else:
                 return f"Game full. {self.players[0]} & {self.players[1]} are playing!"
         elif command == "end":
@@ -70,6 +70,6 @@ class TicTacToe(Module):
                 self.board[loc] = "o"
             if self.check() != "":
                 return self.check()
-            return self.board()
+            return self.string_board()
         else:
             return "Unkown command."
