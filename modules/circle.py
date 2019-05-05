@@ -3,7 +3,7 @@ import requests
 import random
 
 
-class Boink(Module):
+class Circle(Module):
     DESCRIPTION = "Generate a compliment circle"
 
     def response(self, query, message):
