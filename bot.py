@@ -109,6 +109,7 @@ commands = {
     "zalgo": modules.Zalgo(),
     "flip": modules.Flip(),
     "mccarthy": modules.McCarthy(),
+    "circle": modules.Circle(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

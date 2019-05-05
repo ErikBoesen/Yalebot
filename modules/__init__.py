@@ -54,3 +54,4 @@ from .record import Record
 from .colleges import Colleges
 from .tictactoe import TicTacToe
 from .yalenews import YaleNews
+from .circle import Circle
