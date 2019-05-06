@@ -18,4 +18,4 @@ class Groups(Module):
     }
 
     def response(self, query, message):
-        return '\n'.join(["%s -> https://groupme.com/join_group/%s" % (name, self.links[name]) for name in self.links])
+        return "\n".join(["%s -> https://groupme.com/join_group/%s" % (name, self.links[name]) for name in self.links])
