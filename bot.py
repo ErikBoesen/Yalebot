@@ -340,4 +340,4 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Testing interface to Yalebot.")
     parser.add_argument("message")
     args = parser.parse_args()
-    print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "system": False}))
+    print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "system": False, "group_id": "TEST_GROUP"}))
