@@ -10,8 +10,11 @@ class Groups(Module):
         "Directed Studies": "49954511/RJGSTgEU",
         "Black Yale 2023": "49447961/dUZwOQEp",
         "First Generation students": "49418581/byuFtN4q",
+        "LGBT+": "49376932/0wl2GN9F",
 
-        "DMV Region": "46655481/kpn04v",
+        "New York City": "46816234/B3PBXk"
+        "DMV": "46655481/kpn04v",
+        "New Jersey": "46963295/tmRi3T",
     }
 
     def response(self, query, message):
