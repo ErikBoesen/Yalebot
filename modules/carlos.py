@@ -1,9 +1,9 @@
-from .base import Module, ImageUploader
+from .base import Module, ImageModule
 from PIL import Image, ImageDraw
 import random
 
 
-class Carlos(Module, ImageUploader):
+class Carlos(Module, ImageModule):
     DESCRIPTION = "❤️"
     hearts = [Image.open(f"resources/hearts/{number}.png") for number in range(0, 13 + 1)]
     HEART_RESOLUTION = 120

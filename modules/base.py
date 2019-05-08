@@ -13,7 +13,7 @@ class Module:
         print("Loaded module %s." % self.__class__.__name__)
 
 
-class ImageUploader:
+class ImageModule:
     MAX_IMAGE_WIDTH = 1000
 
     def upload_image(self, data) -> str:

@@ -1,9 +1,9 @@
-from .base import Module, ImageUploader
+from .base import Module, ImageModule
 import re
 import ocr_space
 
 
-class Truman(Module, ImageUploader):
+class Truman(Module, ImageModule):
     DESCRIPTION = "Is your battery sinfully low?"
     PERCENTAGE_RE = re.compile(r"(\d+) *%")
     api = ocr_space.OCRSpace("helloworld")
