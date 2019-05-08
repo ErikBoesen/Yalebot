@@ -220,6 +220,12 @@ class Meme(Module, ImageUploader):
 
                 {"position": (139, 618), "wrap": 10},
             ),
+            "worldburn": (
+                {"center_vertical": True, "color": self.WHITE},
+
+                {"position": (365, 378)},
+                {"position": (1000, 422)},
+            ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
