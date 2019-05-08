@@ -45,7 +45,7 @@ class ImageUploader:
         natural_width, natural_height = image.size
         if natural_width > self.MAX_IMAGE_WIDTH:
             width = self.MAX_IMAGE_WIDTH
-            height = int(tear_width * tear_natural_height / tear_natural_width)
+            height = int(width * natural_height / natural_width)
             image = image.resize((width, height), Image.ANTIALIAS)
         return image
 
