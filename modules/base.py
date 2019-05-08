@@ -14,7 +14,7 @@ class Module:
 
 
 class ImageUploader:
-    MAX_IMAGE_WIDTH = 2000
+    MAX_IMAGE_WIDTH = 1000
 
     def upload_image(self, data) -> str:
         """

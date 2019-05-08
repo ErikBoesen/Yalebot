@@ -227,7 +227,7 @@ class Meme(Module, ImageUploader):
                 {"position": (1000, 422)},
             ),
             "yeet": (
-                {"center_vertical": True, "wrap": 16, "color": (32, 32, 20)},
+                {"center_vertical": True, "wrap": 12, "color": (60, 60, 50)},
 
                 {"position": (409, 99)},
             ),

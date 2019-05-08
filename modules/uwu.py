@@ -26,11 +26,11 @@ class UWU(Module, ImageUploader):
 
     def response(self, query, message):
         source_url = self.get_source_url(message)
+        background = self.pil_from_url(source_url)
+        self.limit_image_size(background)
 
         tear = Image.open("resources/uwu/tear.png")
         blush = Image.open("resources/uwu/blush.png")
-        # TODO: crashes if image is too large; need to use self.limit_image_size but that doesn't change `image` just PIL Images
-        background = self.pil_from_url(source_url)
         faces = face_recognition.face_landmarks(np.array(background))
         if len(faces) == 0:
             return "No faces found in image."
