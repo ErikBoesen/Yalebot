@@ -13,7 +13,7 @@ class Module:
         print("Loaded module %s." % self.__class__.__name__)
 
 
-class ImageModule:
+class ImageModule(Module):
     MAX_IMAGE_WIDTH = 1000
 
     def upload_image(self, data) -> str:
@@ -24,8 +24,7 @@ class ImageModule:
         :return: URL of image now hosted on GroupMe server.
         """
         headers = {
-            # TODO: we store this in every Module...
-            "X-Access-Token": os.environ.get("GROUPME_ACCESS_TOKEN"),
+            "X-Access-Token": self.ACCESS_TOKEN,
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)

@@ -1,11 +1,11 @@
-from .base import Module, ImageModule
+from .base import ImageModule
 import face_recognition
 from PIL import Image, ImageDraw
 import math
 import numpy as np
 
 
-class UWU(Module, ImageModule):
+class UWU(ImageModule):
     DESCRIPTION = "Abuse photographs of your compatriots"
 
     def tear_position(self, element):

@@ -1,9 +1,9 @@
-from .base import Module, ImageModule
+from .base import ImageModule
 from PIL import Image
 import random
 
 
-class Crist(Module, ImageModule):
+class Crist(ImageModule):
     DESCRIPTION = "Memorialize the fallen"
     heaven = Image.open("resources/heaven.jpg")
 

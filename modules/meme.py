@@ -1,11 +1,11 @@
-from .base import Module, ImageModule
+from .base import ImageModule
 from PIL import Image, ImageFont, ImageDraw
 from textwrap import wrap
 import requests
 import os
 
 
-class Meme(Module, ImageModule):
+class Meme(ImageModule):
     ARGC = 1
 
     FONT_SIZE = 30
