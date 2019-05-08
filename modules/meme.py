@@ -221,7 +221,7 @@ class Meme(Module, ImageUploader):
                 {"position": (139, 618), "wrap": 10},
             ),
             "worldburn": (
-                {"center_vertical": True, "color": self.WHITE},
+                {"center_vertical": True, "color": self.WHITE, "font_size": self.LARGE_FONT_SIZE},
 
                 {"position": (365, 378)},
                 {"position": (1000, 422)},
