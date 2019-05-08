@@ -27,7 +27,7 @@ class UWU(ImageModule):
     def response(self, query, message):
         source_url = self.get_source_url(message)
         background = self.pil_from_url(source_url)
-        self.limit_image_size(background)
+        background = self.limit_image_size(background)
 
         tear = Image.open("resources/uwu/tear.png")
         blush = Image.open("resources/uwu/blush.png")
