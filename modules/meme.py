@@ -268,23 +268,9 @@ class Meme(ImageModule):
                 real_y = y + line_index * real_line_height
                 if shadow_color is not None:
                     shadow_size = setting.get("shadow_size", settings[0].get("shadow_size", 3))
-                    # top left
-                    canvas.text((x - shadow_size, real_y - shadow_size), line, font=font, fill=shadow_color)
-                    # top right
-                    canvas.text((x - shadow_size, real_y + shadow_size), line, font=font, fill=shadow_color)
-                    # bottom left
-                    canvas.text((x + shadow_size, real_y - shadow_size), line, font=font, fill=shadow_color)
-                    # bottom right
-                    canvas.text((x + shadow_size, real_y + shadow_size), line, font=font, fill=shadow_color)
-
-                    # top
-                    canvas.text((x, real_y - shadow_size), line, font=font, fill=shadow_color)
-                    # left
-                    canvas.text((x - shadow_size, real_y), line, font=font, fill=shadow_color)
-                    # bottom
-                    canvas.text((x, real_y + shadow_size), line, font=font, fill=shadow_color)
-                    # right
-                    canvas.text((x + shadow_size, real_y), line, font=font, fill=shadow_color)
+                    for offset_x in range(-shadow_size, shadow_size + 1):
+                        for offset_y in range(-shadow_size, shadow_size + 1):
+                            canvas.text((x + offset_x, real_y + offset_y), line, font=font, fill=shadow_color)
                 canvas.text((x, real_y),
                             line,
                             font=font,
