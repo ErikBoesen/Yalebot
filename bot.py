@@ -133,8 +133,8 @@ def process_message(message):
             instructions = text[len(PREFIX):].strip().split(None, 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
-            # Prevent response to long string of exclamation marks
-            if PREFIX in command and set(command) == set(PREFIX):
+            # Prevent response if prefix is repeated
+            if PREFIX in command:
                 pass
             # Check if there's a static response for this command
             elif command in static_commands:
