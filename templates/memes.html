@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block main %}
+<h3>Yalebot Meme Templates Index</h3>
+{% for meme in memes %}
+<div class="meme">
+    <h4>{{ meme }}</h4>
+    <img src="/static/images/memes/{{ meme }}.jpg" alt="{{ meme }} meme template image">
+</div>
+{% endfor %}
+{% endblock %}

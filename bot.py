@@ -243,6 +243,11 @@ def home():
     return render_template("index.html", static_commands=static_commands.keys(), commands=[(key, commands[key].DESCRIPTION) for key in commands])
 
 
+@app.route("/memes", methods=["GET"])
+def memes():
+    return render_template("memes.html", memes=commands["meme"].templates.keys())
+
+
 def in_group(group_id):
     return db.session.query(db.exists().where(Bot.group_id == group_id)).scalar()
 

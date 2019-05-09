@@ -244,7 +244,7 @@ class Meme(ImageModule):
         captions_required = len(self.templates[template_name]) - 1
         if len(captions) < captions_required:
             return f"Not enough captions provided; {captions_required} required for template {template_name}. Remember to separate with newlines."
-        image = Image.open(f"resources/memes/{template_name}.jpg")
+        image = Image.open(f"static/images/memes/{template_name}.jpg")
         canvas = ImageDraw.Draw(image)
         self.draw_captions(canvas, captions, self.templates[template_name])
 
