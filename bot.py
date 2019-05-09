@@ -231,12 +231,12 @@ def reply(message, group_id):
         response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
 
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def home():
     return render_template("index.html", static_commands=static_commands.keys(), commands=[(key, commands[key].DESCRIPTION) for key in commands])
 
 
-@app.route("/memes", methods=["GET"])
+@app.route("/memes")
 def memes():
     return render_template("memes.html",
                            memes=zip(commands["meme"].templates.keys(),
