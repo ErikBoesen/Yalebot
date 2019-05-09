@@ -39,7 +39,7 @@ class Meme(ImageModule):
                 {"position": (579, 420)},
             ),
             "catch": (
-                {"color": self.WHITE},
+                {"color": self.WHITE, "shadow_color": self.BLACK},
 
                 {"position": (250, 90)},
                 {"position": (550, 275)},
@@ -130,7 +130,7 @@ class Meme(ImageModule):
                 {"position": (265, 245)},
             ),
             "hug": (
-                {"font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "center": False},
+                {"font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "shadow_color": self.BLACK, "center": False},
 
                 {"position": (15, 508)},
                 {"position": (686, 301)},
@@ -154,7 +154,7 @@ class Meme(ImageModule):
                 {"position": (322, 593)},
             ),
             "highfive": (
-                {"center_vertical": True},
+                {"center_vertical": True, "shadow_color": self.WHITE},
 
                 {"position": (131, 89)},
                 # {"position": (341, 23)},
@@ -166,14 +166,14 @@ class Meme(ImageModule):
                 {"position": (240, 150), "wrap": 30},
             ),
             "hannibal": (
-                {"center_vertical": True, "color": self.WHITE, "font_size": self.LARGE_FONT_SIZE},
+                {"center_vertical": True, "color": self.WHITE, "shadow_color": self.BLACK, "font_size": self.LARGE_FONT_SIZE},
 
                 {"position": (845, 420)},
                 {"position": (300, 435)},
                 {"position": (640, 1400), "wrap": 50, "color": self.YELLOW},
             ),
             "distractedboyfriend": (
-                {},
+                {"shadow_color": self.WHITE},
 
                 {"position": (360, 190)},
                 {"position": (162, 257)},
@@ -186,16 +186,16 @@ class Meme(ImageModule):
                 {"position": (430, 864), "font_size": 50, "color": self.WHITE},
             ),
             "stencil": (
-                {"center_vertical": True, "color": self.WHITE},
+                {"center_vertical": True, "color": self.WHITE, "shadow_color": self.BLACK},
 
                 {"position": (572, 346), "wrap": 10},
                 {"position": (259, 405)},
-                {"position": (368, 1043), "color": self.BLACK},
+                {"position": (368, 1043), "color": self.BLACK, "shadow_color": None},
             ),
             "owl": (
-                {"center_vertical": True},
+                {"center_vertical": True, "shadow_color": self.WHITE},
 
-                {"position": (169, 294), "color": self.WHITE},
+                {"position": (169, 294)},
                 {"position": (654, 360)},
             ),
             "megan": (
@@ -208,7 +208,7 @@ class Meme(ImageModule):
 
                 {"position": (152, 136)},
                 {"position": (353, 98)},
-                {"position": (174, 810), "color": self.WHITE},
+                {"position": (174, 810), "color": self.WHITE, "shadow_color": self.BLACK},
             ),
             "scroll": (
                 {"center_vertical": True},
