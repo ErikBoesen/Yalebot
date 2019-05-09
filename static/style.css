@@ -146,6 +146,14 @@ footer a {
     background-image: url('/static/images/cah_white.png');
 }
 
+.meme {
+    display: inline-block;
+}
+.meme img {
+    height: 300px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
 @media (min-width: 800px) {
     header, main, footer {
         padding: 10px 60px;
