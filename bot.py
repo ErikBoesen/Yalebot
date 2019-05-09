@@ -245,7 +245,9 @@ def home():
 
 @app.route("/memes", methods=["GET"])
 def memes():
-    return render_template("memes.html", memes=commands["meme"].templates.keys())
+    return render_template("memes.html",
+                           memes=zip(commands["meme"].templates.keys(),
+                                     [len(commands["meme"].templates[template]) - 1 for template in commands["meme"].templates]))
 
 
 def in_group(group_id):
