@@ -8,6 +8,8 @@ from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 import argparse
 from threading import Thread
+import discord
+import asyncio
 
 
 app = Flask(__name__)
@@ -345,3 +347,45 @@ if __name__ == "__main__":
     parser.add_argument("message")
     args = parser.parse_args()
     print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "system": False, "group_id": "TEST_GROUP"}))
+
+
+class DiscordBot(discord.Client):
+    def __init__(self, config):
+        super().__init__()
+        print("Starting Discord bot...")
+        self.run(os.environ.get("DISCORD_TOKEN")
+
+    async def on_ready(self):
+        """Run when the bot is ready."""
+        print("Logged into Discord as " + self.user.name + " (ID " + self.user.id + ").")
+
+        await self.change_presence(status=discord.Status.online, game=discord.Game(name='fork me on GitHub @ frc1418/VictiBot!'))
+
+    async def on_message(self, message):
+        """Catch a user's messages and figure out what to return."""
+
+        # Log message
+        print('[Discord] {time} | #{channel} | {user}: {message}'.format(time=message.timestamp.strftime('%y:%m:%d:%H:%M:%S'),
+                                                                         channel=message.channel.name,
+                                                                         user=message.author.name,
+                                                                         message=message.content))
+
+
+
+        await self.send_message(message.channel, 'Psst... you may want to move to <#228121923245178880>.')
+
+    async def on_member_join(self, member):
+        """
+        When a member joins a server.
+        :param member: The name of the member who joined.
+        """
+        await self.send_message(member.server.default_channel, '**Welcome ' + member.mention + ' to the server!** :rocket:')
+
+    async def on_member_remove(self, member):
+        """
+        When a member has left or been kicked from a server.
+        :param member: The name of the member who left.
+        """
+        await self.send_message(member.server.default_channel, member.name + ' has left the server. :frowning:')
+
+discord_bot = DiscordBot()
