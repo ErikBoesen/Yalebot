@@ -26,7 +26,7 @@ class Welcome(System):
         results = [result for result in results if result not in ("", "re")]
         # Return the last non-empty (and non-re) match
         # Account for multiple users being added simultaneously, also
-        return results.pop()..replace(" and ", ", ").split(", ")
+        return results.pop().replace(" and ", ", ").split(", ")
 
 
 class Mourn(System):
