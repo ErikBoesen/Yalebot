@@ -7,6 +7,7 @@ from io import BytesIO
 class Module:
     DESCRIPTION = ""
     ARGC = 0
+    ARGUMENT_WARNING = "Not enough arguments!"
     ACCESS_TOKEN = os.environ.get("GROUPME_ACCESS_TOKEN")
 
     def __init__(self):

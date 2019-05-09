@@ -137,7 +137,7 @@ def process_message(message):
             elif command in commands:
                 # Make sure there are enough arguments
                 if len(list(filter(None, query.split("\n")))) < commands[command].ARGC:
-                    responses.append("Not enough arguments!")
+                    responses.append(commands[command].ARGUMENT_WARNING)
                 else:
                     response = commands[command].response(query, message)
                     if response is not None:

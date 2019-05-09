@@ -17,6 +17,7 @@ _(___(____)____(___(_
 class Tea(Module):
     DESCRIPTION = "Spills the tea."
     ARGC = 1
+    ARGUMENT_WARNING = "Please specify tea to spill!"
 
     def width(self, row):
         """
