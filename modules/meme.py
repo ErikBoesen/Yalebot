@@ -221,7 +221,7 @@ class Meme(ImageModule):
                 {"position": (139, 618), "wrap": 10},
             ),
             "worldburn": (
-                {"center_vertical": True, "color": self.WHITE, "font_size": self.LARGE_FONT_SIZE},
+                {"center_vertical": True, "color": self.WHITE, "font_size": self.LARGE_FONT_SIZE, "shadow_color": self.BLACK},
 
                 {"position": (365, 378)},
                 {"position": (1000, 422)},
@@ -264,7 +264,14 @@ class Meme(ImageModule):
                     x -= line_width / 2
                 if setting.get("center_vertical", settings[0].get("center_vertical", False)):
                     y -= (lines_count * real_line_height) / 2
-                canvas.text((x, y + line_index * real_line_height),
+                shadow_color = setting.get("shadow_color", settings[0].get("shadow_color", None))
+                real_y = y + line_index * real_line_height
+                if shadow_color is not None:
+                    canvas.text((x - 2, real_y - 2), line, font=font, fill=shadow_color)
+                    canvas.text((x - 2, real_y + 2), line, font=font, fill=shadow_color)
+                    canvas.text((x + 2, real_y - 2), line, font=font, fill=shadow_color)
+                    canvas.text((x + 2, real_y + 2), line, font=font, fill=shadow_color)
+                canvas.text((x, real_y),
                             line,
                             font=font,
                             fill=setting.get("color", settings[0].get("color", self.BLACK)))
