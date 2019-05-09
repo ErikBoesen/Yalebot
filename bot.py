@@ -7,6 +7,7 @@ import difflib
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 import argparse
+from threading import Thread
 
 
 app = Flask(__name__)
@@ -175,7 +176,7 @@ def process_message(message):
         if system_responses["welcome"].RE.match(text):
             check_names = system_responses["welcome"].get_names(text)
             for check_name in check_names:
-                reply(commands["vet"].check_user(check_name), group_id)
+                send(commands["vet"].check_user(check_name), group_id)
         """
     return responses
 
@@ -185,16 +186,21 @@ def webhook():
     """
     Receive callback to URL when message is sent in the group.
     """
+    def reply(message, group_id):
+        response = process_message(message)
+        if response:
+            send(response, group_id)
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
     group_id = message["group_id"]
-    response = process_message(message)
-    if response:
-        reply(response, group_id)
+    # Begin reply process in a new thread.
+    # This way, the request won't time out if a response takes too long to generate.
+    thread = Thread(target=reply, args=(message, group_id))
+    thread.start()
     return "ok", 200
 
 
-def reply(message, group_id):
+def send(message, group_id):
     """
     Reply in chat.
     :param message: text of message to send. May be a tuple with further data, or a list of messages.
@@ -202,10 +208,9 @@ def reply(message, group_id):
     """
     # Recurse to send a list of messages.
     # This is useful when a module must respond with multiple messages.
-    # TODO: This feels sort of clunky.
     if isinstance(message, list):
         for item in message:
-            reply(item, group_id)
+            send(item, group_id)
         return
     this_bot = Bot.query.get(group_id)
     data = {
@@ -219,7 +224,7 @@ def reply(message, group_id):
     if len(text) > MAX_MESSAGE_LENGTH:
         # If text is too long for one message, split it up over several
         for block in [text[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(text), MAX_MESSAGE_LENGTH)]:
-            reply(block, group_id)
+            send(block, group_id)
         data["text"] = ""
     else:
         data["text"] = text
@@ -329,8 +334,7 @@ def cah_entry():
     player = game.players[user_id]
     group_id = game.group_id
     if game.is_czar(user_id):
-
-        reply("The Card Czar has selected ", group_id)
+        send("The Card Czar has selected ", group_id)
     else:
         game.player_choose(user_id, data["card_index"])
     return "ok", 200
