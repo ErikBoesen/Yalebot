@@ -267,23 +267,24 @@ class Meme(ImageModule):
                 shadow_color = setting.get("shadow_color", settings[0].get("shadow_color", None))
                 real_y = y + line_index * real_line_height
                 if shadow_color is not None:
+                    shadow_size = setting.get("shadow_size", settings[0].get("shadow_size", 3))
                     # top left
-                    canvas.text((x - 4, real_y - 4), line, font=font, fill=shadow_color)
+                    canvas.text((x - shadow_size, real_y - shadow_size), line, font=font, fill=shadow_color)
                     # top right
-                    canvas.text((x - 4, real_y + 4), line, font=font, fill=shadow_color)
+                    canvas.text((x - shadow_size, real_y + shadow_size), line, font=font, fill=shadow_color)
                     # bottom left
-                    canvas.text((x + 4, real_y - 4), line, font=font, fill=shadow_color)
+                    canvas.text((x + shadow_size, real_y - shadow_size), line, font=font, fill=shadow_color)
                     # bottom right
-                    canvas.text((x + 4, real_y + 4), line, font=font, fill=shadow_color)
+                    canvas.text((x + shadow_size, real_y + shadow_size), line, font=font, fill=shadow_color)
 
                     # top
-                    canvas.text((x, real_y - 4), line, font=font, fill=shadow_color)
+                    canvas.text((x, real_y - shadow_size), line, font=font, fill=shadow_color)
                     # left
-                    canvas.text((x - 4, real_y), line, font=font, fill=shadow_color)
+                    canvas.text((x - shadow_size, real_y), line, font=font, fill=shadow_color)
                     # bottom
-                    canvas.text((x, real_y + 4), line, font=font, fill=shadow_color)
+                    canvas.text((x, real_y + shadow_size), line, font=font, fill=shadow_color)
                     # right
-                    canvas.text((x + 4, real_y), line, font=font, fill=shadow_color)
+                    canvas.text((x + shadow_size, real_y), line, font=font, fill=shadow_color)
                 canvas.text((x, real_y),
                             line,
                             font=font,
