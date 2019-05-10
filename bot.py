@@ -353,7 +353,7 @@ class DiscordBot(discord.Client):
     def __init__(self, config):
         super().__init__()
         print("Starting Discord bot...")
-        self.run(os.environ.get("DISCORD_TOKEN")
+        self.run(os.environ.get("DISCORD_TOKEN"))
 
     async def on_ready(self):
         """Run when the bot is ready."""
@@ -401,5 +401,6 @@ class DiscordBot(discord.Client):
         :param member: The name of the member who left.
         """
         await self.send_message(member.server.default_channel, member.name + ' has left the server. :frowning:')
+
 
 discord_bot = DiscordBot()
