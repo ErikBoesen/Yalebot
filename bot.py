@@ -188,16 +188,12 @@ def webhook():
     """
     Receive callback to URL when message is sent in the group.
     """
-    def reply(message, group_id):
-        response = process_message(message)
-        if response:
-            send(response, group_id)
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
     group_id = message["group_id"]
     # Begin reply process in a new thread.
     # This way, the request won't time out if a response takes too long to generate.
-    thread = Thread(target=reply, args=(message, group_id))
+    thread = Thread(target=send, args=(process_message(message), group_id))
     thread.start()
     return "ok", 200
 
