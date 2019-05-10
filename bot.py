@@ -359,7 +359,7 @@ class DiscordBot(discord.Client):
         """Run when the bot is ready."""
         print(f"Logged into Discord as {self.user.name} (ID {self.user.id}).")
 
-        await self.change_presence(status=discord.Status.online, game=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
+        await self.change_presence(status=discord.Status.online, activity=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
 
     async def on_message(self, message):
         """Catch a user's messages and figure out what to return."""
