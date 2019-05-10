@@ -374,11 +374,18 @@ class DiscordBot(discord.Client):
                                     "sender_type": "user",  # TODO: give actual type! Should be easy
                                     "system": False,
                                     "group_id": "DISCORD"})
+        self.send(response)
 
     async def send(self, content):
         if isinstance(content, list):
             for item in content:
                 await self.send(content)
+            return
+        if isinstance(content, tuple):
+            content, image = content
+            await self.send(content)
+            await self.send(image)
+            return
         await self.send_message(message.channel, content)
 
     async def on_member_join(self, member):
