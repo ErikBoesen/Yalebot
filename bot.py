@@ -183,6 +183,10 @@ def process_message(message):
     return responses
 
 
+def reply(message, group_id):
+    send(process_message(message), group_id)
+
+
 @app.route("/", methods=["POST"])
 def webhook():
     """
@@ -193,8 +197,7 @@ def webhook():
     group_id = message["group_id"]
     # Begin reply process in a new thread.
     # This way, the request won't time out if a response takes too long to generate.
-    thread = Thread(target=send, args=(process_message(message), group_id))
-    thread.start()
+    Thread(target=reply, args=(message, group_id)).start()
     return "ok", 200
 
 
