@@ -130,7 +130,7 @@ class Meme(ImageModule):
                 {"position": (265, 245)},
             ),
             "hug": (
-                {"font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "shadow_color": self.BLACK, "center": False},
+                {"font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "shadow_color": self.BLACK, "shadow_size": 1, "center": False},
 
                 {"position": (15, 508)},
                 {"position": (686, 301)},
