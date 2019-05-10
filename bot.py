@@ -357,7 +357,7 @@ class DiscordBot(discord.Client):
 
     async def on_ready(self):
         """Run when the bot is ready."""
-        print("Logged into Discord as " + self.user.name + " (ID " + self.user.id + ").")
+        print(f"Logged into Discord as {self.user.name} (ID {self.user.id}).")
 
         await self.change_presence(status=discord.Status.online, game=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
 
