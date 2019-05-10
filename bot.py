@@ -350,7 +350,7 @@ if __name__ == "__main__":
 
 
 class DiscordBot(discord.Client):
-    def __init__(self, config):
+    def __init__(self):
         super().__init__()
         print("Starting Discord bot...")
         self.run(os.environ.get("DISCORD_TOKEN"))
