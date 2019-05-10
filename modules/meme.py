@@ -232,7 +232,7 @@ class Meme(ImageModule):
                 {"position": (409, 99)},
             ),
             "allowed": (
-                {"center_vertical": True, "font_size": self.SMALL_FONT_SIZE, "color": self.WHITE, "shadow_color": self.BLACK},
+                {"center_vertical": True, "color": self.WHITE, "shadow_color": self.BLACK},
 
                 {"position": (126, 186)},
                 {"position": (252, 215)},
