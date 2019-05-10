@@ -193,7 +193,8 @@ def webhook():
     group_id = message["group_id"]
     # Begin reply process in a new thread.
     # This way, the request won't time out if a response takes too long to generate.
-    Thread(target=send, args=(process_message(message), group_id)).start()
+    thread = Thread(target=send, args=(process_message(message), group_id))
+    thread.start()
     return "ok", 200
 
 
