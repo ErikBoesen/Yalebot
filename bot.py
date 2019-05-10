@@ -363,7 +363,7 @@ class DiscordBot(discord.Client):
     async def on_message(self, message):
         """Catch a user's messages and figure out what to return."""
         # Log message
-        print('[Discord] {time} | #{channel} | {user}: {message}'.format(time=message.timestamp.strftime('%y:%m:%d:%H:%M:%S'),
+        print("[Discord] {time} | #{channel} | {user}: {message}".format(time=message.created_at.strftime("%y:%m:%d:%H:%M:%S"),
                                                                          channel=message.channel.name,
                                                                          user=message.author.name,
                                                                          message=message.content))
@@ -373,33 +373,33 @@ class DiscordBot(discord.Client):
                                     "sender_type": "user",  # TODO: give actual type! Should be easy
                                     "system": False,
                                     "group_id": "DISCORD"})
-        self.send(response)
+        await self.send(response, message.channel)
 
-    async def send(self, content):
+    async def send(self, content, channel):
         if isinstance(content, list):
             for item in content:
-                await self.send(content)
-            return
-        if isinstance(content, tuple):
+                await self.send(item, channel)
+        elif isinstance(content, tuple):
             content, image = content
-            await self.send(content)
-            await self.send(image)
-            return
-        await self.send_message(message.channel, content)
+            await self.send(content, channel)
+            await self.send(image, channel)
+        elif content:
+            await channel.send(content)
 
     async def on_member_join(self, member):
         """
         When a member joins a server.
         :param member: The name of the member who joined.
         """
-        await self.send_message(member.server.default_channel, '**Welcome ' + member.mention + ' to the server!** :rocket:')
+        await member.server.default_channel.send("**Welcome " + member.mention + " to the server!** :rocket:")
 
     async def on_member_remove(self, member):
         """
         When a member has left or been kicked from a server.
         :param member: The name of the member who left.
         """
-        await self.send_message(member.server.default_channel, member.name + ' has left the server. :frowning:')
+        await member.server.default_channel.send(member.name + " has left the server. :frowning:")
 
 
-Thread(target=DiscordBot).start()
+DiscordBot()
+# Thread(target=DiscordBot).start()
