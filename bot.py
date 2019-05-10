@@ -403,4 +403,4 @@ class DiscordBot(discord.Client):
         await self.send_message(member.server.default_channel, member.name + ' has left the server. :frowning:')
 
 
-discord_bot = DiscordBot()
+# discord_bot = DiscordBot()
