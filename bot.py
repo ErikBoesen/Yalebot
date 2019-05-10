@@ -359,20 +359,27 @@ class DiscordBot(discord.Client):
         """Run when the bot is ready."""
         print("Logged into Discord as " + self.user.name + " (ID " + self.user.id + ").")
 
-        await self.change_presence(status=discord.Status.online, game=discord.Game(name='fork me on GitHub @ frc1418/VictiBot!'))
+        await self.change_presence(status=discord.Status.online, game=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
 
     async def on_message(self, message):
         """Catch a user's messages and figure out what to return."""
-
         # Log message
         print('[Discord] {time} | #{channel} | {user}: {message}'.format(time=message.timestamp.strftime('%y:%m:%d:%H:%M:%S'),
                                                                          channel=message.channel.name,
                                                                          user=message.author.name,
                                                                          message=message.content))
 
+        response = process_message({"text": message.content,
+                                    "name": message.author.name,
+                                    "sender_type": "user",  # TODO: give actual type! Should be easy
+                                    "system": False,
+                                    "group_id": "DISCORD"})
 
-
-        await self.send_message(message.channel, 'Psst... you may want to move to <#228121923245178880>.')
+    async def send(self, content):
+        if isinstance(content, list):
+            for item in content:
+                await self.send(content)
+        await self.send_message(message.channel, content)
 
     async def on_member_join(self, member):
         """
