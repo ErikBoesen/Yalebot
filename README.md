@@ -7,6 +7,8 @@
 
 To add this bot to your own server, go [here](https://yalebot.herokuapp.com)!
 
+[Add to Discord server](https://discordapp.com/oauth2/authorize?client_id=576194237175955456&permissions=0&scope=bot)
+
 ## Design
 Yalebot uses the [GroupMe Bots API](https://dev.groupme.com/tutorials/bots) for message exchange, hosting a Flask server which listens for incoming webhooks calculates on a response.
 
