@@ -410,12 +410,12 @@ thread.start()
 facebook_bot = FacebookBot(os.environ["FACEBOOK_ACCESS_TOKEN"])
 
 
-def facebook_reply(recipient_id, content):
-    response = process_message({"text": message.content,
-                                "name": message.author.name,
-                                "sender_type": "user",  # TODO: give actual type! Should be easy
+def facebook_reply(recipient_id, message):
+    response = process_message({"text": message["message"]["text"],
+                                "name": "Facebook User",
+                                "sender_type": "user",  # TODO: do this correctly
                                 "system": False,
-                                "group_id": "DISCORD"})
+                                "group_id": "FACEBOOK"})
     facebook_send(response)
 
 
