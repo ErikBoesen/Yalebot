@@ -453,4 +453,4 @@ def facebook_send(recipient_id, content):
         facebook_send(recipient_id, content)
         facebook_bot.send_image_url(recipient_id, image)
     elif content:
-        facebook_bot.send_text_message(recipient_id, response)
+        facebook_bot.send_text_message(recipient_id, content)
