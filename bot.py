@@ -352,22 +352,22 @@ discord_client = discord.Client()
 
 
 async def start():
-    await client.start(os.environ.get("DISCORD_TOKEN"))
+    await discord_client.start(os.environ.get("DISCORD_TOKEN"))
 
 
-async def run_loop(loop):
+def run_loop(loop):
     loop.run_forever()
 
 
 @discord_client.event
-async def on_ready(self):
+async def on_ready():
     """Run when the bot is ready."""
-    print(f"Logged into Discord as {self.user.name} (ID {self.user.id}).")
-    await self.change_presence(status=discord.Status.online, activity=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
+    print(f"Logged into Discord as {discord_client.user.name} (ID {discord_client.user.id}).")
+    await discord_client.change_presence(status=discord.Status.online, activity=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
 
 
 @discord_client.event
-async def on_message(self, message):
+async def on_message(message):
     """Catch a user's messages and figure out what to return."""
     # Log message
     print("[Discord] {time} | #{channel} | {user}: {message}".format(time=message.created_at.strftime("%y:%m:%d:%H:%M:%S"),
@@ -380,19 +380,19 @@ async def on_message(self, message):
                                 "sender_type": "user",  # TODO: give actual type! Should be easy
                                 "system": False,
                                 "group_id": "DISCORD"})
-    await self.send(response, message.channel)
+    await discord_send(response, message.channel)
 
 
-async def discord_send(self, content, channel):
+async def discord_send(content, channel):
     if isinstance(content, list):
         for item in content:
-            await self.discord_send(item, channel)
+            await discord_send(item, channel)
     elif isinstance(content, tuple):
         content, image = content
-        await self.discord_send(content, channel)
-        await self.discord_send(image, channel)
+        await discord_send(content, channel)
+        await discord_send(image, channel)
     elif content:
-        await channel.discord_send(content)
+        await channel.send(content)
 
 
 # TODO: reimplement join/leave listeners
