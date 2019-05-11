@@ -359,14 +359,14 @@ async def run_loop(loop):
     loop.run_forever()
 
 
-@client.event
+@discord_client.event
 async def on_ready(self):
     """Run when the bot is ready."""
     print(f"Logged into Discord as {self.user.name} (ID {self.user.id}).")
     await self.change_presence(status=discord.Status.online, activity=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
 
 
-@client.event
+@discord_client.event
 async def on_message(self, message):
     """Catch a user's messages and figure out what to return."""
     # Log message
@@ -397,6 +397,9 @@ async def discord_send(self, content, channel):
 
 # TODO: reimplement join/leave listeners
 
-print("Starting Discord bot...")
-discord_bot = DiscordBot()
-Thread(target=discord_bot.run, args=().start()
+asyncio.get_child_watcher()
+loop = asyncio.get_event_loop()
+loop.create_task(start())
+
+thread = Thread(target=run_loop, args=(loop,))
+thread.start()
