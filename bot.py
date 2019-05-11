@@ -348,58 +348,55 @@ if __name__ == "__main__":
     print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "system": False, "group_id": "TEST_GROUP"}))
 
 
-class DiscordBot(discord.Client):
-    def __init__(self):
-        super().__init__()
-        print("Starting Discord bot...")
-        self.run(os.environ.get("DISCORD_TOKEN"))
-
-    async def on_ready(self):
-        """Run when the bot is ready."""
-        print(f"Logged into Discord as {self.user.name} (ID {self.user.id}).")
-
-        await self.change_presence(status=discord.Status.online, activity=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
-
-    async def on_message(self, message):
-        """Catch a user's messages and figure out what to return."""
-        # Log message
-        print("[Discord] {time} | #{channel} | {user}: {message}".format(time=message.created_at.strftime("%y:%m:%d:%H:%M:%S"),
-                                                                         channel=message.channel.name,
-                                                                         user=message.author.name,
-                                                                         message=message.content))
-
-        response = process_message({"text": message.content,
-                                    "name": message.author.name,
-                                    "sender_type": "user",  # TODO: give actual type! Should be easy
-                                    "system": False,
-                                    "group_id": "DISCORD"})
-        await self.send(response, message.channel)
-
-    async def send(self, content, channel):
-        if isinstance(content, list):
-            for item in content:
-                await self.send(item, channel)
-        elif isinstance(content, tuple):
-            content, image = content
-            await self.send(content, channel)
-            await self.send(image, channel)
-        elif content:
-            await channel.send(content)
-
-    async def on_member_join(self, member):
-        """
-        When a member joins a server.
-        :param member: The name of the member who joined.
-        """
-        await member.server.default_channel.send("**Welcome " + member.mention + " to the server!** :rocket:")
-
-    async def on_member_remove(self, member):
-        """
-        When a member has left or been kicked from a server.
-        :param member: The name of the member who left.
-        """
-        await member.server.default_channel.send(member.name + " has left the server. :frowning:")
+discord_client = discord.Client()
 
 
-DiscordBot()
-# Thread(target=DiscordBot).start()
+async def start():
+    await client.start(os.environ.get("DISCORD_TOKEN"))
+
+
+async def run_loop(loop):
+    loop.run_forever()
+
+
+@client.event
+async def on_ready(self):
+    """Run when the bot is ready."""
+    print(f"Logged into Discord as {self.user.name} (ID {self.user.id}).")
+    await self.change_presence(status=discord.Status.online, activity=discord.Game(name="GitHub: ErikBoesen/Yalebot!"))
+
+
+@client.event
+async def on_message(self, message):
+    """Catch a user's messages and figure out what to return."""
+    # Log message
+    print("[Discord] {time} | #{channel} | {user}: {message}".format(time=message.created_at.strftime("%y:%m:%d:%H:%M:%S"),
+                                                                     channel=message.channel.name,
+                                                                     user=message.author.name,
+                                                                     message=message.content))
+
+    response = process_message({"text": message.content,
+                                "name": message.author.name,
+                                "sender_type": "user",  # TODO: give actual type! Should be easy
+                                "system": False,
+                                "group_id": "DISCORD"})
+    await self.send(response, message.channel)
+
+
+async def discord_send(self, content, channel):
+    if isinstance(content, list):
+        for item in content:
+            await self.discord_send(item, channel)
+    elif isinstance(content, tuple):
+        content, image = content
+        await self.discord_send(content, channel)
+        await self.discord_send(image, channel)
+    elif content:
+        await channel.discord_send(content)
+
+
+# TODO: reimplement join/leave listeners
+
+print("Starting Discord bot...")
+discord_bot = DiscordBot()
+Thread(target=discord_bot.run, args=().start()
