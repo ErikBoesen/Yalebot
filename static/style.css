@@ -97,7 +97,7 @@ th:first-child, td:first-child {
 }
 .button.delete {
     border-color: #ea0404;
-    color: #ea0404
+    color: #ea0404;
 }
 .button.delete:hover, .button.delete:focus, .button.delete:active {
     color: white;
@@ -105,6 +105,22 @@ th:first-child, td:first-child {
 }
 .button-row {
     margin: 10px 0 20px;
+}
+.button.groupme {
+    border-color: #00aff0;
+    color: #00aff0;
+}
+.button.groupme:hover, .button.groupme:focus, .button.groupme:active {
+    color: white;
+    background-color: #00aff0;
+}
+.button.discord {
+    border-color: #738ADB;
+    color: #738ADB;
+}
+.button.discord:hover, .button.discord:focus, .button.discord:active {
+    color: white;
+    background-color: #738ADB;
 }
 table img {
     width: 50px;
