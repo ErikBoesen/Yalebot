@@ -16,3 +16,5 @@ face_recognition
 git+https://github.com/ErikBoesen/ocr_space.git#egg=ocr_space
 
 discord.py
+
+pymessenger
