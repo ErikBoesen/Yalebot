@@ -407,16 +407,17 @@ thread.start()
 
 
 # Facebook Messenger section
+"""
 facebook_bot = Bot(os.environ.get("FACEBOOK_ACCESS_TOKEN"))
 
 
 @app.route("/facebook", methods=["GET", "POST"])
 def receive_message():
     if request.method == "GET":
-        """
+        ""
         Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook.
-        """
+        ""
         token_sent = request.args.get("hub.verify_token")
         if token_sent == os.environ.get("FACEBOOK_VERIFY_TOKEN"):
             return request.args.get("hub.challenge")
@@ -439,3 +440,4 @@ def facebook_send(recipient_id, response):
     # send user the text message provided via input response parameter
     facebook_bot.send_text_message(recipient_id, response)
     return "success"
+"""
