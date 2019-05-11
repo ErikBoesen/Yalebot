@@ -435,10 +435,18 @@ def receive_message():
                 # Get Messenger ID for user so we know where to send response back to
                 recipient_id = message["sender"]["id"]
                 if message["message"].get("text"):
+                    print(message["message"])
                     Thread(target=facebook_reply, args=(recipient_id, content)).start()
     return "ok", 200
 
 
-def facebook_send(recipient_id, response):
-    # send user the text message provided via input response parameter
-    facebook_bot.send_text_message(recipient_id, response)
+def facebook_send(recipient_id, content):
+    if isinstance(content, list):
+        for item in content:
+            facebook_send(recipient_id, content)
+    elif isinstance(content, tuple):
+        content, image = content
+        facebook_send(recipient_id, content)
+        facebook_bot.send_image_url(recipient_id, image)
+    elif content:
+        facebook_bot.send_text_message(recipient_id, response)

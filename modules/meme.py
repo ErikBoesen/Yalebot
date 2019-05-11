@@ -242,7 +242,7 @@ class Meme(ImageModule):
                 {"color": self.WHITE, "shadow_color": (50, 50, 50)},
 
                 {"position": (340, 44)},
-                {"position": (183, 435), "font_size": self.SMALL_FONT_SIZE},
+                {"position": (183, 425), "font_size": self.SMALL_FONT_SIZE},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
