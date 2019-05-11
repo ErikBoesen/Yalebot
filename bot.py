@@ -410,6 +410,11 @@ thread.start()
 facebook_bot = FacebookBot(os.environ["FACEBOOK_ACCESS_TOKEN"])
 
 
+def facebook_reply(recipient_id, content):
+    response = process_message(content)
+    facebook_send(response)
+
+
 @app.route("/facebook", methods=["GET", "POST"])
 def receive_message():
     if request.method == "GET":
@@ -430,9 +435,8 @@ def receive_message():
                 # Get Messenger ID for user so we know where to send response back to
                 recipient_id = message["sender"]["id"]
                 if message["message"].get("text"):
-                    response_sent_text = "Gotcha"
-                    facebook_send(recipient_id, response_sent_text)
-    return "Message Processed"
+                    Thread(target=facebook_reply, args=(recipient_id, content)).start()
+    return "ok", 200
 
 
 def facebook_send(recipient_id, response):
