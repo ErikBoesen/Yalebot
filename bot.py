@@ -447,7 +447,7 @@ def receive_message():
 def facebook_send(recipient_id, content):
     if isinstance(content, list):
         for item in content:
-            facebook_send(recipient_id, content)
+            facebook_send(recipient_id, item)
     elif isinstance(content, tuple):
         content, image = content
         facebook_send(recipient_id, content)
