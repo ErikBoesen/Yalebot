@@ -436,7 +436,7 @@ def receive_message():
                 recipient_id = message["sender"]["id"]
                 if message["message"].get("text"):
                     print(message["message"])
-                    Thread(target=facebook_reply, args=(recipient_id, content)).start()
+                    Thread(target=facebook_reply, args=(recipient_id, message["message"])).start()
     return "ok", 200
 
 
