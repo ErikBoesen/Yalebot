@@ -416,7 +416,7 @@ def facebook_reply(recipient_id, message):
                                 "sender_type": "user",  # TODO: do this correctly
                                 "system": False,
                                 "group_id": "FACEBOOK"})
-    facebook_send(response)
+    facebook_send(recipient_id, response)
 
 
 @app.route("/facebook", methods=["GET", "POST"])
