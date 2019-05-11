@@ -10,6 +10,7 @@ import argparse
 from threading import Thread
 import discord
 import asyncio
+from pymessenger.bot import Bot
 
 
 app = Flask(__name__)
@@ -188,7 +189,7 @@ def reply(message, group_id):
 
 
 @app.route("/", methods=["POST"])
-def webhook():
+def groupme_webhook():
     """
     Receive callback to URL when message is sent in the group.
     """
@@ -403,3 +404,38 @@ loop.create_task(start())
 
 thread = Thread(target=run_loop, args=(loop,))
 thread.start()
+
+
+# Facebook Messenger section
+facebook_bot = Bot(os.environ.get("FACEBOOK_ACCESS_TOKEN"))
+
+
+@app.route("/facebook", methods=["GET", "POST"])
+def receive_message():
+    if request.method == "GET":
+        """
+        Before allowing people to message your bot, Facebook has implemented a verify token
+        that confirms all requests that your bot receives came from Facebook.
+        """
+        token_sent = request.args.get("hub.verify_token")
+        if token_sent == os.environ.get("FACEBOOK_VERIFY_TOKEN"):
+            return request.args.get("hub.challenge")
+        return "Invalid verification token."
+    # get whatever message a user sent the bot
+    output = request.get_json()
+    for event in output["entry"]:
+        messaging = event["messaging"]
+        for message in messaging:
+            if message.get("message"):
+                # Get Messenger ID for user so we know where to send response back to
+                recipient_id = message["sender"]["id"]
+                if message["message"].get("text"):
+                    response_sent_text = "Gotcha"
+                    facebook_send(recipient_id, response_sent_text)
+    return "Message Processed"
+
+
+def facebook_send(recipient_id, response):
+    # send user the text message provided via input response parameter
+    bot.send_text_message(recipient_id, response)
+    return "success"
