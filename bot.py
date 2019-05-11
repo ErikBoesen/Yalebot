@@ -411,7 +411,11 @@ facebook_bot = FacebookBot(os.environ["FACEBOOK_ACCESS_TOKEN"])
 
 
 def facebook_reply(recipient_id, content):
-    response = process_message(content)
+    response = process_message({"text": message.content,
+                                "name": message.author.name,
+                                "sender_type": "user",  # TODO: give actual type! Should be easy
+                                "system": False,
+                                "group_id": "DISCORD"})
     facebook_send(response)
 
 
@@ -435,8 +439,8 @@ def receive_message():
                 # Get Messenger ID for user so we know where to send response back to
                 recipient_id = message["sender"]["id"]
                 if message["message"].get("text"):
-                    print(message["message"])
-                    Thread(target=facebook_reply, args=(recipient_id, message["message"])).start()
+                    print(message)
+                    Thread(target=facebook_reply, args=(recipient_id, message)).start()
     return "ok", 200
 
 
