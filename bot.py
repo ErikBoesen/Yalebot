@@ -437,5 +437,5 @@ def receive_message():
 
 def facebook_send(recipient_id, response):
     # send user the text message provided via input response parameter
-    bot.send_text_message(recipient_id, response)
+    facebook_bot.send_text_message(recipient_id, response)
     return "success"
