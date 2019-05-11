@@ -103,7 +103,7 @@ th:first-child, td:first-child {
     color: white;
     background-color: #ea0404;
 }
-.button.prominent {
+.button-row {
     margin: 10px 0 20px;
 }
 table img {
