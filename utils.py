@@ -25,7 +25,7 @@ class Message:
         if time is None:
             self.time = datetime.now()
         elif type(time) == int:
-            self.time = datetime.from_timestamp(time)
+            self.time = datetime.fromtimestamp(time)
         else:
             self.time = time
         self.name = name
@@ -45,7 +45,7 @@ class Message:
         if self.platform == Platform.GROUPME:
             return self.group_id
         if self.platform == Platform.DISCORD:
-            return self.raw.channel.name
+            return self.raw."#" + self.raw.channel.name
         if self.platform == Platform.FACEBOOK:
             # TODO
             pass
