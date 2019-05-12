@@ -68,6 +68,6 @@ class ImageModule(Module):
             # Get sent image
             return image_attachments[0]["url"]
         elif len(mention_attachments) > 0:
-            return self.get_portrait(mention_attachments[0]["user_ids"][0], message["group_id"])
+            return self.get_portrait(mention_attachments[0]["user_ids"][0], message.group_id)
         # If no image was sent, use sender's avatar
         return message.avatar_url

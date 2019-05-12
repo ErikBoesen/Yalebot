@@ -137,7 +137,7 @@ class Meme(ImageModule):
                 {"position": (601, 202), "wrap": 10, "center": True},
             ),
             "jesus": (
-                {"font_size": 12, "wrap": 13, "center": False},
+                {"font_size": 12, "wrap": 13, "font_size": self.LARGE_FONT_SIZE, "center": False},
 
                 {"position": (68, 66)},
             ),
