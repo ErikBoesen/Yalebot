@@ -28,13 +28,13 @@ class Message:
     @classmethod
     def from_groupme(cls, message: dict):
         return cls(message,
-                   text=message["text"],
+                   text=message.get("text"),
                    platform=Platform.GROUPME,
-                   user_id=message["user_id"],
-                   name=message["name"],
-                   sender_type=message["sender_type"],
-                   group_id=message["group_id"],
-                   avatar_url=message["avatar_url"])
+                   user_id=message.get("user_id"),
+                   name=message.get("name"),
+                   sender_type=message.get("sender_type"),
+                   group_id=message.get("group_id"),
+                   avatar_url=message.get("avatar_url"))
 
     @classmethod
     def from_discord(cls, message: discord.message):

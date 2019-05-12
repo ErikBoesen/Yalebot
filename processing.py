@@ -1,6 +1,7 @@
 import re
 import modules
 import difflib
+from utils import SenderType, Message
 
 
 PREFIX = "!"
@@ -108,7 +109,7 @@ def process_message(message):
         responses.append(f_matches.groups()[0] + " ❤")
     if message.sender_type != SenderType.BOT:
         if message.text.startswith(PREFIX):
-            instructions = text[len(PREFIX):].strip().split(None, 1)
+            instructions = message.text[len(PREFIX):].strip().split(None, 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
             # Prevent response if prefix is repeated
