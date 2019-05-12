@@ -24,8 +24,8 @@ class Message:
         self.user_id = user_id
         if time is None:
             self.time = datetime.now()
-        elif type(timestamp) == int:
-            self.time = datetime.from_timestamp(timestamp)
+        elif type(time) == int:
+            self.time = datetime.from_timestamp(time)
         else:
             self.time = time
         self.name = name
