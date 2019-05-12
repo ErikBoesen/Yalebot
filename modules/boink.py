@@ -17,12 +17,11 @@ class Boink(Module):
             return match.group().lstrip('@')
 
     def response(self, query, message):
-        group_id = message["group_id"]
-        if self.queues.get(group_id) is None or len(self.queues[group_id]) < 2:
-            users = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]["members"]
-            self.queues[group_id] = [user["name"] for user in users]
-            random.shuffle(self.queues[group_id])
+        if self.queues.get(message.group_id) is None or len(self.queues[message.group_id]) < 2:
+            users = requests.get(f"https://api.groupme.com/v3/groups/{message.group_id}?token={self.ACCESS_TOKEN}").json()["response"]["members"]
+            self.queues[message.group_id] = [user["name"] for user in users]
+            random.shuffle(self.queues[message.group_id])
         mention = self.get_mention(query)
-        name1 = mention or self.queues[group_id].pop()
-        name2 = self.queues[group_id].pop()
+        name1 = mention or self.queues[message.group_id].pop()
+        name2 = self.queues[message.group_id].pop()
         return f"I choose... {name1} & {name2}! 💙"
