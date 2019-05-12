@@ -1,5 +1,6 @@
 from enum import Enum
 import discord
+from termcolor import colored
 
 
 class Platform(Enum):

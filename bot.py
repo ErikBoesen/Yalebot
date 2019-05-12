@@ -180,7 +180,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Testing interface to Yalebot.")
     parser.add_argument("message")
     args = parser.parse_args()
-    print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "group_id": "TEST_GROUP"}))
+    print(process_message(Message({}, args.message, name="Tester")))
 
 
 discord_client = discord.Client()
@@ -210,10 +210,7 @@ async def on_message(message):
                                                                      user=message.author.name,
                                                                      message=message.content))
 
-    response = process_message({"text": message.content,
-                                "name": message.author.name,
-                                "sender_type": "user",  # TODO: give actual type! Should be easy
-                                "group_id": "DISCORD"})
+    response = process_message(Message.from_discord(message))
     await discord_send(response, message.channel)
 
 
@@ -244,10 +241,7 @@ facebook_bot = FacebookBot(os.environ["FACEBOOK_ACCESS_TOKEN"])
 
 
 def facebook_reply(recipient_id, message):
-    response = process_message({"text": message["message"]["text"],
-                                "name": "Facebook User",
-                                "sender_type": "user",  # TODO: do this correctly
-                                "group_id": "FACEBOOK"})
+    response = process_message(Message.from_facebook(message))
     facebook_send(recipient_id, response)
 
 
