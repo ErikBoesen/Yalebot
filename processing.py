@@ -98,20 +98,16 @@ system_responses = {
     "mourn": modules.Mourn(),
 }
 
-F_PATTERN = re.compile("can i get an? (.+) in the chat", flags=re.IGNORECASE | re.MULTILINE)
-
 
 def process_message(message):
     responses = []
-    text = message["text"]
-    name = message["name"]
-    forename = name.split(" ", 1)[0]
+    forename = message.name.split(" ", 1)[0]
     print("Message received: %s" % message)
-    f_matches = F_PATTERN.search(text)
+    f_matches = re.search("can i get an? (.+) in the chat", message.text, flags=re.IGNORECASE | re.MULTILINE)
     if f_matches is not None and len(f_matches.groups()):
         responses.append(f_matches.groups()[0] + " ❤")
-    if message["sender_type"] != "bot":
-        if text.startswith(PREFIX):
+    if message.sender_type != SenderType.BOT:
+        if message.text.startswith(PREFIX):
             instructions = text[len(PREFIX):].strip().split(None, 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
@@ -154,12 +150,12 @@ def process_message(message):
                 except IndexError:
                     advice = ""
                 responses.append(f"Command not found. {advice}Use !help to view a list of commands.")
-        if "thank" in text.lower() and "yalebot" in text.lower():
+        if "thank" in message.text.lower() and "yalebot" in message.text.lower():
             responses.append("You're welcome, " + forename + "! :)")
-    if message["sender_type"] == "system":
+    if message.sender_type == SenderType.SYSTEM:
         for option in system_responses:
-            if system_responses[option].RE.match(text):
-                responses.append(system_responses[option].response(text, message))
+            if system_responses[option].RE.match(message.text):
+                responses.append(system_responses[option].response(message.text, message))
         """
         if system_responses["welcome"].RE.match(text):
             check_names = system_responses["welcome"].get_names(text)

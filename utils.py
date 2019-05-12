@@ -9,17 +9,18 @@ class Platform(Enum):
 
 
 class SenderType(Enum):
-    USER = 0
-    BOT = 1
-    SYSTEM = 2
+    USER = "user"
+    BOT = "bot"
+    SYSTEM = "system"
 
 
 class Message:
-    def __init__(self, raw, text, platform=None, user_id=None, name=None):
+    def __init__(self, raw, text, platform=None, user_id=None, name=None, sender_type=SenderType.USER):
         self.raw = raw
         self.text = text
         self.user_id = user_id
         self.name = name
+        self.sender_type = sender_type
 
     @classmethod
     def from_groupme(cls, message: dict):
@@ -27,7 +28,8 @@ class Message:
                    text=message["text"],
                    platform=Platform.GROUPME,
                    user_id=message["user_id"],
-                   name=message["name"])
+                   name=message["name"],
+                   sender_type=message["sender_type"])
 
     @classmethod
     def from_discord(cls, message: discord.message):
@@ -44,4 +46,3 @@ class Message:
                    platform=Platform.FACEBOOK,
                    user_id=message["sender"]["id"],
                    name=None)
-

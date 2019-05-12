@@ -8,6 +8,7 @@ import discord
 import asyncio
 from pymessenger.bot import Bot as FacebookBot
 
+from utils import Message
 from processing import PREFIX, static_commands, commands, process_message
 
 
