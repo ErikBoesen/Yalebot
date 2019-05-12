@@ -7,5 +7,5 @@ class Pick(Module):
     ARGC = 1
 
     def response(self, query, message):
-        options = [name.strip() for name in query.split(',')]
+        options = [name.strip() for name in query.split(",")]
         return "Thinking...\n\nI choose...\n\n" + random.choice(options) + "!"

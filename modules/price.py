@@ -9,6 +9,6 @@ class Price(Module):
     ARGC = 1
 
     def response(self, query, message):
-        query = query.strip().strip('$')
+        query = query.strip().strip("$")
         price = float(query)
         return "For $%.2f, you could purchase %.2f pairs of socks from the Yale Bookstore. Make the right choice here: %s" % (price, price / SOCK_PRICE, SOCK_URL)

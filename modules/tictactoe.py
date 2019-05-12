@@ -42,14 +42,13 @@ class TicTacToe(Module):
     def response(self, query, message):
         arguments = query.split()
         command = arguments.pop(0).lower()
-        name = message["name"]
         if command == "join":
             if self.players[0] == "":
-                self.players[0] = name
-                return f"{name} has joined, waiting on a second player"
+                self.players[0] = message.name
+                return f"{message.name} has joined, waiting on a second player"
             elif self.players[1] == "":
-                self.players[1] = name
-                return [f"{name} has joined, ready to play", self.string_board()]
+                self.players[1] = message.name
+                return [f"{message.name} has joined, ready to play", self.string_board()]
             else:
                 return f"Game full. {self.players[0]} & {self.players[1]} are playing!"
         elif command == "end":
@@ -62,10 +61,10 @@ class TicTacToe(Module):
             return desc
         elif command in self.movements:
             loc = self.movements[command]
-            if self.turn and name == self.players[0]:
+            if self.turn and message.name == self.players[0]:
                 self.turn = False
                 self.board[loc] = "x"
-            elif not self.turn and name == self.players[1]:
+            elif not self.turn and message.name == self.players[1]:
                 self.turn = True
                 self.board[loc] = "o"
             if self.check() != "":

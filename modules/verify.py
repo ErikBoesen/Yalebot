@@ -24,7 +24,7 @@ class Verify(Module):
 
     def response(self, query, message):
         if not query:
-            members = self.get_members(message["group_id"])
+            members = self.get_members(message.group_id)
             return "\n".join([self.check_member(member) for member in members])
         return self.check_user(query.strip("@"))
 

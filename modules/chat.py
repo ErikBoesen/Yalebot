@@ -43,7 +43,6 @@ class Chat(Module):
         super().__init__()
 
     def response(self, query, message):
-        group_id = message["group_id"]
-        if self.clients.get(group_id) is None:
-            self.clients[group_id] = CleverBot(os.environ.get("CLEVERBOT_USER"), os.environ.get("CLEVERBOT_KEY"), group_id)
-        return self.clients[group_id].query(query)
+        if self.clients.get(message.group_id) is None:
+            self.clients[message.group_id] = CleverBot(os.environ.get("CLEVERBOT_USER"), os.environ.get("CLEVERBOT_KEY"), message.group_id)
+        return self.clients[message.group_id].query(query)

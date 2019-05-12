@@ -101,9 +101,9 @@ class CardsAgainstHumanity(Module):
         # TODO: fix this mess
         arguments = query.split()
         command = arguments.pop(0)
-        group_id = message["group_id"]
-        user_id = message["user_id"]
-        name = message["name"]
+        group_id = message.group_id
+        user_id = message.user_id
+        name = message.name
         if command == "start":
             if group_id in self.games:
                 return "Game already started!"
