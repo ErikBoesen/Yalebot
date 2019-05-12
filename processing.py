@@ -103,7 +103,6 @@ system_responses = {
 def process_message(message):
     responses = []
     forename = message.name.split(" ", 1)[0]
-    print("Message received: %s" % message)
     f_matches = re.search("can i get an? (.+) in the chat", message.text, flags=re.IGNORECASE | re.MULTILINE)
     if f_matches is not None and len(f_matches.groups()):
         responses.append(f_matches.groups()[0] + " ❤")
