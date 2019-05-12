@@ -68,7 +68,7 @@ class Message:
                    text=message.content,
                    platform=Platform.DISCORD,
                    user_id=message.id,
-                   time=int(message.created_at),
+                   time=message.created_at,
                    name=message.author.display_name,
                    avatar_url=message.author.avatar_url)
 
