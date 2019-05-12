@@ -45,7 +45,7 @@ class Message:
         if self.platform == Platform.GROUPME:
             return self.group_id
         if self.platform == Platform.DISCORD:
-            return self.raw."#" + self.raw.channel.name
+            return "#" + self.raw.channel.name
         if self.platform == Platform.FACEBOOK:
             # TODO
             pass
