@@ -15,12 +15,14 @@ class SenderType(Enum):
 
 
 class Message:
-    def __init__(self, raw, text, platform=None, user_id=None, name=None, sender_type=SenderType.USER):
+    def __init__(self, raw, text, platform=None, user_id=None, name=None, sender_type=SenderType.USER, group_id=None, avatar_url=None):
         self.raw = raw
         self.text = text
         self.user_id = user_id
         self.name = name
         self.sender_type = sender_type
+        self.group_id = group_id
+        self.avatar_url = avatar_url
 
     @classmethod
     def from_groupme(cls, message: dict):
@@ -29,7 +31,9 @@ class Message:
                    platform=Platform.GROUPME,
                    user_id=message["user_id"],
                    name=message["name"],
-                   sender_type=message["sender_type"])
+                   sender_type=message["sender_type"],
+                   group_id=message["group_id"],
+                   avatar_url=message["avatar_url"])
 
     @classmethod
     def from_discord(cls, message: discord.message):
@@ -37,7 +41,8 @@ class Message:
                    text=message.content,
                    platform=Platform.DISCORD,
                    user_id=message.id,
-                   name=None)
+                   name=message.author.display_name,
+                   avatar_url=message.author.avatar_url)
 
     @classmethod
     def from_facebook(cls, message: dict):

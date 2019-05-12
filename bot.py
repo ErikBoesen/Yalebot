@@ -20,7 +20,7 @@ MAX_MESSAGE_LENGTH = 1000
 
 
 def reply(message, group_id):
-    send(process_message(message), group_id)
+    send(process_message(Message.from_groupme(message)), group_id)
 
 
 @app.route("/", methods=["POST"])
