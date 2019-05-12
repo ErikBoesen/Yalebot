@@ -22,13 +22,12 @@ class Message:
         self.text = text
         self.platform = platform
         self.user_id = user_id
-        if timestamp is None:
+        if time is None:
             self.time = datetime.now()
         elif type(timestamp) == int:
             self.time = datetime.from_timestamp(timestamp)
         else:
             self.time = time
-        self.timestamp = timestam
         self.name = name
         self.sender_type = sender_type
         self.group_id = group_id
@@ -57,7 +56,7 @@ class Message:
                    text=message.get("text"),
                    platform=Platform.GROUPME,
                    user_id=message.get("user_id"),
-                   timestamp=message.get("created_at"),
+                   time=message.get("created_at"),
                    name=message.get("name"),
                    sender_type=message.get("sender_type"),
                    group_id=message.get("group_id"),
@@ -69,7 +68,7 @@ class Message:
                    text=message.content,
                    platform=Platform.DISCORD,
                    user_id=message.id,
-                   timestamp=int(message.created_at),
+                   time=int(message.created_at),
                    name=message.author.display_name,
                    avatar_url=message.author.avatar_url)
 
@@ -79,5 +78,5 @@ class Message:
                    text=message["message"]["text"],
                    platform=Platform.FACEBOOK,
                    user_id=message["sender"]["id"],
-                   timestamp=message["timestamp"] // 1000,
+                   time=message["timestamp"] // 1000,
                    name=None)

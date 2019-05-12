@@ -205,11 +205,6 @@ async def on_ready():
 async def on_message(message):
     """Catch a user's messages and figure out what to return."""
     # Log message
-    print("[Discord] {time} | #{channel} | {user}: {message}".format(time=message.created_at.strftime("%y:%m:%d:%H:%M:%S"),
-                                                                     channel=message.channel.name,
-                                                                     user=message.author.name,
-                                                                     message=message.content))
-
     response = process_message(Message.from_discord(message))
     await discord_send(response, message.channel)
 
