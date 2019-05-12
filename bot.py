@@ -260,7 +260,6 @@ def receive_message():
                 # Get Messenger ID for user so we know where to send response back to
                 recipient_id = message["sender"]["id"]
                 if message["message"].get("text"):
-                    print(message)
                     Thread(target=facebook_reply, args=(recipient_id, message)).start()
     return "ok", 200
 

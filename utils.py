@@ -79,4 +79,4 @@ class Message:
                    platform=Platform.FACEBOOK,
                    user_id=message["sender"]["id"],
                    time=message["timestamp"] // 1000,
-                   name=None)
+                   name="Friend")
