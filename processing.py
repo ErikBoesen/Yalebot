@@ -1,5 +1,6 @@
 import re
 import modules
+import difflib
 
 
 PREFIX = "!"
@@ -155,7 +156,7 @@ def process_message(message):
                 responses.append(f"Command not found. {advice}Use !help to view a list of commands.")
         if "thank" in text.lower() and "yalebot" in text.lower():
             responses.append("You're welcome, " + forename + "! :)")
-    if message["system"]:
+    if message["sender_type"] == "system":
         for option in system_responses:
             if system_responses[option].RE.match(text):
                 responses.append(system_responses[option].response(text, message))

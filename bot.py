@@ -1,7 +1,5 @@
 import os
 import requests
-import json
-import difflib
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 import argparse
@@ -44,8 +42,7 @@ def send(message, group_id):
     :param message: text of message to send. May be a tuple with further data, or a list of messages.
     :param group_id: ID of group in which to send message.
     """
-    # Recurse to send a list of messages.
-    # This is useful when a module must respond with multiple messages.
+    # Recurse when sending multiple messages.
     if isinstance(message, list):
         for item in message:
             send(item, group_id)
@@ -182,7 +179,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Testing interface to Yalebot.")
     parser.add_argument("message")
     args = parser.parse_args()
-    print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "system": False, "group_id": "TEST_GROUP"}))
+    print(process_message({"text": args.message, "name": "Tester", "sender_type": "user", "group_id": "TEST_GROUP"}))
 
 
 discord_client = discord.Client()
@@ -215,7 +212,6 @@ async def on_message(message):
     response = process_message({"text": message.content,
                                 "name": message.author.name,
                                 "sender_type": "user",  # TODO: give actual type! Should be easy
-                                "system": False,
                                 "group_id": "DISCORD"})
     await discord_send(response, message.channel)
 
@@ -250,7 +246,6 @@ def facebook_reply(recipient_id, message):
     response = process_message({"text": message["message"]["text"],
                                 "name": "Facebook User",
                                 "sender_type": "user",  # TODO: do this correctly
-                                "system": False,
                                 "group_id": "FACEBOOK"})
     facebook_send(recipient_id, response)
 
