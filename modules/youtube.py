@@ -8,10 +8,10 @@ class YouTube(Module):
     ARGC = 1
 
     def response(self, query, message):
-        url = "https://www.youtube.com/results?search_query="
-        bs = BeautifulSoup(requests.get(url + query.replace(" ", "+").lower()).text, "html.parser")
+        search_url = "https://www.youtube.com/results?search_query="
+        bs = BeautifulSoup(requests.get(search_url + query.replace(" ", "+").lower()).text, "html.parser")
         for link in bs.find_all("a"):
-            result = link.get("href")
-            if result.startswith("/watch"):
-                break
-        return "https://www.youtube.com" + result
+            path = link.get("href")
+            if path.startswith("/watch"):
+                return "https://www.youtube.com" + path
+        return "No video found."
