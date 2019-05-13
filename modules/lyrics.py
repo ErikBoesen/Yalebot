@@ -18,10 +18,9 @@ class Lyrics(Module):
         lyrics_page = "https://www.lyricsfreak.com" + link["href"]
         r = requests.get(lyrics_page)
         bs = BeautifulSoup(r.text, "html.parser")
-        column = bs.find("div", {"class": "maincont d-cell al-t floatfix"})
-        text = column.find("div", {"class": "l_title"}).text.strip()
+        text = bs.find("h2", {"class": "lyric-song-head"}).text.strip()
         text += "\n\n"
-        text += column.find("div", {"id": "content"}).text.strip()
+        text += bs.find("div", {"id": "content"}).text.strip()
         if len(text) > 1000:
             more = "...\n\nFull lyrics: " + lyrics_page
             text = text[:1000 - len(more)]
