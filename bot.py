@@ -52,11 +52,9 @@ def send(message, group_id):
     data = {
         "bot_id": this_bot.bot_id,
     }
+    image = None
     if isinstance(message, tuple):
         text, image = message
-    else:
-        text = message
-        image = None
     if len(text) > MAX_MESSAGE_LENGTH:
         # If text is too long for one message, split it up over several
         for block in [text[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(text), MAX_MESSAGE_LENGTH)]:
@@ -68,7 +66,7 @@ def send(message, group_id):
         data["picture_url"] = image
     # Prevent sending message if there's no content
     # It would be rejected anyway
-    if data["text"] or data["picture_url"]:
+    if data["text"] or data.get("picture_url"):
         response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
 
 
