@@ -35,11 +35,10 @@ class Message:
         print(self)
 
     def __repr__(self):
-        color = {Platform.GROUPME: "cyan", Platform.DISCORD: "magenta", Platform.FACEBOOK: "blue"}.get(self.platform)
-        return colored("{time} | {location} | {name}: {text}".format(time=self.time.strftime("%y:%m:%d:%H:%M:%S"),
-                                                                     location=self.get_location(),
-                                                                     name=self.name,
-                                                                     text=self.text), color)
+        color = {Platform.GROUPME: "green", Platform.DISCORD: "magenta", Platform.FACEBOOK: "blue"}.get(self.platform)
+        return colored("{location} | {name}: {text}".format(location=self.get_location(),
+                                                            name=self.name,
+                                                            text=self.text), color)
 
     def get_location(self):
         if self.platform == Platform.GROUPME:
