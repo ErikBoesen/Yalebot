@@ -80,14 +80,14 @@ label {
     border: solid 2px #00356b;
     text-decoration: none;
     vertical-align: middle;
-    transition: 0.5s;
+    transition: 0.5s color background;
     cursor: pointer;
     display: inline-block;
 }
 .button:hover, .button:focus, .button:active {
     color: white;
     background: #00356b;
-    transition: 0.6s;
+    transition: 0.6s color background;
 }
 th, td {
     padding: 0 10px;
