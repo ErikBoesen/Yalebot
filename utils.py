@@ -35,7 +35,7 @@ class Message:
         print(self)
 
     def __repr__(self):
-        color = {Platform.GROUPME: "cyan", Platform.DISCORD: "magenta", Platform.FACEBOOK: "blue"}[self.platform]
+        color = {Platform.GROUPME: "cyan", Platform.DISCORD: "magenta", Platform.FACEBOOK: "blue"}.get(self.platform)
         return colored("{time} | {location} | {name}: {text}".format(time=self.time.strftime("%y:%m:%d:%H:%M:%S"),
                                                                      location=self.get_location(),
                                                                      name=self.name,
