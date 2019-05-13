@@ -9,6 +9,7 @@ GroupyAPI
 beautifulsoup4
 praw
 numpy
+random-word
 
 cmake
 face_recognition

@@ -1,10 +1,13 @@
 from .base import Module
 import random
+from random_word import RandomWords
+import time
 
 
 class Kelbo(Module):
     DESCRIPTION = '____ __ _____'
     ARGC = 0
+    dictionary = RandomWords()
 
     def random(self):
         """
@@ -19,8 +22,21 @@ class Kelbo(Module):
         """
         return "".join([" " if char == " " else "_" for char in text])
 
+    def get_word(self, length):
+        while True:
+            try:
+                return self.dictionary.get_random_word(minLength=length, maxLength=length)
+            except Exception:
+                pass
+            time.sleep(1)
+
     def response(self, query, message):
-        if len(query) > 0:
-            return self.kelboify(query)
+        if "_" in query:
+            results = []
+            words = [self.get_word(len(underscores)) for underscores in query.split()]
+            return " ".join(words)
         else:
-            return self.random()
+            if len(query) > 0:
+                return self.kelboify(query)
+            else:
+                return self.random()
