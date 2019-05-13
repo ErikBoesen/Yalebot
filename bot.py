@@ -127,7 +127,6 @@ class Response(db.Model):
 
 
 def process_message(message):
-    from bot import db
     responses = []
     forename = message.name.split(" ", 1)[0]
     f_matches = re.search("can i get an? (.+) in the chat", message.text, flags=re.IGNORECASE | re.MULTILINE)
@@ -240,14 +239,14 @@ def send(message, group_id):
     }
     image = None
     if isinstance(message, tuple):
-        text, image = message
-    if len(text) > MAX_MESSAGE_LENGTH:
+        message, image = message
+    if len(message) > MAX_MESSAGE_LENGTH:
         # If text is too long for one message, split it up over several
-        for block in [text[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(text), MAX_MESSAGE_LENGTH)]:
+        for block in [message[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(message), MAX_MESSAGE_LENGTH)]:
             send(block, group_id)
         data["text"] = ""
     else:
-        data["text"] = text
+        data["text"] = message
     if image is not None:
         data["picture_url"] = image
     # Prevent sending message if there's no content
