@@ -101,14 +101,16 @@ system_responses = {
     "mourn": modules.Mourn(),
 }
 
+
 class Response(db.Model):
     __tablename__ = "responses"
-    name = db.Column(db.String(64), unique=True, primary_key=True)
+    name = db.Column(db.String(64), primary_key=True)
     content = db.Column(db.String(256))
 
     def __init__(self, name, content):
         self.name = name
         self.content = content
+
 
 def process_message(message):
     responses = []
@@ -136,9 +138,7 @@ def process_message(message):
                     response = commands[command].response(query, message)
                     if response is not None:
                         responses.append(response)
-            elif command == "register":
-                pass
-           elif command == "help":
+            elif command == "help":
                 if query:
                     query = query.strip(PREFIX)
                     if query in static_commands:
@@ -155,13 +155,26 @@ def process_message(message):
                     help_string += "\nTools: " + ", ".join([PREFIX + title for title in commands])
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
                     responses.append(help_string)
+            elif command == "register":
+                new_command, content = query.split(None, 1)
+                if Response.query.get(new_command) is None:
+                    response = Response(new_command, content)
+                    db.session.add(response)
+                    db.session.commit()
+                    responses.append(f"Command {new_command} registered successfully.")
+                else:
+                    responses.append(f"Command {new_command} already registered!")
             else:
-                try:
-                    closest = difflib.get_close_matches(command, list(static_commands.keys()) + list(commands.keys()), 1)[0]
-                    advice = f"Perhaps you meant {PREFIX}{closest}? "
-                except IndexError:
-                    advice = ""
-                responses.append(f"Command not found. {advice}Use !help to view a list of commands.")
+                response = Response.query.get(command)
+                if response is not None:
+                    responses.append(response.content)
+                else:
+                    try:
+                        closest = difflib.get_close_matches(command, list(static_commands.keys()) + list(commands.keys()), 1)[0]
+                        advice = f"Perhaps you meant {PREFIX}{closest}? "
+                    except IndexError:
+                        advice = ""
+                    responses.append(f"Command not found. {advice}Use !help to view a list of commands.")
         if "thank" in message.text.lower() and "yalebot" in message.text.lower():
             responses.append("You're welcome, " + forename + "! :)")
     if message.sender_type == SenderType.SYSTEM:
