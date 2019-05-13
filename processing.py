@@ -2,6 +2,7 @@ import re
 import modules
 import difflib
 from utils import SenderType, Message
+from bot import db
 
 
 PREFIX = "!"
@@ -100,6 +101,14 @@ system_responses = {
     "mourn": modules.Mourn(),
 }
 
+class Response(db.Model):
+    __tablename__ = "responses"
+    name = db.Column(db.String(64), unique=True, primary_key=True)
+    content = db.Column(db.String(256))
+
+    def __init__(self, name, content):
+        self.name = name
+        self.content = content
 
 def process_message(message):
     responses = []
@@ -127,7 +136,9 @@ def process_message(message):
                     response = commands[command].response(query, message)
                     if response is not None:
                         responses.append(response)
-            elif command == "help":
+            elif command == "register":
+                pass
+           elif command == "help":
                 if query:
                     query = query.strip(PREFIX)
                     if query in static_commands:

@@ -116,7 +116,6 @@ def manager():
 
 class Bot(db.Model):
     __tablename__ = "bots"
-    # TODO: store owner also
     group_id = db.Column(db.String(16), unique=True, primary_key=True)
     bot_id = db.Column(db.String(26), unique=True)
     owner_id = db.Column(db.String(16))
