@@ -373,7 +373,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Testing interface to Yalebot.")
     parser.add_argument("message")
     args = parser.parse_args()
-    print(process_message(Message({}, args.message, name="Tester")))
+    while True:
+        print(process_message(Message({}, input("> ", name="Tester")))
 
 
 discord_client = discord.Client()
