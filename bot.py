@@ -174,7 +174,7 @@ def process_message(message):
             elif command == "register":
                 # TODO: this is lazy and bad, fix it
                 args = query.split(None, 1)
-                new_command = args.pop(0)
+                new_command = args.pop(0).lower()
                 content = None
                 if args:
                     content = args[0]
