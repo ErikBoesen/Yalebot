@@ -171,7 +171,9 @@ def process_message(message):
                     responses.append(help_string)
             elif command == "register":
                 new_command, content = query.split(None, 1)
-                if Response.query.get(new_command) is None:
+                response = Response.query.get(new_command)
+                print(response)
+                if response is None:
                     response = Response(new_command, content)
                     db.session.add(response)
                     db.session.commit()
