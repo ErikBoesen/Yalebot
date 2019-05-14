@@ -248,6 +248,9 @@ def send(message, group_id):
     image = None
     if isinstance(message, tuple):
         message, image = message
+    # TODO: this is lazy
+    if message is None:
+        message = ""
     if len(message) > MAX_MESSAGE_LENGTH:
         # If text is too long for one message, split it up over several
         for block in [message[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(message), MAX_MESSAGE_LENGTH)]:
