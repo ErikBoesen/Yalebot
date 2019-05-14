@@ -45,7 +45,6 @@ static_commands = {
     "amma": ("", "https://i.groupme.com/714x456.jpeg.66fb9e9dacab4cd9b860b084eceff282.large"),
     "ohno": ("", "https://i.groupme.com/1280x720.jpeg.f7c11a529a3b4a7195f71fa6be5ebfef.large"),
     "defuse": ("", "https://i.groupme.com/500x500.jpeg.26cbc006bcbf47048ade8a896b1e3d5a.large"),
-    "darwin": ("", "https://i.groupme.com/1125x1500.jpeg.fa1ab5432c0e458a9ac0df3612714f90.large"),
 }
 
 commands = {
