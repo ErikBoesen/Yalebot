@@ -10,6 +10,7 @@ class JPEG(ImageModule):
         source_url = self.get_source_url(message)
         image = self.pil_from_url(source_url)
         image = self.limit_image_size(image, max_width=400)
+        image = image.convert("RGB")
         output = BytesIO()
         image.save(output, format="JPEG", quality=2)
         return ("", self.upload_image(output.getvalue()))
