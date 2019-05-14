@@ -15,8 +15,6 @@ class Module:
 
 
 class ImageModule(Module):
-    MAX_IMAGE_WIDTH = 1000
-
     def upload_image(self, data) -> str:
         """
         Send image to GroupMe Image API.
@@ -41,10 +39,10 @@ class ImageModule(Module):
         response.raw.decode_content = True
         return Image.open(response.raw)
 
-    def limit_image_size(self, image: Image):
+    def limit_image_size(self, image: Image, max_width=1000):
         natural_width, natural_height = image.size
-        if natural_width > self.MAX_IMAGE_WIDTH:
-            width = self.MAX_IMAGE_WIDTH
+        if natural_width > max_width:
+            width = max_width
             height = int(width * natural_height / natural_width)
             image = image.resize((width, height), Image.ANTIALIAS)
         return image
