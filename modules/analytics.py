@@ -79,7 +79,6 @@ class Analytics(Module):
             print("\r%.2f%% done" % remaining, end="")
 
     def response(self, query, message):
-        return "Analytics temporarily disabled."
         parameters = query.split(" ")
         command = parameters.pop(0)
         output = ""
