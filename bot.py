@@ -284,7 +284,7 @@ def memes():
 @app.route("/analytics/<group_id>")
 def analytics(group_id):
     # TODO: clear up users/leaderboards naming
-    users = commands["analytics"].leaderboards[group_id]
+    users = commands["analytics"].leaderboards.get(group_id)
     return render_template("analytics.html", users=users)
 
 

@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block main %}
+{% if users is None %}
+<p>No data for this group! Run <em>!analytics generate</em>.</p>
+{% else %}
 <table>
     <thead>
         {% for key, value in users[0].items() %}
@@ -16,4 +19,5 @@
         {% endfor %}
     </tbody>
 </table>
+{% endif %}
 {% endblock %}
