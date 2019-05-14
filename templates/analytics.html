@@ -9,7 +9,7 @@
     <tbody>
         {% for user in users %}
         <tr>
-            {% for key, value in users %}
+            {% for key, value in users.items() %}
             <td>{{ value }}</td>
             {% endfor %}
         </tr>
