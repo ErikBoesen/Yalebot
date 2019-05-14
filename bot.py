@@ -2,7 +2,6 @@ import os
 import requests
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
-import argparse
 from threading import Thread
 import discord
 import asyncio
@@ -381,9 +380,6 @@ def cah_entry():
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Testing interface to Yalebot.")
-    parser.add_argument("message")
-    args = parser.parse_args()
     while True:
         print(process_message(Message({}, input("> "), name="Tester")))
 
