@@ -79,3 +79,10 @@ class Message:
                    user_id=message["sender"]["id"],
                    time=message["timestamp"] // 1000,
                    name="Friend")
+
+    @property
+    def image_url(self):
+        if self.platform == Platform.GROUPME:
+            image_attachments = [attachment for attachment in message.raw["attachments"] if attachment["type"] == "image"]
+            if image_attachments:
+                return image_attachments[0]
