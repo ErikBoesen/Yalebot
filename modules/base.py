@@ -39,12 +39,16 @@ class ImageModule(Module):
         response.raw.decode_content = True
         return Image.open(response.raw)
 
+    def resize(self, image: Image, width):
+        natural_width, natural_height = image.size
+        height = int(width * natural_height / natural_width)
+        image = image.resize((width, height), Image.ANTIALIAS)
+        return image
+
     def limit_image_size(self, image: Image, max_width=1000):
         natural_width, natural_height = image.size
         if natural_width > max_width:
-            width = max_width
-            height = int(width * natural_height / natural_width)
-            image = image.resize((width, height), Image.ANTIALIAS)
+            image = self.resize(image, max_width)
         return image
 
     def get_portrait(self, user_id, group_id):

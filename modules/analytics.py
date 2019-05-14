@@ -95,4 +95,6 @@ class Analytics(Module):
                 output += " / Likes Given: %d" % user["likes"]
                 output += " / Likes Received: %d" % user["likes_received"]
                 output += "\n"
+        else:
+            return "No command specified!"
         return output
