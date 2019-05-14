@@ -55,3 +55,4 @@ from .colleges import Colleges
 from .tictactoe import TicTacToe
 from .yalenews import YaleNews
 from .circle import Circle
+from .jpeg import JPEG

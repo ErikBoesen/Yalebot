@@ -31,9 +31,9 @@ class ImageModule(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
-    def upload_pil_image(self, image: Image):
+    def upload_pil_image(self, image: Image, quality=None):
         output = BytesIO()
-        image.save(output, format="JPEG")
+        image.save(output, format="JPEG", quality=None)
         return self.upload_image(output.getvalue())
 
     def pil_from_url(self, url):

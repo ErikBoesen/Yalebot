@@ -108,6 +108,7 @@ commands = {
     "flip": modules.Flip(),
     "mccarthy": modules.McCarthy(),
     "circle": modules.Circle(),
+    "jpeg": modules.JPEG(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
