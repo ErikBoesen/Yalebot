@@ -381,7 +381,7 @@ def cah_entry():
 
 if __name__ == "__main__":
     while True:
-        print(process_message(Message({}, input("> "), name="Tester")))
+        print(process_message(Message({}, input("> "), name="Tester", group_id=49940116)))
 
 
 discord_client = discord.Client()
