@@ -413,7 +413,23 @@ async def discord_send(content, channel):
         await channel.send(content)
 
 
-# TODO: reimplement join/leave listeners
+@discord_client.event
+async def on_member_join(self, member):
+    """
+    When a member joins a server.
+    :param member: The name of the member who joined.
+    """
+    await discord_send("**Welcome " + member.mention + " to the server!** :rocket:", member.server.default_channel)
+
+
+@discord_client.event
+async def on_member_remove(self, member):
+    """
+    When a member has left or been kicked from a server.
+    :param member: The name of the member who left.
+    """
+    await discord_send(member.mention + " has left the server. :frowning:", member.server.default_channel)
+
 
 asyncio.get_child_watcher()
 loop = asyncio.get_event_loop()
