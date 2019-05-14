@@ -172,7 +172,12 @@ def process_message(message):
                     help_string += f"\n(Run `{PREFIX}help commandname` for in-depth explanations.)"
                     responses.append(help_string)
             elif command == "register":
-                new_command, content = query.split(None, 1)
+                # TODO: this is lazy and bad, fix it
+                args = query.split(None, 1)
+                new_command = args.pop(0)
+                content = None
+                if args:
+                    content = args[0]
                 response = Response.query.get(new_command)
                 if response is None:
                     response = Response(new_command, content, message.image_url)
