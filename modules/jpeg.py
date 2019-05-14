@@ -10,5 +10,5 @@ class JPEG(ImageModule):
         source_url = self.get_source_url(message)
         image = self.pil_from_url(source_url)
         output = BytesIO()
-        image.save(output, format="JPEG", quality=1)
-        return self.upload_image(output.getvalue())
+        image.save(output, format="JPEG", quality=2)
+        return ("", self.upload_image(output.getvalue()))
