@@ -10,10 +10,10 @@ GROUP_ID = 48071223
 
 class Analytics(Module):
     DESCRIPTION = "View statistics on user activity in the chat"
-    users = {}
+    groups = {}
 
     def generate_data(self):
-        self.users = {}
+        self.groups[group_id] = {}
         group = self.get_group(GROUP_ID)
 
         # Display info to user before the analysis begins
@@ -35,7 +35,7 @@ class Analytics(Module):
 
     def populate_users(self, members):
         for member in members:
-            self.users[member["user_id"]] = self.new_user(member["name"])
+            self.groups[group_id][member["user_id"]] = self.new_user(member["name"])
 
     def analyze_group(self, group_id, message_count):
         message_id = 0
@@ -57,21 +57,21 @@ class Analytics(Module):
                 sender_id = message["sender_id"]
                 likers = message["favorited_by"]
 
-                if sender_id not in self.users.keys():
-                    self.users[sender_id] = self.new_user(name)
+                if sender_id not in self.groups[group_id].keys():
+                    self.groups[group_id][sender_id] = self.new_user(name)
 
                 # Fill the name in if user liked a message but hasn"t yet been added to the dictionary
-                if not self.users[sender_id].get("name"):
-                    self.users[sender_id]["name"] = name
+                if not self.groups[group_id][sender_id].get("name"):
+                    self.groups[group_id][sender_id]["name"] = name
 
                 for liker_id in likers:
-                    if liker_id not in self.users.keys():
+                    if liker_id not in self.groups[group_id].keys():
                         # Leave name blank until user sends their first message
-                        self.users[liker_id] = self.new_user("")
-                    self.users[liker_id]["likes"] += 1
+                        self.groups[group_id][liker_id] = self.new_user("")
+                    self.groups[group_id][liker_id]["likes"] += 1
 
-                self.users[sender_id]["messages"] += 1  # Increment sent message count
-                self.users[sender_id]["likes_received"] += len(likers)
+                self.groups[group_id][sender_id]["messages"] += 1  # Increment sent message count
+                self.groups[group_id][sender_id]["likes_received"] += len(likers)
 
             message_id = messages[-1]["id"]  # Get last message's ID for next request
             percentage = int(10 * message_number / message_count) * 10
@@ -88,7 +88,7 @@ class Analytics(Module):
         if command == "profile":
             return "Profiling coming soon"
         elif command == "leaderboard":
-            users = [self.users[key] for key in self.users]
+            users = [self.groups[group_id][key] for key in self.groups[group_id]]
             users.sort(key=lambda user: user["messages"], reverse=True)
             try:
                 length = int(parameters.pop(0))
