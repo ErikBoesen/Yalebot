@@ -9,7 +9,7 @@ import os
 class Analytics(Module):
     DESCRIPTION = "View statistics on user activity in the chat"
     groups = {}
-    leaderboards = []
+    leaderboards = {}
 
     def generate_data(self, group_id):
         self.groups[group_id] = {}
@@ -78,8 +78,11 @@ class Analytics(Module):
                 self.groups[group_id][sender_id]["messages"] += 1  # Increment sent message count
                 self.groups[group_id][sender_id]["likes_received"] += len(likers)
 
-            print(id(self))
-            message_id = messages[-1]["id"]  # Get last message's ID for next request
+            try:
+                message_id = messages.pop()["id"]  # Get last message's ID for next request
+            except Exception:
+                # If history has been cleared
+                return
             percentage = int(10 * message_number / message_count) * 10
             if percentage > last_percentage:
                 last_percentage = percentage
