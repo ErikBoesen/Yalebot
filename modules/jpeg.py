@@ -1,5 +1,6 @@
 from .base import ImageModule
 from PIL import Image
+from io import BytesIO
 
 
 class JPEG(ImageModule):
@@ -8,4 +9,6 @@ class JPEG(ImageModule):
     def response(self, query, message):
         source_url = self.get_source_url(message)
         image = self.pil_from_url(source_url)
-        return ("", self.upload_pil_image(image, quality=20))
+        output = BytesIO()
+        image.save(output, format="JPEG", quality=1)
+        return self.upload_image(output.getvalue())
