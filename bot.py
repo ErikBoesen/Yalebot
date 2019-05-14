@@ -282,6 +282,13 @@ def memes():
                                      [len(commands["meme"].templates[template]) - 1 for template in commands["meme"].templates]))
 
 
+@app.route("/analytics/<group_id>")
+def analytics(group_id):
+    # TODO: clear up users/leaderboards naming
+    users = commands["analytics"].leaderboards[group_id]
+    return render_template("analytics.html", users=users)
+
+
 def in_group(group_id):
     return db.session.query(db.exists().where(Bot.group_id == group_id)).scalar()
 

@@ -1,4 +1,19 @@
 {% extends "layout.html" %}
 {% block main %}
-
+<table>
+    <thead>
+        {% for key, value in users[0].items() %}
+        <th>{{ key }}</th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            {% for key, value in users %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

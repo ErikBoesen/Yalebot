@@ -11,6 +11,7 @@ GROUP_ID = 48071223
 class Analytics(Module):
     DESCRIPTION = "View statistics on user activity in the chat"
     groups = {}
+    leaderboards = []
 
     def generate_data(self):
         self.groups[group_id] = {}
@@ -25,6 +26,12 @@ class Analytics(Module):
 
         # Perform analysis
         self.analyze_group(GROUP_ID, message_count)
+
+        # Make ordered list
+        # TODO: clear up users/leaderboards naming
+        users = [self.groups[group_id][key] for key in self.groups[group_id]]
+        users.sort(key=lambda user: user["messages"], reverse=True)
+        self.leaderboards[group_id] = users
         return "%d messages processed." % message_count
 
     def get_group(self, group_id):
@@ -88,13 +95,11 @@ class Analytics(Module):
         if command == "profile":
             return "Profiling coming soon"
         elif command == "leaderboard":
-            users = [self.groups[group_id][key] for key in self.groups[group_id]]
-            users.sort(key=lambda user: user["messages"], reverse=True)
             try:
                 length = int(parameters.pop(0))
             except Exception:
                 length = 10
-            leaders = users[:length]
+            leaders = self.leaderboards[message.group_id][:length]
             for place, user in enumerate(leaders):
                 output += str(place + 1) + ". " + user["name"] + " / Messages Sent: %d" % user["messages"]
                 output += " / Likes Given: %d" % user["likes"]
