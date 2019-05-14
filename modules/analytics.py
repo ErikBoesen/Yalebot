@@ -5,7 +5,7 @@ import sys
 from pprint import pprint
 import os
 
-GROUP_ID = 46649296
+GROUP_ID = 48071223
 
 
 class Analytics(Module):
@@ -28,9 +28,7 @@ class Analytics(Module):
         return "%d messages processed." % message_count
 
     def get_group(self, group_id):
-        response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}")
-        data = response.json()
-        return data["response"]
+        return requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
 
     def new_user(self, name):
         return {"name": name, "messages": 0, "likes": 0, "likes_received": 0.0}
@@ -49,7 +47,7 @@ class Analytics(Module):
             }
             if message_id:
                 params["before_id"] = message_id
-            response = requests.get("https://api.groupme.com/v3/groups/{group_id}/messages?token={token}", params=params)
+            response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}/messages?token={self.ACCESS_TOKEN}", params=params)
             messages = response.json()["response"]["messages"]
             for message in messages:
                 message_number += 1
