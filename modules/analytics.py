@@ -40,6 +40,7 @@ class Analytics(Module):
     def analyze_group(self, group_id, message_count):
         message_id = 0
         message_number = 0
+        last_percentage = 0
         while message_number < message_count:
             params = {
                 # Get maximum number of messages at a time
@@ -72,9 +73,11 @@ class Analytics(Module):
                 self.users[sender_id]["messages"] += 1  # Increment sent message count
                 self.users[sender_id]["likes_received"] += len(likers)
 
-            message_id = messages[-1]["id"]  # Get last message"s ID for next request
-            remaining = 100 * message_number / message_count
-            print("%.2f%% done" % remaining)
+            message_id = messages[-1]["id"]  # Get last message's ID for next request
+            percentage = int(10 * message_number / message_count) * 10
+            if percentage > last_percentage:
+                last_percentage = percentage
+                print("%d%% done" % remaining)
 
     def response(self, query, message):
         parameters = query.split(" ")
