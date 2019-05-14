@@ -62,11 +62,10 @@ class ImageModule(Module):
         First choose attached image, then use mentioned person's avatar, then sender's avatar.
         :return: URL of image to use.
         """
-        image_attachments = [attachment for attachment in message.raw["attachments"] if attachment["type"] == "image"]
         mention_attachments = [attachment for attachment in message.raw["attachments"] if attachment["type"] == "mentions"]
-        if len(image_attachments) > 0:
+        if message.image_url is not None:
             # Get sent image
-            return image_attachments[0]["url"]
+            return message.image_url
         elif len(mention_attachments) > 0:
             return self.get_portrait(mention_attachments[0]["user_ids"][0], message.group_id)
         # If no image was sent, use sender's avatar
