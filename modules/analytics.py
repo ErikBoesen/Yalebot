@@ -74,20 +74,24 @@ class Analytics(Module):
 
             message_id = messages[-1]["id"]  # Get last message"s ID for next request
             remaining = 100 * message_number / message_count
-            print("\r%.2f%% done" % remaining, end="")
+            print("%.2f%% done" % remaining)
 
     def response(self, query, message):
         parameters = query.split(" ")
         command = parameters.pop(0)
         output = ""
-        if command == "regenerate":
+        if command == "generate":
             return self.generate_data()
         if command == "profile":
             return "Profiling coming soon"
         elif command == "leaderboard":
             users = [self.users[key] for key in self.users]
             users.sort(key=lambda user: user["messages"], reverse=True)
-            leaders = users[:10]
+            try:
+                length = int(parameters.pop(0))
+            except Exception:
+                length = 10
+            leaders = users[:length]
             for place, user in enumerate(leaders):
                 output += str(place + 1) + ". " + user["name"] + " / Messages Sent: %d" % user["messages"]
                 output += " / Likes Given: %d" % user["likes"]
