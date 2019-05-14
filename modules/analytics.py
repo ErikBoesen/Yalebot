@@ -5,17 +5,15 @@ import sys
 from pprint import pprint
 import os
 
-GROUP_ID = 48071223
-
 
 class Analytics(Module):
     DESCRIPTION = "View statistics on user activity in the chat"
     groups = {}
     leaderboards = []
 
-    def generate_data(self):
+    def generate_data(self, group_id):
         self.groups[group_id] = {}
-        group = self.get_group(GROUP_ID)
+        group = self.get_group(group_id)
 
         # Display info to user before the analysis begins
         message_count = group["messages"]["count"]
@@ -91,7 +89,7 @@ class Analytics(Module):
         command = parameters.pop(0)
         output = ""
         if command == "generate":
-            return self.generate_data()
+            return self.generate_data(message.group_id)
         if command == "profile":
             return "Profiling coming soon"
         elif command == "leaderboard":
