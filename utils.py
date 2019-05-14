@@ -83,6 +83,6 @@ class Message:
     @property
     def image_url(self):
         if self.platform == Platform.GROUPME:
-            image_attachments = [attachment for attachment in message.raw["attachments"] if attachment["type"] == "image"]
+            image_attachments = [attachment for attachment in self.raw["attachments"] if attachment["type"] == "image"]
             if image_attachments:
                 return image_attachments[0]
