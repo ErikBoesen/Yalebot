@@ -20,10 +20,10 @@ class Analytics(Module):
         print("Analyzing " + str(message_count) + " messages.")
 
         # Make dictionary of members
-        self.populate_users(group["members"])
+        self.populate_users(group["members"], group_id)
 
         # Perform analysis
-        self.analyze_group(GROUP_ID, message_count)
+        self.analyze_group(group_id, message_count)
 
         # Make ordered list
         # TODO: clear up users/leaderboards naming
@@ -36,9 +36,9 @@ class Analytics(Module):
         return requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
 
     def new_user(self, name):
-        return {"name": name, "messages": 0, "likes": 0, "likes_received": 0.0}
+        return {"name": name, "messages": 0, "likes": 0, "likes_received": 0}
 
-    def populate_users(self, members):
+    def populate_users(self, members, group_id):
         for member in members:
             self.groups[group_id][member["user_id"]] = self.new_user(member["name"])
 
@@ -78,11 +78,12 @@ class Analytics(Module):
                 self.groups[group_id][sender_id]["messages"] += 1  # Increment sent message count
                 self.groups[group_id][sender_id]["likes_received"] += len(likers)
 
+            print(id(self))
             message_id = messages[-1]["id"]  # Get last message's ID for next request
             percentage = int(10 * message_number / message_count) * 10
             if percentage > last_percentage:
                 last_percentage = percentage
-                print("%d%% done" % remaining)
+                print("%d%% done" % percentage)
 
     def response(self, query, message):
         parameters = query.split(" ")
