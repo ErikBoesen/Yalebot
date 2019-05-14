@@ -184,6 +184,10 @@ def process_message(message):
                     db.session.add(response)
                     db.session.commit()
                     responses.append(f"Command {new_command} registered successfully.")
+                elif not content and not message.image_url:
+                    db.session.delete(response)
+                    db.session.commit()
+                    responses.append(f"Command {new_command} unregistered.")
                 else:
                     responses.append(f"Command {new_command} already registered!")
             else:
@@ -374,7 +378,7 @@ if __name__ == "__main__":
     parser.add_argument("message")
     args = parser.parse_args()
     while True:
-        print(process_message(Message({}, input("> ", name="Tester")))
+        print(process_message(Message({}, input("> "), name="Tester")))
 
 
 discord_client = discord.Client()
