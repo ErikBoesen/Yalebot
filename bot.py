@@ -120,10 +120,12 @@ class Response(db.Model):
     __tablename__ = "responses"
     name = db.Column(db.String(64), primary_key=True)
     content = db.Column(db.String(256))
+    image_url = db.Column(db.String(128))
 
-    def __init__(self, name, content):
+    def __init__(self, name, content, image_url):
         self.name = name
         self.content = content
+        self.image_url = image_url
 
 
 def process_message(message):
@@ -172,9 +174,8 @@ def process_message(message):
             elif command == "register":
                 new_command, content = query.split(None, 1)
                 response = Response.query.get(new_command)
-                print(response)
                 if response is None:
-                    response = Response(new_command, content)
+                    response = Response(new_command, content, message.image_url)
                     db.session.add(response)
                     db.session.commit()
                     responses.append(f"Command {new_command} registered successfully.")
@@ -183,7 +184,7 @@ def process_message(message):
             else:
                 response = Response.query.get(command)
                 if response is not None:
-                    responses.append(response.content)
+                    responses.append((response.content, response.image_url) if response.image_url else response.content)
                 else:
                     try:
                         closest = difflib.get_close_matches(command, list(static_commands.keys()) + list(commands.keys()), 1)[0]
