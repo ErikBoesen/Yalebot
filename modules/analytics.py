@@ -16,7 +16,7 @@ class Analytics(Module):
         group = self.get_group(group_id)
 
         # Display info to user before the analysis begins
-        message_count = group["messages"]["count"]
+        message_count = group["Messages"]["count"]
         print("Analyzing " + str(message_count) + " messages.")
 
         # Make dictionary of members
@@ -28,7 +28,7 @@ class Analytics(Module):
         # Make ordered list
         # TODO: clear up users/leaderboards naming
         users = [self.groups[group_id][key] for key in self.groups[group_id]]
-        users.sort(key=lambda user: user["messages"], reverse=True)
+        users.sort(key=lambda user: user["Messages"], reverse=True)
         self.leaderboards[group_id] = users
         return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{group_id}, or use `!analytics leaderboard` to view a list of the top users!"
 
@@ -36,11 +36,11 @@ class Analytics(Module):
         return requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
 
     def new_user(self, name):
-        return {"name": name, "messages": 0, "likes": 0, "likes_received": 0}
+        return {"Name": name, "Messages": 0, "Likes": 0, "Likes Received": 0}
 
     def populate_users(self, members, group_id):
         for member in members:
-            self.groups[group_id][member["user_id"]] = self.new_user(member["name"])
+            self.groups[group_id][member["user_id"]] = self.new_user(member["Name"])
 
     def analyze_group(self, group_id, message_count):
         message_id = 0
@@ -54,10 +54,10 @@ class Analytics(Module):
             if message_id:
                 params["before_id"] = message_id
             response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}/messages?token={self.ACCESS_TOKEN}", params=params)
-            messages = response.json()["response"]["messages"]
+            messages = response.json()["response"]["Messages"]
             for message in messages:
                 message_number += 1
-                name = message["name"]
+                name = message["Name"]
 
                 sender_id = message["sender_id"]
                 likers = message["favorited_by"]
@@ -66,17 +66,17 @@ class Analytics(Module):
                     self.groups[group_id][sender_id] = self.new_user(name)
 
                 # Fill the name in if user liked a message but hasn"t yet been added to the dictionary
-                if not self.groups[group_id][sender_id].get("name"):
-                    self.groups[group_id][sender_id]["name"] = name
+                if not self.groups[group_id][sender_id].get("Name"):
+                    self.groups[group_id][sender_id]["Name"] = name
 
                 for liker_id in likers:
                     if liker_id not in self.groups[group_id].keys():
                         # Leave name blank until user sends their first message
                         self.groups[group_id][liker_id] = self.new_user("")
-                    self.groups[group_id][liker_id]["likes"] += 1
+                    self.groups[group_id][liker_id]["Likes"] += 1
 
-                self.groups[group_id][sender_id]["messages"] += 1  # Increment sent message count
-                self.groups[group_id][sender_id]["likes_received"] += len(likers)
+                self.groups[group_id][sender_id]["Messages"] += 1  # Increment sent message count
+                self.groups[group_id][sender_id]["Likes Received"] += len(likers)
 
             try:
                 message_id = messages.pop()["id"]  # Get last message's ID for next request
@@ -94,8 +94,6 @@ class Analytics(Module):
         output = ""
         if command == "generate":
             return self.generate_data(message.group_id)
-        if command == "profile":
-            return "Profiling coming soon"
         elif command == "leaderboard":
             try:
                 length = int(parameters.pop(0))
@@ -103,10 +101,10 @@ class Analytics(Module):
                 length = 10
             leaders = self.leaderboards[message.group_id][:length]
             for place, user in enumerate(leaders):
-                output += str(place + 1) + ". " + user["name"] + " / Messages Sent: %d" % user["messages"]
-                output += " / Likes Given: %d" % user["likes"]
-                output += " / Likes Received: %d" % user["likes_received"]
+                output += str(place + 1) + ". " + user["Name"] + " / Messages Sent: %d" % user["Messages"]
+                output += " / Likes Given: %d" % user["Likes"]
+                output += " / Likes Received: %d" % user["Likes Received"]
                 output += "\n"
         else:
-            return "No command specified!"
+            return "Please state a valid command!"
         return output
