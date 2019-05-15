@@ -22,7 +22,7 @@ from .eightball import EightBall
 from .analytics import Analytics
 from .pick import Pick
 from .meme import Meme
-from .system import Welcome, Mourn
+from .system import Welcome, Mourn, Introduce
 from .youtube import YouTube
 from .price import Price
 from .minion import Minion
