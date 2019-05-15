@@ -23,7 +23,7 @@ class Colours:
     WHITE = (255,) * 3
 
 
-def deepfry(img: Image, *, token: str = None, url_base: str = 'westcentralus', session: aiohttp.ClientSession = None, type=DeepfryTypes.RED) -> Image:
+async def deepfry(img: Image, *, token: str = None, url_base: str = 'westcentralus', session: aiohttp.ClientSession = None, type=DeepfryTypes.RED) -> Image:
     """
     Deepfry an image.
 
@@ -125,5 +125,6 @@ class DeepFry(ImageModule):
     def response(self, query, message):
         source_url = self.get_source_url(message)
         image = self.pil_from_url(source_url)
-        image = deepfry(image)
+        loop = asyncio.get_event_loop()
+        image = loop.run_until_complete(deepfry(img, token=token))
         return ("", self.upload_pil_image(image))
