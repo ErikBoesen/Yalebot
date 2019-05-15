@@ -161,8 +161,6 @@ def process_message(message):
                         responses.append(PREFIX + query + ": static response.")
                     elif query in commands:
                         responses.append(PREFIX + query + ": " + commands[query].DESCRIPTION + f". Requires {commands[query].ARGC} argument(s).")
-                    elif query in meme_commands:
-                        responses.append(PREFIX + query + ": meme command; provide captions separated by newlines.")
                     else:
                         responses.append("No such command.")
                 else:
