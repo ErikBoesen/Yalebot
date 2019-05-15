@@ -82,7 +82,7 @@ class Analytics(Module):
                 message_id = messages.pop()["id"]  # Get last message's ID for next request
             except Exception:
                 # If history has been cleared
-                return
+                break
             percentage = int(10 * message_number / message_count) * 10
             if percentage > last_percentage:
                 last_percentage = percentage
