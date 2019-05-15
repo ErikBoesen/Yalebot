@@ -88,8 +88,8 @@ class Analytics(Module):
                 last_percentage = percentage
                 print("%d%% done" % percentage)
         for user_id in self.groups[group_id]:
-            if self.groups[user_id]["Messages"]:
-                self.groups[user_id]["Likes Received Per Message"] = (self.groups[user_id]["Likes Received"] / self.groups[user_id]["Messages"])
+            if self.groups[group_id][user_id]["Messages"] > 0:
+                self.groups[group_id][user_id]["Likes Received Per Message"] = (self.groups[group_id][user_id]["Likes Received"] / self.groups[group_id][user_id]["Messages"])
 
     def response(self, query, message):
         parameters = query.split(" ")

@@ -251,11 +251,11 @@ class Meme(ImageModule):
                 {"position": (244, 381)},
             ),
             "pikachu": (
-                {"center_vertical": True},
+                {"center_vertical": True, "wrap": 18},
 
                 {"position": (159, 86)},
                 {"position": (466, 90)},
-                {"position": (550, 531), "wrap": 10},
+                {"position": (545, 531), "wrap": 10},
             ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
