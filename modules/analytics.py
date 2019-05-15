@@ -30,7 +30,7 @@ class Analytics(Module):
         users = [self.groups[group_id][key] for key in self.groups[group_id]]
         users.sort(key=lambda user: user["messages"], reverse=True)
         self.leaderboards[group_id] = users
-        return "%d messages processed." % message_count
+        return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{group_id}, or use `!analytics leaderboard` to view a list of the top users!"
 
     def get_group(self, group_id):
         return requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
