@@ -112,6 +112,7 @@ commands = {
 system_responses = {
     "welcome": modules.Welcome(),
     "mourn": modules.Mourn(),
+    "introduce": modules.Introduce(),
 }
 
 

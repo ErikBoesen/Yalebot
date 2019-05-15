@@ -2,6 +2,7 @@ import os
 import requests
 from PIL import Image
 from io import BytesIO
+import random
 
 
 class Module:
@@ -12,6 +13,9 @@ class Module:
 
     def __init__(self):
         print("Loaded module %s." % self.__class__.__name__)
+
+    def wave(self):
+        return random.choice("👋🏻👋🏼👋🏽👋🏾👋🏿")
 
 
 class ImageModule(Module):
