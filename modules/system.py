@@ -23,7 +23,7 @@ class Welcome(System):
     RE = re.compile(r"(.+) added (.+) to the group\.|(.+) has (re)?joined the group")
 
     def response(self, query, message):
-        names = ", ".join([name.split(" ", 1)[0] for name in self.get_groupme_names(query)])
+        names = ", ".join([name.split(" ", 1)[0] for name in self.get_names_groupme(query)])
         return self.wave() + " Welcome " + names + "! We're happy to have you. I'm Yalebot, a GroupMe bot for Yale University. Type !help to see what I can do."
 
 
