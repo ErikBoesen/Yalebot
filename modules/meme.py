@@ -257,6 +257,11 @@ class Meme(ImageModule):
                 {"position": (466, 90)},
                 {"position": (545, 531), "wrap": 10},
             ),
+            "rules": (
+                {"center": False},
+
+                {"position": (18, 332)},
+            ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
