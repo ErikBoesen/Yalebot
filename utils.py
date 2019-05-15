@@ -57,7 +57,7 @@ class Message:
                    user_id=message.get("user_id"),
                    time=message.get("created_at"),
                    name=message.get("name"),
-                   sender_type=message.get("sender_type"),
+                   sender_type=SenderType(message.get("sender_type")),
                    group_id=message.get("group_id"),
                    avatar_url=message.get("avatar_url"))
 
