@@ -308,7 +308,7 @@ def manager():
                                json={"bot": bot}).json()["response"]["bot"]
 
         # Store in database
-        registrant = Bot(result["group_id"], result["bot_id"], me["user_id"])
+        registrant = Bot(result["group_id"], result["bot_id"], me["user_id"], access_token)
         db.session.add(registrant)
         db.session.commit()
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
@@ -324,11 +324,13 @@ class Bot(db.Model):
     group_id = db.Column(db.String(16), unique=True, primary_key=True)
     bot_id = db.Column(db.String(26), unique=True)
     owner_id = db.Column(db.String(16))
+    access_token = db.Column(db.String(32))
 
-    def __init__(self, group_id, bot_id, owner_id):
+    def __init__(self, group_id, bot_id, owner_id, access_token):
         self.group_id = group_id
         self.bot_id = bot_id
         self.owner_id = owner_id
+        self.access_token = access_token
 
 
 @app.route("/delete", methods=["POST"])
