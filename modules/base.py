@@ -15,7 +15,7 @@ class Module:
         print("Loaded module %s." % self.__class__.__name__)
 
     def wave(self):
-        return 👋 + random.choice("🏻🏼🏽🏾🏿")
+        return "👋" + random.choice("🏻🏼🏽🏾🏿")
 
 
 class ImageModule(Module):
