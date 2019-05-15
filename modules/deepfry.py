@@ -1,7 +1,10 @@
 from PIL import Image, ImageOps, ImageEnhance
 from io import BytesIO
 from enum import Enum
-import aiohttp, asyncio, math, argparse
+import aiohttp
+import asyncio
+import math
+import argparse
 from .base import ImageModule
 
 
@@ -20,7 +23,7 @@ class Colours:
     WHITE = (255,) * 3
 
 
-async def deepfry(img: Image, *, token: str=None, url_base: str='westcentralus', session: aiohttp.ClientSession=None, type=DeepfryTypes.RED) -> Image:
+def deepfry(img: Image, *, token: str = None, url_base: str = 'westcentralus', session: aiohttp.ClientSession = None, type=DeepfryTypes.RED) -> Image:
     """
     Deepfry an image.
 
