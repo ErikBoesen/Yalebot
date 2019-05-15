@@ -108,6 +108,7 @@ commands = {
     "mccarthy": modules.McCarthy(),
     "circle": modules.Circle(),
     "jpeg": modules.JPEG(),
+    "deepfry": modules.DeepFry(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
