@@ -16,7 +16,7 @@ class Analytics(Module):
         group = self.get_group(group_id)
 
         # Display info to user before the analysis begins
-        message_count = group["Messages"]["count"]
+        message_count = group["messages"]["count"]
         print("Analyzing " + str(message_count) + " messages.")
 
         # Make dictionary of members
@@ -40,7 +40,7 @@ class Analytics(Module):
 
     def populate_users(self, members, group_id):
         for member in members:
-            self.groups[group_id][member["user_id"]] = self.new_user(member["Name"])
+            self.groups[group_id][member["user_id"]] = self.new_user(member["name"])
 
     def analyze_group(self, group_id, message_count):
         message_id = 0
@@ -54,10 +54,10 @@ class Analytics(Module):
             if message_id:
                 params["before_id"] = message_id
             response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}/messages?token={self.ACCESS_TOKEN}", params=params)
-            messages = response.json()["response"]["Messages"]
+            messages = response.json()["response"]["messages"]
             for message in messages:
                 message_number += 1
-                name = message["Name"]
+                name = message["name"]
 
                 sender_id = message["sender_id"]
                 likers = message["favorited_by"]
