@@ -126,5 +126,5 @@ class DeepFry(ImageModule):
     def response(self, query, message):
         source_url = self.get_source_url(message)
         image = self.pil_from_url(source_url)
-        image = deepfry(img, token=token)
+        image = deepfry(image)
         return ("", self.upload_pil_image(image))
