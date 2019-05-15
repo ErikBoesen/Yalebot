@@ -2,7 +2,6 @@ from PIL import Image, ImageOps, ImageEnhance
 from io import BytesIO
 from enum import Enum
 import aiohttp
-import asyncio
 import math
 import argparse
 from .base import ImageModule
@@ -23,7 +22,7 @@ class Colours:
     WHITE = (255,) * 3
 
 
-async def deepfry(img: Image, *, token: str = None, url_base: str = 'westcentralus', session: aiohttp.ClientSession = None, type=DeepfryTypes.RED) -> Image:
+def deepfry(img: Image, *, token: str = None, url_base: str = 'westcentralus', session: aiohttp.ClientSession = None, type=DeepfryTypes.RED) -> Image:
     """
     Deepfry an image.
 
@@ -38,6 +37,7 @@ async def deepfry(img: Image, *, token: str = None, url_base: str = 'westcentral
     if type not in DeepfryTypes:
         raise ValueError(f'Unknown deepfry type "{type}", expected a value from deeppyer.DeepfryTypes')
 
+    """
     if token:
         req_url = f'https://{url_base}.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=true'
         headers = {
@@ -81,6 +81,7 @@ async def deepfry(img: Image, *, token: str = None, url_base: str = 'westcentral
             flare_right_size = eye_right_height if eye_right_height > eye_right_width else eye_right_width
             flare_right_size *= 4
             eye_right_corner = tuple(math.floor(x - flare_right_size / 2.5 + 5) for x in eye_right_corner)
+            """
 
     # Crush image to hell and back
     img = img.convert('RGB')
@@ -125,6 +126,5 @@ class DeepFry(ImageModule):
     def response(self, query, message):
         source_url = self.get_source_url(message)
         image = self.pil_from_url(source_url)
-        loop = asyncio.get_event_loop()
-        image = loop.run_until_complete(deepfry(img, token=token))
+        image = deepfry(img, token=token)
         return ("", self.upload_pil_image(image))
