@@ -133,7 +133,7 @@ def process_message(message):
     f_matches = re.search("can i get an? (.+) in the chat", message.text, flags=re.IGNORECASE | re.MULTILINE)
     if f_matches is not None and len(f_matches.groups()):
         responses.append(f_matches.groups()[0] + " ❤")
-    if message.sender_type == SenderType.BOT:
+    if message.sender_type == SenderType.USER:
         if message.text.startswith(PREFIX):
             instructions = message.text[len(PREFIX):].strip().split(None, 1)
             command = instructions.pop(0).lower()
