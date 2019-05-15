@@ -36,7 +36,7 @@ class Analytics(Module):
         return requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
 
     def new_user(self, name):
-        return {"Name": name, "Messages": 0, "Likes": 0, "Likes Received": 0}
+        return {"Name": name, "Messages": 0, "Likes": 0, "Likes Received": 0, "Likes Received Per Message": 0}
 
     def populate_users(self, members, group_id):
         for member in members:
@@ -87,6 +87,9 @@ class Analytics(Module):
             if percentage > last_percentage:
                 last_percentage = percentage
                 print("%d%% done" % percentage)
+        for user_id in self.groups[group_id]:
+            if self.groups[user_id]["Messages"]:
+                self.groups[user_id]["Likes Received Per Message"] = (self.groups[user_id]["Likes Received"] / self.groups[user_id]["Messages"])
 
     def response(self, query, message):
         parameters = query.split(" ")
