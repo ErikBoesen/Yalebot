@@ -36,6 +36,7 @@ class Message:
 
     def __repr__(self):
         color = {Platform.GROUPME: "green", Platform.DISCORD: "magenta", Platform.FACEBOOK: "blue"}.get(self.platform)
+        print(self.sender_type)
         return colored("{location} | {name}: {text}".format(location=self.get_location(),
                                                             name=self.name,
                                                             text=self.text), color)
