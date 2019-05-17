@@ -297,9 +297,10 @@ def manager():
     access_token = request.args["access_token"]
     if request.method == "POST":
         # Build and send bot data
+        group_id = request.form["group_id"]
         bot = {
             "name": request.form["name"] or "Yalebot",
-            "group_id": request.form["group_id"],
+            "group_id": group_id,
             "avatar_url": request.form["avatar_url"] or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
             "callback_url": "https://yalebot.herokuapp.com/",
             "dm_notification": False,
@@ -307,9 +308,10 @@ def manager():
         me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
         result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
                                json={"bot": bot}).json()["response"]["bot"]
+        group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
 
         # Store in database
-        registrant = Bot(result["group_id"], me["name"], result["bot_id"], me["user_id"], me["name"], access_token)
+        registrant = Bot(group_id, group["name"], me["name"], result["bot_id"], me["user_id"], me["name"], access_token)
         db.session.add(registrant)
         db.session.commit()
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
@@ -323,6 +325,7 @@ def manager():
 class Bot(db.Model):
     __tablename__ = "bots"
     group_id = db.Column(db.String(16), unique=True, primary_key=True)
+    group_name = db.Column(db.String(50))
     bot_id = db.Column(db.String(26), unique=True)
     owner_id = db.Column(db.String(16))
     owner_name = db.Column(db.String(64))
