@@ -397,6 +397,8 @@ def cah_selection(data):
         send("The Card Czar has selected \"{card}\" played by {name}, who now has a score of {score}.".format(card=card,
                                                                                                               name=player.name,
                                                                                                               score=len(player.won)), group_id)
+        send("The next black card is \"{card}\" and {name} is now Czar.".format(card=game.current_black_card,
+                                                                                name=player.name), group_id)
     else:
         game.player_choose(user_id, data["card_index"])
         send(player.name + " has played a card.", group_id)
