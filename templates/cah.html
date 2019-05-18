@@ -5,14 +5,16 @@
 
 {% block main %}
 <p id="warning"></p>
-<p id="czar"></p>
-<div class="black card">
-</div>
-<div class="cards" id="selection">
-</div>
-<div class="cards" id="hand">
-</div>
-<div id="score"></div>
+<section id="game">
+    <p id="czar"></p>
+    <div class="black card" id="black">
+    </div>
+    <div class="cards" id="selection">
+    </div>
+    <div class="cards" id="hand">
+    </div>
+    <div id="score"></div>
+</section>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script src="/static/scripts/cah.js"></script>
