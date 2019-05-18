@@ -12,6 +12,7 @@ class Groups(Module):
         "First Generation students": "49418581/byuFtN4q",
         "LGBT+": "49376932/0wl2GN9F",
         "FSY": "50473402/gMWpQ8WK",
+        "FOCUS": "50535013/HphGXnXD",
 
         "New York City": "46816234/B3PBXk",
         "DMV": "46655481/kpn04v",
