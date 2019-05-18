@@ -44,7 +44,7 @@ var row = document.getElementsByClassName("cards")[0]; // TODO: there might be o
 function fillRow(cards) {
     row.innerHTML = ""; // you ignoramus, do this right
     for (card of cards) {
-        row.appendChild(buildCard("white", card);
+        row.appendChild(buildCard("white", card));
     }
 }
 socket.on("cah_ping", function(data) {
@@ -53,6 +53,9 @@ socket.on("cah_ping", function(data) {
         document.getElementById("warning").textContent = "You're not in a game. Type !cah join in the group first.";
         return;
     }
+
+    // Again... address this in a more effective way
+    document.getElementsByClassName("black")[0].textContent = data.black_card;
 
     if (data.is_czar) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
