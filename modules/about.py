@@ -14,7 +14,7 @@ class About(Module):
             most_lines = 0
             longest_file = None
             filenames = []
-            for criterion in ["Procfile", "*.py", "*.sh", "static/*.css",
+            for criterion in ["Procfile", "*.py", "*.sh", "static/stylesheets/*.css",
                               "static/scripts/*", "modules/*.py",
                               "hooks/*", "templates/*"]:
                 filenames.extend(glob(criterion))
