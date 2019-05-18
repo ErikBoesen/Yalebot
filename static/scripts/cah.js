@@ -1,27 +1,3 @@
-/*
-onclick = function(e) {
-    console.log("Clicked somewhere.");
-    if (e.target.classList.contains("card") && e.target.classList.contains("white")) {
-        console.log("Clicked on a card.");
-        var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
-
-        var req = new XMLHttpRequest();
-        req.open("POST", location.href);
-        req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        var url = new URL(location.href);
-        var data = {
-            "access_token": url.searchParams.get("access_token"),
-            "card_index": cardIndex,
-        };
-        req.send(JSON.stringify(data));
-        req.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                location.reload();
-            }
-        };
-    }
-};
-*/
 // TODO: there is no elegance here. Only sleep deprivation and regret.
 // Please, if you have any self-respect, rewrite this entire file.
 // Then wipe its inconvenient past from the git history and never speak of it again.
@@ -69,7 +45,7 @@ socket.on("cah_ping", function(data) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
         fillSelection(data.selection);
         // THIS IS ALL TEMPORARY FOR TESTING AND WILL ALLOW A CZAR TO SUBMIT CARDS WHICH THEY SHOULDN'T BE ABLE TO
-        fillRow(data.hand);
+        fillHand(data.hand);
     } else {
         // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
         // You lazy idiot.
@@ -77,3 +53,34 @@ socket.on("cah_ping", function(data) {
         fillHand(data.hand);
     }
 });
+
+onclick = function(e) {
+    if (e.target.classList.contains("card") && e.target.classList.contains("white")) {
+        console.log("Clicked on a card.");
+        var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
+        // TEMPORARY for debugging
+        is_czar =  (e.target.parentNode.id == "hand");
+
+        /*
+        var req = new XMLHttpRequest();
+        req.open("POST", location.href);
+        req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        */
+        var url = new URL(location.href);
+        var data = {
+            "access_token": url.searchParams.get("access_token"),
+            "card_index": cardIndex,
+            "is_czar": is_czar,
+        };
+        // WHY WOULD YOU EVER NEED THIS okay keep it I guess it's not going to affect how odious this code is
+        /*
+        req.send(JSON.stringify(data));
+        req.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                location.reload();
+            }
+        };
+        */
+        socket.emit("cah_selection", data);
+    }
+};
