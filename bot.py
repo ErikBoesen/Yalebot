@@ -393,10 +393,13 @@ def cah_selection(data):
     group_id = game.group_id
     # if game.is_czar(user_id):
     if data["is_czar"]:
-        game.czar_choose(data["card_index"])
-        send("The Card Czar has selected ", group_id)
+        card, player = game.czar_choose(data["card_index"])
+        send("The Card Czar has selected \"{card}\" played by {name}, who now has a score of {score}.".format(card=card,
+                                                                                                              name=player.name,
+                                                                                                              score=len(player.won)), group_id)
     else:
         game.player_choose(user_id, data["card_index"])
+    # TODO: refresh EVERYONE, not just the selector!!
     cah_ping(access_token)
 
 
