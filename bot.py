@@ -2,6 +2,7 @@ import os
 import requests
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_socketio import SocketIO
 from threading import Thread
 import discord
 import asyncio
@@ -16,6 +17,7 @@ from utils import Message, SenderType
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 db = SQLAlchemy(app)
+socketio = SocketIO(app)
 
 MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
