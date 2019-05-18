@@ -58,28 +58,14 @@ onclick = function(e) {
         console.log("Clicked on a card.");
         var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
         // TEMPORARY for debugging
-        is_czar =  (e.target.parentNode.id == "hand");
+        is_czar =  (e.target.parentNode.id == "selection");
 
-        /*
-        var req = new XMLHttpRequest();
-        req.open("POST", location.href);
-        req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        */
         var url = new URL(location.href);
         var data = {
             "access_token": url.searchParams.get("access_token"),
             "card_index": cardIndex,
             "is_czar": is_czar,
         };
-        // WHY WOULD YOU EVER NEED THIS okay keep it I guess it's not going to affect how odious this code is
-        /*
-        req.send(JSON.stringify(data));
-        req.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                location.reload();
-            }
-        };
-        */
         socket.emit("cah_selection", data);
     }
 };
