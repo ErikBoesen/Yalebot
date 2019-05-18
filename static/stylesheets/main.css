@@ -133,35 +133,6 @@ footer a {
     color: inherit;
 }
 
-.cards {
-
-}
-.card {
-    vertical-align: top;
-    display: inline-block;
-    width: 2in;
-    margin-bottom: 5px;
-    padding: 20px;
-    height: 2.8in;
-    font-size: 20px;
-    border: solid 1px #111;
-    border-radius: 5px;
-    background-position: 90% 95%;
-    background-repeat: no-repeat;
-    background-size: 30px;
-}
-.card.white {
-    background-color: white;
-    color: #111;
-    background-image: url('/static/images/cah_black.png');
-    cursor: pointer;
-}
-.card.black {
-    background-color: #111;
-    color: white;
-    background-image: url('/static/images/cah_white.png');
-}
-
 .meme {
     display: inline-block;
 }

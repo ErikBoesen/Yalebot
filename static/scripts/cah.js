@@ -40,11 +40,19 @@ function buildCard(color, content) {
     return card;
 }
 
-var row = document.getElementsByClassName("cards")[0]; // TODO: there might be others
-function fillRow(cards) {
-    row.innerHTML = ""; // you ignoramus, do this right
+var selection = document.getElementById("selection"); // TODO: there might be others
+var hand = document.getElementById("hand");
+function fillSelection(cards) {
+    selection.innerHTML = ""; // you ignoramus, do this right
     for (card of cards) {
-        row.appendChild(buildCard("white", card));
+        selection.appendChild(buildCard("white", card));
+    }
+}
+function fillSelection(cards) {
+    hand.innerHTML = ""; // twice? What kind of fool
+    // TODO: DRY
+    for (card of cards) {
+        hand.appendChild(buildCard("white", card));
     }
 }
 socket.on("cah_ping", function(data) {
@@ -59,11 +67,13 @@ socket.on("cah_ping", function(data) {
 
     if (data.is_czar) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
-        fillRow(data.selection);
+        fillSelection(data.selection);
+        // THIS IS ALL TEMPORARY FOR TESTING AND WILL ALLOW A CZAR TO SUBMIT CARDS WHICH THEY SHOULDN'T BE ABLE TO
+        fillRow(data.hand);
     } else {
         // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
         // You lazy idiot.
         document.getElementById("czar").textContent = "";
-        fillRow(data.hand);
+        fillHand(data.hand);
     }
 });
