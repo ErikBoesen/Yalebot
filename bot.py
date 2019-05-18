@@ -399,6 +399,7 @@ def cah_selection(data):
                                                                                                               score=len(player.won)), group_id)
     else:
         game.player_choose(user_id, data["card_index"])
+        send(player.name + " has played a card.", group_id)
     # TODO: refresh EVERYONE, not just the selector!!
     cah_ping(access_token)
 
