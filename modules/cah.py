@@ -30,7 +30,7 @@ class Game:
     def __init__(self, group_id):
         self.group_id = group_id
         self.players = {}
-        self.selection = {}
+        self.selection = []
         self.hand_size = 8
         self.build_decks()
         self.czar_user_id = None
@@ -70,13 +70,37 @@ class Game:
         for i in range(self.hand_size):
             self.players[user_id].pick_up_white(self.white.pop())
 
+    def has_played(self, user_id):
+        """
+        Check whether a user has played a card already this round.
+        """
+        for candidate_id, card in self.selection:
+            if candidate_id == user_id:
+                return True
+        return False
+
     def player_choose(self, user_id, card_index):
-        # TODO: check if user has already picked a card
-        card = self.players[user_id].hand.pop(card_index)
-        self.selection[card_index] = card
+        if not self.has_played(user_id):
+            card = self.players[user_id].hand.pop(card_index)
+            self.selection.append((user_id, card))
+            # TODO: this is repeated from above, make a method to draw cards
+            self.players[user_id].pick_up_white(self.white.pop())
 
     def is_czar(self, user_id):
         return self.czar_user_id == user_id
+
+    def czar_choose(self, card_index):
+        # TODO: this relies on dictionaries staying in a static order, which they do NOT necessarily
+        counter = 0
+        for user_id, card in self.selection:
+            if counter == card_index:
+                break
+            counter += 1
+        self.players[user_id].score(self.current_black_card)
+        self.choose_black_card()
+        self.selection = []
+        # Return card and winner
+        return card, self.players[user_id]
 
     """
     def discard(self, user_id):

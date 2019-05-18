@@ -31,6 +31,7 @@ function fillSelection(cards) { fillRow(selection, cards); }
 function      fillHand(cards) { fillRow(hand, cards); }
 
 socket.on("cah_ping", function(data) {
+    console.log("Recieved ping from game server", data);
     // If user hasn't joined a game, warn them.
     if (!data.joined) {
         document.getElementById("warning").textContent = "You're not in a game. Type !cah join in the group first.";

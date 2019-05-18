@@ -379,7 +379,7 @@ def cah_ping(access_token):
                       "hand": player.hand,
                       "is_czar": is_czar,
                       "black_card": game.current_black_card,
-                      "selection": list(game.selection.values()) if is_czar else None,
+                      "selection": [card for _, card in game.selection] if is_czar else None,
                       "score": len(player.won)})
 
 
@@ -393,6 +393,7 @@ def cah_selection(data):
     group_id = game.group_id
     # if game.is_czar(user_id):
     if data["is_czar"]:
+        game.czar_choose(data["card_index"])
         send("The Card Czar has selected ", group_id)
     else:
         game.player_choose(user_id, data["card_index"])
@@ -401,7 +402,11 @@ def cah_selection(data):
 
 if __name__ == "__main__":
     while True:
-        print(process_message(Message({}, input("> "), name="Tester", group_id="49940116", avatar_url="https://i.groupme.com/563x563.jpeg.d055af594625412fab6b5a66dbb27693")))
+        print(process_message(Message({},
+                                      input("> "),
+                                      name="Tester",
+                                      group_id="49940116",
+                                      avatar_url="https://i.groupme.com/563x563.jpeg.d055af594625412fab6b5a66dbb27693")))
 
 
 discord_client = discord.Client()
