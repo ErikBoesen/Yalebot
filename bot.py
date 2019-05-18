@@ -364,7 +364,7 @@ def cah():
 @socketio.on("cah_connect")
 def cah_connect(data):
     access_token = data["access_token"]
-    cah_ping()
+    cah_ping(access_token)
 
 
 def cah_ping(access_token):
@@ -396,7 +396,7 @@ def cah_selection(data):
         send("The Card Czar has selected ", group_id)
     else:
         game.player_choose(user_id, data["card_index"])
-    cah_ping()
+    cah_ping(access_token)
 
 
 if __name__ == "__main__":

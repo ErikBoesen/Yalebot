@@ -3,8 +3,8 @@ var access_token = (new URL(location.href)).searchParams.get("access_token");
 
 // Initiate connection to websocket, and listen for connection
 var socket = io.connect(location.protocol + "//" + location.host);
-socket.on("connect", function(data) {
-    console.log(data.connected ? "Connected" : "Disconnected", data);
+socket.on("connect", function() {
+    console.log(socket.connected ? "Connected" : "Disconnected", socket);
     socket.emit("cah_connect", {"access_token": access_token});
 });
 
