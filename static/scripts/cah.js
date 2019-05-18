@@ -1,11 +1,8 @@
-// TODO: there is no elegance here. Only sleep deprivation and regret.
-// Please, if you have any self-respect, rewrite this entire file.
-// Then wipe its inconvenient past from the git history and never speak of it again.
-var url = new URL(location.href);
-var access_token = url.searchParams.get("access_token");
+var access_token = (new URL(location.href)).searchParams.get("access_token");
 
 var socket = io.connect(location.protocol + "//" + location.host);
-socket.on("connect", function() {
+socket.on("connect", function(data) {
+    console.log(data.connected ? "Connected" : "Disconnected", data);
     socket.emit("cah_connect", {"access_token": access_token});
 });
 
