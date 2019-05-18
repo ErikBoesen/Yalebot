@@ -7,8 +7,9 @@ REDIRECT_URL = "https://oauth.groupme.com/oauth/authorize?client_id=iEs9DrSihBnH
 
 
 class Player:
-    def __init__(self, user_id):
+    def __init__(self, user_id, name):
         self.user_id = user_id
+        self.name = name
         self.hand = []
         self.won = []
 
@@ -147,7 +148,7 @@ class CardsAgainstHumanity(Module):
             if group_id not in self.games:
                 return "No game in progress. Say !cah start to start a game."
             self.playing[user_id] = group_id
-            self.games[group_id].join(user_id)
+            self.games[group_id].join(user_id, name)
             return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
         elif command == "info":
             return str(self.games) + " " + str(self.playing) + " " + str(self)
