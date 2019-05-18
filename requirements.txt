@@ -3,7 +3,7 @@ Flask-SQLAlchemy
 Flask-SocketIO
 eventlet
 psycopg2
-gunicorn==19.6.0
+gunicorn>=19.9.0
 zalgoify>=1.0
 upsidedown
 pillow
