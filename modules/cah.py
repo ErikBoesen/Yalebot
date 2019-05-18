@@ -59,10 +59,10 @@ class Game:
         # At least make it more pythonic
         self.czar_user_id = user_id
 
-    def join(self, user_id):
+    def join(self, user_id, name):
         if user_id in self.players:
             return False
-        self.players[user_id] = Player(user_id)
+        self.players[user_id] = Player(user_id, name)
         self.deal(user_id)
         if self.czar_user_id is None:
             self.assign_czar(user_id)
