@@ -18,18 +18,17 @@ function buildCard(color, content) {
 
 var selection = document.getElementById("selection"); // TODO: there might be others
 var hand = document.getElementById("hand");
-function fillSelection(cards) {
-    selection.innerHTML = ""; // you ignoramus, do this right
+function fillRow(row, cards) {
+    row.innerHTML = ""; // you ignoramus, do this right
     for (card of cards) {
-        selection.appendChild(buildCard("white", card));
+        row.appendChild(buildCard("white", card));
     }
 }
 function fillSelection(cards) {
-    hand.innerHTML = ""; // twice? What kind of fool
-    // TODO: DRY
-    for (card of cards) {
-        hand.appendChild(buildCard("white", card));
-    }
+    fillRow(selection, cards);
+}
+function fillHand(cards) {
+    fillRow(hand, cards);
 }
 socket.on("cah_ping", function(data) {
     // Should we use bracket notation? Should we use camelCase because this is JavaScript? Should we delete this entire bloated bot and git commit seppuku? Maybe
