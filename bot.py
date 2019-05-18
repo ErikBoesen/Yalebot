@@ -359,17 +359,6 @@ def delete_bot():
 def cah():
     access_token = request.args["access_token"]
     return render_template("cah.html")
-    """
-    player = game.players[user_id]
-    is_czar = game.is_czar(user_id)
-
-    cards = list(game.selection.values()) if is_czar else player.hand
-    return render_template("cah.html",
-                           is_czar=is_czar,
-                           black_card=game.current_black_card,
-                           cards=cards,
-                           score=len(player.won))
-                           """
 
 
 @socketio.on("cah_connect")
@@ -378,6 +367,7 @@ def cah_connect(data):
     user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
+    player = game.players[user_id]
     if game is None:
         emit("cah_ping", {"joined": False})
     is_czar = game.is_czar(user_id)
