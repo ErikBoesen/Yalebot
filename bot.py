@@ -2,7 +2,7 @@ import os
 import requests
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, send, emit
 import eventlet
 from threading import Thread
 import discord
@@ -384,6 +384,7 @@ def cah_connect(data):
     emit("cah_ping", {"joined": True,
                       "hand": player.hand,
                       "is_czar": is_czar,
+                      "black_card": game.current_black_card,
                       "selection": list(game.selection.values()) if is_czar else None,
                       "score": len(player.won)})
 
