@@ -3,6 +3,7 @@ import requests
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
+import eventlet
 from threading import Thread
 import discord
 import asyncio
@@ -357,11 +358,8 @@ def delete_bot():
 @app.route("/cah", methods=["GET"])
 def cah():
     access_token = request.args["access_token"]
-    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-    user_id = user["user_id"]
-    game = commands["cah"].get_user_game(user_id)
-    if game is None:
-        return "You're not in a game yet, say !cah join"
+    return render_template("cah.html")
+    """
     player = game.players[user_id]
     is_czar = game.is_czar(user_id)
 
@@ -371,6 +369,23 @@ def cah():
                            black_card=game.current_black_card,
                            cards=cards,
                            score=len(player.won))
+                           """
+
+
+@socketio.on("cah_connect")
+def cah_connect(data):
+    access_token = data["access_token"]
+    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    user_id = user["user_id"]
+    game = commands["cah"].get_user_game(user_id)
+    if game is None:
+        emit("cah_ping", {"joined": False})
+    is_czar = game.is_czar(user_id)
+    emit("cah_ping", {"joined": True,
+                      "hand": player.hand,
+                      "is_czar": is_czar,
+                      "selection": list(game.selection.values()) if is_czar else None,
+                      "score": len(player.won)})
 
 
 @app.route("/cah", methods=["POST"])

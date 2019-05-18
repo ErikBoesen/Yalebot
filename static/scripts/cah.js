@@ -1,3 +1,4 @@
+/*
 onclick = function(e) {
     console.log("Clicked somewhere.");
     if (e.target.classList.contains("card") && e.target.classList.contains("white")) {
@@ -20,3 +21,11 @@ onclick = function(e) {
         };
     }
 };
+*/
+var url = new URL(location.href);
+var access_token = url.searchParams.get("access_token");
+
+var socket = io.connect(location.protocol + "//" + location.host);
+socket.on("connect", function() {
+    socket.emit("cah_connect", {"access_token": access_token});
+});
