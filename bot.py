@@ -17,7 +17,7 @@ from utils import Message, SenderType
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-app.config["SQLALCHEMY_POOL_SIZE"] = 30
+app.config["SQLALCHEMY_POOL_SIZE"] = 15
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
@@ -237,6 +237,10 @@ def groupme_webhook():
     return "ok", 200
 
 
+def refresh_groupme_bots():
+    pass
+
+
 def send(message, group_id):
     """
     Reply in chat.
@@ -315,7 +319,7 @@ def manager():
         group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
 
         # Store in database
-        registrant = Bot(group_id, group["name"], me["name"], result["bot_id"], me["user_id"], me["name"], access_token)
+        registrant = Bot(group_id, group["name"], result["bot_id"], me["user_id"], me["name"], access_token)
         db.session.add(registrant)
         db.session.commit()
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
