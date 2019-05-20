@@ -8,6 +8,7 @@ class Groups(Module):
         "Yale Prom": "47397377/6SQ6Z9",
         "Robotics Yalies": "48299309/LfsRP2eP",
         "Directed Studies": "49954511/RJGSTgEU",
+        "School of Engineering and Applied Sciences": "50588247/lehHIPNS",
         "Black Yale 2023": "49447961/dUZwOQEp",
         "Korean Students": "50571775/dZYpXhb8",
         "First Generation students": "49418581/byuFtN4q",
