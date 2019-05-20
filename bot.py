@@ -17,6 +17,7 @@ from utils import Message, SenderType
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+app.config["SQLALCHEMY_POOL_SIZE"] = 30
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
