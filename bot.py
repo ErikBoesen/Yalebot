@@ -213,7 +213,7 @@ def process_message(message):
         if system_responses["welcome"].RE.match(message.text):
             check_names = system_responses["welcome"].get_names_groupme(message.text)
             for check_name in check_names:
-                responses.append(commands["vet"].check_user(check_name))
+                responses.append(commands["verify"].check_user(check_name))
     return responses
 
 
