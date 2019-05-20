@@ -210,12 +210,10 @@ def process_message(message):
         for option in system_responses:
             if system_responses[option].RE.match(message.text):
                 responses.append(system_responses[option].response(message.text, message))
-        """
         if system_responses["welcome"].RE.match(text):
-            check_names = system_responses["welcome"].get_names(text)
+            check_names = system_responses["welcome"].get_names_groupme(text)
             for check_name in check_names:
-                send(commands["vet"].check_user(check_name), group_id)
-        """
+                responses.append(commands["vet"].check_user(check_name))
     return responses
 
 
