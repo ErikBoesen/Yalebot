@@ -28,10 +28,12 @@ class Damn(ImageModule):
         draw_words.text((0, 0), query, font=font, fill=(255, 0, 0))
         # We need to trim off the top of the image because the font has padding
         words_width, words_height = words.size
-        words = words.crop((0, int(font_size * .20), words_width, words_height))
+        words = words.crop((0, int(font_size * .24), words_width, words_height))
         # Resize to fit width of background
         words = self.resize(words, background_width)
 
         # Superimpose text
         background.paste(words, (0, 0), words)
-        background.show()
+
+        # Send finished image
+        return ("", self.upload_pil_image(background))
