@@ -276,6 +276,7 @@ def send(message, group_id):
         for item in message:
             send(item, group_id)
         return
+    print(bot_ids)
     data = {
         "bot_id": bot_ids[group_id],
     }
