@@ -3,12 +3,15 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class Damn(ImageModule):
-    DESCRIPTION = "Mimic the DAMN. album cover. Send an image and/or specify a caption."
-    ARGC = 0
+    DESCRIPTION = "Mimic the DAMN. album cover. Send an image and/or specify a caption"
 
     def transform(self, text):
         if not text:
             return "DAMN."
+        #
+        if "@" in text[:-1]:
+            # Get the name after an @
+            text = text.split("@")[1].split()[0]
         return text.strip(".").upper() + "."
 
     def response(self, query, message):
@@ -28,7 +31,7 @@ class Damn(ImageModule):
         draw_words.text((0, 0), query, font=font, fill=(255, 0, 0))
         # We need to trim off the top of the image because the font has padding
         words_width, words_height = words.size
-        words = words.crop((0, int(font_size * .24), words_width, words_height))
+        words = words.crop((0, int(font_size * .23), words_width, words_height))
         # Resize to fit width of background
         words = self.resize(words, background_width)
 
