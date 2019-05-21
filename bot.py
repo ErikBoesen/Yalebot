@@ -235,36 +235,6 @@ def groupme_webhook():
     return "ok", 200
 
 
-class Bot(db.Model):
-    __tablename__ = "bots"
-    group_id = db.Column(db.String(16), unique=True, primary_key=True)
-    group_name = db.Column(db.String(50))
-    bot_id = db.Column(db.String(26), unique=True)
-    owner_id = db.Column(db.String(16))
-    owner_name = db.Column(db.String(64))
-    access_token = db.Column(db.String(32))
-
-    def __init__(self, group_id, group_name, bot_id, owner_id, owner_name, access_token):
-        self.group_id = group_id
-        self.group_name = group_name
-        self.bot_id = bot_id
-        self.owner_id = owner_id
-        self.owner_name = owner_name
-        self.access_token = access_token
-
-
-bot_ids = {}
-
-
-def refresh_groupme_bots():
-    bot_ids = {}
-    for bot in Bot.query.all():
-        bot_ids[bot.group_id] = bot.bot_id
-
-
-refresh_groupme_bots()
-
-
 def send(message, group_id):
     """
     Reply in chat.
@@ -276,9 +246,9 @@ def send(message, group_id):
         for item in message:
             send(item, group_id)
         return
-    print(bot_ids)
+    this_bot = Bot.query.get(group_id)
     data = {
-        "bot_id": bot_ids[group_id],
+        "bot_id": this_bot.bot_id,
     }
     image = None
     if isinstance(message, tuple):
@@ -346,13 +316,30 @@ def manager():
         registrant = Bot(group_id, group["name"], result["bot_id"], me["user_id"], me["name"], access_token)
         db.session.add(registrant)
         db.session.commit()
-        refresh_bot_ids()
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
     bots = requests.get(f"https://api.groupme.com/v3/bots?token={access_token}").json()["response"]
     if os.environ.get("DATABASE_URL") is not None:
         groups = [group for group in groups if not Bot.query.get(group["group_id"])]
         bots = [bot for bot in bots if Bot.query.get(bot["group_id"])]
     return render_template("manager.html", access_token=access_token, groups=groups, bots=bots)
+
+
+class Bot(db.Model):
+    __tablename__ = "bots"
+    group_id = db.Column(db.String(16), unique=True, primary_key=True)
+    group_name = db.Column(db.String(50))
+    bot_id = db.Column(db.String(26), unique=True)
+    owner_id = db.Column(db.String(16))
+    owner_name = db.Column(db.String(64))
+    access_token = db.Column(db.String(32))
+
+    def __init__(self, group_id, group_name, bot_id, owner_id, owner_name, access_token):
+        self.group_id = group_id
+        self.group_name = group_name
+        self.bot_id = bot_id
+        self.owner_id = owner_id
+        self.owner_name = owner_name
+        self.access_token = access_token
 
 
 @app.route("/delete", methods=["POST"])
@@ -364,7 +351,6 @@ def delete_bot():
     if req.ok:
         db.session.delete(bot)
         db.session.commit()
-        refresh_bot_ids()
         return "ok", 200
 
 
