@@ -235,8 +235,16 @@ def groupme_webhook():
     return "ok", 200
 
 
+bot_ids = {}
+
+
 def refresh_groupme_bots():
-    pass
+    bot_ids = {}
+    for bot in Bot.query.all():
+        bot_ids[bot.group_id] = bot.bot_id
+
+
+refresh_groupme_bots()
 
 
 def send(message, group_id):
@@ -250,9 +258,8 @@ def send(message, group_id):
         for item in message:
             send(item, group_id)
         return
-    this_bot = Bot.query.get(group_id)
     data = {
-        "bot_id": this_bot.bot_id,
+        "bot_id": bot_ids[group_id],
     }
     image = None
     if isinstance(message, tuple):
@@ -320,6 +327,7 @@ def manager():
         registrant = Bot(group_id, group["name"], result["bot_id"], me["user_id"], me["name"], access_token)
         db.session.add(registrant)
         db.session.commit()
+        refresh_bot_ids()
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
     bots = requests.get(f"https://api.groupme.com/v3/bots?token={access_token}").json()["response"]
     if os.environ.get("DATABASE_URL") is not None:
@@ -355,6 +363,7 @@ def delete_bot():
     if req.ok:
         db.session.delete(bot)
         db.session.commit()
+        refresh_bot_ids()
         return "ok", 200
 
 
