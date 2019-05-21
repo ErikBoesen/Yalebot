@@ -5,11 +5,11 @@ CUP = r""">
       )      )
     )     (      )
 _(___(____)____(___(_
-\ {str0} /__
- \ {str1} /   |
-  \ {str2} /____|
-   \ {str3} /
-    \ {str4} /
+\ {} /__
+ \ {} /   |
+  \ {} /____|
+   \ {} /
+    \ {} /
      \_________/"""
 
 
@@ -31,5 +31,5 @@ class Tea(Module):
             lines.append(("{0: <" + str(self.width(row)) + "}").format(query[offset:offset + self.width(row)]))
             offset += self.width(row)
         # TODO: Format this list more efficiently
-        tea = CUP.format(str0=lines[0], str1=lines[1], str2=lines[2], str3=lines[3], str4=lines[4]).replace(" ", " ")
+        tea = CUP.format(*lines).replace(" ", " ")
         return tea
