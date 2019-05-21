@@ -336,7 +336,7 @@ def manager():
     if bots:
         for bot in bots:
             # TODO remove this abomination
-            group_id = bot.group_id
+            group_id = bot["group_id"]
             this_bot = Bot.query.get(group_id)
             me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
             result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
