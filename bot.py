@@ -184,16 +184,23 @@ def process_message(message):
                     content = args[0]
                 response = Response.query.get(new_command)
                 if response is None:
-                    response = Response(new_command, content, message.image_url)
-                    db.session.add(response)
-                    db.session.commit()
-                    responses.append(f"Command {new_command} registered successfully.")
-                elif not content and not message.image_url:
+                    if not content and not message.image_url:
+                        responses.append("Please provide content or an image.")
+                    else:
+                        response = Response(new_command, content, message.image_url)
+                        db.session.add(response)
+                        db.session.commit()
+                        responses.append(f"Command {new_command} registered successfully.")
+                else:
+                    responses.append(f"Command {new_command} already registered!")
+            elif command == "unregister":
+                response = Response.query.get(query)
+                if response is None:
+                    responses.append(f"No registered command named {query}.")
+                else:
                     db.session.delete(response)
                     db.session.commit()
                     responses.append(f"Command {new_command} unregistered.")
-                else:
-                    responses.append(f"Command {new_command} already registered!")
             else:
                 response = Response.query.get(command)
                 if response is not None:
