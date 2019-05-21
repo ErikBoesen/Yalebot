@@ -235,6 +235,24 @@ def groupme_webhook():
     return "ok", 200
 
 
+class Bot(db.Model):
+    __tablename__ = "bots"
+    group_id = db.Column(db.String(16), unique=True, primary_key=True)
+    group_name = db.Column(db.String(50))
+    bot_id = db.Column(db.String(26), unique=True)
+    owner_id = db.Column(db.String(16))
+    owner_name = db.Column(db.String(64))
+    access_token = db.Column(db.String(32))
+
+    def __init__(self, group_id, group_name, bot_id, owner_id, owner_name, access_token):
+        self.group_id = group_id
+        self.group_name = group_name
+        self.bot_id = bot_id
+        self.owner_id = owner_id
+        self.owner_name = owner_name
+        self.access_token = access_token
+
+
 bot_ids = {}
 
 
@@ -334,24 +352,6 @@ def manager():
         groups = [group for group in groups if not Bot.query.get(group["group_id"])]
         bots = [bot for bot in bots if Bot.query.get(bot["group_id"])]
     return render_template("manager.html", access_token=access_token, groups=groups, bots=bots)
-
-
-class Bot(db.Model):
-    __tablename__ = "bots"
-    group_id = db.Column(db.String(16), unique=True, primary_key=True)
-    group_name = db.Column(db.String(50))
-    bot_id = db.Column(db.String(26), unique=True)
-    owner_id = db.Column(db.String(16))
-    owner_name = db.Column(db.String(64))
-    access_token = db.Column(db.String(32))
-
-    def __init__(self, group_id, group_name, bot_id, owner_id, owner_name, access_token):
-        self.group_id = group_id
-        self.group_name = group_name
-        self.bot_id = bot_id
-        self.owner_id = owner_id
-        self.owner_name = owner_name
-        self.access_token = access_token
 
 
 @app.route("/delete", methods=["POST"])
