@@ -200,7 +200,7 @@ def process_message(message):
                 else:
                     db.session.delete(response)
                     db.session.commit()
-                    responses.append(f"Command {new_command} unregistered.")
+                    responses.append(f"Command {query} unregistered.")
             else:
                 response = Response.query.get(command)
                 if response is not None:
