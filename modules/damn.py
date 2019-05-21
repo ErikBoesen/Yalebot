@@ -8,7 +8,7 @@ class Damn(ImageModule):
     def transform(self, text):
         if not text:
             return "DAMN."
-        #
+        # Use mention if there's something in it
         if "@" in text[:-1]:
             # Get the name after an @
             text = text.split("@")[1].split()[0]

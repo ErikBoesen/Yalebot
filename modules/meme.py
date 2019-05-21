@@ -289,7 +289,7 @@ class Meme(ImageModule):
             lines_count = len(lines)
             for line_index, line in enumerate(lines):
                 x, y = setting.get("position")
-                font = ImageFont.truetype("resources/Lato-Regular.ttf", setting.get("font_size", settings[0].get("font_size", self.FONT_SIZE)))
+                font = ImageFont.truetype("resources/fonts/lato.ttf", setting.get("font_size", settings[0].get("font_size", self.FONT_SIZE)))
                 line_width, line_height = canvas.textsize(line, font=font)
                 if setting.get("center", settings[0].get("center", True)):
                     x -= line_width / 2
