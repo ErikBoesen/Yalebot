@@ -26,8 +26,11 @@ class Damn(ImageModule):
         words = Image.new("RGBA", draw_background.textsize(query, font=font))
         draw_words = ImageDraw.Draw(words)
         draw_words.text((0, 0), query, font=font, fill=(255, 0, 0))
+        # We need to trim off the top of the image because the font has padding
+        words_width, words_height = words.size
+        words = words.crop((0, int(font_size * .25), words_width, words_height))
         words = self.resize(words, background_width)
 
-        # Superimpose text, shifting upward to account for padding at top of font
-        background.paste(words, (0, int(font_size * .75)), words)
+        # Superimpose text
+        background.paste(words, (0, 0), words)
         background.show()
