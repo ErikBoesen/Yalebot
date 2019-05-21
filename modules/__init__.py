@@ -57,3 +57,4 @@ from .yalenews import YaleNews
 from .circle import Circle
 from .jpeg import JPEG
 from .deepfry import DeepFry
+from .anna import Anna

@@ -113,6 +113,7 @@ commands = {
     "circle": modules.Circle(),
     "jpeg": modules.JPEG(),
     "deepfry": modules.DeepFry(),
+    "anna": modules.Anna(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
@@ -247,6 +248,7 @@ def send(message, group_id):
             send(item, group_id)
         return
     this_bot = Bot.query.get(group_id)
+    # Cliose session so it won't remain locked on database
     db.session.close()
     data = {
         "bot_id": this_bot.bot_id,
