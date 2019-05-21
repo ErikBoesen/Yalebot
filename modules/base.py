@@ -62,7 +62,7 @@ class ImageModule(Module):
             if member["user_id"] == user_id:
                 return member["image_url"]
 
-    def get_source_url(self, message):
+    def get_source_url(self, message, include_avatar=True):
         """
         Given complete image data, extract the URL of the best image to use for a command.
         First choose attached image, then use mentioned person's avatar, then sender's avatar.
@@ -75,4 +75,5 @@ class ImageModule(Module):
         elif len(mention_attachments) > 0:
             return self.get_portrait(mention_attachments[0]["user_ids"][0], message.group_id)
         # If no image was sent, use sender's avatar
-        return message.avatar_url
+        if include_avatar:
+            return message.avatar_url
