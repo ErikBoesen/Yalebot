@@ -247,6 +247,7 @@ def send(message, group_id):
             send(item, group_id)
         return
     this_bot = Bot.query.get(group_id)
+    db.session.close()
     data = {
         "bot_id": this_bot.bot_id,
     }
