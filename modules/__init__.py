@@ -58,3 +58,4 @@ from .circle import Circle
 from .jpeg import JPEG
 from .deepfry import DeepFry
 from .anna import Anna
+from .damn import Damn

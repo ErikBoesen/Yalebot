@@ -114,6 +114,7 @@ commands = {
     "jpeg": modules.JPEG(),
     "deepfry": modules.DeepFry(),
     "anna": modules.Anna(),
+    "damn": modules.Damn(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
@@ -417,7 +418,7 @@ def cah_selection(data):
 
 if __name__ == "__main__":
     while True:
-        print(process_message(Message({},
+        print(process_message(Message({"attachments": []},
                                       input("> "),
                                       name="Tester",
                                       group_id="49940116",
