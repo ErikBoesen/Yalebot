@@ -3,6 +3,7 @@ from .base import Module
 
 class Tiya(Module):
     DESCRIPTION = "DAMN"
+    ARGC = 1
 
     def indamnify(self, word):
         return word.upper() + "."
