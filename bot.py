@@ -339,8 +339,6 @@ def manager():
             group_id = bot["group_id"]
             this_bot = Bot.query.get(group_id)
             me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-            result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
-                                   json={"bot": bot}).json()["response"]["bot"]
             group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
             this_bot.group_name = group["name"]
             this_bot.access_token = access_token
