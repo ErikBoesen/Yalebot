@@ -9,7 +9,7 @@ class Damn(ImageModule):
     def transform(self, text):
         if not text:
             return "DAMN."
-        return text.strip(".").upper()
+        return text.strip(".").upper() + "."
 
     def response(self, query, message):
         query = self.transform(query)
@@ -21,14 +21,15 @@ class Damn(ImageModule):
         background_width, background_height = background.size
         draw_background = ImageDraw.Draw(background)
 
-        font_size = 100
+        font_size = background_width
         font = ImageFont.truetype("resources/fonts/times.ttf", font_size)
         words = Image.new("RGBA", draw_background.textsize(query, font=font))
         draw_words = ImageDraw.Draw(words)
         draw_words.text((0, 0), query, font=font, fill=(255, 0, 0))
         # We need to trim off the top of the image because the font has padding
         words_width, words_height = words.size
-        words = words.crop((0, int(font_size * .25), words_width, words_height))
+        words = words.crop((0, int(font_size * .20), words_width, words_height))
+        # Resize to fit width of background
         words = self.resize(words, background_width)
 
         # Superimpose text
