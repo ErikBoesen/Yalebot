@@ -39,4 +39,4 @@ class Damn(ImageModule):
         background.paste(words, (0, 0), words)
 
         # Send finished image
-        return ("", self.upload_pil_image(background))
+        return "", self.upload_pil_image(background)

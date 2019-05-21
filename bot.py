@@ -332,6 +332,20 @@ def manager():
     if os.environ.get("DATABASE_URL") is not None:
         groups = [group for group in groups if not Bot.query.get(group["group_id"])]
         bots = [bot for bot in bots if Bot.query.get(bot["group_id"])]
+    # TEMPORARY; fill in information that used to not be collected
+    if bots:
+        for bot in bots:
+            # TODO remove this abomination
+            group_id = bot.group_id
+            this_bot = Bot.query.get(group_id)
+            me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+            result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
+                                   json={"bot": bot}).json()["response"]["bot"]
+            group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
+            this_bot.group_name = group["name"]
+            this_bot.access_token = access_token
+            this_bot.owner_name = me["name"]
+        db.session.commit()
     return render_template("manager.html", access_token=access_token, groups=groups, bots=bots)
 
 
