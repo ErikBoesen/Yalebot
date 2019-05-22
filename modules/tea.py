@@ -6,11 +6,11 @@ CUP = r""">
       )      )
     )     (      )
 _(___(____)____(___(_
-\ {}/__
- \ {}/   |
-  \ {}/____|
-   \ {}/
-    \ {}/
+\ {} /__
+ \ {} /   |
+  \ {} /____|
+   \ {} /
+    \ {} /
      \_________/"""
 
 
@@ -23,7 +23,7 @@ class Tea(Module):
         """
         Given the number of the row, calculate how long that row should be.
         """
-        return 18 - 2 * row
+        return 17 - 2 * row
 
     def response(self, query, message):
         num_rows = 5
