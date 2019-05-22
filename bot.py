@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, send, emit
 import eventlet
@@ -382,6 +382,11 @@ def delete_bot():
 def cah():
     access_token = request.args["access_token"]
     return render_template("cah.html")
+
+
+@app.route("/cah/join")
+def cah_redirect():
+    return redirect("https://oauth.groupme.com/oauth/authorize?client_id=iEs9DrSihBnH0JbOGZSWK8SdsqRt0pUn8EpulL8Fia3rf6QM", code=302)
 
 
 @socketio.on("cah_connect")

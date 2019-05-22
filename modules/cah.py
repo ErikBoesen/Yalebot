@@ -3,7 +3,7 @@ import json
 import random
 
 
-REDIRECT_URL = "https://oauth.groupme.com/oauth/authorize?client_id=iEs9DrSihBnH0JbOGZSWK8SdsqRt0pUn8EpulL8Fia3rf6QM"
+REDIRECT_URL =
 
 
 class Player:
@@ -149,7 +149,7 @@ class CardsAgainstHumanity(Module):
                 return "No game in progress. Say !cah start to start a game."
             self.playing[user_id] = group_id
             self.games[group_id].join(user_id, name)
-            return f"{name} has joined the game! Please go to {REDIRECT_URL} to play."
+            return f"{name} has joined the game! Please go to https://yalebot.herokuapp.com/cah/join to play."
         elif command == "info":
             return str(self.games) + " " + str(self.playing) + " " + str(self)
         """

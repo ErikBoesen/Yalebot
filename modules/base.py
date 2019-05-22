@@ -20,7 +20,8 @@ class Module:
     def lines(self, query):
         return [line for line in query.split("\n") if line != ""]
 
-    def safe_spaces(self, text):
+    @staticmethod
+    def safe_spaces(text):
         """
         Replace spaces with Unicode character "Three-Per-Em Space" which GroupMe won't combine on mobile.
         Useful for sending ASCII art.
