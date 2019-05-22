@@ -27,8 +27,13 @@ function fillRow(row, cards) {
         row.appendChild(buildCard("white", card));
     }
 }
-function fillSelection(cards) { fillRow(selection, cards); }
-function      fillHand(cards) { fillRow(hand, cards); }
+function fillSelection(cards, length) {
+    if (!cards) cards = Array(length).fill("");
+    fillRow(selection, cards);
+}
+function fillHand(cards) {
+    fillRow(hand, cards);
+}
 
 socket.on("cah_ping", function(data) {
     console.log("Recieved ping from game server", data);
@@ -43,7 +48,6 @@ socket.on("cah_ping", function(data) {
 
     if (data.is_czar) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
-        fillSelection(data.selection);
         // THIS IS ALL TEMPORARY FOR TESTING AND WILL ALLOW A CZAR TO SUBMIT CARDS WHICH THEY SHOULDN'T BE ABLE TO
         fillHand(data.hand);
     } else {
@@ -51,6 +55,7 @@ socket.on("cah_ping", function(data) {
         document.getElementById("czar").textContent = "";
         fillHand(data.hand);
     }
+    fillSelection(data.selection, data.selection_length);
 });
 
 onclick = function(e) {

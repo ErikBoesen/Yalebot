@@ -402,13 +402,16 @@ def cah_ping(access_token):
     player = game.players[user_id]
     if game is None:
         emit("cah_ping", {"joined": False})
+        return
     is_czar = game.is_czar(user_id)
+    selection = [card for _, card in game.selection]
     emit("cah_ping", {"joined": True,
                       "hand": player.hand,
                       "is_czar": is_czar,
                       "black_card": game.current_black_card,
-                      "selection": [card for _, card in game.selection] if is_czar else None,
-                      "score": len(player.won)})
+                      "selection_length": len(selection),
+                      "selection": selection if is_czar else None,
+                      "score": len(player.won)}, broadcast=True)
 
 
 @socketio.on("cah_selection")
@@ -428,7 +431,7 @@ def cah_selection(data):
         send("The next black card is \"{card}\" and {name} is now Czar.".format(card=game.current_black_card,
                                                                                 name=player.name), group_id)
     else:
-        game.player_choose(user_id, data["card_index"])
+        remaining_players = game.player_choose(user_id, data["card_index"])
         send(player.name + " has played a card.", group_id)
     # TODO: refresh EVERYONE, not just the selector!!
     cah_ping(access_token)
