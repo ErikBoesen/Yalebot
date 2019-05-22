@@ -17,6 +17,9 @@ class Module:
     def wave(self):
         return "👋" + random.choice("🏻🏼🏽🏾🏿")
 
+    def lines(self, query):
+        return [line for line in query.split("\n") if line != ""]
+
 
 class ImageModule(Module):
     def upload_image(self, data) -> str:

@@ -267,7 +267,7 @@ class Meme(ImageModule):
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
 
     def response(self, query, message):
-        captions = query.split("\n")
+        captions = self.lines(query)
 
         template_name = captions.pop(0).strip().lower()
         if self.templates.get(template_name) is None:
