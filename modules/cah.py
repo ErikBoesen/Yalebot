@@ -3,9 +3,6 @@ import json
 import random
 
 
-REDIRECT_URL =
-
-
 class Player:
     def __init__(self, user_id, name):
         self.user_id = user_id
