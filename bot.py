@@ -115,6 +115,7 @@ commands = {
     "deepfry": modules.DeepFry(),
     "anna": modules.Anna(),
     "damn": modules.Damn(),
+    "handshake": modules.Handshake(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

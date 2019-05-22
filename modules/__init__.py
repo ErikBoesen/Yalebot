@@ -59,3 +59,4 @@ from .jpeg import JPEG
 from .deepfry import DeepFry
 from .anna import Anna
 from .damn import Damn
+from .handshake import Handshake
