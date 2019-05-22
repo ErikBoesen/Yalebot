@@ -23,7 +23,12 @@ class Welcome(System):
     RE = re.compile(r"(.+) added (.+) to the group\.|(.+) has (re)?joined the group")
 
     def response(self, query, message):
-        names = ", ".join([name.split(" ", 1)[0] for name in self.get_names_groupme(query)])
+        names = [name.split(" ", 1)[0] for name in self.get_names_groupme(query)]
+        # Join names list together
+        if len(names) > 1:
+            last = names.pop()
+            names[-1] += ("," if len(names) > 2 else "") + " and " + last
+        names = ", ".join(names)
         return self.wave() + " Welcome " + names + "! We're happy to have you. I'm Yalebot, a GroupMe bot for Yale University. Type !help to see what I can do."
 
 
@@ -36,7 +41,7 @@ class Mourn(System):
 
 
 class Introduce(System):
-    RE = re.compile(r"(.+) added the Yalebot bot.")
+    RE = re.compile(r"(.+) added the Yalebot.* bot.")
 
     def response(self, query, message):
         return self.wave() + " Hi! I'm Yalebot. Thanks for adding me. Type !help to see what I can do."
