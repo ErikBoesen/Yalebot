@@ -35,7 +35,7 @@ class ImageModule(Module):
 
     def upload_pil_image(self, image: Image):
         output = BytesIO()
-        image.save(output)
+        image.save(output, format="JPEG", mode="RGB")
         return self.upload_image(output.getvalue())
 
     def pil_from_url(self, url):
