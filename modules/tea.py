@@ -35,6 +35,5 @@ class Tea(Module):
             line = wrapped[0] if len(wrapped) > 0 else ""
             lines.append(line.ljust(width))
             query = " ".join(wrapped[1:])
-        lines += [""] * (num_rows - len(lines))
         tea = CUP.format(*lines).replace(" ", " ")
         return tea
