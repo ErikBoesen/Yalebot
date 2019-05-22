@@ -20,6 +20,16 @@ class Module:
     def lines(self, query):
         return [line for line in query.split("\n") if line != ""]
 
+    def safe_space(self, text):
+        """
+        Replace spaces with Unicode character "Three-Per-Em Space" which GroupMe won't combine on mobile.
+        Useful for sending ASCII art.
+
+        :param text: text in which to replace spaces.
+        :return: text that's safe to send.
+        """
+        return text.replace(" ", "\u2004")
+
 
 class ImageModule(Module):
     def upload_image(self, data) -> str:
