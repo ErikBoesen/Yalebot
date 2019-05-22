@@ -156,7 +156,7 @@ def process_message(message):
             # If not, query appropriate module for a response
             elif command in commands:
                 # Make sure there are enough arguments
-                if len(list(filter(None, query.split("\n")))) < commands[command].ARGC:
+                if len(modules.Module.lines(None, instructions)) < commands[command].ARGC:
                     responses.append(commands[command].ARGUMENT_WARNING)
                 else:
                     response = commands[command].response(query, message)
