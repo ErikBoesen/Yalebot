@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 
 class Anna(Module):
-    DESCRIPTION = "Need to hide some unpleasant content from the chat?"
+    DESCRIPTION = "Need to hide some unpleasant content from the chat? Do so while appreciating Russian realist literature"
 
     def response(self, query, message):
         bs = BeautifulSoup(requests.get("http://www.gutenberg.org/files/1399/1399-h/1399-h.htm").text, "html.parser")
