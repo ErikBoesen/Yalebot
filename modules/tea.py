@@ -1,15 +1,16 @@
 from .base import Module
+from textwrap import wrap
 
 CUP = r""">
           (
       )      )
     )     (      )
 _(___(____)____(___(_
-\ {} /__
- \ {} /   |
-  \ {} /____|
-   \ {} /
-    \ {} /
+\ {}/__
+ \ {}/   |
+  \ {}/____|
+   \ {}/
+    \ {}/
      \_________/"""
 
 
@@ -22,14 +23,18 @@ class Tea(Module):
         """
         Given the number of the row, calculate how long that row should be.
         """
-        return 17 - 2 * row
+        return 18 - 2 * row
 
     def response(self, query, message):
+        num_rows = 5
         lines = []
         offset = 0
-        for row in range(0, 5):
-            lines.append(("{0: <" + str(self.width(row)) + "}").format(query[offset:offset + self.width(row)]))
-            offset += self.width(row)
-        # TODO: Format this list more efficiently
+        for row in range(0, num_rows):
+            width = self.width(row)
+            wrapped = wrap(query, width)
+            line = wrapped[0] if len(wrapped) > 0 else ""
+            lines.append(line.ljust(width))
+            query = " ".join(wrapped[1:])
+        lines += [""] * (num_rows - len(lines))
         tea = CUP.format(*lines).replace(" ", " ")
         return tea
