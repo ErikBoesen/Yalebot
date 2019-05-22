@@ -81,11 +81,13 @@ class Game:
         return False
 
     def player_choose(self, user_id, card_index):
-        if not self.has_played(user_id):
-            card = self.players[user_id].hand.pop(card_index)
-            self.selection.append((user_id, card))
-            # TODO: this is repeated from above, make a method to draw cards
-            self.players[user_id].pick_up_white(self.white.pop())
+        if self.has_played(user_id):
+            return False
+        card = self.players[user_id].hand.pop(card_index)
+        self.selection.append((user_id, card))
+        # TODO: this is repeated from above, make a method to draw cards
+        self.players[user_id].pick_up_white(self.white.pop())
+        return len(self.players) - len(self.selection)
 
     def is_czar(self, user_id):
         return self.czar_user_id == user_id
