@@ -19,9 +19,9 @@ class Handshake(Module):
         left = wrap(left, SIDE_WIDTH)
         right = wrap(right, SIDE_WIDTH)
         middle = wrap(middle, MIDDLE_WIDTH)
-        left_length = max_length(left)
-        right_length = max_length(right)
-        middle_length = max_length(middle)
+        left_length = self.max_length(left)
+        right_length = self.max_length(right)
+        middle_length = self.max_length(middle)
         if len(left) > len(right):
             right = [""] * (len(left) - len(right)) + right
         elif len(right) > len(left):
