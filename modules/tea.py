@@ -35,5 +35,5 @@ class Tea(Module):
             line = wrapped[0] if len(wrapped) > 0 else ""
             lines.append(line.ljust(width))
             query = " ".join(wrapped[1:])
-        tea = self.safe_space(CUP.format(*lines))
+        tea = self.safe_spaces(CUP.format(*lines))
         return tea

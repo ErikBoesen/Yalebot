@@ -6,13 +6,13 @@ class Handshake(Module):
     DESCRIPTION = "Generate Twitter handshake format messages"
     ARGC = 3
 
-    def max_length(lines):
+    def max_length(self, lines):
         length = 0
         for line in lines:
             length = max(length, len(line))
         return length
 
-    def handshake(left, right, middle):
+    def handshake(self, left, right, middle):
         SIDE_WIDTH = 20
         MIDDLE_WIDTH = SIDE_WIDTH
         EMOJI = "🤝"
@@ -40,4 +40,4 @@ class Handshake(Module):
 
         # Split list into variable names
         left, right, middle = phrases
-        return self.safe_space(self.handshake(left, right, middle))
+        return self.safe_spaces(self.handshake(left, right, middle))
