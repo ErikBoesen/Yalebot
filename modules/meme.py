@@ -262,6 +262,12 @@ class Meme(ImageModule):
 
                 {"position": (18, 332)},
             ),
+            "detectivepikachu": (
+                {"center_vertical": True},
+
+                {"position": (621, 191)},
+                {"position": (621, 615)},
+            ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
