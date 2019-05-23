@@ -10,6 +10,12 @@ h1 {
         margin-left: 0;
     }
 }
+#warning:empty {
+    display: none;
+}
+.cards#selection {
+    display: inline-block;
+}
 .cards {
 
 }
@@ -42,9 +48,9 @@ h1 {
     background-position: center center;
     background-size: 100%;
 }
-.card.disabled {
+.cards.disabled {
     opacity: 0.5;
 }
-.card.disabled .card {
+.cards.disabled .card {
     cursor: none;
 }
