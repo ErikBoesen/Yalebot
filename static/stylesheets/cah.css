@@ -38,3 +38,7 @@ h1 {
     color: white;
     background-image: url('/static/images/cah_white.png');
 }
+.card:empty {
+    background-position: center center;
+    background-size: 100%;
+}
