@@ -55,6 +55,8 @@ class Game:
         self.current_black_card = self.black.pop()
 
     def assign_czar(self, user_id=None):
+        if user_id is None:
+            user_id = random.choice(list(self.players.keys()))
         # TODO: Do we need this function?
         # At least make it more pythonic
         self.czar_user_id = user_id
