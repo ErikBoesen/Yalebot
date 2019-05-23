@@ -263,7 +263,7 @@ class Meme(ImageModule):
                 {"position": (18, 332)},
             ),
             "detectivepikachu": (
-                {"center_vertical": True, "font_size": self.FONT_SIZE_LARGE},
+                {"center_vertical": True, "font_size": self.LARGE_FONT_SIZE},
 
                 {"position": (621, 191)},
                 {"position": (621, 615)},

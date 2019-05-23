@@ -16,10 +16,20 @@ function buildCard(color, content) {
     return card;
 }
 
-// Card list from which Czar chooses
-var selection = document.getElementById("selection");
-// Your own cards, from which you choose when not Czar
-var hand = document.getElementById("hand");
+var elem = {
+    // Disconnection warning
+    warning: document.getElementById("warning"),
+    // Parent element holding all game components
+    game: document.getElementById("game"),
+    // Line saying that you're currently Czar
+    czar: document.getElementById("czar"),
+    // Black card
+    black: document.getElementById("black"),
+    // Card list from which Czar chooses
+    selection: document.getElementById("selection"),
+    // Your own cards, from which you choose when not Czar
+    hand: document.getElementById("hand"),
+}
 function fillRow(row, cards) {
     // Empty whatever is in the row first
     while (row.firstChild) row.removeChild(row.firstChild);
@@ -29,41 +39,40 @@ function fillRow(row, cards) {
 }
 function fillSelection(cards, length) {
     if (!cards) cards = Array(length).fill("");
-    fillRow(selection, cards);
+    fillRow(elem.selection, cards);
 }
 function fillHand(cards) {
-    fillRow(hand, cards);
+    fillRow(elem.hand, cards);
 }
 
 socket.on("cah_ping", function(data) {
     console.log("Recieved ping from game server", data);
-    document.getElementById("black").textContent = data.black_card;
+    elem.black.textContent = data.black_card;
     fillSelection(data.selection, data.selection_length);
 });
 socket.on("cah_update_user", function(data) {
     console.log("Recieved user update from server", data);
     // If user hasn't joined a game, warn them.
     if (!data.joined) {
-        document.getElementById("warning").textContent = "You're not in a game. Type !cah join in the group first.";
+        elem.warning.textContent = "You're not in a game. Type !cah join in the group first.";
         return;
     }
-    document.getElementById("game").style.display = "block";
+    elem.game.style.display = "block";
 
     fillHand(data.hand);
     if (data.is_czar) {
-        document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
-        hand.classList.add("disabled");
+        elem.czar.textContent = "You are Card Czar this round. Please select a card.";
+        elem.hand.classList.add("disabled");
     } else {
         // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
-        document.getElementById("czar").textContent = "";
-        hand.classList.remove("disabled");
+        elem.czar.textContent = "";
+        elem.hand.classList.remove("disabled");
     }
 });
 
 onclick = function(e) {
     if (
-        e.target.classList.contains("card") &&
-        e.target.classList.contains("white") &&
+        e.target.classList.contains("card", "white") &&
         !(e.target.parentNode.classList.contains("disabled"))
     ) {
         console.log("Clicked on a card.");
