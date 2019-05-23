@@ -89,6 +89,7 @@ class Game:
         self.selection.append((user_id, card))
         # TODO: this is repeated from above, make a method to draw cards
         self.players[user_id].pick_up_white(self.white.pop())
+        return True
 
     def players_needed(self):
         return len(self.players) - len(self.selection) - 1

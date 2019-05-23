@@ -445,9 +445,10 @@ def cah_selection(data):
                                                                                 name=player.name), group_id)
     else:
         # TODO: NEED TO ACTUALLY CHECK THAT PERSON CAN PLAY before saying that they played
-        game.player_choose(user_id, data["card_index"])
+        permitted = game.player_choose(user_id, data["card_index"])
         remaining_players = game.players_needed()
-        send(f"{player.name} has played a card. {remaining_players} still need to play.", group_id)
+        if permitted:
+            send(f"{player.name} has played a card. {remaining_players} still need to play.", group_id)
     cah_ping(access_token)
 
 
