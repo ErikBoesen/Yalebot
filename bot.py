@@ -412,7 +412,7 @@ def cah_ping(access_token):
     emit("cah_ping", {"joined": True,
                       "black_card": game.current_black_card,
                       "selection_length": len(selection),
-                      "selection": selection if game.remaining_players() == 0 else None},
+                      "selection": selection if game.players_needed() == 0 else None},
          room=game.group_id)
 
 
