@@ -4,6 +4,12 @@ body {
 h1 {
     color: #111;
 }
+@media (min-width: 800px) {
+    header img {
+        height: 220px;
+        margin-left: 0;
+    }
+}
 .cards {
 
 }
