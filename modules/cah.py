@@ -96,14 +96,17 @@ class Game:
     def is_czar(self, user_id):
         return self.czar_user_id == user_id
 
-    def czar_choose(self, card_index):
+    def get_nth_card_user_id(self, n):
         # TODO: this relies on dictionaries staying in a static order, which they do NOT necessarily!
         # Use a less lazy implementation.
         counter = 0
         for user_id, card in self.selection:
             if counter == card_index:
-                break
+                return user_id, card
             counter += 1
+
+    def czar_choose(self, card_index):
+        user_id, card = get_nth_card_user_id(card_index)
         self.players[user_id].score(self.current_black_card)
         self.choose_black_card()
         self.selection = []

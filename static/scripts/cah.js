@@ -52,11 +52,11 @@ socket.on("cah_update_user", function(data) {
     fillHand(data.hand);
     if (data.is_czar) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
-        hand.disabled = true;
+        hand.classList.add("disabled");
     } else {
         // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
         document.getElementById("czar").textContent = "";
-        hand.disabled = false;
+        hand.classList.remove("disabled");
     }
 });
 
@@ -64,7 +64,7 @@ onclick = function(e) {
     if (
         e.target.classList.contains("card") &&
         e.target.classList.contains("white") &&
-        !(e.target.disabled)
+        !(e.target.parentNode.classList.contains("disabled"))
     ) {
         console.log("Clicked on a card.");
         var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);

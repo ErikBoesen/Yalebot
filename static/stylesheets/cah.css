@@ -42,9 +42,9 @@ h1 {
     background-position: center center;
     background-size: 100%;
 }
-.card[disabled] {
+.card.disabled {
     opacity: 0.5;
 }
-.card[disabled] .card {
+.card.disabled .card {
     cursor: none;
 }
