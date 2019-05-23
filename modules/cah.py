@@ -89,7 +89,7 @@ class Game:
         self.players[user_id].pick_up_white(self.white.pop())
 
     def players_needed(self):
-        return len(self.players) - len(self.selection)
+        return len(self.players) - len(self.selection) - 1
 
     def is_czar(self, user_id):
         return self.czar_user_id == user_id
