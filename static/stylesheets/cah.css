@@ -46,7 +46,7 @@ h1 {
 }
 .card:empty {
     background-position: center center;
-    background-size: 100%;
+    background-size: 60%;
 }
 .cards.disabled {
     opacity: 0.5;
