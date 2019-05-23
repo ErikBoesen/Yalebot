@@ -1,8 +1,23 @@
 body {
     border-color: #111;
+
+    /* Prevent selection of text */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+header {
+    display: none;
+}
+p {
+    margin-top: 0;
 }
 header, main, footer {
-    padding: 10px;
+    padding: 20px;
 }
 main {
     max-width: none;
