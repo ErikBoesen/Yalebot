@@ -402,6 +402,8 @@ def cah_connect(data):
 
 
 def cah_ping(access_token):
+    # TODO: These lines are repeated like three times what are you DOING
+    # TODO: Clean this up in the morning when you're sane
     user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
@@ -421,12 +423,13 @@ def cah_update_user(access_token):
 
     if game is None:
         emit("cah_update_user", {"joined": False})
-        return
+        return False
     player = game.players[user_id]
     is_czar = game.is_czar(user_id)
     emit("cah_update_user", {"is_czar": is_czar,
                              "hand": player.hand,
                              "score": len(player.won)})
+    return True
 
 
 @socketio.on("cah_selection")

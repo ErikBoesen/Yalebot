@@ -37,6 +37,18 @@ function fillHand(cards) {
 
 socket.on("cah_ping", function(data) {
     console.log("Recieved ping from game server", data);
+
+    document.getElementById("black").textContent = data.black_card;
+
+    } else {
+        // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
+        document.getElementById("czar").textContent = "";
+        fillHand(data.hand);
+    }
+    fillSelection(data.selection, data.selection_length);
+});
+socket.on("cah_update_user", function(data) {
+    console.log("Recieved user update from server", data);
     // If user hasn't joined a game, warn them.
     if (!data.joined) {
         document.getElementById("warning").textContent = "You're not in a game. Type !cah join in the group first.";
@@ -45,17 +57,15 @@ socket.on("cah_ping", function(data) {
     }
 
     document.getElementById("black").textContent = data.black_card;
-
+    fillHand(data.hand);
     if (data.is_czar) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
-        // THIS IS ALL TEMPORARY FOR TESTING AND WILL ALLOW A CZAR TO SUBMIT CARDS WHICH THEY SHOULDN'T BE ABLE TO
-        fillHand(data.hand);
+        hand.style.opacity = 0.5;
     } else {
         // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
         document.getElementById("czar").textContent = "";
-        fillHand(data.hand);
+        hand.style.opacity = 1;
     }
-    fillSelection(data.selection, data.selection_length);
 });
 
 onclick = function(e) {
