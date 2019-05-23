@@ -45,9 +45,9 @@ socket.on("cah_update_user", function(data) {
     // If user hasn't joined a game, warn them.
     if (!data.joined) {
         document.getElementById("warning").textContent = "You're not in a game. Type !cah join in the group first.";
-        document.getElementById("game").style.display = "none";
         return;
     }
+    document.getElementById("game").style.display = "block";
 
     fillHand(data.hand);
     if (data.is_czar) {

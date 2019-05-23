@@ -10,6 +10,7 @@ body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+/* TODO: this is all kind of messy. Consider deleting a lot of these nitpicky rules and making a more consistent system. */
 header {
     display: none;
 }
@@ -22,8 +23,8 @@ header, main, footer {
 main {
     max-width: none;
 }
-h1 {
-    color: #111;
+#game {
+    display: none;
 }
 @media (min-width: 800px) {
     header img {
@@ -45,14 +46,15 @@ h1 {
     display: inline-block;
     width: 2in;
     margin-bottom: 5px;
+    margin-right: 5px;
     padding: 20px;
     height: 2.8in;
     font-size: 20px;
-    border: solid 1px #111;
     border-radius: 5px;
     background-position: 90% 95%;
     background-repeat: no-repeat;
     background-size: 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 .card.white {
     background-color: white;
