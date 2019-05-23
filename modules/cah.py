@@ -41,6 +41,8 @@ class Game:
     def build_black_deck(self):
         with open("resources/cah/black.json", "r") as f:
             self.black = json.load(f)
+        # Filter out Pick 2 cards for now
+        self.black = [card for card in self.black if card.count("_") == 1]
         random.shuffle(self.black)
 
     def build_white_deck(self):
