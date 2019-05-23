@@ -397,10 +397,12 @@ def cah_connect(data):
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
 
-    join_room(game.group_id)
-
-    cah_ping(access_token)
-    cah_update_user(access_token)
+    joined = cah_update_user(access_token)
+    # This is kind of a mess and we should merge cah_ping and cah_update_user
+    # functions (NOT socket exchanges) together
+    if joined:
+        join_room(game.group_id)
+        cah_ping(access_token)
 
 
 def cah_ping(access_token):
