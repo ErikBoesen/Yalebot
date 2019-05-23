@@ -455,7 +455,7 @@ def cah_selection(data):
         remaining_players = game.players_needed()
         send(f"{player.name} has played a card. {remaining_players} still need to play.", group_id)
     cah_ping(access_token)
-    cah_user_update(access_token)
+    cah_update_user(access_token)
 
 
 if __name__ == "__main__":

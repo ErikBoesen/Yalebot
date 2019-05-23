@@ -143,7 +143,7 @@ class CardsAgainstHumanity(Module):
             if group_id not in self.games:
                 return "No game in progress."
             game = self.games.pop(group_id)
-            for player in game.players:
+            for player in game.players.items():
                 self.playing.pop(player.user_id)
             return "Game ended. Say !cah start to start a new game."
         elif command == "join":
