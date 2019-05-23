@@ -396,6 +396,7 @@ def cah_connect(data):
     user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
+
     join_room(game.group_id)
 
     cah_ping(access_token)
@@ -409,8 +410,7 @@ def cah_ping(access_token):
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
     selection = [card for _, card in game.selection]
-    emit("cah_ping", {"joined": True,
-                      "black_card": game.current_black_card,
+    emit("cah_ping", {"black_card": game.current_black_card,
                       "selection_length": len(selection),
                       "selection": selection if game.players_needed() == 0 else None},
          room=game.group_id)
@@ -427,7 +427,8 @@ def cah_update_user(access_token):
         return False
     player = game.players[user_id]
     is_czar = game.is_czar(user_id)
-    emit("cah_update_user", {"is_czar": is_czar,
+    emit("cah_update_user", {"joined": True,
+                             "is_czar": is_czar,
                              "hand": player.hand,
                              "score": len(player.won)})
     return True
