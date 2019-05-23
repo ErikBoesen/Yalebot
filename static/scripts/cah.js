@@ -37,9 +37,7 @@ function fillHand(cards) {
 
 socket.on("cah_ping", function(data) {
     console.log("Recieved ping from game server", data);
-
     document.getElementById("black").textContent = data.black_card;
-
     fillSelection(data.selection, data.selection_length);
 });
 socket.on("cah_update_user", function(data) {
@@ -51,7 +49,6 @@ socket.on("cah_update_user", function(data) {
         return;
     }
 
-    document.getElementById("black").textContent = data.black_card;
     fillHand(data.hand);
     if (data.is_czar) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
