@@ -444,8 +444,7 @@ def cah_selection(data):
     game = commands["cah"].get_user_game(user_id)
     player = game.players[user_id]
     group_id = game.group_id
-    # if game.is_czar(user_id):
-    if data["is_czar"]:
+    if game.is_czar(user_id):
         card, player = game.czar_choose(data["card_index"])
         send("The Card Czar has selected \"{card}\" played by {name}, who now has a score of {score}.".format(card=card,
                                                                                                               name=player.name,
@@ -453,6 +452,7 @@ def cah_selection(data):
         send("The next black card is \"{card}\" and {name} is now Czar.".format(card=game.current_black_card,
                                                                                 name=player.name), group_id)
     else:
+        # TODO: NEED TO ACTUALLY CHECK THAT PERSON CAN PLAY before saying that they played
         game.player_choose(user_id, data["card_index"])
         remaining_players = game.players_needed()
         send(f"{player.name} has played a card. {remaining_players} still need to play.", group_id)
