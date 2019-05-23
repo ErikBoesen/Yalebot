@@ -40,11 +40,6 @@ socket.on("cah_ping", function(data) {
 
     document.getElementById("black").textContent = data.black_card;
 
-    } else {
-        // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
-        document.getElementById("czar").textContent = "";
-        fillHand(data.hand);
-    }
     fillSelection(data.selection, data.selection_length);
 });
 socket.on("cah_update_user", function(data) {
