@@ -2,7 +2,7 @@ import os
 import requests
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 import eventlet
 from threading import Thread
 import discord
@@ -257,7 +257,7 @@ def send(message, group_id):
             send(item, group_id)
         return
     this_bot = Bot.query.get(group_id)
-    # Cliose session so it won't remain locked on database
+    # Close session so it won't remain locked on database
     db.session.close()
     data = {
         "bot_id": this_bot.bot_id,
@@ -385,7 +385,7 @@ def cah():
 
 
 @app.route("/cah/join")
-def cah_redirect():
+def cah_join_redirect():
     return redirect("https://oauth.groupme.com/oauth/authorize?client_id=iEs9DrSihBnH0JbOGZSWK8SdsqRt0pUn8EpulL8Fia3rf6QM", code=302)
 
 
@@ -399,19 +399,29 @@ def cah_ping(access_token):
     user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
-    player = game.players[user_id]
-    if game is None:
-        emit("cah_ping", {"joined": False})
-        return
-    is_czar = game.is_czar(user_id)
     selection = [card for _, card in game.selection]
     emit("cah_ping", {"joined": True,
-                      "hand": player.hand,
-                      "is_czar": is_czar,
                       "black_card": game.current_black_card,
                       "selection_length": len(selection),
-                      "selection": selection if is_czar else None,
-                      "score": len(player.won)}, broadcast=True)
+                      "selection": selection if game.remaining_players() == 0 else None},
+        room=
+
+
+def cah_update_user(access_token):
+    # TODO: DRY; this is basically all repeated in cah_ping generation
+    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    user_id = user["user_id"]
+    game = commands["cah"].get_user_game(user_id)
+
+    if game is None:
+        emit("cah_update_user", {"joined": False})
+        return
+    player = game.players[user_id]
+    is_czar = game.is_czar(user_id)
+    emit("cah_update_user", {"is_czar": is_czar,
+                             "hand": player.hand,
+                             "score": len(player.won)})
+
 
 
 @socketio.on("cah_selection")
@@ -431,7 +441,8 @@ def cah_selection(data):
         send("The next black card is \"{card}\" and {name} is now Czar.".format(card=game.current_black_card,
                                                                                 name=player.name), group_id)
     else:
-        remaining_players = game.player_choose(user_id, data["card_index"])
+        game.player_choose(user_id, data["card_index"])
+        remaining_players = game.players_needed()
         send(f"{player.name} has played a card. {remaining_players} still need to play.", group_id)
     # TODO: refresh EVERYONE, not just the selector!!
     cah_ping(access_token)
