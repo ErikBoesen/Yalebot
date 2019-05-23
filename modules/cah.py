@@ -95,7 +95,8 @@ class Game:
         return self.czar_user_id == user_id
 
     def czar_choose(self, card_index):
-        # TODO: this relies on dictionaries staying in a static order, which they do NOT necessarily
+        # TODO: this relies on dictionaries staying in a static order, which they do NOT necessarily!
+        # Use a less lazy implementation.
         counter = 0
         for user_id, card in self.selection:
             if counter == card_index:

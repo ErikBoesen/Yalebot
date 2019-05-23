@@ -52,11 +52,11 @@ socket.on("cah_update_user", function(data) {
     fillHand(data.hand);
     if (data.is_czar) {
         document.getElementById("czar").textContent = "You are Card Czar this round. Please select a card.";
-        hand.style.opacity = 0.5;
+        hand.disabled = true;
     } else {
         // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
         document.getElementById("czar").textContent = "";
-        hand.style.opacity = 1;
+        hand.disabled = false;
     }
 });
 
