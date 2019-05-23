@@ -61,7 +61,11 @@ socket.on("cah_update_user", function(data) {
 });
 
 onclick = function(e) {
-    if (e.target.classList.contains("card") && e.target.classList.contains("white")) {
+    if (
+        e.target.classList.contains("card") &&
+        e.target.classList.contains("white") &&
+        !(e.target.disabled)
+    ) {
         console.log("Clicked on a card.");
         var cardIndex = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
 
