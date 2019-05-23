@@ -397,43 +397,35 @@ def cah_connect(data):
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
 
-    joined = cah_update_user(access_token)
-    # This is kind of a mess and we should merge cah_ping and cah_update_user
-    # functions (NOT socket exchanges) together
+    joined = cah_ping(access_token, room=False)
     if joined:
         join_room(game.group_id)
-        cah_ping(access_token)
+        cah_ping(access_token, single=False)
 
 
-def cah_ping(access_token):
+def cah_ping(access_token, room=True, single=True):
     # TODO: These lines are repeated like three times what are you DOING
     # TODO: Clean this up in the morning when you're sane
     user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
     user_id = user["user_id"]
     game = commands["cah"].get_user_game(user_id)
-    selection = [card for _, card in game.selection]
-    emit("cah_ping", {"black_card": game.current_black_card,
-                      "selection_length": len(selection),
-                      "selection": selection if game.players_needed() == 0 else None},
-         room=game.group_id)
-
-
-def cah_update_user(access_token):
-    # TODO: DRY; this is basically all repeated in cah_ping generation
-    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-    user_id = user["user_id"]
-    game = commands["cah"].get_user_game(user_id)
-
-    if game is None:
-        emit("cah_update_user", {"joined": False})
-        return False
-    player = game.players[user_id]
-    is_czar = game.is_czar(user_id)
-    emit("cah_update_user", {"joined": True,
-                             "is_czar": is_czar,
-                             "hand": player.hand,
-                             "score": len(player.won)})
-    return True
+    if room:
+        selection = [card for _, card in game.selection]
+        emit("cah_ping", {"black_card": game.current_black_card,
+                          "selection_length": len(selection),
+                          "selection": selection if game.players_needed() == 0 else None},
+             room=game.group_id)
+    if single:
+        if game is None:
+            emit("cah_update_user", {"joined": False})
+            return False
+        player = game.players[user_id]
+        is_czar = game.is_czar(user_id)
+        emit("cah_update_user", {"joined": True,
+                                 "is_czar": is_czar,
+                                 "hand": player.hand,
+                                 "score": len(player.won)})
+        return True
 
 
 @socketio.on("cah_selection")
@@ -457,7 +449,6 @@ def cah_selection(data):
         remaining_players = game.players_needed()
         send(f"{player.name} has played a card. {remaining_players} still need to play.", group_id)
     cah_ping(access_token)
-    cah_update_user(access_token)
 
 
 if __name__ == "__main__":
