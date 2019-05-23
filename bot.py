@@ -391,7 +391,13 @@ def cah_join_redirect():
 
 @socketio.on("cah_connect")
 def cah_connect(data):
+    # TODO: DRY!!
+    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+    user_id = user["user_id"]
+    game = commands["cah"].get_user_game(user_id)
+    join_room(game.group_id)
     access_token = data["access_token"]
+
     cah_ping(access_token)
 
 
@@ -404,7 +410,7 @@ def cah_ping(access_token):
                       "black_card": game.current_black_card,
                       "selection_length": len(selection),
                       "selection": selection if game.remaining_players() == 0 else None},
-        room=
+         room=game.group_id)
 
 
 def cah_update_user(access_token):
@@ -421,7 +427,6 @@ def cah_update_user(access_token):
     emit("cah_update_user", {"is_czar": is_czar,
                              "hand": player.hand,
                              "score": len(player.won)})
-
 
 
 @socketio.on("cah_selection")
