@@ -105,6 +105,7 @@ class Game:
         self.players[user_id].score(self.current_black_card)
         self.choose_black_card()
         self.selection = []
+        self.assign_czar(user_id)
         # Return card and winner
         return card, self.players[user_id]
 
