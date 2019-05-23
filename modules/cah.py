@@ -43,6 +43,7 @@ class Game:
             self.black = json.load(f)
         # Filter out Pick 2 cards for now
         self.black = [card for card in self.black if card.count("_") == 1]
+        self.black = [card.replace("_", "_" * 5) for card in self.black]
         random.shuffle(self.black)
 
     def build_white_deck(self):
