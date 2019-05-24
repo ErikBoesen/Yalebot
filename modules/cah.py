@@ -107,7 +107,7 @@ class Game:
             counter += 1
 
     def czar_choose(self, card_index):
-        user_id, card = get_nth_card_user_id(card_index)
+        user_id, card = self.get_nth_card_user_id(card_index)
         self.players[user_id].score(self.current_black_card)
         self.choose_black_card()
         self.selection = []
@@ -151,7 +151,7 @@ class CardsAgainstHumanity(Module):
                 return "Game already started!"
             self.games[group_id] = Game(group_id)
             self.add_player(group_id, user_id, name)
-            return (f"Cards Against Humanity game started. {name} added to game as first Czar.\n"
+            return (f"Cards Against Humanity game started. {name} added to game as first Czar. Play at https://yalebot.herokuapp.com/cah/join.\n"
                     "Other players can say !cah join to join. !cah end will terminate the game.\n")
         elif command == "end":
             if group_id not in self.games:
