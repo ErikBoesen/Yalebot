@@ -102,7 +102,7 @@ class Game:
         # Use a less lazy implementation.
         counter = 0
         for user_id, card in self.selection:
-            if counter == card_index:
+            if counter == n:
                 return user_id, card
             counter += 1
 
