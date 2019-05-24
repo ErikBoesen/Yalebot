@@ -47,6 +47,7 @@ static_commands = {
     "amma": ("", "https://i.groupme.com/714x456.jpeg.66fb9e9dacab4cd9b860b084eceff282.large"),
     "ohno": ("", "https://i.groupme.com/1280x720.jpeg.f7c11a529a3b4a7195f71fa6be5ebfef.large"),
     "defuse": ("", "https://i.groupme.com/500x500.jpeg.26cbc006bcbf47048ade8a896b1e3d5a.large"),
+    "cah": "Cards Against Humanity was recently removed from Yalebot and the game can now be run through Bot Against Humanity, a new separate bot which can be added at https://botagainsthumanitygroupme.herokuapp.com."
 }
 
 commands = {
