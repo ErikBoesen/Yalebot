@@ -17,6 +17,8 @@ from utils import Message, SenderType
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+# Suppress warnings
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
