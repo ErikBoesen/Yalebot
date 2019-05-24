@@ -69,6 +69,7 @@ main {
 .cards.disabled {
     opacity: 0.5;
 }
-.cards.disabled .card {
+.cards.disabled .card,
+.card:empty{
     cursor: not-allowed;
 }
