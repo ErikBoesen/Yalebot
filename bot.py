@@ -444,7 +444,6 @@ def cah_selection(data):
         send("The next black card is \"{card}\" and {name} is now Czar.".format(card=game.current_black_card,
                                                                                 name=player.name), group_id)
     else:
-        # TODO: NEED TO ACTUALLY CHECK THAT PERSON CAN PLAY before saying that they played
         permitted = game.player_choose(user_id, data["card_index"])
         remaining_players = game.players_needed()
         if permitted:

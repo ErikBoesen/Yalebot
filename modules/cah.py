@@ -162,6 +162,12 @@ class CardsAgainstHumanity(Module):
             self.playing[user_id] = group_id
             self.games[group_id].join(user_id, name)
             return f"{name} has joined the game! Please go to https://yalebot.herokuapp.com/cah/join to play."
+        elif command == "leave":
+            if user_id in self.playing:
+                self.playing.pop(user_id)
+                return f"Removed {name} from the game."
+            else:
+                return f"{name} is not currently in a game."
         elif command == "info":
             return str(self.games) + " " + str(self.playing) + " " + str(self)
         """
