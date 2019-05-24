@@ -9,6 +9,8 @@ To add this bot to your own server, go [here](https://yalebot.herokuapp.com)!
 
 [Add to Discord server](https://discordapp.com/oauth2/authorize?client_id=576194237175955456&permissions=0&scope=bot)
 
+Cards Against Humanity was removed from this bot in May 2019, in favor of moving that functionality into Bot Against Humanity, a new bot without Yale baggage that can be used by all. Add it [here](https://botagainsthumanitygroupme.herokuapp.com)! [(GitHub)](https://github.com/ErikBoesen/BotAgainstHumanity)
+
 ## Design
 Yalebot uses the [GroupMe Bots API](https://dev.groupme.com/tutorials/bots) for message exchange, hosting a Flask server which listens for incoming webhooks calculates on a response.
 
