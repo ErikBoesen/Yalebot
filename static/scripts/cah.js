@@ -82,5 +82,6 @@ onclick = function(e) {
             "card_index": cardIndex,
         };
         socket.emit("cah_selection", data);
+        elem.hand.classList.add("disabled");
     }
 };
