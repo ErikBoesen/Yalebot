@@ -134,6 +134,10 @@ class CardsAgainstHumanity(Module):
         # TODO: use references to Player objects??
         self.playing = {}
 
+    def add_player(self, user_id, name):
+        self.playing[user_id] = group_id
+        self.games[group_id].join(user_id, name)
+
     def response(self, query, message):
         # TODO: fix this mess
         arguments = query.split()
@@ -159,8 +163,7 @@ class CardsAgainstHumanity(Module):
                 return "You're already in a game."
             if group_id not in self.games:
                 return "No game in progress. Say !cah start to start a game."
-            self.playing[user_id] = group_id
-            self.games[group_id].join(user_id, name)
+            self.add_player(user_id, name)
             return f"{name} has joined the game! Please go to https://yalebot.herokuapp.com/cah/join to play."
         elif command == "leave":
             if user_id in self.playing:
