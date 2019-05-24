@@ -46,27 +46,26 @@ function fillHand(cards) {
 }
 
 socket.on("cah_ping", function(data) {
-    console.log("Recieved ping from game server", data);
+    console.log("Received ping from game server", data);
     elem.black.textContent = data.black_card;
     fillSelection(data.selection, data.selection_length);
 });
 socket.on("cah_update_user", function(data) {
-    console.log("Recieved user update from server", data);
-    // If user hasn't joined a game, warn them.
-    if (!data.joined) {
-        elem.warning.textContent = "You're not in a game. Type !cah join in the group first.";
-        return;
-    }
-    elem.game.style.display = "block";
-
-    fillHand(data.hand);
-    if (data.is_czar) {
-        elem.czar.textContent = "You are Card Czar this round. Please select a card.";
-        elem.hand.classList.add("disabled");
+    console.log("Received user update from server", data);
+    if (data.joined) {
+        elem.game.style.display = "block";
+        fillHand(data.hand);
+        if (data.is_czar) {
+            elem.czar.textContent = "You are Card Czar this round. Please select a card.";
+            elem.hand.classList.add("disabled");
+        } else {
+            elem.czar.textContent = "";
+            elem.hand.classList.remove("disabled");
+        }
     } else {
-        // TODO: there's nothing stopping anyone from submitting their own cards on the server-side, just that they won't be shown.
-        elem.czar.textContent = "";
-        elem.hand.classList.remove("disabled");
+        // If user hasn't joined a game, warn them.
+        elem.warning.textContent = "You're not in a game. Type !cah join in the group first.";
+        elem.game.style.display = "none";
     }
 });
 
