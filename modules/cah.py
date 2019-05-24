@@ -134,7 +134,8 @@ class CardsAgainstHumanity(Module):
         # TODO: use references to Player objects??
         self.playing = {}
 
-    def add_player(self, user_id, name):
+    def add_player(self, group_id, user_id, name):
+        # This is a function so that it can be called automatically when a user is joining or when they're starting a game
         self.playing[user_id] = group_id
         self.games[group_id].join(user_id, name)
 
@@ -149,8 +150,9 @@ class CardsAgainstHumanity(Module):
             if group_id in self.games:
                 return "Game already started!"
             self.games[group_id] = Game(group_id)
-            return (f"Cards Against Humanity game started in group #{group_id}.\n"
-                    "Say !cah join to join, or !cah end to terminate the game.\n")
+            self.add_player(group_id, user_id, name)
+            return (f"Cards Against Humanity game started. {name} added to game as first Czar.\n"
+                    "Other players can say !cah join to join. !cah end will terminate the game.\n")
         elif command == "end":
             if group_id not in self.games:
                 return "No game in progress."
@@ -163,7 +165,7 @@ class CardsAgainstHumanity(Module):
                 return "You're already in a game."
             if group_id not in self.games:
                 return "No game in progress. Say !cah start to start a game."
-            self.add_player(user_id, name)
+            self.add_player(group_id, user_id, name)
             return f"{name} has joined the game! Please go to https://yalebot.herokuapp.com/cah/join to play."
         elif command == "leave":
             if user_id in self.playing:
