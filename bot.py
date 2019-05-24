@@ -17,7 +17,6 @@ from utils import Message, SenderType
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-app.config["SQLALCHEMY_POOL_SIZE"] = 15
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
@@ -104,7 +103,6 @@ commands = {
     "tiya": modules.Tiya(),
     "crist": modules.Crist(),
     "power": modules.Power(),
-    "cah": modules.CardsAgainstHumanity(),
     "colleges": modules.Colleges(),
     "tictactoe": modules.TicTacToe(),
     "zalgo": modules.Zalgo(),
@@ -376,79 +374,6 @@ def delete_bot():
         db.session.delete(bot)
         db.session.commit()
         return "ok", 200
-
-
-@app.route("/cah", methods=["GET"])
-def cah():
-    access_token = request.args["access_token"]
-    return render_template("cah.html")
-
-
-@app.route("/cah/join")
-def cah_join_redirect():
-    return redirect("https://oauth.groupme.com/oauth/authorize?client_id=iEs9DrSihBnH0JbOGZSWK8SdsqRt0pUn8EpulL8Fia3rf6QM", code=302)
-
-
-@socketio.on("cah_connect")
-def cah_connect(data):
-    access_token = data["access_token"]
-    # TODO: DRY!!
-    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-    user_id = user["user_id"]
-    game = commands["cah"].get_user_game(user_id)
-
-    joined = cah_ping(access_token, room=False)
-    if joined:
-        join_room(game.group_id)
-        cah_ping(access_token, single=False)
-
-
-def cah_ping(access_token, room=True, single=True):
-    # TODO: These lines are repeated like three times what are you DOING
-    # TODO: Clean this up in the morning when you're sane
-    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-    user_id = user["user_id"]
-    game = commands["cah"].get_user_game(user_id)
-    if room:
-        selection = [card for _, card in game.selection]
-        emit("cah_ping", {"black_card": game.current_black_card,
-                          "selection_length": len(selection),
-                          "selection": selection if game.players_needed() == 0 else None},
-             room=game.group_id)
-    if single:
-        if game is None:
-            emit("cah_update_user", {"joined": False})
-            return False
-        player = game.players[user_id]
-        is_czar = game.is_czar(user_id)
-        emit("cah_update_user", {"joined": True,
-                                 "is_czar": is_czar,
-                                 "hand": player.hand,
-                                 "score": len(player.won)})
-        return True
-
-
-@socketio.on("cah_selection")
-def cah_selection(data):
-    access_token = data["access_token"]
-    user = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-    user_id = user["user_id"]
-    game = commands["cah"].get_user_game(user_id)
-    player = game.players[user_id]
-    group_id = game.group_id
-    if game.is_czar(user_id):
-        card, player = game.czar_choose(data["card_index"])
-        send("The Card Czar has selected \"{card}\" played by {name}, who now has a score of {score}.".format(card=card,
-                                                                                                              name=player.name,
-                                                                                                              score=len(player.won)), group_id)
-        send("The next black card is \"{card}\" and {name} is now Czar.".format(card=game.current_black_card,
-                                                                                name=player.name), group_id)
-    else:
-        permitted = game.player_choose(user_id, data["card_index"])
-        remaining_players = game.players_needed()
-        if permitted:
-            send(f"{player.name} has played a card. {remaining_players} still need to play.", group_id)
-    cah_ping(access_token)
 
 
 if __name__ == "__main__":

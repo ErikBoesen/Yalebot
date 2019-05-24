@@ -50,7 +50,6 @@ from .nato import NATO
 from .tiya import Tiya
 from .crist import Crist
 from .power import Power
-from .cah import CardsAgainstHumanity
 from .record import Record
 from .colleges import Colleges
 from .tictactoe import TicTacToe
