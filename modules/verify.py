@@ -65,4 +65,4 @@ class McCarthy(Verify):
     NEGATIVE_EMOJI = "☭"
 
     def response(self, query, message):
-        return self.check_user(random.choice(self.get_members(message["group_id"])))
+        return self.check_user(random.choice(self.get_members(message.group_id)))
