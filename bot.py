@@ -114,7 +114,7 @@ commands = {
     "circle": modules.Circle(),
     "jpeg": modules.JPEG(),
     "deepfry": modules.DeepFry(),
-    # "anna": modules.Anna(),
+    "anna": modules.Anna(),
     "damn": modules.Damn(),
     "handshake": modules.Handshake(),
 }
