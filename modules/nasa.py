@@ -12,4 +12,4 @@ class NASA(Module):
 
         # Send URL for image along with image title
         return ["NASA Image of the Day " + photo["date"] + "\n\n" + photo["explanation"],
-                photo["hdurl"]]
+                photo.get("url", photo.get("hdurl"))]
