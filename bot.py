@@ -309,7 +309,7 @@ def in_group(group_id):
 
 @app.route("/manager", methods=["GET", "POST"])
 def manager():
-    access_token = request.args["access_token"]
+    access_token = request.args.get("access_token")
     if request.method == "POST":
         # Build and send bot data
         group_id = request.form["group_id"]
@@ -329,6 +329,8 @@ def manager():
         registrant = Bot(group_id, group["name"], result["bot_id"], me["user_id"], me["name"], access_token)
         db.session.add(registrant)
         db.session.commit()
+    if access_token is None:
+        return redirect("https://oauth.groupme.com/oauth/authorize?client_id=46tkWF26m1juUxxvRGKUjVqVjbejYK4Njz3VA4ZZjWhr5dtH", code=302)
     groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
     bots = requests.get(f"https://api.groupme.com/v3/bots?token={access_token}").json()["response"]
     if os.environ.get("DATABASE_URL") is not None:
