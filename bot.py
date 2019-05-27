@@ -2,7 +2,6 @@ import os
 import requests
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
-import eventlet
 from threading import Thread
 import discord
 import asyncio
@@ -300,10 +299,6 @@ def analytics(group_id):
     # TODO: clear up users/leaderboards naming
     users = commands["analytics"].leaderboards.get(group_id)
     return render_template("analytics.html", users=users)
-
-
-def in_group(group_id):
-    return db.session.query(db.exists().where(Bot.group_id == group_id)).scalar()
 
 
 @app.route("/manager", methods=["GET", "POST"])
