@@ -1,6 +1,5 @@
 Flask
 Flask-SQLAlchemy
-Flask-SocketIO
 eventlet
 psycopg2
 gunicorn>=19.9.0

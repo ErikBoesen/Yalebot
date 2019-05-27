@@ -2,7 +2,6 @@ import os
 import requests
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO, emit, join_room, leave_room
 import eventlet
 from threading import Thread
 import discord
