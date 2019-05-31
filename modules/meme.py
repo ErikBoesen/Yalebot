@@ -269,7 +269,7 @@ class Meme(ImageModule):
                 {"position": (621, 615)},
             ),
             "smoke": (
-                {"center_vertical": True, "font_size": self.SMALL_FONT_SIZE},
+                {"center_vertical": True, "font_size": self.SMALL_FONT_SIZE, "wrap": 12},
 
                 {"position": (383, 41)},
             ),
