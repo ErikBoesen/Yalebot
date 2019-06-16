@@ -58,6 +58,6 @@ class Dining(Module):
                 is_open = not bool(location["ISCLOSED"])
                 response += "- {emoji} {name} ({status})\n".format(emoji=self.type_emoji[location["TYPE"]],
                                                                    name=location["DININGLOCATIONNAME"],
-                                                                   status="Open, {capacity}%".format(capacity=10 * location["CAPACITY"])
+                                                                   status="Open, {capacity}% capacity".format(capacity=10 * location["CAPACITY"])
                                                                    if is_open else "Closed")
         return response
