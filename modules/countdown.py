@@ -10,7 +10,7 @@ class Event:
         plurality = tuple(["is" if remaining[0] == 1 else "are"]) + tuple("" if num == 1 else "s" for num in remaining[:5])
         # TODO: Do this formatting better
         return "There {0} {6} week{1}, {7} day{2}, {8} hour{3}, {9} minute{4}, and {10:.2f} second{5} left until {name}.".format(*(plurality + remaining),
-                                      name=self.name)
+                                                                                                                                 name=self.name)
 
     def remaining_time(self):
         """
@@ -54,7 +54,6 @@ class Countdown(Module):
         if len(events) == 0:
             return "No upcoming events."
         return "\n".join([str(event) for event in events])
-
 
     def next_event(self) -> Event:
         """
