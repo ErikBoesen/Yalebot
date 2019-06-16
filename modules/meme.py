@@ -163,7 +163,7 @@ class Meme(ImageModule):
             "pyramid": (
                 {"center": False, "center_vertical": True},
 
-                {"position": (240, 150), "wrap": 30},
+                {"position": (240, 150), "wrap": 25,
             ),
             "hannibal": (
                 {"center_vertical": True, "color": self.WHITE, "shadow_color": self.BLACK, "font_size": self.LARGE_FONT_SIZE},
