@@ -49,9 +49,12 @@ class Countdown(Module):
             event = self.get_event(query)
             if event is None:
                 return "Couldn't find the event '%s'" % query
-        else:
-            event = self.next_event()
-        return str(event)
+            return str(event)
+        events = self.remaining_events()
+        if len(events) == 0:
+            return "No upcoming events."
+        return "\n".join([str(event) for event in events])
+
 
     def next_event(self) -> Event:
         """
@@ -64,5 +67,8 @@ class Countdown(Module):
         return None
 
     def remaining_events(self):
-        pass
-
+        now = datetime.datetime.now()
+        for event in self.events:
+            if (event.date - now).total_seconds() < 0:
+                self.events.pop(0)
+        return self.events
