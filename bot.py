@@ -114,6 +114,7 @@ commands = {
     "anna": modules.Anna(),
     "damn": modules.Damn(),
     "handshake": modules.Handshake(),
+    "dining": modules.Dining(),
 }
 system_responses = {
     "welcome": modules.Welcome(),

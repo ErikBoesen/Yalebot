@@ -21,3 +21,4 @@ discord.py
 
 pymessenger
 termcolor
+yaledining==0.1.0

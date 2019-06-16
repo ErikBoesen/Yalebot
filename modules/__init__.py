@@ -60,3 +60,4 @@ from .deepfry import DeepFry
 from .anna import Anna
 from .damn import Damn
 from .handshake import Handshake
+from .dining import Dining
