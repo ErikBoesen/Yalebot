@@ -16,7 +16,7 @@ class Meme(ImageModule):
     YELLOW = (255, 255, 0)
 
     def list_templates(self):
-        return "Supported templates: " + ", ".join(self.templates.keys())
+        return "Supported templates: " + ", ".join(self.templates.keys()) + ". You can view a gallery of templates at https://yalebot.herokuapp.com/memes"
 
     def __init__(self):
         super().__init__()
