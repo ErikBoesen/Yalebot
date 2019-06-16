@@ -35,6 +35,7 @@ class Countdown(Module):
     events = [
         Event("Bulldog Days", datetime.datetime(year=2019, month=4, day=15, hour=14)),
         Event("FSY", datetime.datetime(year=2019, month=6, day=25, hour=17)),
+        Event("residential college/roommate announcements", datetime.datetime(year=2019, month=6, day=26, hour=12)),
         Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20)),
     ]
 
