@@ -13,12 +13,11 @@ class Handshake(Module):
         return length
 
     def handshake(self, left, right, middle):
-        SIDE_WIDTH = 20
-        MIDDLE_WIDTH = SIDE_WIDTH
-        EMOJI = "🤝"
-        left = wrap(left, SIDE_WIDTH)
-        right = wrap(right, SIDE_WIDTH)
-        middle = wrap(middle, MIDDLE_WIDTH)
+        side_width = 20
+        middle_width = side_width
+        left = wrap(left, side_width)
+        right = wrap(right, side_width)
+        middle = wrap(middle, middle_width)
         left_length = self.max_length(left)
         right_length = self.max_length(right)
         middle_length = self.max_length(middle)
@@ -29,7 +28,7 @@ class Handshake(Module):
         lines = []
         for line in range(len(left)):
             lines.append(left[line].rjust(left_length) + (" " * middle_length) + right[line])
-        lines.append(" " * (left_length + middle_length // 2 - 1) + EMOJI)
+        lines.append(" " * (left_length + middle_length // 2 - 1) + "🤝")
         for line in middle:
             lines.append(" " * left_length + line)
 
