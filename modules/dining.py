@@ -26,7 +26,7 @@ class Dining(Module):
         locations = dining.get_locations()
         response = ""
         if query:
-            desired_location =  None
+            desired_location = None
             for location in locations:
                 if args.location == location["DININGLOCATIONNAME"]:
                     desired_location = location
@@ -49,5 +49,5 @@ class Dining(Module):
                 response += "- {emoji} {name} ({status})".format(emoji=self.type_emoji[location["TYPE"]],
                                                                  name=location["DININGLOCATIONNAME"],
                                                                  status="Open, {capacity}%".format(capacity=10 * location["CAPACITY"])
-                                                                    if is_open else "Closed")
+                                                                 if is_open else "Closed")
         return response
