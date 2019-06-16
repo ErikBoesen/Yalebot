@@ -22,9 +22,7 @@ class Dining(Module):
             managers.append(manager)
         return ", ".join([f"{name} ({email})" for name, email in managers])
 
-    def capacity_bar(is_open, capacity):
-        if not is_open:
-            return ''
+    def capacity_bar(capacity: int):
         return ('▇' * capacity) + ('░' * (10 - capacity))
 
     def response(self, query, message):
@@ -42,7 +40,8 @@ class Dining(Module):
             is_open = not bool(location["ISCLOSED"])
             # TODO: this sucks lol
             response += "Open: " + "Yes" if is_open else "No" + "\n"
-            response += "Capacity: {capacity}% ".format(capacity=location["CAPACITY"] * 10) + self.capacity_bar(is_open, location["CAPACITY"]) + "\n"
+            if is_open:
+                response += "Capacity: {capacity}% ".format(capacity=location["CAPACITY"] * 10) + self.capacity_bar(is_open, location["CAPACITY"]) + "\n"
             response += "Type: " + location["TYPE"] + " " + self.type_emoji[location["TYPE"]] + "\n"
             response += "Address: " + "{address} ({coordinates})\n".format(address=location["ADDRESS"],
                                                                            coordinates=location["GEOLOCATION"])
