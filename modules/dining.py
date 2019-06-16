@@ -29,11 +29,11 @@ class Dining(Module):
         locations = self.api.get_locations()
         response = ""
         if query:
-            desired_location = None
+            location = None
             for location_candidate in locations:
                 if query == location["DININGLOCATIONNAME"]:
                     location = location_candidate
-            if desired_location is None:
+            if location is None:
                 return("Unknown location name.")
             response += "-" * 3 + location["DININGLOCATIONNAME"] + "-" * 3 + "\n"
             # TODO: repetition
@@ -47,7 +47,7 @@ class Dining(Module):
                                                                            coordinates=location["GEOLOCATION"])
             response += "Phone: " + location["PHONE"] + "\n"
             response += "Managers: " + self.get_managers(location) + "\n"
-            menus = self.api.get_menus(desired_location["ID_LOCATION"])
+            menus = self.api.get_menus(location["ID_LOCATION"])
             response += "\n"
             if menus:
                 response += "Menu support coming soon!"
