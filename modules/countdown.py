@@ -4,26 +4,26 @@ import datetime
 
 class Event:
     def __repr__(self):
-        remaining = self.time(event)
+        remaining = self.remaining_time()
         if remaining is None:
             return "There are no events scheduled."
         plurality = tuple(["is" if remaining[0] == 1 else "are"]) + tuple("" if num == 1 else "s" for num in remaining[:5])
-        return "There {0} {6} week{1}, {7} day{2}, {8} hour{3}, {9} minute{4}, and {10:.2f} second{5} left until {11}.".format(*(plurality + remaining))
+        # TODO: Do this formatting better
+        return "There {0} {6} week{1}, {7} day{2}, {8} hour{3}, {9} minute{4}, and {10:.2f} second{5} left until {name}.".format(*(plurality + remaining),
+                                      name=self.name)
 
-    def remaining_time(self, event):
+    def remaining_time(self):
         """
         Get time split into units until Bulldog Days.
         """
         now = datetime.datetime.now()
-        if event is None:
-            return None
-        delta = event.date - now
+        delta = self.date - now
         seconds = delta.total_seconds()
         weeks, seconds = divmod(seconds, 60 * 60 * 24 * 7)
         days, seconds = divmod(seconds, 60 * 60 * 24)
         hours, seconds = divmod(seconds, 60 * 60)
         minutes, seconds = divmod(seconds, 60)
-        return int(weeks), int(days), int(hours), int(minutes), seconds, event.name
+        return int(weeks), int(days), int(hours), int(minutes), seconds
 
     def __init__(self, name: str, date: datetime.datetime):
         self.name = name
