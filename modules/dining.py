@@ -4,13 +4,13 @@ from yaledining import YaleDining
 
 class Dining(Module):
     DESCRIPTION = "Get information about Yale Dining services, closures, menus, etc."
-    dining = YaleDining()
+    api = YaleDining()
     type_emoji = {
         "Residential": "🏠",
         "Retail": "💰",
     }
 
-    def get_managers(location):
+    def get_managers(self, location):
         managers = []
         num_managers = 0
         while num_managers < 4:
@@ -23,12 +23,12 @@ class Dining(Module):
         return ", ".join([f"{name} ({email})" for name, email in managers])
 
     def response(self, query, message):
-        locations = dining.get_locations()
+        locations = self.api.get_locations()
         response = ""
         if query:
             desired_location = None
             for location in locations:
-                if args.location == location["DININGLOCATIONNAME"]:
+                if query == location["DININGLOCATIONNAME"]:
                     desired_location = location
             if desired_location is None:
                 return("Unknown location name.")
@@ -37,7 +37,7 @@ class Dining(Module):
                                                                            coordinates=location["GEOLOCATION"])
             response += "Phone: " + location["PHONE"] + "\n"
             response += "Managers: " + self.get_managers(location) + "\n"
-            menus = dining.get_menus(desired_location["ID_LOCATION"])
+            menus = self.api.get_menus(desired_location["ID_LOCATION"])
             response += "\n" * 2
             if menus:
                 response += "Menu support coming soon!"
