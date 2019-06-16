@@ -34,7 +34,7 @@ class Dining(Module):
                 if query == location["DININGLOCATIONNAME"]:
                     location = location_candidate
             if location is None:
-                return("Unknown location name.")
+                return "Unknown location name."
             response += "-" * 3 + location["DININGLOCATIONNAME"] + "-" * 3 + "\n"
             # TODO: repetition
             is_open = not bool(location["ISCLOSED"])
