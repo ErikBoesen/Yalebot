@@ -38,9 +38,11 @@ class Dining(Module):
             if desired_location is None:
                 return("Unknown location name.")
             response += "-" * 3 + desired_location["DININGLOCATIONNAME"] + "-" * 3 + "\n"
+            # TODO: repetition
+            is_open = not bool(location["ISCLOSED"])
             # TODO: this sucks lol
-            response += "Open: " + ("Yes", "No")[location["ISCLOSED"]]
-            response += "Capacity: " +
+            response += "Open: " + "Yes" if is_open else "No" + "\n"
+            response += "Capacity: {capacity}% ".format(capacity=location["CAPACITY"] * 10) + self.capacity_bar(is_open, location["CAPACITY"]) + "\n"
             response += "Type: " + location["TYPE"] + " " + self.type_emoji[location["TYPE"]] + "\n"
             response += "Address: " + "{address} ({coordinates})\n".format(address=location["ADDRESS"],
                                                                            coordinates=location["GEOLOCATION"])
