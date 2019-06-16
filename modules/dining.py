@@ -33,6 +33,8 @@ class Dining(Module):
             if desired_location is None:
                 return("Unknown location name.")
             response += "-" * 3 + desired_location["DININGLOCATIONNAME"] + "-" * 3 + "\n"
+            response += "Type: " + location["TYPE"] + " " + self.type_emoji[location["TYPE"]]
+
             response += "Address: " + "{address} ({coordinates})\n".format(address=location["ADDRESS"],
                                                                            coordinates=location["GEOLOCATION"])
             response += "Phone: " + location["PHONE"] + "\n"
