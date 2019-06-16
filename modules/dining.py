@@ -22,6 +22,11 @@ class Dining(Module):
             managers.append(manager)
         return ", ".join([f"{name} ({email})" for name, email in managers])
 
+    def capacity_bar(is_open, capacity):
+        if not is_open:
+            return ''
+        return ('▇' * capacity) + ('░' * (10 - capacity))
+
     def response(self, query, message):
         locations = self.api.get_locations()
         response = ""
@@ -33,8 +38,10 @@ class Dining(Module):
             if desired_location is None:
                 return("Unknown location name.")
             response += "-" * 3 + desired_location["DININGLOCATIONNAME"] + "-" * 3 + "\n"
-            response += "Type: " + location["TYPE"] + " " + self.type_emoji[location["TYPE"]]
-
+            # TODO: this sucks lol
+            response += "Open: " + ("Yes", "No")[location["ISCLOSED"]]
+            response += "Capacity: " +
+            response += "Type: " + location["TYPE"] + " " + self.type_emoji[location["TYPE"]] + "\n"
             response += "Address: " + "{address} ({coordinates})\n".format(address=location["ADDRESS"],
                                                                            coordinates=location["GEOLOCATION"])
             response += "Phone: " + location["PHONE"] + "\n"
