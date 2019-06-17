@@ -22,7 +22,7 @@ class Dining(Module):
             managers.append(manager)
         return ", ".join([f"{name} ({email})" for name, email in managers])
 
-    def capacity_bar(capacity: int):
+    def capacity_bar(self, capacity: int):
         return ('▇' * capacity) + ('░' * (10 - capacity))
 
     def response(self, query, message):
@@ -41,7 +41,7 @@ class Dining(Module):
             # TODO: this sucks lol
             response += "Open: " + ("Yes" if is_open else "No") + "\n"
             if is_open:
-                response += "Capacity: {capacity}% ".format(capacity=location["CAPACITY"] * 10) + self.capacity_bar(is_open, location["CAPACITY"]) + "\n"
+                response += "Capacity: {capacity}% ".format(capacity=location["CAPACITY"] * 10) + self.capacity_bar(location["CAPACITY"]) + "\n"
             response += "Type: " + location["TYPE"] + " " + self.type_emoji[location["TYPE"]] + "\n"
             response += "Address: " + "{address} ({coordinates})\n".format(address=location["ADDRESS"],
                                                                            coordinates=location["GEOLOCATION"])
@@ -58,5 +58,5 @@ class Dining(Module):
                 is_open = not bool(location["ISCLOSED"])
                 response += "- {emoji} {name} ({status})\n".format(emoji=self.type_emoji[location["TYPE"]],
                                                                    name=location["DININGLOCATIONNAME"],
-                                                                   status=("Open" + (", {capacity}% capacity".format(capacity=10 * location["CAPACITY"]) if location.get("CAPACITY") is not None else "")) if is_open else "Closed")
+                                                                   status=("Open" + ((", {capacity}% capacity".format(capacity=10 * location["CAPACITY"]) + self.capacity_bar(location["CAPACITY"])) if location.get("CAPACITY") is not None else "")) if is_open else "Closed")
         return response
