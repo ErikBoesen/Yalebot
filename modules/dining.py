@@ -31,11 +31,11 @@ class Dining(Module):
         if query:
             location = None
             for location_candidate in locations:
-                if query == location["DININGLOCATIONNAME"]:
+                if query == location_candidate["DININGLOCATIONNAME"]:
                     location = location_candidate
             if location is None:
                 return f"Unknown location name '{query}'."
-            response += "-" * 3 + location["DININGLOCATIONNAME"] + "-" * 3 + "\n"
+            response += ("-" * 3) + location["DININGLOCATIONNAME"] + ("-" * 3) + "\n"
             # TODO: repetition
             is_open = not bool(location["ISCLOSED"])
             # TODO: this sucks lol
