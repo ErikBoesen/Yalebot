@@ -16,6 +16,7 @@ class Groups(Module):
         "FSY": "50473402/gMWpQ8WK",
         "FOCUS": "50535013/HphGXnXD",
         "Cultural Connections": "50539019/Zi6masBV",
+        "OIS": "51221005/yK4OvtHh",
 
         "New York City": "46816234/B3PBXk",
         "DMV": "46655481/kpn04v",
