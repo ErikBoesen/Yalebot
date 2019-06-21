@@ -16,7 +16,7 @@ class Building(Module):
         response += f"Building {building.id}: {building.name}\n"
         if building.category:
             response += f"Category: {building.category}\n"
-        response += f"Address:\n\t{building.address_1}\n\t{building.address_2}\n\t{building.address_3}\n"
+        response += f"Address:\n  {building.address_1}\n  {building.address_2}\n  {building.address_3}\n"
         if building.latitude and building.longitude:
             response += f"Coordinates: ({building.latitude}, {building.longitude})\n"
         if building.historical_name:

@@ -29,6 +29,7 @@ class Module:
         :param text: text in which to replace spaces.
         :return: text that's safe to send.
         """
+        text.replace("\t", " " * 4)
         return text.replace(" ", "\u2004")
 
 
