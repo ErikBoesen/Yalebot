@@ -115,6 +115,7 @@ commands = {
     "damn": modules.Damn(),
     "handshake": modules.Handshake(),
     "dining": modules.Dining(),
+    "building": modules.Building(),
 }
 system_responses = {
     "welcome": modules.Welcome(),
