@@ -13,14 +13,14 @@ class Building(Module):
         if building is None:
             return "No building found with that ID."
         response = ""
-        response += f"Building {building.id}: {building.name}"
+        response += f"Building {building.id}: {building.name}\n"
         if building.category:
             response += f"Category: {building.category}"
-        response += f"Address:\n\t{building.address_1}\n\t{building.address_2}\n\t{building.address_3}"
+        response += f"Address:\n\t{building.address_1}\n\t{building.address_2}\n\t{building.address_3}\n"
         if building.latitude and building.longitude:
-            response += f"Coordinates: ({building.latitude}, {building.longitude})"
+            response += f"Coordinates: ({building.latitude}, {building.longitude})\n"
         if building.historical_name:
-            response += f"Historical name: {building.historical_name}"
+            response += f"Historical name: {building.historical_name}\n"
         if building.prose:
-            response += f"Fun facts: {building.fun_facts}"
+            response += f"Fun facts: {building.fun_facts}\n"
         return response
