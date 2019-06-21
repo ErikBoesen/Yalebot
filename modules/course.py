@@ -11,10 +11,12 @@ class Course(Module):
     def response(self, query, message):
         if query.isalpha():
             courses = self.api.courses(query)
-            if course is None:
-                return "No course found with that ID."
+            if not courses:
+                return f"{query} is not a recognized subject."
             response = ""
-
+            for course in courses:
+                response += f"* {course.subject_code}{course.number}: {course.name}\n"
+            response += f"\nSpecify a course's number to get further information, for example '!course {courses[0].subject_code}{courses[0].number}'"
             return response
         else:
             return "Single course information querying coming soon!"
