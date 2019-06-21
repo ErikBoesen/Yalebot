@@ -62,3 +62,4 @@ from .damn import Damn
 from .handshake import Handshake
 from .dining import Dining
 from .building import Building
+from .course import Course
