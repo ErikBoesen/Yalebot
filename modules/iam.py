@@ -1,7 +1,6 @@
 from .base import Module
 
-TEMPLATE = """>
-i am:
+TEMPLATE = """i am:
 ⚪️ male
 ⚪️ female
 🔘 %s
