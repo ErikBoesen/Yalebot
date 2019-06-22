@@ -23,7 +23,7 @@ class Course(Module):
                 return query + " is not a recognized course."
             response = ""
             response += f"--- {course.number}: {course.name}\n ---"
-            if course.meeting_pattern:
+            if course.meeting_patterns:
                 response += f"Meeting schedule(s): " + ", ".join(course.meeting_patterns) + "\n"
             response += "Professors: " + ", ".join(course.instructors) + "\n"
             response += f"School: {course.school_name}"
