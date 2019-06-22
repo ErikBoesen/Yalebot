@@ -4,7 +4,7 @@ import os
 
 
 class Course(Module):
-    DESCRIPTION = "Get information on a Yale course, simply by specifying its ID. Specify a subject to learn about all courses in that subject."
+    DESCRIPTION = "Get information on a Yale course, simply by specifying its ID. Specify a subject to learn about all courses in that subject"
     ARGC = 1
     api = YaleCourses(os.environ.get("YALE_API_KEY"))
 
@@ -12,7 +12,7 @@ class Course(Module):
         if query.isalpha():
             courses = self.api.courses(query)
             if not courses:
-                return f"{query} is not a recognized subject."
+                return query + " is not a recognized subject."
             response = ""
             for course in courses:
                 response += f"* {course.subject_code}{course.number}: {course.name}\n"

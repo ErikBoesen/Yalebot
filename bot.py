@@ -118,6 +118,7 @@ commands = {
     "building": modules.Building(),
     "course": modules.Course(),
 }
+commands["courses"] = commands["course"]
 system_responses = {
     "welcome": modules.Welcome(),
     "mourn": modules.Mourn(),
