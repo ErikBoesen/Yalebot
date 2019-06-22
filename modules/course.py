@@ -17,6 +17,17 @@ class Course(Module):
             for course in courses:
                 response += f"* {course.subject_code}{course.number}: {course.name}\n"
             response += f"\nSpecify a course's number to get further information, for example '!course {courses[0].subject_code}{courses[0].number}'"
-            return response
         else:
-            return "Single course information querying coming soon!"
+            course = self.api.course(query)
+            if not course:
+                return query + " is not a recognized course."
+            response = ""
+            response += f"--- {course.number}: {course.name}\n ---"
+            if course.meeting_pattern:
+                response += f"Meeting schedule(s): " + ", ".join(course.meeting_patterns) + "\n"
+            response += "Professors: " + ", ".join(course.instructors) + "\n"
+            response += f"School: {course.school_name}"
+            response += "Registration available: " + ("YES" if course.active else "NO") + "\n"
+            response += "Description:\n"
+            response += course.raw_description
+        return response
