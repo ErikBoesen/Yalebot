@@ -1,5 +1,6 @@
 import os
 import requests
+import time
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from threading import Thread
@@ -274,6 +275,7 @@ def send(message, group_id):
         # If text is too long for one message, split it up over several
         for block in [message[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(message), MAX_MESSAGE_LENGTH)]:
             send(block, group_id)
+            time.sleep(0.3)
         data["text"] = ""
     else:
         data["text"] = message
