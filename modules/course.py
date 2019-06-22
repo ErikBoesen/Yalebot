@@ -9,7 +9,7 @@ class Course(Module):
     api = YaleCourses(os.environ.get("YALE_API_KEY"))
 
     def response(self, query, message):
-        if query.isalpha():
+        if not any([char.isdigit() for char in query]):
             courses = self.api.courses(query)
             if not courses:
                 return query + " is not a recognized subject."
