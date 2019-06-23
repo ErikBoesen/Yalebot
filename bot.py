@@ -119,6 +119,7 @@ commands = {
     "building": modules.Building(),
     "course": modules.Course(),
     "iam": modules.IAm(),
+    "people": modules.People(),
 }
 commands["courses"] = commands["course"]
 system_responses = {
