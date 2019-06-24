@@ -65,3 +65,4 @@ from .building import Building
 from .course import Course
 from .iam import IAm
 from .people import People
+from .compliment import Compliment
