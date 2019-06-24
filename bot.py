@@ -121,6 +121,7 @@ commands = {
     "iam": modules.IAm(),
     "people": modules.People(),
     "compliment": modules.Compliment(),
+    "poem": modules.Poem(),
 }
 commands["courses"] = commands["course"]
 system_responses = {
