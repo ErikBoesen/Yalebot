@@ -5,7 +5,7 @@ from yaledirectory import YaleDirectory
 class People(Module):
     DESCRIPTION = "Get information about Yale-affiliated people"
     ARGC = 1
-    api = YaleDirectory(os.environ.get("YALE_API_KEY"))
+    api = YaleDirectory()
 
     def response(self, query, message):
         people = self.api.search(query)
@@ -14,7 +14,8 @@ class People(Module):
         response = ""
         for person in people[:1]:
             response += "Name: " + person.display_name
-            response += "NetID: " + person.netid
+            if person.netid:
+                response += "NetID: " + person.netid
             if person.phone_number:
                 response += "Phone: " + person.phone_number
             if person.primary_organization_name:
@@ -25,5 +26,4 @@ class People(Module):
                 response += "Residential College Name: " + person.residential_college_name
             if person.student_expected_graduation_year:
                 response += "Grad year: " + person.student_expected_graduation_year
-            response += "UPI: " + person.upi
         return response
