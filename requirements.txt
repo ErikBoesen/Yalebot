@@ -21,7 +21,7 @@ discord.py
 
 pymessenger
 termcolor
-yaledining==0.1.0
+yaledining
 yalebuildings
 yalecourses>=0.1.4
 yaledirectory

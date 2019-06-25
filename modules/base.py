@@ -20,6 +20,16 @@ class Module:
     def lines(self, query):
         return [line for line in query.split("\n") if line != ""]
 
+    def bullet_list(self, pairs) -> str:
+        """
+        Generate nicely-formatted list of data points about some object.
+        :param pairs: list of tuples, each having a key and a value.
+        """
+        response = ""
+        for title, value in pairs:
+            if value:
+                response += title + ": " + value + "\n"
+
     @staticmethod
     def safe_spaces(text):
         """

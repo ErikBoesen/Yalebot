@@ -23,9 +23,8 @@ class Poem(Module):
     def response(self, query, message):
         word = random.choice(list(self.chain.keys()))
         message = word.capitalize()
-
         for _ in range(100):
             word = random.choice(self.chain[word])
-            message += ' ' + word
+            message += " " + word
 
         return message
