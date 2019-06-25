@@ -8,17 +8,10 @@ class Poem(Module):
 
     def __init__(self):
         super().__init__()
-        self.poems = open("resources/poetry.txt", "r").read()
-        self.poems = ''.join([i for i in self.poems if not i.isdigit()]).replace("\n\n", " ").split(' ')
-        # This process the list of poems. Double line breaks separate poems, so they are removed.
-        # Splitting along spaces creates a list of all words.
-
-    def response(self, query, message):
+        with open("resources/poetry.txt", "r") as f:
+            words = f.read().split()
         index = 1
         chain = {}
-
-        count = 100 # Desired word count of output
-
         # This loop creates a dicitonary called "chain". Each key is a word, and the value of each key
         # is an array of the words that immediately followed it.
         for word in self.poems[index:]:
@@ -29,13 +22,12 @@ class Poem(Module):
                 chain[key] = [word]
             index += 1
 
-        word1 = random.choice(list(chain.keys())) #random first word
-        message = word1.capitalize()
+    def response(self, query, message):
+        first_word = random.choice(list(chain.keys()))
+        message = first_word.capitalize()
 
-        # Picks the next word over and over until word count achieved
-        while len(message.split(' ')) < count:
-            word2 = random.choice(chain[word1])
-            word1 = word2
-            message += ' ' + word2
+        for _ in range(100):
+            word = random.choice(chain[word])
+            message += ' ' + word
 
         return message

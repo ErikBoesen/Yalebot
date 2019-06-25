@@ -67,3 +67,4 @@ from .iam import IAm
 from .people import People
 from .compliment import Compliment
 from .poem import Poem
+from .lmgtfy import LMGTFY
