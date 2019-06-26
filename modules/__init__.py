@@ -68,3 +68,4 @@ from .people import People
 from .compliment import Compliment
 from .poem import Poem
 from .lmgtfy import LMGTFY
+from .randomcollege import RandomCollege
