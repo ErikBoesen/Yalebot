@@ -25,4 +25,5 @@ class Course(Module):
                                      ("Professors", ", ".join(course.instructors)),
                                      ("School", course.school_name),
                                      ("Registration available", ("YES" if course.active else "NO")),
-                                     ("Description", "\n" + course.raw_description)))
+                                     ("Description", "\n" + course.raw_description)),
+                                    embellish_first=True)

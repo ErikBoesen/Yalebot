@@ -20,12 +20,17 @@ class Module:
     def lines(self, query):
         return [line for line in query.split("\n") if line != ""]
 
-    def bullet_list(self, pairs) -> str:
+    def bullet_list(self, pairs, embellish_first=False) -> str:
         """
         Generate nicely-formatted list of data points about some object.
         :param pairs: list of tuples, each having a key and a value.
         """
         response = ""
+        if embellish_first:
+            if type(pairs) == tuple:
+                pairs = list(pairs)
+            title, value = pairs.pop(0)
+            response += f"--- {title}: {value} ---\n"
         for title, value in pairs:
             if value:
                 response += f"{title}: {value}\n"
