@@ -87,6 +87,17 @@ class Analytics(Module):
             if percentage > last_percentage:
                 last_percentage = percentage
                 print("%d%% done" % percentage)
+        # Consolidate all of own messages into one user
+        yalebot = self.new_user("Yalebot")
+        yalebot_id = None
+        for user_id in self.groups[group_id]:
+            if self.groups[group_id][user_id]["Name"] == "Yalebot":
+                duplicate = self.groups[group_id].pop(user_id)
+                yalebot_id = user_id
+                for field in duplicate:
+                    yalebot[field] += duplicate[field]
+        if yalebot_id:
+            self.groups[group_id][yalebot_id] = yalebot
         for user_id in self.groups[group_id]:
             if self.groups[group_id][user_id]["Messages"] > 0:
                 self.groups[group_id][user_id]["Likes Received Per Message"] = (self.groups[group_id][user_id]["Likes Received"] / self.groups[group_id][user_id]["Messages"])
