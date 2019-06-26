@@ -13,9 +13,7 @@ class Course(Module):
             courses = self.api.courses(query)
             if not courses:
                 return query + " is not a recognized subject."
-            response = ""
-            for course in courses:
-                response += f"* {course.subject_code}{course.number}: {course.name}\n"
+            response = self.bullet_list(*[(course.subject_code + course.number, course.name) for course in courses])
             response += f"\nSpecify a course's number to get further information, for example '!course {courses[0].subject_code}{courses[0].number}'"
         else:
             course = self.api.course(query)
