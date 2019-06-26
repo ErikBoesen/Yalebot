@@ -95,7 +95,8 @@ class Analytics(Module):
             if self.groups[group_id][user_id]["Name"] == "Yalebot":
                 yalebot_id = user_id
                 for field in self.groups[group_id][user_id]:
-                    yalebot[field] += self.groups[group_id][user_id][field]
+                    if type(yalebot[field]) != str:
+                        yalebot[field] += self.groups[group_id][user_id][field]
         if yalebot_id:
             self.groups[group_id][yalebot_id] = yalebot
             for user_id in duplicate_ids:
