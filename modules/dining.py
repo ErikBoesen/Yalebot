@@ -20,14 +20,14 @@ class Dining(Module):
             if location is None:
                 return f"Unknown location name '{query}'."
             response = self.bullet_list(((location.name, "Open" if location.open else "Closed"),
-                                         ("Capacity", (f"{location.percent_capacity}% " + self.capacity_bar(location.percent_capacity)) if location.open else None),
+                                         ("Capacity", (f"{location.percent_capacity}% " + self.capacity_bar(location.capacity)) if location.open else None),
                                          ("Type", location.type + " " + self.type_emoji[location.type]),
                                          ("Address", f"{location.address} ({location.geolocation})"),
                                          ("Phone", location.phone),
                                          ("Managers", ", ".join([f"{manager.name} ({manager.email})" for manager in location.managers]))),
                                         embellish_first=True) + "\n"
             meals = location.meals
-            if menus:
+            if meals:
                 response += "Menu support coming soon!"
             else:
                 response += "No menu is currently available."
