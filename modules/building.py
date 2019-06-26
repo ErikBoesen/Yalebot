@@ -12,15 +12,11 @@ class Building(Module):
         building = self.api.building(query)
         if building is None:
             return "No building found with that ID."
-        response = ""
-        response += f"Building {building.id}: {building.name}\n"
-        if building.category:
-            response += f"Category: {building.category}\n"
-        response += f"Address:\n  {building.address_1}\n  {building.address_2}\n  {building.address_3}\n"
-        if building.latitude and building.longitude:
-            response += f"Coordinates: ({building.latitude}, {building.longitude})\n"
-        if building.historical_name:
-            response += f"Historical name: {building.historical_name}\n"
-        if building.prose:
-            response += f"Fun facts: {building.fun_facts}\n"
-        return response
+        return self.bullet_list(("Building " + building.id, building.name),
+                                ("Category", building.category),
+                                ("Address", building.address_1),
+                                ("City", building.address_2),
+                                ("Zip code", building.address_3),
+                                ("Coordinates", f"({building.latitude}, {building.longitude})" if building.longitude and building.latitude else None),
+                                ("Historical name", building.historical_name),
+                                ("Fun facts", building.fun_facts))
