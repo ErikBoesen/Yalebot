@@ -124,6 +124,7 @@ commands = {
     "poem": modules.Poem(),
     "lmgtfy": modules.LMGTFY(),
     "randomcollege": modules.RandomCollege(),
+    "morse": modules.Morse(),
 }
 commands["courses"] = commands["course"]
 system_responses = {

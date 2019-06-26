@@ -69,3 +69,4 @@ from .compliment import Compliment
 from .poem import Poem
 from .lmgtfy import LMGTFY
 from .randomcollege import RandomCollege
+from .morse import Morse

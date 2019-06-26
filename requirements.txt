@@ -25,3 +25,4 @@ yaledining
 yalebuildings
 yalecourses>=0.1.4
 yaledirectory
+morse-talk
