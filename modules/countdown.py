@@ -27,7 +27,8 @@ class Event:
 
     def __init__(self, name: str, date: datetime.datetime):
         self.name = name
-        self.date = date
+        # Compensate for heroku hosting timezone
+        self.date = date + datetime.timedelta(hours=4)
 
 
 class Countdown(Module):
@@ -68,8 +69,6 @@ class Countdown(Module):
 
     def remaining_events(self):
         now = datetime.datetime.now()
-        # Compensate for heroku hosting timezone
-        now -= datetime.timedelta(hours=4)
         for event in self.events:
             if (event.date - now).total_seconds() < 0:
                 self.events.pop(0)
