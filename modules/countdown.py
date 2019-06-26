@@ -17,6 +17,7 @@ class Event:
         Get time split into units until Bulldog Days.
         """
         now = datetime.datetime.now()
+        # Compensate for heroku hosting timezone
         delta = self.date - now
         seconds = delta.total_seconds()
         weeks, seconds = divmod(seconds, 60 * 60 * 24 * 7)
@@ -35,7 +36,7 @@ class Countdown(Module):
     events = [
         Event("Bulldog Days", datetime.datetime(year=2019, month=4, day=15, hour=14)),
         Event("FSY", datetime.datetime(year=2019, month=6, day=25, hour=17)),
-        Event("residential college/roommate announcements", datetime.datetime(year=2019, month=6, day=26, hour=12)),
+        Event("housing announcements", datetime.datetime(year=2019, month=6, day=26, hour=12)),
         Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20)),
     ]
 

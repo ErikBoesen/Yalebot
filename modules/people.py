@@ -1,11 +1,12 @@
 from .base import Module
 from yaledirectory import YaleDirectory
+import os
 
 
 class People(Module):
     DESCRIPTION = "Get information about Yale-affiliated people"
     ARGC = 1
-    api = YaleDirectory()
+    api = YaleDirectory(os.environ.get("NETID"), os.environ.get("YALE_PASSWORD"))
 
     def response(self, query, message):
         people = self.api.search(query)

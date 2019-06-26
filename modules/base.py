@@ -28,7 +28,8 @@ class Module:
         response = ""
         for title, value in pairs:
             if value:
-                response += title + ": " + value + "\n"
+                response += f"{title}: {value}\n"
+        return response
 
     @staticmethod
     def safe_spaces(text):
