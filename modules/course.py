@@ -13,19 +13,16 @@ class Course(Module):
             courses = self.api.courses(query)
             if not courses:
                 return query + " is not a recognized subject."
-            response = self.bullet_list(*[(course.subject_code + course.number, course.name) for course in courses])
+            response = self.bullet_list(tuple([(course.subject_code + course.number, course.name) for course in courses]))
             response += f"\nSpecify a course's number to get further information, for example '!course {courses[0].subject_code}{courses[0].number}'"
+            return response
         else:
             course = self.api.course(query)
             if not course:
                 return query + " is not a recognized course."
-            response = ""
-            response += f"--- {course.number}: {course.name} ---\n"
-            if course.meeting_patterns:
-                response += f"Meeting schedule(s): " + ", ".join(course.meeting_patterns) + "\n"
-            response += "Professors: " + ", ".join(course.instructors) + "\n"
-            response += f"School: {course.school_name}\n"
-            response += "Registration available: " + ("YES" if course.active else "NO") + "\n"
-            response += "Description:\n"
-            response += course.raw_description
-        return response
+            return self.bullet_list(((course.number, course.name),
+                                     ("Meeting schedule(s)", ", ".join(course.meeting_patterns)),
+                                     ("Professors", ", ".join(course.instructors)),
+                                     ("School", course.school_name),
+                                     ("Registration available", ("YES" if course.active else "NO")),
+                                     ("Description", "\n" + course.raw_description)))
