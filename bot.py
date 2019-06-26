@@ -212,6 +212,9 @@ def process_message(message):
                     db.session.delete(response)
                     db.session.commit()
                     responses.append(f"Command {query} unregistered.")
+            elif command == "stats":
+                count = Bot.count()
+                responses.append(f"I am currently in {count} GroupMe groups. Add me to more at https://yalebot.herokuapp.com!")
             else:
                 response = Response.query.get(command)
                 if response is not None:
