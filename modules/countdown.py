@@ -18,6 +18,7 @@ class Event:
         """
         now = datetime.datetime.now()
         # Compensate for heroku hosting timezone
+        now -= datetime.timedelta(hours=4)
         delta = self.date - now
         seconds = delta.total_seconds()
         weeks, seconds = divmod(seconds, 60 * 60 * 24 * 7)
