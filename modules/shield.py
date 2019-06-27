@@ -18,7 +18,7 @@ class Shield(ImageModule):
         smallest_dimension = min(background_width, background_height)
         # Crop to square
         left = (background_width - smallest_dimension) / 2
-        top = (height - smallest_dimension) / 2
+        top = (background_height - smallest_dimension) / 2
         right = background_width - left
         bottom = background_height - top
         background = background.crop((left, top, right, bottom))
