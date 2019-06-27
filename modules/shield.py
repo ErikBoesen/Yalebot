@@ -8,14 +8,13 @@ class Shield(ImageModule):
 
     def __init__(self):
         super().__init__()
-        shields = {name.lower(): Image.open("resources/shields/" + name.replace(" ", "") + ".png") for name in self.COLLEGES}
 
     def response(self, query, message):
         if query not in self.COLLEGES:
             return query + " is not recognized as a college name. Valid colleges: " + ", ".join(self.COLLEGES)
         background = self.pil_from_url(source_url)
         background_width, background_height = background.size
-        shield = self.shields[query.lower()].copy()
+        shield = Image.open("resources/shields/" + query.lower().replace(" ", "") + ".png")
         shield_natural_width, shield_natural_height = background.size
 
         shield = self.resize(shield, background_width // self.SIZE_RATIO)
