@@ -125,6 +125,7 @@ commands = {
     "lmgtfy": modules.LMGTFY(),
     "randomcollege": modules.RandomCollege(),
     "morse": modules.Morse(),
+    "shield": modules.Shield(),
 }
 commands["courses"] = commands["course"]
 system_responses = {
@@ -214,7 +215,7 @@ def process_message(message):
                     db.session.commit()
                     responses.append(f"Command {query} unregistered.")
             elif command == "stats":
-                count = Bot.count()
+                count = Bot.query.count()
                 responses.append(f"I am currently in {count} GroupMe groups. Add me to more at https://yalebot.herokuapp.com!")
             else:
                 response = Response.query.get(command)
