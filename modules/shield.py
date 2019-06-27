@@ -15,6 +15,14 @@ class Shield(ImageModule):
         source_url = self.get_source_url(message)
         background = self.pil_from_url(source_url)
         background_width, background_height = background.size
+        smallest_dimension = min(background_width, background_height)
+        # Crop to square
+        left = (background_width - smallest_dimension) / 2
+        top = (height - smallest_dimension) / 2
+        right = background_width - left
+        bottom = background_height - top
+        background = background.crop((left, top, right, bottom))
+
         shield = Image.open("static/images/shields/" + query.lower().replace(" ", "") + ".png")
         shield_natural_width, shield_natural_height = background.size
 
