@@ -1,5 +1,5 @@
 from .base import ImageModule
-from PIL import Image, ImageDraw
+from PIL import Image
 import random
 
 

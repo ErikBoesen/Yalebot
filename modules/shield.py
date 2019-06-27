@@ -1,6 +1,5 @@
 from .base import ImageModule
-from PIL import Image, ImageDraw
-import random
+from PIL import Image
 
 
 class Shield(ImageModule):
@@ -15,14 +14,15 @@ class Shield(ImageModule):
         if query not in self.COLLEGES:
             return query + " is not recognized as a college name. Valid colleges: " + ", ".join(self.COLLEGES)
         background = self.pil_from_url(source_url)
+        background_width, background_height = background.size
         shield = self.shields[query.lower()].copy()
-        shield_width, shield_height = background.size
-        shield_width //= self.SIZE_RATIO
-        shield_height //= self.SIZE_RATIO
+        shield_natural_width, shield_natural_height = background.size
 
-        processed_heart = heart.resize((heart_size, heart_size), Image.ANTIALIAS)
-        background.paste(processed_heart,
-                         (int(random.random() * (image_width - processed_width)), int(random.random() * (image_height - processed_height))),
-                         processed_heart)
+        shield = self.resize(shield, background_width // self.SIZE_RATIO)
+        processed_width, processed_height = shield.size
+        background.paste(shield,
+                         (int(background_width - processed_width - (processed_width // self.SIZE_RATIO)),
+                          int(background_height - processed_height - (processed_height // self.SIZE_RATIO))),
+                         shield)
 
         return "", self.upload_pil_image(background)
