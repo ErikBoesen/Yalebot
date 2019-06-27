@@ -15,7 +15,7 @@ class Shield(ImageModule):
         source_url = self.get_source_url(message)
         background = self.pil_from_url(source_url)
         background_width, background_height = background.size
-        shield = Image.open("resources/shields/" + query.lower().replace(" ", "") + ".png")
+        shield = Image.open("static/images/shields/" + query.lower().replace(" ", "") + ".png")
         shield_natural_width, shield_natural_height = background.size
 
         shield = self.resize(shield, background_width // self.SIZE_RATIO)
