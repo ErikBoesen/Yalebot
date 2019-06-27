@@ -22,6 +22,8 @@ class Shield(ImageModule):
         right = background_width - left
         bottom = background_height - top
         background = background.crop((left, top, right, bottom))
+        # Get new width and height
+        background_width, background_height = background.size
 
         shield = Image.open("resources/shields/" + query.lower().replace(" ", "") + ".png")
         shield_natural_width, shield_natural_height = background.size
