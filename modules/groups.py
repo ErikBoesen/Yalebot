@@ -17,6 +17,7 @@ class Groups(Module):
         "FOCUS": "50535013/HphGXnXD",
         "Cultural Connections": "50539019/Zi6masBV",
         "OIS": "51221005/yK4OvtHh",
+        "First Gen": "49418581/byuFtN4q",
 
         "New York City": "46816234/B3PBXk",
         "DMV": "46655481/kpn04v",
