@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import unittest
 import bot
 
@@ -16,8 +17,10 @@ class MessageProcessing(unittest.TestCase):
     def test_empty(self):
         self._message("This shouldn't trigger anything.", [])
 
+    """
     def test_invalid_command(self):
         self._command("this_is_not_a_real_command", "some content", "Command not found. Use !help to view a list of commands.")
+    """
 
     def test_static(self):
         for key in bot.static_commands:
