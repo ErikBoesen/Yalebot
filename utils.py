@@ -4,10 +4,6 @@ from termcolor import colored
 from datetime import datetime
 
 
-class Platform(Enum):
-    GROUPME = 0
-
-
 class SenderType(Enum):
     USER = "user"
     BOT = "bot"
@@ -15,10 +11,9 @@ class SenderType(Enum):
 
 
 class Message:
-    def __init__(self, raw, text, platform=None, user_id=None, time=None, name=None, sender_type=SenderType.USER, group_id=None, avatar_url=None):
+    def __init__(self, raw, text, user_id=None, time=None, name=None, sender_type=SenderType.USER, group_id=None, avatar_url=None):
         self.raw = raw
         self.text = text
-        self.platform = platform
         self.user_id = user_id
         if time is None:
             self.time = datetime.now()
@@ -33,25 +28,14 @@ class Message:
         print(self)
 
     def __repr__(self):
-        color = {Platform.GROUPME: "green"}.get(self.platform)
-        return colored("{location} | {name}: {text}".format(location=self.get_location(),
-                                                            name=self.name,
-                                                            text=self.text), color)
-
-    def get_location(self):
-        if self.platform == Platform.GROUPME:
-            return self.group_id
-        if self.platform == Platform.DISCORD:
-            return "#" + self.raw.channel.name
-        if self.platform == Platform.FACEBOOK:
-            # TODO
-            pass
+        return "{location} | {name}: {text}".format(location=self.group_id,
+                                                    name=self.name,
+                                                    text=self.text)
 
     @classmethod
     def from_groupme(cls, message: dict):
         return cls(message,
                    text=message.get("text"),
-                   platform=Platform.GROUPME,
                    user_id=message.get("user_id"),
                    time=message.get("created_at"),
                    name=message.get("name"),
@@ -61,7 +45,6 @@ class Message:
 
     @property
     def image_url(self):
-        if self.platform == Platform.GROUPME:
-            image_attachments = [attachment for attachment in self.raw["attachments"] if attachment["type"] == "image"]
-            if image_attachments:
-                return image_attachments[0]["url"]
+        image_attachments = [attachment for attachment in self.raw["attachments"] if attachment["type"] == "image"]
+        if image_attachments:
+            return image_attachments[0]["url"]
