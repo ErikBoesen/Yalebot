@@ -71,3 +71,4 @@ from .lmgtfy import LMGTFY
 from .randomcollege import RandomCollege
 from .morse import Morse
 from .shield import Shield
+from .organizations import Organizations
