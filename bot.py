@@ -399,4 +399,4 @@ if __name__ == "__main__":
                                       input("> "),
                                       name="Tester",
                                       group_id="49940116",
-                                      avatar_url="https://i.groupme.com/563x563.jpeg.d055af594625412fab6b5a66dbb27693")))
+                                      avatar_url="https://i.groupme.com/900x620.jpeg.bdc7a3233afc4832a3bce3fae95c2d8b.preview")))
