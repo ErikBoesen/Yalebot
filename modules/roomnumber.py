@@ -15,20 +15,19 @@ class RoomNumber(Module):
         return ", ".join(items)
 
     def response(self, query, message):
-        # First letter is entryway
-        # First number is floor number
-        # Following number is the number of the room on that floor
-        # A letter at the end is the room off the suite that you're in
         query = query.upper()
 
         result = self.NUMBER.search(query)
         if not result:
             return query + " is not a recognized suite or room."
         entryways, floor, suite, room = result.groups()
-        response = ""
-        response += "Your suite can be accessed through entryway%s %s, " % ("s" if len(entryways) > 1 else "",
-                                                                            self.verbalize_list(entryways))
-        response += "is on floor %s, and is suite #%s on that floor.\n" % (floor, room_number)
-        if query:
-            response += " Your own room is room %s in your suite.\n" % query
+        response = (
+            "Your suite can be accessed through entryway{pluralize_entryway} {entryways}, "
+            "is on floor {floor}, and is suite #{suite} on that floor."
+        ).format(pluralize_entryway="s" if len(entryways) > 1 else "",
+                 entryways=self.verbalize_list(entryways),
+                 floor=floor,
+                 suite=suite)
+        if room:
+            response += " Your own room is room {room} within your suite.".format(room=room)
         return response
