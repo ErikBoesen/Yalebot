@@ -15,6 +15,8 @@ class RoomNumber(Module):
         return ", ".join(items)
 
     def response(self, query, message):
+        if not query:
+            return "Confidentially decode your room number using this helpful tool: https://erikboesen.com/roomnumbers"
         query = query.upper()
 
         result = self.NUMBER.search(query)
