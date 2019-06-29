@@ -22,15 +22,20 @@ class RoomNumber(Module):
         query = query.upper()
         if not self.NUMBER.match(query):
             return query + " is not a recognized room number."
-        try:
-            entryways = []
-            while query[0].isalpha():
-                entryways += query[0].upper()
-                query = query[1:]
-            response += "Your room can be accessed through the %s entryway%s.\n" % (self.verbalize_list(entryways),
-                                                                                    "s" if len(entryways) > 1)
-            floor = query[0]
+        entryways = []
+        while query[0].isalpha():
+            entryways += query[0].upper()
             query = query[1:]
-            response += "Your room is on floor #%s.\n" % floor
-            room_number = ""
-            while
+        response += "Your suite can be accessed through the %s entryway%s.\n" % (self.verbalize_list(entryways),
+                                                                                 "s" if len(entryways) > 1 else "")
+        floor = query[0]
+        query = query[1:]
+        response += "The suite can be found on floor %s.\n" % floor
+        room_number = ""
+        while query[0].isdigit():
+            room_number += query[0]
+            query = query[1:]
+        response += "Your suite is #%s on that floor.\n" % room_number
+        if query:
+            response += "Your own room is room %s in your suite.\n" % query
+        return response
