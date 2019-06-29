@@ -1,13 +1,13 @@
 # Yalebot
 [![Build Status](https://travis-ci.org/ErikBoesen/Yalebot.svg?branch=master)](https://travis-ci.org/ErikBoesen/Yalebot)
 
-> A chatbot for Yale University.
+> A GroupMe chatbot for Yale University.
 
 ![Screenshot](screenshot.png)
 
 To add this bot to your own server, go [here](https://yalebot.herokuapp.com)!
 
-[Add to Discord server](https://discordapp.com/oauth2/authorize?client_id=576194237175955456&permissions=0&scope=bot)
+**NOTE:** This bot was formerly available for Discord and Facebook Messenger, but due to lack of use that functionality has been removed.
 
 ## Some notes
 I would not recommend attempting to reuse this bot's code for your own. While I've licensed it under the GPL and invite you to borrow code at will under proper attribution, this bot is extremely complex, which a very large number of extraneous features that you probably don't want. If you want to use this bot yourself, it's quite easy to [add it to your own group](https://yalebot.herokuapp.com). If you're interested in creating your own GroupMe bot from scratch, start with [this tutorial](http://www.apnorton.com/blog/2017/02/28/How-I-wrote-a-Groupme-Chatbot-in-24-hours/). If you need practice in Python, I recommend [Codecademy's course](https://www.codecademy.com/learn/learn-python-3).
