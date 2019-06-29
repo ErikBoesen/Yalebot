@@ -9,5 +9,7 @@ jobs:
   include:
     - stage: style
       script: ./style_test.sh
+    - stage: unittest
+      script: ./unittests.py
 cache: pip
 
