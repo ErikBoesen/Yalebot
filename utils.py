@@ -12,6 +12,11 @@ class SenderType(Enum):
 
 class Message:
     def __init__(self, raw={}, text=None):
+        """
+        Translate raw message data into an easily usable format.
+        :param raw: a dictionary of raw message data.
+        :param text: raw text of message, useful for saving verbosity when testing.
+        """
         self.raw = raw or {"attachments": []}
         self.text = text or raw.get("text")
         self.user_id = raw.get("user_id")

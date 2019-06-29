@@ -244,11 +244,11 @@ def process_message(message):
 
 
 def reply(message, group_id):
-    send(process_message(Message.from_groupme(message)), group_id)
+    send(process_message(Message(message)), group_id)
 
 
 @app.route("/", methods=["POST"])
-def groupme_webhook():
+def receive():
     """
     Receive callback to URL when message is sent in the group.
     """
