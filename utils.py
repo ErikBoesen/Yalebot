@@ -11,18 +11,17 @@ class SenderType(Enum):
 
 
 class Message:
-    def __init__(self, raw, text, user_id=None, time=None, name=None, sender_type=SenderType.USER, group_id=None, avatar_url=None):
+    def __init__(self, raw={}, text=None, user_id=None, time=None, name=None, sender_type=SenderType.USER, group_id=None, avatar_url=None):
         self.raw = raw
-        self.text = text
+        self.text = text or raw.get(
         self.user_id = user_id
-        if time is None:
-            self.time = datetime.now()
+        time = raw.get("created_at", datetime.now())
         elif type(time) == int:
             self.time = datetime.fromtimestamp(time)
         else:
             self.time = time
-        self.name = name
-        self.sender_type = sender_type
+        self.name = name or "Test"
+        self.sender_type = SenderType(message.get("sender_type"))
         self.group_id = group_id
         self.avatar_url = avatar_url
         print(self)
@@ -33,15 +32,14 @@ class Message:
                                                     text=self.text)
 
     @classmethod
-    def from_groupme(cls, message: dict):
+    def from_groupme(cls, message: dict = {"attachments": []}):
         return cls(message,
                    text=message.get("text"),
                    user_id=message.get("user_id"),
-                   time=message.get("created_at"),
-                   name=message.get("name"),
-                   sender_type=SenderType(message.get("sender_type")),
-                   group_id=message.get("group_id"),
-                   avatar_url=message.get("avatar_url"))
+                   time=,
+                   sender_type=,
+                   group_id=message.get("group_id", "49940116"),
+                   avatar_url=message.get("avatar_url", "https://i.groupme.com/900x620.jpeg.bdc7a3233afc4832a3bce3fae95c2d8b.preview"))
 
     @property
     def image_url(self):

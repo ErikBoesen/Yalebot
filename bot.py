@@ -395,8 +395,4 @@ def delete_bot():
 
 if __name__ == "__main__":
     while True:
-        print(process_message(Message({"attachments": []},
-                                      input("> "),
-                                      name="Tester",
-                                      group_id="49940116",
-                                      avatar_url="https://i.groupme.com/900x620.jpeg.bdc7a3233afc4832a3bce3fae95c2d8b.preview")))
+        print(process_message(Message(text=input("> "))))
