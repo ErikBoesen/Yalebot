@@ -6,8 +6,6 @@ from datetime import datetime
 
 class Platform(Enum):
     GROUPME = 0
-    DISCORD = 1
-    FACEBOOK = 2
 
 
 class SenderType(Enum):
@@ -35,7 +33,7 @@ class Message:
         print(self)
 
     def __repr__(self):
-        color = {Platform.GROUPME: "green", Platform.DISCORD: "magenta", Platform.FACEBOOK: "blue"}.get(self.platform)
+        color = {Platform.GROUPME: "green"}.get(self.platform)
         return colored("{location} | {name}: {text}".format(location=self.get_location(),
                                                             name=self.name,
                                                             text=self.text), color)
@@ -60,25 +58,6 @@ class Message:
                    sender_type=SenderType(message.get("sender_type")),
                    group_id=message.get("group_id"),
                    avatar_url=message.get("avatar_url"))
-
-    @classmethod
-    def from_discord(cls, message: discord.message):
-        return cls(message,
-                   text=message.content,
-                   platform=Platform.DISCORD,
-                   user_id=message.id,
-                   time=message.created_at,
-                   name=message.author.display_name,
-                   avatar_url=message.author.avatar_url)
-
-    @classmethod
-    def from_facebook(cls, message: dict):
-        return cls(message,
-                   text=message["message"]["text"],
-                   platform=Platform.FACEBOOK,
-                   user_id=message["sender"]["id"],
-                   time=message["timestamp"] // 1000,
-                   name="Friend")
 
     @property
     def image_url(self):
