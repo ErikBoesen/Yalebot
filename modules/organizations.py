@@ -8,7 +8,17 @@ class Organizations(Module):
     api = YaleOrgDirectory(os.environ.get("YALE_API_KEY"))
 
     def response(self, query, message):
-        organizations = self.api.organizations(tags=query)
-        if not organizations:
-            return "No organizations found."
-        return self.bullet_list([(organization.name, organization.website) for organization in organizations])
+        if not query:
+            if not organizations:
+                return "No organizations found."
+            organizations = self.api.organizations(tags=query)
+            return self.bullet_list([(organization.name, organization.website) for organization in organizations])
+        else:
+            organization = self.api.organization(query)
+            if not organization:
+                return f"No organization '{query}' found."
+            return self.bullet_list((("Name", organization.name),
+                                     ("Website", organization.website),
+                                     ("Address", organization.address),
+                                     ("Room #", organization.room),
+                                     ("Telephone #", organization.telephone)))
