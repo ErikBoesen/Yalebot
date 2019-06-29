@@ -4,17 +4,24 @@ import bot
 
 class MessageProcessing(unittest.TestCase):
     def _message(self, text, response):
+        # Handle single strings
         if type(response) != list:
             response = [response]
         message = bot.Message(text=text)
         self.assertEqual(bot.process_message(message), response)
+
+    def _command(self, command, text, response):
+        self._message(bot.PREFIX + command + " " + text, response)
 
     def test_empty(self):
         self._message("This shouldn't trigger anything.", [])
 
     def test_static(self):
         for key in bot.static_commands:
-            self._message(bot.PREFIX + key, bot.static_commands[key])
+            self._command(key, "", bot.static_commands[key])
+
+    def test_morse(self):
+        self._command("morse", "SOS", "...   ---   ...")
 
 
 if __name__ == "__main__":

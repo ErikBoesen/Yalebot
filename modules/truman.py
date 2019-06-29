@@ -6,7 +6,7 @@ import ocrspace
 class Truman(ImageModule):
     DESCRIPTION = "Is your battery sinfully low?"
     PERCENTAGE_RE = re.compile(r"(\d+) *%")
-    api = ocrspace.OCRSpace()
+    api = ocrspace.API()
 
     def response(self, query, message):
         source_url = self.get_source_url(message)
