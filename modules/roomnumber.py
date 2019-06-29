@@ -4,7 +4,6 @@ import re
 
 class RoomNumber(Module):
     DESCRIPTION = "Decode cryptic room numbers"
-    ARGC = 1
     NUMBER = re.compile(r"^([A-Z]+)(\d)(\d+)([A-Z]+)?$")
 
     def verbalize_list(self, items):
@@ -16,7 +15,7 @@ class RoomNumber(Module):
 
     def response(self, query, message):
         if not query:
-            return "Confidentially decode your room number using this helpful tool: https://erikboesen.com/roomnumbers"
+            return "Confidentially decode your room number using this helpful tool: https://erikboesen.com/roomnumbers\nAlternatively, specify your room number after this command, bearing in mind that your room number will be visible in the group."
         query = query.upper()
 
         result = self.NUMBER.search(query)
