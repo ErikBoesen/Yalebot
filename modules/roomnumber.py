@@ -5,9 +5,10 @@ import re
 class RoomNumber(Module):
     DESCRIPTION = "Decode cryptic room numbers"
     ARGC = 1
-    NUMBER = re.compile(r"^([A-Z]+)\d(\d+)([A-Z]+)?$")
+    NUMBER = re.compile(r"^([A-Z]+)(\d)(\d+)([A-Z]+)?$")
 
     def verbalize_list(self, items):
+        items = list(items)
         if len(items) > 1:
             last = items.pop()
             items[-1] += " and " + last
@@ -18,24 +19,16 @@ class RoomNumber(Module):
         # First number is floor number
         # Following number is the number of the room on that floor
         # A letter at the end is the room off the suite that you're in
-        response = ""
         query = query.upper()
-        if not self.NUMBER.match(query):
-            return query + " is not a recognized room number."
-        entryways = []
-        while query[0].isalpha():
-            entryways += query[0].upper()
-            query = query[1:]
-        response += "Your suite can be accessed through the %s entryway%s.\n" % (self.verbalize_list(entryways),
-                                                                                 "s" if len(entryways) > 1 else "")
-        floor = query[0]
-        query = query[1:]
-        response += "The suite can be found on floor %s.\n" % floor
-        room_number = ""
-        while query[0].isdigit():
-            room_number += query[0]
-            query = query[1:]
-        response += "Your suite is #%s on that floor.\n" % room_number
+
+        result = self.NUMBER.search(query)
+        if not result:
+            return query + " is not a recognized suite or room."
+        entryways, floor, suite, room = result.groups()
+        response = ""
+        response += "Your suite can be accessed through entryway%s %s, " % ("s" if len(entryways) > 1 else "",
+                                                                            self.verbalize_list(entryways))
+        response += "is on floor %s, and is suite #%s on that floor.\n" % (floor, room_number)
         if query:
-            response += "Your own room is room %s in your suite.\n" % query
+            response += " Your own room is room %s in your suite.\n" % query
         return response
