@@ -280,6 +280,11 @@ class Meme(ImageModule):
                 {"position": (313, 183)},
                 {"position": (372, 520)},
             ),
+            "maslow": (
+                {"center_vertical": True, "color": self.WHITE},
+
+                {"position": (328, 383)},
+            ),
         }
         self.templates["yaledrake"] = self.templates["drake"]
         self.DESCRIPTION = "Generate memes! List the desired template, and then captions each on a new line. " + self.list_templates()
