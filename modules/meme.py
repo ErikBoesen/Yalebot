@@ -281,7 +281,7 @@ class Meme(ImageModule):
                 {"position": (372, 520)},
             ),
             "maslow": (
-                {"center_vertical": True, "color": self.WHITE},
+                {"center_vertical": True, "color": self.WHITE, "wrap": 40},
 
                 {"position": (328, 383)},
             ),
