@@ -274,7 +274,7 @@ class Meme(ImageModule):
                 {"position": (383, 41)},
             ),
             "hulk": (
-                {"center_vertical": True},
+                {"center_vertical": True, "color": self.WHITE},
 
                 {"position": (183, 87)},
                 {"position": (313, 183)},
