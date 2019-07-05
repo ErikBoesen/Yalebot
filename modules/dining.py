@@ -28,9 +28,11 @@ class Dining(Module):
                                         embellish_first=True) + "\n"
             meals = location.meals
             if meals:
-                response += "Menu support coming soon!"
+                response += self.bullet_list(tuple([(meal.name, ", ".join([item.name for item in meal.items])) for meal in meals]))
+                for meal in meals:
+                    response
             else:
-                response += "No menu is currently available."
+                response += "No menu is currently listed."
         else:
             locations = self.api.locations()
             for location in locations:
