@@ -28,7 +28,8 @@ class Dining(Module):
                                         embellish_first=True) + "\n"
             meals = location.meals
             if meals:
-                response += self.bullet_list(tuple([(meal.name, ", ".join([item.name for item in meal.items])) for meal in meals]))
+                response += self.bullet_list(tuple([(meal.date.strftime("%m/%d") + " " + meal.name,
+                                                     ", ".join([item.name for item in meal.items])) for meal in meals]))
                 for meal in meals:
                     response
             else:
