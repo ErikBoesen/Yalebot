@@ -37,7 +37,8 @@ class Countdown(Module):
         Event("Bulldog Days", datetime.datetime(year=2019, month=4, day=15, hour=14)),
         Event("FSY", datetime.datetime(year=2019, month=6, day=25, hour=17)),
         Event("housing announcements", datetime.datetime(year=2019, month=6, day=26, hour=12)),
-        Event("orientation week begins", datetime.datetime(year=2019, month=8, day=20)),
+        Event("pre-orientation", datetime.datetime(year=2019, month=8, day=17, hour=12)),
+        Event("orientation", datetime.datetime(year=2019, month=8, day=20)),
     ]
 
     def get_event(self, name):
