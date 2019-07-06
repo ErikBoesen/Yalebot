@@ -128,6 +128,7 @@ commands = {
     "shield": modules.Shield(),
     "organizations": modules.Organizations(),
     "roomnumber": modules.RoomNumber(),
+    "smol": modules.Smol(),
 }
 commands["courses"] = commands["course"]
 system_responses = {
