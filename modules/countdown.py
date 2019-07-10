@@ -12,13 +12,19 @@ class Event:
         return "There {0} {6} week{1}, {7} day{2}, {8} hour{3}, {9} minute{4}, and {10:.2f} second{5} left until {name}.".format(*(plurality + remaining),
                                                                                                                                  name=self.name)
 
+    @property
+    def delta(self) -> datetime.timedelta:
+        """
+        Get datetime.timedelta remaining until, or elapsed since, this event.
+        """
+        now = datetime.datetime.now()
+        return self.date - now
+
     def remaining_time(self):
         """
         Get time split into units until Bulldog Days.
         """
-        now = datetime.datetime.now()
-        delta = self.date - now
-        seconds = delta.total_seconds()
+        seconds = self.delta.total_seconds()
         weeks, seconds = divmod(seconds, 60 * 60 * 24 * 7)
         days, seconds = divmod(seconds, 60 * 60 * 24)
         hours, seconds = divmod(seconds, 60 * 60)
@@ -27,8 +33,7 @@ class Event:
 
     @property
     def passed(self):
-        now = datetime.datetime.now()
-        return (self.date - now).total_seconds() > 0
+        return self.delta.total_seconds() > 0
 
     def __init__(self, name: str, date: datetime.datetime):
         self.name = name
