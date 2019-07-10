@@ -25,6 +25,11 @@ class Event:
         minutes, seconds = divmod(seconds, 60)
         return int(weeks), int(days), int(hours), int(minutes), seconds
 
+    @property
+    def passed(self):
+        now = datetime.datetime.now()
+        return (self.date - now).total_seconds() > 0
+
     def __init__(self, name: str, date: datetime.datetime):
         self.name = name
         # Compensate for heroku hosting timezone
@@ -64,13 +69,13 @@ class Countdown(Module):
         """
         now = datetime.datetime.now()
         for event in self.events:
-            if (event.date - now).total_seconds() > 0:
+            if event.passed:
                 return event
         return None
 
     def remaining_events(self):
         now = datetime.datetime.now()
         for event in self.events:
-            if (event.date - now).total_seconds() < 0:
+            if event.passed:
                 self.events.pop(0)
         return self.events
