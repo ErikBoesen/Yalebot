@@ -33,7 +33,7 @@ class Event:
 
     @property
     def passed(self):
-        return self.delta.total_seconds() > 0
+        return self.delta.total_seconds() < 0
 
     def __init__(self, name: str, date: datetime.datetime):
         self.name = name
@@ -68,19 +68,9 @@ class Countdown(Module):
             return "No upcoming events."
         return "\n".join([str(event) for event in events])
 
-    def next_event(self) -> Event:
-        """
-        :return: next event in list.
-        """
-        now = datetime.datetime.now()
-        for event in self.events:
-            if event.passed:
-                return event
-        return None
-
     def remaining_events(self):
-        now = datetime.datetime.now()
+        cleaned = []
         for event in self.events:
-            if event.passed:
-                self.events.pop(0)
-        return self.events
+            if not event.passed:
+                cleaned.append(event)
+        return cleaned
