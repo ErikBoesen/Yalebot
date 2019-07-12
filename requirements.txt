@@ -17,9 +17,6 @@ face_recognition
 
 ocrspace
 
-discord.py
-
-pymessenger
 termcolor
 yaledining>=1.0.0
 yalebuildings

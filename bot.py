@@ -4,9 +4,6 @@ import time
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from threading import Thread
-import discord
-import asyncio
-from pymessenger.bot import Bot as FacebookBot
 import re
 import modules
 import difflib
