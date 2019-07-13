@@ -11,7 +11,7 @@ beautifulsoup4
 praw
 numpy
 random-word
-
+aiohttp
 cmake
 face_recognition
 
