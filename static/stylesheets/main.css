@@ -114,14 +114,6 @@ th:first-child, td:first-child {
     color: white;
     background-color: #00aff0;
 }
-.button.discord {
-    border-color: #738ADB;
-    color: #738ADB;
-}
-.button.discord:hover, .button.discord:focus, .button.discord:active {
-    color: white;
-    background-color: #738ADB;
-}
 table img {
     width: 50px;
 }
