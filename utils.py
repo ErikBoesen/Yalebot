@@ -1,5 +1,4 @@
 from enum import Enum
-import discord
 from termcolor import colored
 from datetime import datetime
 
