@@ -74,6 +74,7 @@ class Module:
         """
         return text.lower().replace(" ", "")
 
+
 class ImageModule(Module):
     def upload_image(self, data) -> str:
         """
