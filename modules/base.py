@@ -66,7 +66,7 @@ class Module:
         text.replace("\t", " " * 4)
         return text.replace(" ", "\u2004")
 
-    def normalize(text):
+    def normalize(self, text):
         """
         Get everything into an easily comparable format.
         :param text: input text.

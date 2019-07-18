@@ -10,7 +10,7 @@ class Shield(ImageModule):
         super().__init__()
 
     def response(self, query, message):
-        if self.normalize(query) not in ([self.normalize(college) for college in self.COLLEGES] + ['peirson']):
+        if self.normalize(query) not in ([self.normalize(college) for college in self.COLLEGES] + ['peirson', 'davinport']):
             return query + " is not recognized as a college name. Valid colleges: " + ", ".join(self.COLLEGES)
         source_url = self.get_source_url(message)
         background = self.pil_from_url(source_url)
