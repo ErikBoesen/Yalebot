@@ -56,6 +56,7 @@ class Module:
     @staticmethod
     def safe_spaces(text):
         """
+        BUILD A HOME HERE.
         Replace spaces with Unicode character "Three-Per-Em Space" which GroupMe won't combine on mobile.
         Useful for sending ASCII art.
 
@@ -65,6 +66,13 @@ class Module:
         text.replace("\t", " " * 4)
         return text.replace(" ", "\u2004")
 
+    def normalize(text):
+        """
+        Get everything into an easily comparable format.
+        :param text: input text.
+        :return: lowercase text without spaces or other confounding content.
+        """
+        return text.lower().replace(" ", "")
 
 class ImageModule(Module):
     def upload_image(self, data) -> str:
