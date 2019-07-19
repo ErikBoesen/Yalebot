@@ -286,7 +286,7 @@ class Meme(ImageModule):
                 {"position": (328, 383)},
             ),
             "remind": (
-                {"center_vertical": True, "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "wrap": 38},
+                {"center_vertical": True, "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "wrap": 35},
 
                 {"position": (414, 200)},
             )
