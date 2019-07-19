@@ -286,9 +286,9 @@ class Meme(ImageModule):
                 {"position": (328, 383)},
             ),
             "remind": (
-                {"center_vertical": True, "color": self.WHITE, "wrap": 40},
+                {"center_vertical": True, "font_size": self.LARGE_FONT_SIZE, "color": self.WHITE, "wrap": 38},
 
-                {"position": (814, 200)},
+                {"position": (414, 200)},
             )
         }
         self.templates["yaledrake"] = self.templates["drake"]

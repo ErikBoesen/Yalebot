@@ -7,7 +7,7 @@ from threading import Thread
 import re
 import modules
 import difflib
-
+import argparse
 from utils import Message, SenderType
 
 
@@ -392,5 +392,11 @@ def delete_bot():
 
 
 if __name__ == "__main__":
-    while True:
-        print(process_message(Message(text=input("> "))))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("command", nargs="?")
+    args = parser.parse_args()
+    if args.command:
+        print(process_message(Message(text=args.command)))
+    else:
+        while True:
+            print(process_message(Message(text=input("> "))))
