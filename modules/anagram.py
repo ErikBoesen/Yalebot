@@ -24,4 +24,4 @@ class Anagram(Module):
         entries[0] = entries[0].replace("<p>", "")
         entries = [entry.strip() for entry in entries if not any([c in entry for c in ("-", ".")])]
         random.shuffle(entries)
-        return ", ".join(entries)
+        return ", ".join(entries[:20])
