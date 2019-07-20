@@ -3,8 +3,7 @@ import requests
 import time
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_cache import make_template_fragment_key
-from flask_cache import Cache
+from flask_caching import Cache
 from threading import Thread
 import re
 import modules
@@ -22,7 +21,7 @@ cache = Cache(app, config={"CACHE_TYPE": "simple"})
 
 MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
-CACHE_LENGTH = 60 * 60
+CACHE_TIMEOUT = 60 * 60
 
 static_commands = {
     "ping": "Pong!",
@@ -302,7 +301,7 @@ def send(message, group_id):
         response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
 
 
-@cache.cached(timeout=CACHE_LENGTH)
+@cache.cached(timeout=CACHE_TIMEOUT)
 @app.route("/")
 def home():
     return render_template("index.html", static_commands=static_commands.keys(), commands=[(key, commands[key].DESCRIPTION) for key in commands])
