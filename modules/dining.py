@@ -41,7 +41,7 @@ class Dining(Module):
                 for location in locations:
                     response += "- {emoji} {name} ({status})\n".format(emoji=self.type_emoji[location.type],
                                                                        name=location.name,
-                                                                       status=("{capacity}% capacity".format(capacity=location.percent_capacity) + self.capacity_bar(location.capacity)) if location.capacity is not None else "Open")
+                                                                       status=("{capacity}% capacity ".format(capacity=location.percent_capacity) + self.capacity_bar(location.capacity)) if location.capacity is not None else "Open")
             else:
                 response = "No dining locations are currently open."
         return response
