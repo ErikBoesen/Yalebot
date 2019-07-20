@@ -14,7 +14,7 @@ import argparse
 
 # Bot components
 from utils import Message, SenderType
-from commands import static_commands, commands, system_responses, modules
+from commands import static_commands, commands, system_commands, modules
 
 
 app = Flask(__name__)
@@ -220,11 +220,11 @@ def process_message(message):
         if "thank" in message.text.lower() and "yalebot" in message.text.lower():
             responses.append("You're welcome, " + forename + "! :)")
     if message.sender_type == SenderType.SYSTEM:
-        for option in system_responses:
-            if system_responses[option].RE.match(message.text):
-                responses.append(system_responses[option].response(message.text, message))
-        if system_responses["welcome"].RE.match(message.text):
-            check_names = system_responses["welcome"].get_names_groupme(message.text)
+        for option in system_commands:
+            if system_commands[option].RE.match(message.text):
+                responses.append(system_commands[option].response(message.text, message))
+        if system_commands["welcome"].RE.match(message.text):
+            check_names = system_commands["welcome"].get_names_groupme(message.text)
             for check_name in check_names:
                 responses.append(commands["verify"].check_user(check_name))
     return responses
