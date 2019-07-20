@@ -1,14 +1,18 @@
-import os
-import requests
-import time
+# Flask
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
+
+# Other
 from threading import Thread
+import requests
+import os
+import time
 import re
 import difflib
 import argparse
 
+# Bot components
 from utils import Message, SenderType
 from commands import static_commands, commands, system_responses, modules
 
@@ -188,14 +192,14 @@ def send(message, group_id):
         response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
 
 
-@cache.cached(timeout=CACHE_TIMEOUT)
 @app.route("/")
+@cache.cached(timeout=CACHE_TIMEOUT)
 def home():
     return render_template("index.html", static_commands=static_commands.keys(), commands=[(key, commands[key].DESCRIPTION) for key in commands])
 
 
-@cache.cached(timeout=CACHE_TIMEOUT)
 @app.route("/memes")
+@cache.cached(timeout=CACHE_TIMEOUT)
 def memes():
     return render_template("memes.html",
                            memes=zip(commands["meme"].templates.keys(),
