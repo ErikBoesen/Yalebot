@@ -15,7 +15,7 @@ class Laundry(Module):
             items += [("Washers available", f"{use.available.washers}/{use.total.washers}"),
                       ("Dryers available", f"{use.available.dryers}/{use.total.dryers}")]
             for appliance in room.appliances:
-                items.append((appliance.type + " " + appliance.label, appliance.time_remaining_raw))
+                items.append((f"{appliance.type} {appliance.number}", appliance.time_remaining_raw))
             return self.bullet_list(items, embellish_first=True)
         else:
             rooms = self.api.rooms()
