@@ -107,6 +107,7 @@ commands = {
     "smol": modules.Smol(),
     "laundry": modules.Laundry(),
     "admit": modules.Admit(),
+    "anagram": modules.Anagram(),
 }
 commands["courses"] = commands["course"]
 system_commands = {
