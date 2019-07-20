@@ -10,11 +10,10 @@ class Laundry(Module):
     def response(self, query, message):
         if query:
             room = self.api.room(query)
-            avail = room.availability
-            total = room.totals
+            use = room.use
             items = [(room.name, f"({room.campus_name})")]
-            items += [("Washers available", f"{avail.washer}/{total.washer}"),
-                      ("Dryers available", f"{avail.dryer}/{total.dryer}")]
+            items += [("Washers available", f"{use.available.washers}/{use.total.washers}"),
+                      ("Dryers available", f"{use.available.dryers}/{use.total.dryers}")]
             for appliance in room.appliances:
                 items.append((appliance.type + " " + appliance.label, appliance.status_raw))
             return self.bullet_list(items, embellish_first=True)
@@ -22,8 +21,7 @@ class Laundry(Module):
             rooms = self.api.rooms()
             items = []
             for room in rooms:
-                avail = room.availability
-                total = room.totals
+                use = room.use
                 items.append((room.name,
-                              f"{avail.washer}/{total.washer} washers, {avail.dryer}/{total.dryer} dryers currently available"))
+                              f"{use.available.washers}/{use.total.washers} washers, {use.available.dryers}/{use.total.dryers} dryers currently available"))
             return self.bullet_list(items)
