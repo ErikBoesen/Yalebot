@@ -106,6 +106,7 @@ commands = {
     "roomnumber": modules.RoomNumber(),
     "smol": modules.Smol(),
     "laundry": modules.Laundry(),
+    "admit": modules.Admit(),
 }
 commands["courses"] = commands["course"]
 system_commands = {
