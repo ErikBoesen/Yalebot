@@ -20,6 +20,8 @@ class Anagram(Module):
         entries = paragraph.split("<br/>")
         # Remove informational content at the bottom of the paragraph
         entries.pop()
+        if not entries:
+            return "No anagrams found."
         # Remove opening <p> tag
         entries[0] = entries[0].replace("<p>", "")
         entries = [entry.strip() for entry in entries if not any([c in entry for c in ("-", ".")])]
