@@ -29,6 +29,25 @@ PREFIX = "!"
 CACHE_TIMEOUT = 60 * 60
 
 
+# Database models
+class Bot(db.Model):
+    __tablename__ = "bots"
+    group_id = db.Column(db.String(16), unique=True, primary_key=True)
+    group_name = db.Column(db.String(50))
+    bot_id = db.Column(db.String(26), unique=True)
+    owner_id = db.Column(db.String(16))
+    owner_name = db.Column(db.String(64))
+    access_token = db.Column(db.String(32))
+
+    def __init__(self, group_id, group_name, bot_id, owner_id, owner_name, access_token):
+        self.group_id = group_id
+        self.group_name = group_name
+        self.bot_id = bot_id
+        self.owner_id = owner_id
+        self.owner_name = owner_name
+        self.access_token = access_token
+
+
 class Response(db.Model):
     __tablename__ = "responses"
     name = db.Column(db.String(64), primary_key=True)
@@ -39,6 +58,82 @@ class Response(db.Model):
         self.name = name
         self.content = content
         self.image_url = image_url
+
+
+# Management console
+@app.route("/manager", methods=["GET", "POST"])
+def manager():
+    access_token = request.args.get("access_token")
+    if request.method == "POST":
+        # Build and send bot data
+        group_id = request.form["group_id"]
+        bot = {
+            "name": request.form["name"] or "Yalebot",
+            "group_id": group_id,
+            "avatar_url": request.form["avatar_url"] or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
+            "callback_url": "https://yalebot.herokuapp.com/",
+            "dm_notification": False,
+        }
+        me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+        result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
+                               json={"bot": bot}).json()["response"]["bot"]
+        group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
+
+        # Store in database
+        registrant = Bot(group_id, group["name"], result["bot_id"], me["user_id"], me["name"], access_token)
+        db.session.add(registrant)
+        db.session.commit()
+    if access_token is None:
+        return redirect("https://oauth.groupme.com/oauth/authorize?client_id=46tkWF26m1juUxxvRGKUjVqVjbejYK4Njz3VA4ZZjWhr5dtH", code=302)
+    groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
+    bots = requests.get(f"https://api.groupme.com/v3/bots?token={access_token}").json()["response"]
+    if os.environ.get("DATABASE_URL") is not None:
+        groups = [group for group in groups if not Bot.query.get(group["group_id"])]
+        bots = [bot for bot in bots if Bot.query.get(bot["group_id"])]
+    # TEMPORARY; fill in information that used to not be collected
+    if bots:
+        for bot in bots:
+            # TODO remove this abomination
+            group_id = bot["group_id"]
+            this_bot = Bot.query.get(group_id)
+            me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
+            group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
+            this_bot.group_name = group["name"]
+            this_bot.access_token = access_token
+            this_bot.owner_name = me["name"]
+        db.session.commit()
+    return render_template("manager.html", access_token=access_token, groups=groups, bots=bots)
+
+
+@app.route("/delete", methods=["POST"])
+def delete_bot():
+    data = request.get_json()
+    access_token = data["access_token"]
+    bot = Bot.query.get(data["group_id"])
+    req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": bot.bot_id})
+    if req.ok:
+        db.session.delete(bot)
+        db.session.commit()
+        return "ok", 200
+
+
+# Webhook receipt and response
+@app.route("/", methods=["POST"])
+def receive():
+    """
+    Receive callback to URL when message is sent in the group.
+    """
+    # Retrieve data on that single GroupMe message.
+    message = request.get_json()
+    group_id = message["group_id"]
+    # Begin reply process in a new thread.
+    # This way, the request won't time out if a response takes too long to generate.
+    Thread(target=reply, args=(message, group_id)).start()
+    return "ok", 200
+
+
+def reply(message, group_id):
+    send(process_message(Message(message)), group_id)
 
 
 def process_message(message):
@@ -135,24 +230,6 @@ def process_message(message):
     return responses
 
 
-def reply(message, group_id):
-    send(process_message(Message(message)), group_id)
-
-
-@app.route("/", methods=["POST"])
-def receive():
-    """
-    Receive callback to URL when message is sent in the group.
-    """
-    # Retrieve data on that single GroupMe message.
-    message = request.get_json()
-    group_id = message["group_id"]
-    # Begin reply process in a new thread.
-    # This way, the request won't time out if a response takes too long to generate.
-    Thread(target=reply, args=(message, group_id)).start()
-    return "ok", 200
-
-
 def send(message, group_id):
     """
     Reply in chat.
@@ -192,12 +269,14 @@ def send(message, group_id):
         response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
 
 
+# Core routing
 @app.route("/")
 @cache.cached(timeout=CACHE_TIMEOUT)
 def home():
     return render_template("index.html", static_commands=static_commands.keys(), commands=[(key, commands[key].DESCRIPTION) for key in commands])
 
 
+# Module interfaces
 @app.route("/memes")
 @cache.cached(timeout=CACHE_TIMEOUT)
 def memes():
@@ -213,80 +292,7 @@ def analytics(group_id):
     return render_template("analytics.html", users=users)
 
 
-@app.route("/manager", methods=["GET", "POST"])
-def manager():
-    access_token = request.args.get("access_token")
-    if request.method == "POST":
-        # Build and send bot data
-        group_id = request.form["group_id"]
-        bot = {
-            "name": request.form["name"] or "Yalebot",
-            "group_id": group_id,
-            "avatar_url": request.form["avatar_url"] or "https://i.groupme.com/310x310.jpeg.1c88aac983ff4587b15ef69c2649a09c",
-            "callback_url": "https://yalebot.herokuapp.com/",
-            "dm_notification": False,
-        }
-        me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-        result = requests.post(f"https://api.groupme.com/v3/bots?token={access_token}",
-                               json={"bot": bot}).json()["response"]["bot"]
-        group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
-
-        # Store in database
-        registrant = Bot(group_id, group["name"], result["bot_id"], me["user_id"], me["name"], access_token)
-        db.session.add(registrant)
-        db.session.commit()
-    if access_token is None:
-        return redirect("https://oauth.groupme.com/oauth/authorize?client_id=46tkWF26m1juUxxvRGKUjVqVjbejYK4Njz3VA4ZZjWhr5dtH", code=302)
-    groups = requests.get(f"https://api.groupme.com/v3/groups?token={access_token}").json()["response"]
-    bots = requests.get(f"https://api.groupme.com/v3/bots?token={access_token}").json()["response"]
-    if os.environ.get("DATABASE_URL") is not None:
-        groups = [group for group in groups if not Bot.query.get(group["group_id"])]
-        bots = [bot for bot in bots if Bot.query.get(bot["group_id"])]
-    # TEMPORARY; fill in information that used to not be collected
-    if bots:
-        for bot in bots:
-            # TODO remove this abomination
-            group_id = bot["group_id"]
-            this_bot = Bot.query.get(group_id)
-            me = requests.get(f"https://api.groupme.com/v3/users/me?token={access_token}").json()["response"]
-            group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
-            this_bot.group_name = group["name"]
-            this_bot.access_token = access_token
-            this_bot.owner_name = me["name"]
-        db.session.commit()
-    return render_template("manager.html", access_token=access_token, groups=groups, bots=bots)
-
-
-class Bot(db.Model):
-    __tablename__ = "bots"
-    group_id = db.Column(db.String(16), unique=True, primary_key=True)
-    group_name = db.Column(db.String(50))
-    bot_id = db.Column(db.String(26), unique=True)
-    owner_id = db.Column(db.String(16))
-    owner_name = db.Column(db.String(64))
-    access_token = db.Column(db.String(32))
-
-    def __init__(self, group_id, group_name, bot_id, owner_id, owner_name, access_token):
-        self.group_id = group_id
-        self.group_name = group_name
-        self.bot_id = bot_id
-        self.owner_id = owner_id
-        self.owner_name = owner_name
-        self.access_token = access_token
-
-
-@app.route("/delete", methods=["POST"])
-def delete_bot():
-    data = request.get_json()
-    access_token = data["access_token"]
-    bot = Bot.query.get(data["group_id"])
-    req = requests.post(f"https://api.groupme.com/v3/bots/destroy?token={access_token}", json={"bot_id": bot.bot_id})
-    if req.ok:
-        db.session.delete(bot)
-        db.session.commit()
-        return "ok", 200
-
-
+# Local testing
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("command", nargs="?")
