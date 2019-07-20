@@ -105,9 +105,10 @@ commands = {
     "organizations": modules.Organizations(),
     "roomnumber": modules.RoomNumber(),
     "smol": modules.Smol(),
+    "laundry": modules.Laundry(),
 }
 commands["courses"] = commands["course"]
-system_responses = {
+system_commands = {
     "welcome": modules.Welcome(),
     "mourn": modules.Mourn(),
     "introduce": modules.Introduce(),

@@ -15,13 +15,12 @@ random-word
 aiohttp
 cmake
 face_recognition
-
 ocrspace
-
+morse-talk
 termcolor
 yaledining>=1.0.0
 yalebuildings
 yalecourses>=0.1.4
 yaledirectory
 yaleorgdirectory
-morse-talk
+yalelaundry

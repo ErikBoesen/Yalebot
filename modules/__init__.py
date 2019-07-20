@@ -74,3 +74,4 @@ from .shield import Shield
 from .organizations import Organizations
 from .roomnumber import RoomNumber
 from .smol import Smol
+from .laundry import Laundry
