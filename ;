@@ -12,12 +12,9 @@ class Laundry(Module):
             room = self.api.room(query)
             avail = room.availability
             total = room.totals
-            items = [(room.name, f"({room.campus_name})")]
+            items = []
             items += [("Washers available", f"{avail.washer}/{total.washer}"),
-                      ("Dryers available", f"{avail.dryer}/{total.dryer}")]
-            for appliance in room.appliances:
-                items.append((appliance.type + " " + appliance.label, appliance.status_raw))
-            return self.bullet_list(items, embellish_first=True)
+                      ("Dryers available", f"{avail.dryer}/{total.dryer}")
         else:
             rooms = self.api.rooms()
             items = []
