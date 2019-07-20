@@ -1,5 +1,6 @@
 Flask
 Flask-SQLAlchemy
+Flask-Cache
 eventlet
 psycopg2
 gunicorn>=19.9.0
