@@ -25,7 +25,6 @@ PREFIX = "!"
 CACHE_TIMEOUT = 60 * 60
 
 
-
 class Response(db.Model):
     __tablename__ = "responses"
     name = db.Column(db.String(64), primary_key=True)
