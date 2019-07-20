@@ -2,7 +2,6 @@ import requests
 import os
 from bs4 import BeautifulSoup
 import json
-import csv
 import re
 import base64
 
@@ -44,9 +43,12 @@ while not finished:
         photo_element = student_entry.find("div", {"class": "facebook_photo"})
         photo = re.findall(r"url\(data:image/png;base64,(.*?)\)", photo_element["style"])
         # If a base64-encoded photo is found (sometimes only the default one will be linked)
+        # TODO: do something with images
+        """
         if len(photo) != 0:
             with open("photos/" + student["Name"] + ".png", "wb") as f:
                 f.write(base64.decodebytes(photo[0].encode()))
+        """
         print("Processed student: {name}.".format(name=student["Name"]))
         students.append(student)
     if len(page_names) < 4 * 12:
