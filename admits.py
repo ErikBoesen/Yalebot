@@ -59,11 +59,7 @@ print("{name_count} admits processed.".format(name_count=len(names)))
 with open("resources/admit_names.json", "w") as f:
     json.dump(names, f)
 
-keys = []
-for student in students:
-    for key in student.keys():
-        if key not in keys:
-            keys.append(key)
+student_dict = {student["Name"]: student for student in students}
 
 with open("resources/admits.json", "w") as f:
-    json.dump(students, f)
+    json.dump(student_dict, f)
