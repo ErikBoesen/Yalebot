@@ -113,6 +113,7 @@ class ImageModule(Module):
         response = requests.get(url, stream=True)
         response.raw.decode_content = True
         image = Image.open(response.raw)
+        # Rotation must be performed now as conversion to RGB drops EXIF data
         image = self.rotate_upright(image)
         image = image.convert("RGB")
         return image
