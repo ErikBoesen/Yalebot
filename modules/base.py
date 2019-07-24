@@ -90,6 +90,20 @@ class ImageModule(Module):
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
         return r.json()["payload"]["url"]
 
+    def rotate_upright(self, image: Image):
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == "Orientation":
+                break
+        exif = dict(image._getexif().items())
+
+        if exif[orientation] == 3:
+            image = image.rotate(180, expand=True)
+        elif exif[orientation] == 6:
+            image = image.rotate(270, expand=True)
+        elif exif[orientation] == 8:
+            image = image.rotate(90, expand=True)
+        return image
+
     def upload_pil_image(self, image: Image):
         output = BytesIO()
         image.save(output, format="JPEG", mode="RGB")
