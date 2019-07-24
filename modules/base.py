@@ -98,7 +98,7 @@ class ImageModule(Module):
     def pil_from_url(self, url):
         response = requests.get(url, stream=True)
         response.raw.decode_content = True
-        return Image.open(response.raw)
+        return Image.open(response.raw).convert("RGB")
 
     def resize(self, image: Image, width):
         natural_width, natural_height = image.size
