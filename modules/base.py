@@ -1,6 +1,6 @@
 import os
 import requests
-from PIL import Image
+from PIL import Image, ExifTags
 from io import BytesIO
 import random
 
@@ -112,7 +112,10 @@ class ImageModule(Module):
     def pil_from_url(self, url):
         response = requests.get(url, stream=True)
         response.raw.decode_content = True
-        return Image.open(response.raw).convert("RGB")
+        image = Image.open(response.raw)
+        image = self.rotate_upright(image)
+        image = image.convert("RGB")
+        return image
 
     def resize(self, image: Image, width):
         natural_width, natural_height = image.size

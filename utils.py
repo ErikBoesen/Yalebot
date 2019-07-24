@@ -27,7 +27,7 @@ class Message:
         self.name = raw.get("name", "Test")
         self.sender_type = SenderType(raw.get("sender_type", "user"))
         self.group_id = raw.get("group_id", "49940116")
-        self.avatar_url = raw.get("avatar_url", "https://i.groupme.com/900x620.jpeg.bdc7a3233afc4832a3bce3fae95c2d8b.preview")
+        self.avatar_url = raw.get("avatar_url", "https://i.groupme.com/1280x960.jpeg.8f50fab1751b461abcb5d510d7fe4b83")
         print(self)
 
     def __repr__(self):
