@@ -13,14 +13,13 @@ import difflib
 import argparse
 
 # Bot components
+from config import Config
 from utils import Message, SenderType
 from commands import static_commands, commands, system_commands, modules
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-# Suppress warnings
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config.from_object(Config)
 db = SQLAlchemy(app)
 cache = Cache(app, config={"CACHE_TYPE": "simple"})
 
