@@ -39,25 +39,12 @@ class Bot(db.Model):
     owner_name = db.Column(db.String(64))
     access_token = db.Column(db.String(32))
 
-    def __init__(self, group_id, group_name, bot_id, owner_id, owner_name, access_token):
-        self.group_id = group_id
-        self.group_name = group_name
-        self.bot_id = bot_id
-        self.owner_id = owner_id
-        self.owner_name = owner_name
-        self.access_token = access_token
-
 
 class Response(db.Model):
     __tablename__ = "responses"
     name = db.Column(db.String(64), primary_key=True)
     content = db.Column(db.String(256))
     image_url = db.Column(db.String(128))
-
-    def __init__(self, name, content, image_url):
-        self.name = name
-        self.content = content
-        self.image_url = image_url
 
 
 # Management console
