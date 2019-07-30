@@ -3,7 +3,7 @@ from PIL import Image
 
 
 class Shield(ImageModule):
-    DESCRIPTION = "Superimpose your residential college shield on a photo/"
+    DESCRIPTION = "Specify the name of your residential college to show your college pride by drawing its shield on your profile photo!"
     SIZE_RATIO = 4
 
     def __init__(self):

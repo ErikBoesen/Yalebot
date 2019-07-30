@@ -2,7 +2,7 @@ from .base import Module
 
 
 class Colleges(Module):
-    DESCRIPTION = "Get links to groups for the various Yale residential colleges"
+    DESCRIPTION = "Get links to private groups for each Yale residential college"
     """
     links = {
         "Yale University": "46649296/URP6KiXC",
