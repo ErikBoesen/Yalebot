@@ -10,7 +10,7 @@
 <p>Static commands: {% for static_command in static_commands %}<strong>!{{ static_command }}</strong>{{ ", " if not loop.last }}{% endfor %}</p>
 <ul>
     {% for command, description in commands %}
-    <li><strong>!{{ command }}</strong>: {{ description }}</li>
+    <li><strong>!{{ command }}</strong>: {{ description }}.</li>
     {% endfor %}
 </ul>
 {% endblock %}
