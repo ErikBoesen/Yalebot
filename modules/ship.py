@@ -4,7 +4,7 @@ import random
 
 
 class Ship(Module):
-    DESCRIPTION = "Save thinking time when generating names for your new favorite hypothetical couples"
+    DESCRIPTION = "Generating couple names"
     ARGC = 1
     ENDPOINT = "https://couplenamegenerator.com/combine"
 
