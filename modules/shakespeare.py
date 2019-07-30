@@ -3,8 +3,8 @@ import csv
 import random
 
 
-class Kelly(Module):
-    DESCRIPTION = "Generate Elizabethan insults for our favorite person"
+class Shakespeare(Module):
+    DESCRIPTION = "Generate Elizabethan insults"
     primary_adjectives = []
     secondary_adjectives = []
     nouns = []

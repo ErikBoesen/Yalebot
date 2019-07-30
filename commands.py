@@ -49,7 +49,7 @@ commands = {
     "maria": modules.Maria(),
     "annie": modules.Annie(),
     "chat": modules.Chat(),
-    "kelly": modules.Kelly(),
+    "shakespeare": modules.Shakespeare(),
     "eightball": modules.EightBall(),
     "analytics": modules.Analytics(),
     "youtube": modules.YouTube(),
