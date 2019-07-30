@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class Damn(ImageModule):
-    DESCRIPTION = "Mimic the DAMN. album cover. Send an image and/or specify a caption"
+    DESCRIPTION = "Mimic Kendrick Lamar's DAMN. album cover. Send an image and/or specify a caption"
 
     def transform(self, text):
         if not text:
