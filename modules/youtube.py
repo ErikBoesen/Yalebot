@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 
 class YouTube(Module):
-    DESCRIPTION = "Searches and sends YouTube video"
+    DESCRIPTION = "Search for a YouTube video"
     ARGC = 1
 
     def response(self, query, message):
