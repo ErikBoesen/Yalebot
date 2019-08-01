@@ -107,6 +107,7 @@ commands = {
     "morse": modules.Morse(),
     "smol": modules.Smol(),
     "anagram": modules.Anagram(),
+    "isitchickentendersday": modules.IsItChickenTendersDay(),
 }
 commands["courses"] = commands["course"]
 system_commands = {
