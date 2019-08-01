@@ -18,6 +18,7 @@ class Groups(Module):
         "Cultural Connections": "50539019/Zi6masBV",
         "OIS": "51221005/yK4OvtHh",
         "First Gen": "49418581/byuFtN4q",
+        "Russian Speakers": "51951606/leHW8Vc9",
 
         "New York City": "46816234/B3PBXk",
         "DMV": "46655481/kpn04v",
