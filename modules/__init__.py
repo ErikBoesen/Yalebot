@@ -78,3 +78,4 @@ from .laundry import Laundry
 from .admit import Admit
 from .anagram import Anagram
 from .isitchickentendersday import IsItChickenTendersDay
+from .pdl import PDL
