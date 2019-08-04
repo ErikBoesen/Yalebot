@@ -8,7 +8,7 @@ import random
 class Module:
     DESCRIPTION = ""
     ARGC = 0
-    ARGUMENT_WARNING = "Not enough arguments!"
+    ARGUMENT_WARNING = "Not enough arguments! Say something more after the command."
     ACCESS_TOKEN = os.environ.get("GROUPME_ACCESS_TOKEN")
 
     COLLEGES = {
