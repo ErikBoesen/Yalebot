@@ -19,39 +19,39 @@ class Doge(ImageModule):
         words = self.lines(query)
         if len(words) == 1:
             words = query.split()
+        decorators = ["so", "very", "much", "such"]
+        words = [random.choice(decorators) + " " + word.lower() for word in words]
 
-            font = ImageFont.truetype("Comic Sans MS.ttf", 34, encoding="unic")
-            image = Image.open("resources/doge.jpg")
-            draw = ImageDraw.Draw(image)
+        font = ImageFont.truetype("Comic Sans MS.ttf", 34, encoding="unic")
+        image = Image.open("resources/doge.jpg")
+        draw = ImageDraw.Draw(image)
 
-            old_boxes = []
-            colors = ["Red", "#7EFDFF", "Yellow", "Teal", "#ffbadd", "Brown", "Green", "DarkViolet", "DarkMagenta"]
-            decorators = ["so", "very", "much", "such"]
-            words = [random.choice(decorators) + " " + word for word in words]
-            words.append("wow")
-            gutter = 20
+        old_boxes = []
+        colors = ["Red", "#7EFDFF", "Yellow", "Teal", "#ffbadd", "Brown", "Green", "DarkViolet", "DarkMagenta"]
+        words.append("wow")
+        gutter = 20
 
-            for i, word in enumerate(words):
-                box = None
-                iterations = 0
-                (text_width, text_height) = draw.textsize(word, font=font)
-                while box is None:
-                    x = random.randint(gutter, image.size[0] - text_width - gutter)
-                    y = random.randint(gutter, image.size[1] - text_height - gutter)
-                    box = (x, y, x + text_width, y + text_height)
+        for i, word in enumerate(words):
+            box = None
+            iterations = 0
+            (text_width, text_height) = draw.textsize(word, font=font)
+            while box is None:
+                x = random.randint(gutter, image.size[0] - text_width - gutter)
+                y = random.randint(gutter, image.size[1] - text_height - gutter)
+                box = (x, y, x + text_width, y + text_height)
 
-                    iterations += 1
-                    if iterations > 100:
+                iterations += 1
+                if iterations > 100:
+                    break
+                for other in old_boxes:
+                    dist = self.rect_dist(box, other)
+                    if dist < 100:
+                        box = None
                         break
-                    for other in old_boxes:
-                        dist = self.rect_dist(box, other)
-                        if dist < 100:
-                            box = None
-                            break
 
-                old_boxes.append(box)
-                color = colors[i % len(colors)]
+            old_boxes.append(box)
+            color = colors[i % len(colors)]
 
-                draw.text((box[0], box[1]), word, font=font, fill=color)
+            draw.text((box[0], box[1]), word, font=font, fill=color)
 
-            image.show()
+        image.show()
