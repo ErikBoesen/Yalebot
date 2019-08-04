@@ -53,6 +53,7 @@ commands = {
     "lyrics": modules.Lyrics(),
     "nasa": modules.NASA(),
     "xkcd": modules.XKCD(),
+    "doge": modules.Doge(),
     "elizabeth": modules.Elizabeth(),
     "dania": modules.Dania(),
     "jake": modules.Jake(),
