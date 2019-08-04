@@ -22,7 +22,7 @@ class Doge(ImageModule):
         decorators = ["so", "very", "much", "such"]
         words = [random.choice(decorators) + " " + word.lower() for word in words]
 
-        font = ImageFont.truetype("Comic Sans MS.ttf", 34, encoding="unic")
+        font = ImageFont.truetype("resources/fonts/Comic Sans MS.ttf", 34, encoding="unic")
         image = Image.open("resources/doge.jpg")
         draw = ImageDraw.Draw(image)
 
