@@ -54,4 +54,4 @@ class Doge(ImageModule):
 
             draw.text((box[0], box[1]), word, font=font, fill=color)
 
-        return self.upload_pil_image(image)
+        return ("", self.upload_pil_image(image))
