@@ -18,7 +18,7 @@ face_recognition
 ocrspace
 morse-talk
 termcolor
-yaledining>=1.0.0
+yaledining>=1.1.0
 yalebuildings
 yalecourses>=0.1.4
 yaledirectory

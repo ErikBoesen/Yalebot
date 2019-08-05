@@ -19,8 +19,8 @@ class Dining(Module):
             location = self.api.location(query)
             if location is None:
                 return f"Unknown location name '{query}'."
-            response = self.bullet_list(((location.name, "Open" if location.open else "Closed"),
-                                         ("Capacity", (f"{location.percent_capacity}% " + self.capacity_bar(location.capacity)) if location.open else None),
+            response = self.bullet_list(((location.name, "Open" if location.is_open else "Closed"),
+                                         ("Capacity", (f"{location.percent_capacity}% " + self.capacity_bar(location.capacity)) if location.is_open else None),
                                          ("Type", location.type + " " + self.type_emoji[location.type]),
                                          ("Address", f"{location.address} ({location.geolocation})"),
                                          ("Phone", location.phone),
@@ -36,7 +36,7 @@ class Dining(Module):
                 response += "No menu is currently listed."
         else:
             locations = self.api.locations()
-            locations = [location for location in locations if location.open]
+            locations = [location for location in locations if location.is_open]
             if locations:
                 for location in locations:
                     response += "- {emoji} {name} ({status})\n".format(emoji=self.type_emoji[location.type],
