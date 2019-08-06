@@ -48,7 +48,8 @@ class Countdown(Module):
         Event("FSY", datetime.datetime(year=2019, month=6, day=25, hour=17)),
         Event("housing announcements", datetime.datetime(year=2019, month=6, day=26, hour=12)),
         Event("pre-orientation", datetime.datetime(year=2019, month=8, day=17, hour=12)),
-        Event("orientation", datetime.datetime(year=2019, month=8, day=20)),
+        Event("orientation", datetime.datetime(year=2019, month=8, day=23)),
+        Event("classes start", datetime.datetime(year=2019, month=8, day=28)),
     ]
 
     def get_event(self, name):
