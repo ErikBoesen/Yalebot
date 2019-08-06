@@ -66,7 +66,7 @@ def manager():
         group = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={access_token}").json()["response"]
 
         # Store in database
-        registrant = Bot(group_id, group["name"], result["bot_id"], me["user_id"], me["name"], access_token)
+        registrant = Bot(group_id=group_id, group_name=group["name"], bot_id=result["bot_id"], owner_id=me["user_id"], owner_name=me["name"], access_token=access_token)
         db.session.add(registrant)
         db.session.commit()
     if access_token is None:
@@ -175,7 +175,7 @@ def process_message(message):
                     if not content and not message.image_url:
                         responses.append("Please provide content or an image.")
                     else:
-                        response = Response(new_command, content, message.image_url)
+                        response = Response(name=new_command, content=content, image_url=message.image_url)
                         db.session.add(response)
                         db.session.commit()
                         responses.append(f"Command {new_command} registered successfully.")
