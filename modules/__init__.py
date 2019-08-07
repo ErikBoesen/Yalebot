@@ -80,3 +80,4 @@ from .anagram import Anagram
 from .isitchickentendersday import IsItChickenTendersDay
 from .pdl import PDL
 from .doge import Doge
+from .cry import Cry

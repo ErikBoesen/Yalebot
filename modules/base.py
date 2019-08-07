@@ -11,7 +11,7 @@ class Module:
     ARGUMENT_WARNING = "Not enough arguments! Say something more after the command."
     ACCESS_TOKEN = os.environ.get("GROUPME_ACCESS_TOKEN")
 
-    COLLEGES = {
+    COLLEGES = (
         "Benjamin Franklin",
         "Berkeley",
         "Branford",
@@ -26,7 +26,7 @@ class Module:
         "Silliman",
         "Timothy Dwight",
         "Trumbull",
-    }
+    )
 
     def __init__(self):
         print("Loaded module %s." % self.__class__.__name__)
