@@ -21,6 +21,9 @@ class Group:
         # Make dictionary of members
         self.populate_users(raw["members"], group_id)
 
+        # Pull message data and parse through it
+        self.analyze_group()
+
     def populate_users(self, members):
         for member in members:
             self.users[member["user_id"]] = self.new_user(member["name"])
@@ -45,28 +48,28 @@ class Group:
                 sender_id = message["sender_id"]
                 likers = message["favorited_by"]
 
-                if sender_id not in self.groups[group_id].keys():
+                if sender_id not in self.users.keys():
                     self.users[sender_id] = self.new_user(name)
 
                 # Fill the name in if user liked a message but hasn't yet been added to the dictionary
-                if not self.groups[group_id][sender_id].get("Name"):
-                    self.groups[group_id][sender_id]["Name"] = name
+                if not self.users[sender_id].get("Name"):
+                    self.users[sender_id]["Name"] = name
 
                 for liker_id in likers:
-                    if liker_id not in self.groups[group_id].keys():
+                    if liker_id not in self.users.keys():
                         # Leave name blank until user sends their first message
-                        self.groups[group_id][liker_id] = self.new_user("")
-                    self.groups[group_id][liker_id]["Likes"] += 1
+                        self.users[liker_id] = self.new_user("")
+                    self.users[liker_id]["Likes"] += 1
 
-                self.groups[group_id][sender_id]["Messages"] += 1  # Increment sent message count
-                self.groups[group_id][sender_id]["Likes Received"] += len(likers)
+                self.users[sender_id]["Messages"] += 1  # Increment sent message count
+                self.users[sender_id]["Likes Received"] += len(likers)
 
                 # Counting over time
                 date = datetime.date.fromtimestamp(message["created_at"])
-                if self.frequency[group_id].get(date):
-                    self.frequency[group_id][date] += 1
+                if self.frequency.get(date):
+                    self.frequency[date] += 1
                 else:
-                    self.frequency[group_id][date] = 1
+                    self.frequency[date] = 1
             try:
                 message_id = messages.pop()["id"]  # Get last message's ID for next request
             except Exception:
@@ -80,19 +83,28 @@ class Group:
         yalebot = self.new_user("Yalebot")
         yalebot_id = None
         duplicate_ids = []
-        for user_id in self.groups[group_id]:
-            if self.groups[group_id][user_id]["Name"] == "Yalebot":
+        # TODO: this should definitely not rely solely on name...
+        for user_id in self.users:
+            if self.users[user_id]["Name"] == "Yalebot":
                 yalebot_id = user_id
-                for field in self.groups[group_id][user_id]:
+                for field in self.users[user_id]:
                     if type(yalebot[field]) != str:
-                        yalebot[field] += self.groups[group_id][user_id][field]
+                        yalebot[field] += self.users[user_id][field]
         if yalebot_id:
-            self.groups[group_id][yalebot_id] = yalebot
+            self.users[yalebot_id] = yalebot
             for user_id in duplicate_ids:
-                self.groups[group_id].pop(user_id)
-        for user_id in self.groups[group_id]:
-            if self.groups[group_id][user_id]["Messages"] > 0:
-                self.groups[group_id][user_id]["Likes Received Per Message"] = (self.groups[group_id][user_id]["Likes Received"] / self.groups[group_id][user_id]["Messages"])
+                self.users.pop(user_id)
+        # Iterate through users and calculate averages
+        for user_id in self.users:
+            if self.users[user_id]["Messages"] > 0:
+                self.users[user_id]["Likes Received Per Message"] = (self.users[user_id]["Likes Received"] / self.users[user_id]["Messages"])
+
+    def build_leaderboards():
+        # Make ordered list
+        # TODO: clear up users/leaderboards naming
+        users = [self.users[key] for key in self.users]
+        users.sort(key=lambda user: user["Messages"], reverse=True)
+        self.leaderboards = users
 
 
 class Analytics(Module):
@@ -102,14 +114,6 @@ class Analytics(Module):
     def generate_data(self, group_id):
         self.groups[group_id] = Group(group_id)
 
-        # Perform analysis
-        self.analyze_group(group_id, message_count)
-
-        # Make ordered list
-        # TODO: clear up users/leaderboards naming
-        users = [self.groups[group_id][key] for key in self.groups[group_id]]
-        users.sort(key=lambda user: user["Messages"], reverse=True)
-        self.leaderboards[group_id] = users
         return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{group_id}, or use `!analytics leaderboard` to view a list of the top users!"
 
 
