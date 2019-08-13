@@ -7,44 +7,25 @@ import datetime
 import os
 
 
-class Analytics(Module):
-    DESCRIPTION = "View statistics on user activity in the chat"
-    groups = {}
+class Group:
+    users = {}
     leaderboards = {}
     frequency = {}
 
-    def generate_data(self, group_id):
-        self.groups[group_id] = {}
-        group = self.get_group(group_id)
-
+    def __init__(self, group_id):
+        raw = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
         # Display info to user before the analysis begins
-        message_count = group["messages"]["count"]
-        print("Analyzing " + str(message_count) + " messages.")
+        self.message_count = raw["messages"]["count"]
+        print("Analyzing " + str(self.message_count) + " messages.")
 
         # Make dictionary of members
-        self.populate_users(group["members"], group_id)
+        self.populate_users(raw["members"], group_id)
 
-        # Perform analysis
-        self.analyze_group(group_id, message_count)
-
-        # Make ordered list
-        # TODO: clear up users/leaderboards naming
-        users = [self.groups[group_id][key] for key in self.groups[group_id]]
-        users.sort(key=lambda user: user["Messages"], reverse=True)
-        self.leaderboards[group_id] = users
-        return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{group_id}, or use `!analytics leaderboard` to view a list of the top users!"
-
-    def get_group(self, group_id):
-        return requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
-
-    def new_user(self, name):
-        return {"Name": name, "Messages": 0, "Likes": 0, "Likes Received": 0, "Likes Received Per Message": 0}
-
-    def populate_users(self, members, group_id):
+    def populate_users(self, members):
         for member in members:
-            self.groups[group_id][member["user_id"]] = self.new_user(member["name"])
+            self.users[member["user_id"]] = self.new_user(member["name"])
 
-    def analyze_group(self, group_id, message_count):
+    def analyze_group(self):
         message_id = 0
         message_number = 0
         last_percentage = 0
@@ -65,9 +46,9 @@ class Analytics(Module):
                 likers = message["favorited_by"]
 
                 if sender_id not in self.groups[group_id].keys():
-                    self.groups[group_id][sender_id] = self.new_user(name)
+                    self.users[sender_id] = self.new_user(name)
 
-                # Fill the name in if user liked a message but hasn"t yet been added to the dictionary
+                # Fill the name in if user liked a message but hasn't yet been added to the dictionary
                 if not self.groups[group_id][sender_id].get("Name"):
                     self.groups[group_id][sender_id]["Name"] = name
 
@@ -112,6 +93,30 @@ class Analytics(Module):
         for user_id in self.groups[group_id]:
             if self.groups[group_id][user_id]["Messages"] > 0:
                 self.groups[group_id][user_id]["Likes Received Per Message"] = (self.groups[group_id][user_id]["Likes Received"] / self.groups[group_id][user_id]["Messages"])
+
+
+class Analytics(Module):
+    DESCRIPTION = "View statistics on user activity in the chat"
+    groups = {}
+
+    def generate_data(self, group_id):
+        self.groups[group_id] = Group(group_id)
+
+        # Perform analysis
+        self.analyze_group(group_id, message_count)
+
+        # Make ordered list
+        # TODO: clear up users/leaderboards naming
+        users = [self.groups[group_id][key] for key in self.groups[group_id]]
+        users.sort(key=lambda user: user["Messages"], reverse=True)
+        self.leaderboards[group_id] = users
+        return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{group_id}, or use `!analytics leaderboard` to view a list of the top users!"
+
+
+    def new_user(self, name):
+        return {"Name": name, "Messages": 0, "Likes": 0, "Likes Received": 0, "Likes Received Per Message": 0}
+
+
 
     def response(self, query, message):
         parameters = query.split(" ")
