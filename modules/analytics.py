@@ -3,6 +3,7 @@ import requests
 import re
 import sys
 from pprint import pprint
+import datetime
 import os
 
 
@@ -10,6 +11,7 @@ class Analytics(Module):
     DESCRIPTION = "View statistics on user activity in the chat"
     groups = {}
     leaderboards = {}
+    frequency = {}
 
     def generate_data(self, group_id):
         self.groups[group_id] = {}
@@ -78,6 +80,12 @@ class Analytics(Module):
                 self.groups[group_id][sender_id]["Messages"] += 1  # Increment sent message count
                 self.groups[group_id][sender_id]["Likes Received"] += len(likers)
 
+                # Counting over time
+                date = datetime.date.fromtimestamp(message["created_at"])
+                if self.frequency[group_id].get(date):
+                    self.frequency[group_id][date] += 1
+                else:
+                    self.frequency[group_id][date] = 1
             try:
                 message_id = messages.pop()["id"]  # Get last message's ID for next request
             except Exception:
