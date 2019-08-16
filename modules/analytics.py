@@ -9,7 +9,7 @@ import os
 
 class Group:
     users = {}
-    leaderboards = {}
+    leaderboard = {}
     frequency = {}
 
     def __init__(self, group_id):
@@ -24,9 +24,15 @@ class Group:
         # Pull message data and parse through it
         self.analyze_group()
 
+        # Create leaderboard list
+        self.build_leaderboard()
+
     def populate_users(self, members):
         for member in members:
             self.users[member["user_id"]] = self.new_user(member["name"])
+
+    def new_user(self, name):
+        return {"Name": name, "Messages": 0, "Likes": 0, "Likes Received": 0, "Likes Received Per Message": 0}
 
     def analyze_group(self):
         message_id = 0
@@ -99,12 +105,13 @@ class Group:
             if self.users[user_id]["Messages"] > 0:
                 self.users[user_id]["Likes Received Per Message"] = (self.users[user_id]["Likes Received"] / self.users[user_id]["Messages"])
 
-    def build_leaderboards():
-        # Make ordered list
-        # TODO: clear up users/leaderboards naming
-        users = [self.users[key] for key in self.users]
+    def build_leaderboard():
+        """
+        Make descending ordered list of users by number of messages sent.
+        """
+        users = list(self.users.values())
         users.sort(key=lambda user: user["Messages"], reverse=True)
-        self.leaderboards = users
+        self.leaderboard = users
 
 
 class Analytics(Module):
@@ -115,12 +122,6 @@ class Analytics(Module):
         self.groups[group_id] = Group(group_id)
 
         return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{group_id}, or use `!analytics leaderboard` to view a list of the top users!"
-
-
-    def new_user(self, name):
-        return {"Name": name, "Messages": 0, "Likes": 0, "Likes Received": 0, "Likes Received Per Message": 0}
-
-
 
     def response(self, query, message):
         parameters = query.split(" ")
