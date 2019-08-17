@@ -118,23 +118,20 @@ class Analytics(Module):
     DESCRIPTION = "View statistics on user activity in the chat"
     groups = {}
 
-    def generate_data(self, group_id):
-        self.groups[group_id] = Group(group_id)
-
-        return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{group_id}, or use `!analytics leaderboard` to view a list of the top users!"
-
     def response(self, query, message):
         parameters = query.split(" ")
         command = parameters.pop(0)
-        output = ""
-        if command == "generate":
-            return self.generate_data(message.group_id)
+        if message.group_id not in self.groups:
+            self.groups[message.group_id] = Group(message.group_id)
+            return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{message.group_id}, or use `!analytics leaderboard` to view a list of the top users!"
+        if not command:
+            return f"View analytics for this group at https://yalebot.herokuapp.com/analytics/{message.group_id}."
         elif command == "leaderboard":
             try:
                 length = int(parameters.pop(0))
             except Exception:
                 length = 10
-            leaders = self.leaderboards[message.group_id][:length]
+            leaders = self.groups[message.group_id].leaderboard[:length]
             for place, user in enumerate(leaders):
                 output += str(place + 1) + ". " + user["Name"] + " / Messages Sent: %d" % user["Messages"]
                 output += " / Likes Given: %d" % user["Likes"]
