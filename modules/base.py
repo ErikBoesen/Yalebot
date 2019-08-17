@@ -106,13 +106,14 @@ class ImageModule(Module):
                     break
             exif = dict(image._getexif().items())
 
-            if exif[orientation] == 3:
+            orientation = exif[orientation]
+            if orientation == 3:
                 image = image.rotate(180, expand=True)
-            elif exif[orientation] == 6:
+            elif orientation == 6:
                 image = image.rotate(270, expand=True)
-            elif exif[orientation] == 8:
+            elif orientation == 8:
                 image = image.rotate(90, expand=True)
-        except AttributeError:
+        except (AttributeError, KeyError) as e:
             pass
         return image
 
