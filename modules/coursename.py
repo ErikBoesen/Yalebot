@@ -1,4 +1,5 @@
 from .base import Module
+import random
 
 
 class CourseName(Module):
@@ -6,7 +7,7 @@ class CourseName(Module):
 
     def __init__(self):
         super().__init__()
-        with open("resources/coursename.txt", "r") as f:
+        with open("resources/coursetitles.txt", "r") as f:
             words = f.read().replace("\"", "").split()
         index = 1
         self.chain = {}
@@ -21,7 +22,7 @@ class CourseName(Module):
     def response(self, query, message):
         word = random.choice(list(self.chain.keys()))
         message = word.capitalize()
-        for _ in range(100):
+        for _ in range(random.randint(4, 10)):
             word = random.choice(self.chain[word])
             message += " " + word
 
