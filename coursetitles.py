@@ -10,6 +10,7 @@ titles = []
 for subject in SUBJECTS[3:]:
     print("-> " + subject + " \r", end="")
     titles += [course.name for course in api.courses(subject)]
+    time.sleep(SLEEP)
 
 with open("resources/coursetitles.txt", "w") as f:
     f.write("\n".join(titles))
