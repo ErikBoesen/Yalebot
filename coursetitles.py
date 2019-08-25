@@ -8,3 +8,6 @@ titles = []
 for subject in SUBJECTS[3:]:
     print("Fetching " + subject)
     titles += [course.name for course in api.courses(subject)]
+
+with open("resources/coursetitles.txt") as f:
+    f.write("\n".join(titles))
