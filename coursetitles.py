@@ -13,4 +13,4 @@ for subject in SUBJECTS[3:]:
     time.sleep(SLEEP)
 
 with open("resources/coursetitles.txt", "w") as f:
-    f.write("\n".join(titles))
+    f.write("\n".join(titles) + "\n")
