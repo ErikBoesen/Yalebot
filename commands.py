@@ -111,6 +111,7 @@ commands = {
     "anagram": modules.Anagram(),
     "isitchickentendersday": modules.IsItChickenTendersDay(),
     "pdl": modules.PDL(),
+    "coursename": modules.CourseName(),
 }
 commands["courses"] = commands["course"]
 system_commands = {
