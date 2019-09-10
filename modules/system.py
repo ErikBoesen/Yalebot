@@ -36,8 +36,7 @@ class Mourn(System):
     RE = re.compile(r"(.+) has left the group\.|(.+) removed (.+) from the group\.")
 
     def response(self, query, message):
-        return random.choice(["Farewell, sweet prince",
-                              "You hear that? That's the sound of someone committing elsewhere."])
+        return random.choice(["Farewell, sweet prince", "🤧"])
 
 
 class Introduce(System):
