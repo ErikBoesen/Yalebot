@@ -39,6 +39,7 @@ class Response(db.Model):
 
 
 # Backwards compatibility
+@app.route("/manager")
 def manager():
     return redirect("http://mebots.co/manager/yalebot")
 

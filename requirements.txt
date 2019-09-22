@@ -2,7 +2,6 @@ Flask
 Flask-SQLAlchemy
 Flask-Caching
 mebots
-eventlet
 psycopg2
 gunicorn>=19.9.0
 zalgoify>=1.0
