@@ -23,6 +23,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 cache = Cache(app, config={"CACHE_TYPE": "simple"})
+bot = mebots.Bot("yalebot", os.environ["BOT_TOKEN"])
 
 MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
@@ -36,6 +37,10 @@ class Response(db.Model):
     content = db.Column(db.String(256))
     image_url = db.Column(db.String(128))
 
+
+# Backwards compatibility
+def manager():
+    return redirect("http://mebots.co/manager/yalebot")
 
 # Webhook receipt and response
 @app.route("/", methods=["POST"])
@@ -123,9 +128,11 @@ def process_message(message):
                     db.session.delete(response)
                     db.session.commit()
                     responses.append(f"Command {query} unregistered.")
-            elif command == "stats":
-                count = Bot.query.count()
-                responses.append(f"I am currently in {count} GroupMe groups. Add me to more at https://yalebot.herokuapp.com!")
+                """
+                elif command == "stats":
+                    count = Bot.query.count()
+                    responses.append(f"I am currently in {count} GroupMe groups. Add me to more at https://yalebot.herokuapp.com!")
+                """
             else:
                 response = Response.query.get(command)
                 if response is not None:
@@ -161,11 +168,8 @@ def send(message, group_id):
         for item in message:
             send(item, group_id)
         return
-    this_bot = Bot.query.get(group_id)
-    # Close session so it won't remain locked on database
-    db.session.close()
     data = {
-        "bot_id": this_bot.bot_id,
+        "bot_id": bot.instance(group_id).id,
     }
     image = None
     if isinstance(message, tuple):
