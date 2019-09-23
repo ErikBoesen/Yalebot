@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 cache = Cache(app, config={"CACHE_TYPE": "simple"})
-bot = mebots.Bot("yalebot", os.environ["BOT_TOKEN"])
+bot = mebots.Bot("yalebot", os.environ.get("BOT_TOKEN"))
 
 MAX_MESSAGE_LENGTH = 1000
 PREFIX = "!"
