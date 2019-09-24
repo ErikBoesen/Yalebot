@@ -10,14 +10,19 @@ class Funny(Module):
 
     def __init__(self):
         super().__init__()
-        self.reddit = praw.Reddit(client_id=os.environ.get("REDDIT_CLIENT_ID"),
-                                  client_secret=os.environ.get("REDDIT_SECRET"),
-                                  user_agent="yalebot")
+        try:
+            self.reddit = praw.Reddit(client_id=os.environ.get("REDDIT_CLIENT_ID"),
+                                      client_secret=os.environ.get("REDDIT_SECRET"),
+                                      user_agent="yalebot")
+        except praw.exceptions.ClientException:
+            self.reddit = None
 
     def response(self, query, message):
-        if len(self.responses) == 0:
-            for submission in self.reddit.subreddit("memes").hot(limit=25):
-                if not submission.stickied and "jpg" in submission.url:
-                    self.responses.append(submission.url)
-            random.shuffle(self.responses)
-        return self.responses.pop()
+        if self.reddit:
+            if len(self.responses) == 0:
+                for submission in self.reddit.subreddit("memes").hot(limit=25):
+                    if not submission.stickied and "jpg" in submission.url:
+                        self.responses.append(submission.url)
+                random.shuffle(self.responses)
+            return self.responses.pop()
+        return "Can't contact Reddit."
