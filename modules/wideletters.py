@@ -1,7 +1,7 @@
 from .base import Module
 
 
-class Elizabeth(Module):
+class WideLetters(Module):
     DESCRIPTION = "𝕙𝕒𝕣𝕕 𝕨𝕠𝕣𝕜 𝕡𝕒𝕪𝕤 𝕠𝕗𝕗."
     ARGC = 1
 
