@@ -42,7 +42,7 @@ from .kelbo import Kelbo
 from .boink import Boink
 from .ship import Ship
 from .hema import Hema
-from .victor import Victor
+from .wholesome import Wholesome
 from .truman import Truman
 from .nato import NATO
 from .heaven import Heaven
