@@ -3,7 +3,7 @@ from PIL import Image
 import random
 
 
-class Crist(ImageModule):
+class Heaven(ImageModule):
     DESCRIPTION = "Memorialize the fallen"
     heaven = Image.open("resources/heaven.jpg")
 

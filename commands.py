@@ -89,7 +89,7 @@ commands = {
     "truman": modules.Truman(),
     "nato": modules.NATO(),
     "tiya": modules.Tiya(),
-    "crist": modules.Crist(),
+    "heaven": modules.Heaven(),
     "power": modules.Power(),
     "tictactoe": modules.TicTacToe(),
     "zalgo": modules.Zalgo(),

@@ -48,7 +48,7 @@ from .victor import Victor
 from .truman import Truman
 from .nato import NATO
 from .tiya import Tiya
-from .crist import Crist
+from .heaven import Heaven
 from .power import Power
 from .record import Record
 from .colleges import Colleges
