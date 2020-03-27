@@ -4,8 +4,8 @@ from .base import Module
 class Groups(Module):
     DESCRIPTION = "Get links to various Yale GroupMe groups"
     links = {
-        "LGBT": "57444490/iwNiIjzV",
-        "Also LGBT": "57668130/3G1UEdSC",
+        "California": "58985981/AC4xwNR3",
+        "LGBT": "57668130/3G1UEdSC",
         "Yalecraft??": "57444490/iwNiIjzV",
     }
 
