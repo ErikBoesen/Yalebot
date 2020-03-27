@@ -42,7 +42,7 @@ from .kelbo import Kelbo
 from .boink import Boink
 from .ship import Ship
 from .wholesome import Wholesome
-from .truman import Truman
+from .battery import Battery
 from .nato import NATO
 from .heaven import Heaven
 from .power import Power

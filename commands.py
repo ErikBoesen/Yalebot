@@ -74,7 +74,7 @@ commands = {
     "boink": modules.Boink(),
     "ship": modules.Ship(),
     "wholesome": modules.Wholesome(),
-    "truman": modules.Truman(),
+    "battery": modules.Battery(),
     "nato": modules.NATO(),
     "heaven": modules.Heaven(),
     "power": modules.Power(),

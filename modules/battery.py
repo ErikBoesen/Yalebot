@@ -3,7 +3,7 @@ import re
 import ocrspace
 
 
-class Truman(ImageModule):
+class Battery(ImageModule):
     DESCRIPTION = "Is your battery sinfully low?"
     PERCENTAGE_RE = re.compile(r"(\d+) *%")
     api = ocrspace.API()
