@@ -41,7 +41,6 @@ from .funny import Funny
 from .kelbo import Kelbo
 from .boink import Boink
 from .ship import Ship
-from .hema import Hema
 from .wholesome import Wholesome
 from .truman import Truman
 from .nato import NATO

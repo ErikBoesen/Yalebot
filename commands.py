@@ -73,7 +73,6 @@ commands = {
     "kelbo": modules.Kelbo(),
     "boink": modules.Boink(),
     "ship": modules.Ship(),
-    "hema": modules.Hema(),
     "wholesome": modules.Wholesome(),
     "truman": modules.Truman(),
     "nato": modules.NATO(),
