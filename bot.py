@@ -151,10 +151,12 @@ def process_message(message):
         for option in system_commands:
             if system_commands[option].RE.match(message.text):
                 responses.append(system_commands[option].response(message.text, message))
+        """
         if system_commands["welcome"].RE.match(message.text):
             check_names = system_commands["welcome"].get_names_groupme(message.text)
             for check_name in check_names:
                 responses.append(commands["verify"].check_user(check_name))
+        """
     return responses
 
 
