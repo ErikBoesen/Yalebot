@@ -46,7 +46,7 @@ commands = {
     "cry": modules.Cry(),
     "xkcd": modules.XKCD(),
     "doge": modules.Doge(),
-    "elizabeth": modules.Elizabeth(),
+    "wideletters": modules.WideLetters(),
     "jake": modules.Jake(),
     "carlos": modules.Carlos(),
     "spaces": modules.Spaces(),

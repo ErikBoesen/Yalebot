@@ -6,7 +6,7 @@ from .verify import Verify, McCarthy
 from .groups import Groups
 from .about import About
 from .xkcd import XKCD
-from .elizabeth import Elizabeth
+from .wideletters import WideLetters
 from .jake import Jake
 from .carlos import Carlos
 from .spaces import Spaces
