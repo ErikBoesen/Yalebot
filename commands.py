@@ -86,7 +86,6 @@ commands = {
     "victor": modules.Victor(),
     "truman": modules.Truman(),
     "nato": modules.NATO(),
-    "tiya": modules.Tiya(),
     "heaven": modules.Heaven(),
     "power": modules.Power(),
     "tictactoe": modules.TicTacToe(),
