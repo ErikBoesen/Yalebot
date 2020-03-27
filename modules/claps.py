@@ -1,8 +1,8 @@
 from .base import Module
 
 
-class Annie(Module):
-    DESCRIPTION = "Give a nice round of applause"
+class Claps(Module):
+    DESCRIPTION = "Give👏a👏nice👏round👏of👏applause"
     ARGC = 1
     CLAP = "👏"
 

@@ -10,7 +10,7 @@ from .elizabeth import Elizabeth
 from .jake import Jake
 from .carlos import Carlos
 from .spaces import Spaces
-from .annie import Annie
+from .claps import Claps
 from .chat import Chat
 from .weather import Weather
 from .shakespeare import Shakespeare
