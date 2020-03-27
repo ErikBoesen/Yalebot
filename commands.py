@@ -65,7 +65,7 @@ commands = {
     "location": modules.Location(),
     "twitter": modules.Twitter(),
     "tea": modules.Tea(),
-    "amber": modules.Amber(),
+    "capitalize": modules.Capitalize(),
     "uwu": modules.UWU(),
     "quote": modules.Quote(),
     "dog": modules.Dog(),

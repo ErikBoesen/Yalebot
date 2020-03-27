@@ -29,7 +29,7 @@ from .house import House
 from .location import Location
 from .lyrics import Lyrics
 from .nasa import NASA
-from .amber import Amber
+from .capitalize import Capitalize
 from .twitter import Twitter
 from .tea import Tea
 from .uwu import UWU

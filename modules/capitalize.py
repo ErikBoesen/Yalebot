@@ -2,7 +2,7 @@ from .base import Module
 import random
 
 
-class Amber(Module):
+class Capitalize(Module):
     DESCRIPTION = 'aMbEr'
     ARGC = 1
 
