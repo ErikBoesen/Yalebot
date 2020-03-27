@@ -7,6 +7,7 @@ class Groups(Module):
         "California": "58985981/AC4xwNR3",
         "Computer Science": "58985302/ZsAYNq7R",
         "LGBT": "57668130/3G1UEdSC",
+        "Yale Asians": "58153915/NmNIq17c",
         "Yalecraft??": "57444490/iwNiIjzV",
         "Hot climate chat": "58986052/bkazz6KU",
     }
