@@ -9,7 +9,7 @@ from .xkcd import XKCD
 from .elizabeth import Elizabeth
 from .jake import Jake
 from .carlos import Carlos
-from .crista import Crista
+from .spaces import Spaces
 from .annie import Annie
 from .chat import Chat
 from .weather import Weather
