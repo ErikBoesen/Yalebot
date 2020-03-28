@@ -10,6 +10,7 @@ class Groups(Module):
         "Yale Asians": "58153915/NmNIq17c",
         "Yalecraft??": "57444490/iwNiIjzV",
         "Hot climate chat": "58986052/bkazz6KU",
+        "Black Yale 2024": "58689269/tK9k6qlp",
     }
 
     def response(self, query, message):
