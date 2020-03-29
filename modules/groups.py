@@ -11,6 +11,7 @@ class Groups(Module):
         "Yalecraft??": "57444490/iwNiIjzV",
         "Hot climate chat": "58986052/bkazz6KU",
         "Black Yale 2024": "58689269/tK9k6qlp",
+        "Cold Climate Yale 2024": "59030987/6STQvYTs",
     }
 
     def response(self, query, message):
