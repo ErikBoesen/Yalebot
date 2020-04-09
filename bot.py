@@ -145,6 +145,9 @@ def process_message(message):
                     except IndexError:
                         advice = ""
                     responses.append(f"Command not found. {advice}Use !help to view a list of commands.")
+        if "netid" in message.text.lower().replace(" ","").replace("-",""):
+            with open("resources/netID.txt", "r") as f: 
+                 responses.append(f.read())
         if "thank" in message.text.lower() and "yalebot" in message.text.lower():
             responses.append("You're welcome, " + forename + "! :)")
     if message.sender_type == SenderType.SYSTEM:
