@@ -9,6 +9,9 @@ class Ship(Module):
     ENDPOINT = "https://couplenamegenerator.com/combine"
 
     def response(self, query, message):
+        forename = message.name.split(" ", 1)[0]
+        if len(query) > 20:
+            return "Your names are too long," + forename.upper() + "!"
         names = query.split()
         if len(names) != 2:
             return "Please provide two names."
