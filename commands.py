@@ -20,6 +20,7 @@ static_commands = {
 # "Explicit is better than implicit."
 commands = {
     "about": modules.About(),
+    "ap": modules.AP(),
     "countdown": modules.Countdown(),
     "verify": modules.Verify(),
     "yalenews": modules.YaleNews(),
