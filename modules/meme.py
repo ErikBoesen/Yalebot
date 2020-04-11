@@ -38,6 +38,11 @@ class Meme(ImageModule):
 
                 {"position": (579, 420)},
             ),
+            "songy": (
+                {"font_size": self.LARGE_FONT_SIZE},
+
+                {"position": (243, 46)},
+            ),
             "catch": (
                 {"color": self.WHITE, "shadow_color": self.BLACK},
 
@@ -137,7 +142,7 @@ class Meme(ImageModule):
                 {"position": (601, 202), "wrap": 10, "center": True},
             ),
             "jesus": (
-                {"font_size": 12, "wrap": 13, "font_size": self.LARGE_FONT_SIZE, "center": False},
+                {"font_size": 12, "wrap": 13, "font_size": self.SMALL_FONT_SIZE, "center": False},
 
                 {"position": (68, 66)},
             ),
