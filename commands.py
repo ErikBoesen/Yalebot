@@ -99,6 +99,7 @@ commands = {
     "isitchickentendersday": modules.IsItChickenTendersDay(),
     "pdl": modules.PDL(),
     "coursename": modules.CourseName(),
+    "pickupline": modules.PickUpLine(),
 }
 commands["courses"] = commands["course"]
 system_commands = {
