@@ -41,7 +41,7 @@ class Meme(ImageModule):
             "songy": (
                 {"font_size": self.LARGE_FONT_SIZE},
 
-                {"position": (243, 46)},
+                {"position": (267, 46), "wrap": 18},
             ),
             "catch": (
                 {"color": self.WHITE, "shadow_color": self.BLACK},
