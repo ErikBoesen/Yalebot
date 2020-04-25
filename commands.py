@@ -4,8 +4,6 @@ static_commands = {
     "ping": "Pong!",
     "testing": "Join the Yalebot testing server: https://groupme.com/join_group/49940116/f2x20kxx",
     "add": "Add me to your own group here: https://yalebot.herokuapp.com",
-    "ap": ("", "open("resources/ap.txt","r").read()"),
-
     "sam": "❗❗❗N O 💪 F L E X 💪 Z O N E ❗❗❗",
     "test": "https://erikboesen.com/yalepuritytest",
     "shrug": r"¯\_(ツ)_/¯",
