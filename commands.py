@@ -77,7 +77,6 @@ commands = {
     "nato": modules.NATO(),
     "heaven": modules.Heaven(),
     "power": modules.Power(),
-    "tictactoe": modules.TicTacToe(),
     "zalgo": modules.Zalgo(),
     "flip": modules.Flip(),
     "mccarthy": modules.McCarthy(),
