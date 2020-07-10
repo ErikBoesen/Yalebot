@@ -1,6 +1,7 @@
 import modules
 
 static_commands = {
+    "groups":"https://docs.google.com/document/d/11WyVIXb5GOzvY4yOULeLDpjnme7wbbVmmvT0OmSqlwc/edit?usp=sharing",
     "ping": "Pong!",
     "testing": "Join the Yalebot testing server: https://groupme.com/join_group/49940116/f2x20kxx",
     "add": "Add me to your own group here: https://yalebot.herokuapp.com",
@@ -23,7 +24,6 @@ commands = {
     "verify": modules.Verify(),
     "yalenews": modules.YaleNews(),
     "record": modules.Record(),
-    "groups": modules.Groups(),
     "weather": modules.Weather(),
     "organizations": modules.Organizations(),
     "roomnumber": modules.RoomNumber(),

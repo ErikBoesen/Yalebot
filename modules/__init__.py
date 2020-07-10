@@ -3,7 +3,6 @@ from .countdown import Countdown
 from .zalgo import Zalgo
 from .flip import Flip
 from .verify import Verify, McCarthy
-from .groups import Groups
 from .about import About
 from .xkcd import XKCD
 from .wideletters import WideLetters
