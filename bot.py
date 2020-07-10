@@ -43,6 +43,7 @@ class Response(db.Model):
 def manager():
     return redirect("http://mebots.co/manager/yalebot")
 
+
 # Webhook receipt and response
 @app.route("/", methods=["POST"])
 def receive():
