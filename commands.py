@@ -1,7 +1,7 @@
 import modules
 
 static_commands = {
-    "groups":"https://docs.google.com/document/d/11WyVIXb5GOzvY4yOULeLDpjnme7wbbVmmvT0OmSqlwc/edit?usp=sharing",
+    "groups": "https://docs.google.com/document/d/11WyVIXb5GOzvY4yOULeLDpjnme7wbbVmmvT0OmSqlwc",
     "ping": "Pong!",
     "testing": "Join the Yalebot testing server: https://groupme.com/join_group/49940116/f2x20kxx",
     "add": "Add me to your own group here: https://yalebot.herokuapp.com",
@@ -33,7 +33,6 @@ commands = {
     "laundry": modules.Laundry(),
     "colleges": modules.Colleges(),
     "randomcollege": modules.RandomCollege(),
-
     "meme": modules.Meme(),
     "damn": modules.Damn(),
     "jpeg": modules.JPEG(),
