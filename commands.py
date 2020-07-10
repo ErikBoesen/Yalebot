@@ -24,7 +24,6 @@ commands = {
     "verify": modules.Verify(),
     "yalenews": modules.YaleNews(),
     "record": modules.Record(),
-    "groups": modules.Groups(),
     "weather": modules.Weather(),
     "organizations": modules.Organizations(),
     "roomnumber": modules.RoomNumber(),
