@@ -4,7 +4,7 @@ import re
 
 class RoomNumber(Module):
     DESCRIPTION = "Decode residential room numbers"
-    NUMBER = re.compile(r"^([A-Z]+)(\d)(\d+)([A-Z]+)?$")
+    NUMBER = re.compile(r"^([A-Z]+)(\d+)(\d)([A-Z]+)?$")
 
     def verbalize_list(self, items):
         items = list(items)
