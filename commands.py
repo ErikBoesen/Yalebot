@@ -30,7 +30,6 @@ commands = {
     "people": modules.People(),
     "admit": modules.Admit(),
     "shield": modules.Shield(),
-    "laundry": modules.Laundry(),
     "colleges": modules.Colleges(),
     "randomcollege": modules.RandomCollege(),
     "meme": modules.Meme(),
