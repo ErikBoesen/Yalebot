@@ -19,6 +19,7 @@ class System(Module):
         return results.pop().replace(" and ", ", ").split(", ")
 
 
+"""
 class Welcome(System):
     RE = re.compile(r"(.+) added (.+) to the group\.|(.+) has (re)?joined the group")
 
@@ -37,6 +38,7 @@ class Mourn(System):
 
     def response(self, query, message):
         return random.choice(["Goodnight, sweet prince / and flights of angels sing thee to thy rest.", "🤧"])
+"""
 
 
 class Introduce(System):

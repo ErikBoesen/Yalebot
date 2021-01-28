@@ -99,7 +99,7 @@ commands = {
 }
 commands["courses"] = commands["course"]
 system_commands = {
-    "welcome": modules.Welcome(),
-    "mourn": modules.Mourn(),
+    #"welcome": modules.Welcome(),
+    #"mourn": modules.Mourn(),
     "introduce": modules.Introduce(),
 }
