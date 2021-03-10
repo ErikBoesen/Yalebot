@@ -73,6 +73,7 @@ def process_message(message):
         responses.append(f_matches.groups()[0] + " ❤")
     if message.sender_type == SenderType.USER:
         if message.text.startswith(PREFIX):
+            print('Detected command.')
             instructions = message.text[len(PREFIX):].strip().split(None, 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
