@@ -199,7 +199,7 @@ def send(message, group_id):
     print("Issuing response:")
     print(data)
     if data["text"] or data.get("picture_url"):
-        response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
+        response = requests.post("https://api.groupme.com/v3/bots/post", json=data)
 
 
 # Core routing
