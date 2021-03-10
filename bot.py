@@ -73,7 +73,7 @@ def process_message(message):
         responses.append(f_matches.groups()[0] + " ❤")
     if message.sender_type == SenderType.USER:
         if message.text.startswith(PREFIX):
-            print('Detected command.')
+            print("Detected command.")
             instructions = message.text[len(PREFIX):].strip().split(None, 1)
             command = instructions.pop(0).lower()
             query = instructions[0] if len(instructions) > 0 else ""
@@ -196,6 +196,8 @@ def send(message, group_id):
         data["picture_url"] = image
     # Prevent sending message if there's no content
     # It would be rejected anyway
+    print("Issuing response:")
+    print(data)
     if data["text"] or data.get("picture_url"):
         response = requests.post("https://api.groupme.com/v3/bots/post", data=data)
 
