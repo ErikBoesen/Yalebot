@@ -9,6 +9,7 @@ upsidedown
 pillow
 GroupyAPI
 beautifulsoup4
+PyYAML
 praw
 numpy
 random-word
