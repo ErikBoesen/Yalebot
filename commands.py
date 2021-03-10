@@ -27,7 +27,7 @@ commands = {
     "weather": modules.Weather(),
     "organizations": modules.Organizations(),
     "roomnumber": modules.RoomNumber(),
-    "people": modules.People(),
+    #"people": modules.People(),
     "admit": modules.Admit(),
     "shield": modules.Shield(),
     "colleges": modules.Colleges(),
