@@ -58,7 +58,7 @@ from .dining import Dining
 from .building import Building
 from .course import Course
 from .iam import IAm
-from .people import People
+#from .people import People
 from .compliment import Compliment
 from .poem import Poem
 from .lmgtfy import LMGTFY
