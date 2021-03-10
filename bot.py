@@ -1,6 +1,7 @@
 # Flask
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_caching import Cache
 
 # Other
@@ -22,6 +23,7 @@ from commands import static_commands, commands, system_commands, modules
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 cache = Cache(app, config={"CACHE_TYPE": "simple"})
 bot = mebots.Bot("yalebot", os.environ.get("BOT_TOKEN"))
 

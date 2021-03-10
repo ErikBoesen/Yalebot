@@ -1,5 +1,6 @@
 Flask
 Flask-SQLAlchemy
+Flask-Migrate
 Flask-Caching
 mebots
 psycopg2
