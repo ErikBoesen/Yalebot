@@ -19,7 +19,7 @@ class System(Module):
         return results.pop().replace(" and ", ", ").split(", ")
 
 
-"""
+r"""
 class Welcome(System):
     RE = re.compile(r"(.+) added (.+) to the group\.|(.+) has (re)?joined the group")
 
