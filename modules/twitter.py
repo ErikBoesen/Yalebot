@@ -21,7 +21,7 @@ class Twitter(Module):
         except IndexError:
             return "Twitter handle does not exist"
 
-        if msg is not "":
+        if msg:
             msg = msg.replace(" ", "%20")
             return f"https://twitter.com/messages/compose?recipient_id={id}&text={msg}"
         else:
