@@ -16,7 +16,7 @@ class Dining(Module):
         if halls:
             for hall in halls:
                 response += "- {name} ({status})\n".format(name=hall.name,
-                                                                   status=("{occupancy}% occupancy ".format(occupancy=hall.occupancy * 10) + self.occupancy_bar(hall.occupancy)) if hall.occupancy is not None else "Open")
+                                                           status=("{occupancy}% occupancy ".format(occupancy=hall.occupancy * 10) + self.occupancy_bar(hall.occupancy)) if hall.occupancy is not None else "Open")
         else:
             response = "No dining halls are currently open."
         response += "\nDownload Yale Menus at https://yalemenus.com to view full menus."
