@@ -106,3 +106,9 @@ venv.bak/
 # Database
 *.db
 *.rdb
+
+# Serverless directories
+.serverless
+
+# Node
+node_modules/
