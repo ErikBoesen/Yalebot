@@ -1,0 +1,14 @@
+service: yalebot
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  hello:
+    handler: handler.hello
+
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
