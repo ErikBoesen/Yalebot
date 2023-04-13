@@ -54,15 +54,15 @@ def receive():
     """
     # Retrieve data on that single GroupMe message.
     message = request.get_json()
-    group_id = message["group_id"]
+    bot_id = message["bot_id"]
     # Begin reply process in a new thread.
     # This way, the request won't time out if a response takes too long to generate.
-    Thread(target=reply, args=(message, group_id)).start()
+    Thread(target=reply, args=(message, bot_id)).start()
     return "ok", 200
 
 
-def reply(message, group_id):
-    send(process_message(Message(message)), group_id)
+def reply(message, bot_id):
+    send(process_message(Message(message)), bot_id)
 
 
 def process_message(message):
@@ -164,19 +164,19 @@ def process_message(message):
     return responses
 
 
-def send(message, group_id):
+def send(message, bot_id):
     """
     Reply in chat.
     :param message: text of message to send. May be a tuple with further data, or a list of messages.
-    :param group_id: ID of group in which to send message.
+    :param bot_id: ID of bot instance to send message from.
     """
     # Recurse when sending multiple messages.
     if isinstance(message, list):
         for item in message:
-            send(item, group_id)
+            send(item, bot_id)
         return
     data = {
-        "bot_id": bot.instance(group_id).id,
+        "bot_id": bot_id,
     }
     image = None
     if isinstance(message, tuple):
@@ -187,7 +187,7 @@ def send(message, group_id):
     if len(message) > MAX_MESSAGE_LENGTH:
         # If text is too long for one message, split it up over several
         for block in [message[i:i + MAX_MESSAGE_LENGTH] for i in range(0, len(message), MAX_MESSAGE_LENGTH)]:
-            send(block, group_id)
+            send(block, bot_id)
             time.sleep(0.3)
         data["text"] = ""
     else:
