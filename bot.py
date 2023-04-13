@@ -43,7 +43,7 @@ class Response(db.Model):
 # Backwards compatibility
 @app.route("/manager")
 def manager():
-    return redirect("http://mebots.co/manager/yalebot")
+    return redirect("http://mebots.io/bot/yalebot")
 
 
 # Webhook receipt and response
