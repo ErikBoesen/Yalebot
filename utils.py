@@ -26,7 +26,9 @@ class Message:
             self.time = time
         self.name = raw.get("name", "Test")
         self.sender_type = SenderType(raw.get("sender_type", "user"))
-        self.group_id = raw.get("group_id", "49940116")
+        self.group_id = raw.get("group_id")
+        self.bot_id = raw.get("bot_id")
+        self.token = raw.get("token")
         self.avatar_url = raw.get("avatar_url", "https://i.groupme.com/1280x960.jpeg.8f50fab1751b461abcb5d510d7fe4b83")
         print(self)
 
