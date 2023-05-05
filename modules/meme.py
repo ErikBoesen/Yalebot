@@ -312,7 +312,7 @@ class Meme(ImageModule):
         canvas = ImageDraw.Draw(image)
         self.draw_captions(canvas, captions, self.templates[template_name])
 
-        return "", self.upload_pil_image(image)
+        return "", self.upload_pil_image(image, message.token)
 
     def draw_captions(self, canvas: ImageDraw, captions, settings):
         for setting in settings[1:]:

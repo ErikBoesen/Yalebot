@@ -15,4 +15,4 @@ class JPEG(ImageModule):
         image = image.convert("RGB")
         output = BytesIO()
         image.save(output, format="JPEG", quality=2)
-        return ("", self.upload_image(output.getvalue()))
+        return ("", self.upload_image(output.getvalue(), message.token))

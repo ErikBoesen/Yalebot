@@ -29,4 +29,4 @@ class Carlos(ImageModule):
                              (int(random.random() * (image_width - processed_width)), int(random.random() * (image_height - processed_height))),
                              processed_heart)
 
-        return "", self.upload_pil_image(background)
+        return "", self.upload_pil_image(background, message.token)

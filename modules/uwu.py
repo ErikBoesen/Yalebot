@@ -60,4 +60,4 @@ class UWU(ImageModule):
             background.paste(scaled_tear, (int(left_tear_x - tear_width / 2), int(left_tear_y)), scaled_tear)
             background.paste(scaled_tear, (int(right_tear_x - tear_width / 2), int(right_tear_y)), scaled_tear)
 
-        return "", self.upload_pil_image(background)
+        return "", self.upload_pil_image(background, messagee.token)

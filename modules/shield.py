@@ -35,4 +35,4 @@ class Shield(ImageModule):
                           int(background_height - processed_height - (processed_width // self.SIZE_RATIO))),
                          shield)
 
-        return "", self.upload_pil_image(background)
+        return "", self.upload_pil_image(background, message.token)

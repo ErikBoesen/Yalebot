@@ -9,7 +9,6 @@ class Module:
     DESCRIPTION = ""
     ARGC = 0
     ARGUMENT_WARNING = "Not enough arguments! Say something more after the command."
-    ACCESS_TOKEN = os.environ.get("GROUPME_ACCESS_TOKEN")
 
     COLLEGES = (
         "Benjamin Franklin",
@@ -82,7 +81,7 @@ class Module:
 
 
 class ImageModule(Module):
-    def upload_image(self, data) -> str:
+    def upload_image(self, data, token) -> str:
         """
         Send image to GroupMe Image API.
 
@@ -90,7 +89,7 @@ class ImageModule(Module):
         :return: URL of image now hosted on GroupMe server.
         """
         headers = {
-            "X-Access-Token": self.ACCESS_TOKEN,
+            "X-Access-Token": token,
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
@@ -117,13 +116,13 @@ class ImageModule(Module):
             pass
         return image
 
-    def upload_pil_image(self, image: Image):
+    def upload_pil_image(self, image: Image, token):
         """
         Given a PIL image, convert it into a format that can be uploaded to GroupMe's image API, then do that.
         """
         output = BytesIO()
         image.save(output, format="JPEG", mode="RGB")
-        return self.upload_image(output.getvalue())
+        return self.upload_image(output.getvalue(), token)
 
     def pil_from_url(self, url):
         """
@@ -165,7 +164,7 @@ class ImageModule(Module):
             image = self.resize(image, max_width)
         return image
 
-    def get_portrait(self, user_id, group_id):
+    def get_portrait(self, user_id, group_id, token):
         """
         Get a given user's portrait in a given group.
         :param user_id: ID of user.
@@ -173,7 +172,7 @@ class ImageModule(Module):
         :reutrn: URL of their portrait.
         """
         # TODO: Figure out a way to not get entire list of members to find one
-        members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]["members"]
+        members = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={token}").json()["response"]["members"]
         for member in members:
             if member["user_id"] == user_id:
                 return member["image_url"]
@@ -191,7 +190,7 @@ class ImageModule(Module):
             # Get sent image
             return message.image_url
         elif len(mention_attachments) > 0:
-            return self.get_portrait(mention_attachments[0]["user_ids"][0], message.group_id)
+            return self.get_portrait(mention_attachments[0]["user_ids"][0], message.group_id, message.token)
         # If no image was sent, use sender's avatar
         if include_avatar:
             return message.avatar_url

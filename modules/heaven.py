@@ -20,4 +20,4 @@ class Heaven(ImageModule):
         background_width, background_height = background.size
         background.paste(scaled_portrait, ((background_width - portrait_width) // 2, 100))
 
-        return "", self.upload_pil_image(background)
+        return "", self.upload_pil_image(background, message.token)
