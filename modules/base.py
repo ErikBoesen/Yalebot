@@ -93,7 +93,6 @@ class ImageModule(Module):
             "Content-Type": "image/jpeg",
         }
         r = requests.post("https://image.groupme.com/pictures", data=data, headers=headers)
-        print(r.text)
         return r.json()["payload"]["url"]
 
     def rotate_upright(self, image: Image):
