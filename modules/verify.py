@@ -17,8 +17,8 @@ class Verify(Module):
         with open("resources/admit_names.json") as f:
             self.admits = json.load(f)
 
-    def get_members(self, group_id):
-        response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()
+    def get_members(self, group_id, token):
+        response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.token}").json()
         members = response["response"]["members"]
         return [member["name"] for member in members]
 
@@ -65,4 +65,4 @@ class McCarthy(Verify):
     NEGATIVE_EMOJI = "☭"
 
     def response(self, query, message):
-        return self.check_user(random.choice(self.get_members(message.group_id)))
+        return self.check_user(random.choice(self.get_members(message.group_id, message.token)))

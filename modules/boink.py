@@ -18,7 +18,7 @@ class Boink(Module):
 
     def response(self, query, message):
         if self.queues.get(message.group_id) is None or len(self.queues[message.group_id]) < 2:
-            users = requests.get(f"https://api.groupme.com/v3/groups/{message.group_id}?token={self.ACCESS_TOKEN}").json()["response"]["members"]
+            users = requests.get(f"https://api.groupme.com/v3/groups/{message.group_id}?token={message.token}").json()["response"]["members"]
             self.queues[message.group_id] = [user["name"] for user in users]
             random.shuffle(self.queues[message.group_id])
         mention = self.get_mention(query)

@@ -12,8 +12,10 @@ class Group:
     leaderboard = {}
     frequency = {}
 
-    def __init__(self, group_id):
-        raw = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.ACCESS_TOKEN}").json()["response"]
+    def __init__(self, group_id, token):
+        self.token = token
+
+        raw = requests.get(f"https://api.groupme.com/v3/groups/{group_id}?token={self.token}").json()["response"]
         # Display info to user before the analysis begins
         self.message_count = raw["messages"]["count"]
         print("Analyzing " + str(self.message_count) + " messages.")
@@ -45,7 +47,7 @@ class Group:
             }
             if message_id:
                 params["before_id"] = message_id
-            response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}/messages?token={self.ACCESS_TOKEN}", params=params)
+            response = requests.get(f"https://api.groupme.com/v3/groups/{group_id}/messages?token={self.token}", params=params)
             messages = response.json()["response"]["messages"]
             for message in messages:
                 message_number += 1
@@ -122,7 +124,7 @@ class Analytics(Module):
         parameters = query.split(" ")
         command = parameters.pop(0)
         if message.group_id not in self.groups:
-            self.groups[message.group_id] = Group(message.group_id)
+            self.groups[message.group_id] = Group(message.group_id, message.token)
             return f"{message_count} messages processed. View statistics at https://yalebot.herokuapp.com/analytics/{message.group_id}, or use `!analytics leaderboard` to view a list of the top users!"
         if not command:
             return f"View analytics for this group at https://yalebot.herokuapp.com/analytics/{message.group_id}."
